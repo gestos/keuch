@@ -1,0 +1,38 @@
+URxvt.keysym.M-C-l: command:\033]49;#FFFFFF\007
+! URxvt*tintColor:          color
+! URxvt*fadeColor:          color
+! URxvt*background:         color
+! URxvt*foreground:         color
+!URxvt*color0:             #182A1E
+!URxvt*color1:             #182A1E
+!URxvt*color2:             #182A1E
+!URxvt*color3:             #182A1E
+!URxvt*color4:             #182A1E
+!URxvt*color5:             #182A1E
+!URxvt*color6:             #182A1E
+!URxvt*color7:             #182A1E
+!URxvt*color8:             #182A1E
+!URxvt*color9:             #182A1E
+!URxvt*color10:            #182A1E
+!URxvt*color11:            #182A1E
+!URxvt*color12:            #182A1E
+!URxvt*color13:            #182A1E
+!URxvt*color14:            #182A1E
+!URxvt*color15:            #182A1E
+! URxvt*colorBD:            color
+! URxvt*colorIT:            color
+! URxvt*colorUL:            color
+! URxvt*colorRV:            color
+! URxvt*underlineColor:     color
+! URxvt*scrollColor:        color
+! URxvt*troughColor:        color
+! URxvt*highlightColor:     color
+! URxvt*highlightTextColor: color
+URxvt*cursorColor:        #4A5495
+URxvt*cursorColor2:       #D6D9EE 
+URxvt*cursorBlink:	    true 
+! URxvt*transparent:	    true 
+! URxvt*pointerColor:       color
+! URxvt*pointerColor2:      color
+! URxvt*borderColor:        color
+! URxvt.perl-ext-common:	    tabbed

@@ -1,0 +1,7 @@
+[begin] (fll-flux-hi)
+	[exec] (aptosid Manual) {x-www-browser /usr/share/aptosid-manual/index.html} </usr/share/icons/hicolor/64x64/apps/aptosid-manual.png>
+	[exec] (Web Browser) {x-www-browser} </usr/share/icons/hicolor/64x64/apps/xdg-browser-launcher.png>
+	[exec] (IRC Chat) {aptosid-irc} </usr/share/icons/hicolor/64x64/apps/aptosid-irc.png>
+	[exec] (Network Setup) {x-terminal-emulator -T "Ceni" -e su-to-root -c /usr/bin/Ceni} </usr/share/icons/hicolor/64x64/apps/ceni.png>
+	[exec] (X Terminal) {x-terminal-emulator} <>
+[end]

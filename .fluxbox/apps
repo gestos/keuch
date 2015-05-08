@@ -1,0 +1,33 @@
+[app] (name=aterm)
+  [Deco]	{NONE}
+  [Hidden]	{yes}
+  [Layer]	{12}
+[end]
+[app] (name=claws-mail)
+  [Workspace]	{1}
+  [Hidden]	{no}
+[end]
+[app] (name=gxmessage)
+  [Layer]	{4}
+[end]
+[app] (name=gxmessage)
+  [Layer]	{4}
+[end]
+[app] (name=NotesScreenlet.py) (class=NotesScreenlet.py)
+  [Deco]	{NONE}
+  [Layer]	{10}
+  [Close]	{yes}
+[end]
+[app] (name=xfe) (class=Xfe)
+  [Close]	{yes}
+[end]
+[app] (name=gamix) (class=Gamix)
+  [Dimensions]	{53% 38%}
+  [Maximized]	{no}
+  [Close]	{yes}
+[end]
+[app] (name=urxvt) (class=URxvt)
+  [Dimensions]	{88% 39%}
+  [Position]	(UPPERLEFT)	{0% 6%}
+  [Close]	{yes}
+[end]

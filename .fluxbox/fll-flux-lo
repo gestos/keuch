@@ -1,0 +1,4 @@
+[begin] (fll-flux-lo)
+	[exec] (Reboot) {su-to-root -X -c /sbin/reboot} <>
+	[exec] (Shutdown) {su-to-root -X -c /sbin/halt} <>
+[end]

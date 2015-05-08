@@ -1,0 +1,62 @@
+# fluxbox startup-script:
+#
+# Lines starting with a '#' are ignored.
+
+# You can set your favourite wallpaper here if you don't want
+# to do it from your style.
+#
+# fbsetbg -f /home/biblioteca/pictures/wallpaper.png
+#
+# This sets a black background
+
+# /usr/bin/fbsetroot -solid black
+
+# This shows the fluxbox-splash-screen
+# fbsetbg -C /usr/share/fluxbox/splash.jpg
+
+# Other examples. Check man xset for details.
+#
+# Turn off beeps:
+# xset -b
+#
+# Increase the keyboard repeat-rate:
+# xset r rate 195 35
+#
+# Your own fonts-dir:
+# xset +fp "/home/biblioteca/.fonts"
+#
+# Your favourite mouse cursor:
+# xsetroot -cursor_name right_ptr
+#
+# Change your keymap:
+# xmodmap "/home/biblioteca/.Xmodmap"
+
+
+
+# Applications you want to run with fluxbox.
+# MAKE SURE THAT APPS THAT KEEP RUNNING HAVE AN ''&'' AT THE END.
+#
+# unclutter -idle 2 &
+# wmnd &
+# wmsmixer -w &
+# idesk &
+# And last but not least we start fluxbox.
+# Because it is the last app you have to run it with ''exec'' before it.
+
+# urxvt -tr -tint cyan -sh 50 -fg white -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -e bash -c "LC_ALL=de_DE.ISO8859-1 calcurse" & -w
+# rm /home/keuch/.calcurse/.calcurse.pid
+# logterm &
+# . .bashrc
+#	conky &
+#	sudo wpa_gui -t &
+
+	fbdesk -rc ~/.fluxbox/init &
+	synclient TapButton1=1 &
+	/usr/local/bin/zz_mount_nfs_on_startx &
+	idesk &
+	exec /usr/bin/fluxbox
+
+
+# or if you want to keep a log:
+# exec /usr/bin/fluxbox -log "/home/biblioteca/.fluxbox/log"
+ 
