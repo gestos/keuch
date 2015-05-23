@@ -28,6 +28,6 @@
 [end]
 [app] (name=urxvt) (class=URxvt)
   [Dimensions]	{88% 39%}
-  [Position]	(UPPERLEFT)	{0% 6%}
+  [Position]	(UPPERLEFT)	{1% 8%}
   [Close]	{yes}
 [end]
