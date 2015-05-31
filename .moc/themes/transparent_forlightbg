@@ -1,0 +1,42 @@
+# transparent_forlightbg theme for MOC by orveldv (version 2)
+# 06/May/2007
+
+colordef blue = 10 50 50
+colordef default = 100 500 500
+
+
+background		= default	default	normal
+frame			= default	default	normal
+window_title		= blue		default	bold
+directory		= black		default	bold,underline
+selected_directory	= white		black	bold
+playlist		= blue		default	normal
+selected_playlist	= white		black	bold
+file			= black		default normal
+info			= black		default	blink
+selected_file		= cyan		black	bold
+selected_info		= cyan		black	bold
+marked_file		= blue		default	bold
+marked_info		= blue		default	bold
+marked_selected_file	= blue		black	bold
+marked_selected_info	= blue		black	bold
+status			= green		default	bold
+title			= green		default	normal
+state			= green		default	bold,blink
+current_time		= blue		default	bold
+time_left		= cyan		default	normal
+total_time		= black		default	bold
+time_total_frames	= black		default	normal
+sound_parameters	= black		default	bold
+legend			= black		default normal
+disabled		= black		default	bold
+enabled			= magenta	default	bold
+empty_mixer_bar		= blue		default	bold
+filled_mixer_bar	= white		cyan	bold
+empty_time_bar		= white		default	normal
+filled_time_bar		= blue		grey	normal
+entry			= black		default	normal
+entry_title		= black		cyan	normal
+error			= red		default	normal
+message			= blue		default	normal
+plist_time		= white		cyan	bold
