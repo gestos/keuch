@@ -1,8 +1,6 @@
-# transparent_forlightbg theme for MOC by orveldv (version 2)
-# 06/May/2007
-
-colordef blue = 10 50 50
-colordef default = 100 500 500
+# transparent_forlightbg theme for MOC by gestos
+# 06/03/15
+# transparent theme for light backgrounds
 
 
 background		= default	default	normal
