@@ -17,7 +17,8 @@ alias evime='vim -u ~/.vimcryp -x'
 alias cal='cal -Nwy'
 echo "$HOME/.bashrc"
 #env > /home/keuch/env_bashrc
-
+export LESSHISTFILE="/dev/null"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+eval "$(dircolors ~/.config/custom_dircolors)"
