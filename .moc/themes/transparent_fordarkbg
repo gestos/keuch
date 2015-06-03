@@ -1,0 +1,41 @@
+# transparent_fordarkbg theme for MOC by gestos
+# based on transparent theme by orveldv (version 2)
+# 03/06/15
+
+#element		  fg		bg	behaviour
+
+background		= default	default	normal
+frame			= default	default	normal
+window_title		= blue		default	bold
+directory		= white		default	bold,underline
+selected_directory	= white		blue	bold
+playlist		= blue		default	normal
+selected_playlist	= white		white	bold
+file			= white		default normal
+info			= white		default	blink
+selected_file		= cyan		blue	bold
+selected_info		= cyan		blue	bold
+marked_file		= blue		default	bold
+marked_info		= blue		default	bold
+marked_selected_file	= blue		white	bold
+marked_selected_info	= blue		white	bold
+status			= green		default	bold
+title			= green		default	normal
+state			= green		default	bold,blink
+current_time		= blue		default	bold
+time_left		= cyan		default	normal
+total_time		= white		default	bold
+time_total_frames	= white		default	normal
+sound_parameters	= white		default	bold
+legend			= white		default normal
+disabled		= white		default	bold
+enabled			= magenta	default	bold
+empty_mixer_bar		= blue		default	bold
+filled_mixer_bar	= white		cyan	bold
+empty_time_bar		= white		default	normal
+filled_time_bar		= blue		grey	normal
+entry			= white		default	normal
+entry_title		= white		cyan	normal
+error			= red		default	normal
+message			= blue		default	normal
+plist_time		= white		cyan	bold
