@@ -1,0 +1,6 @@
+startup_message off
+shelltitle "$ |bash"
+#termcapinfo xterm ti@:te@ 
+#defhstatus "(^Et) | $USER@^EH"
+#hardstatus off
+#caption always "%{= wk} %-w%{= KW} [%n %t ] %{-}%+w %= %{= wg} %C%a" 
