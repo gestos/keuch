@@ -1,0 +1,37 @@
+#!/bin/bash
+
+#### Variablen setzen
+OLDIFS=$IFS	      ## Backup alter File Separator
+IFS='
+'		      ## zu verwendender FS soll eine neue Zeile sein
+iter=$(for verz in $(find $1 -type d); do echo "${verz//[^\/]}"; done | awk '{print length; }' | sort -u | tail -n1 )   ##maximale Tiefe, ggf. für mehrere Durchläufe
+####
+
+
+####
+echo "max. verzeichnistiefe ist $iter"	      ## nur zur Bestätigung
+
+while [ $iter -ge 1 ]						    ## erstmal alle Verzeichnisse finden, ausgehend vom tiefsten Verzeichnislevel
+do								    ## 
+    #echo "finde dateien in level $iter"				    ##
+    for curdir in $(find "$1" -mindepth $iter -maxdepth $iter -type d )	    ## 
+    do echo "$curdir"						    ##
+      echo "" > /tmp/temp_artist
+      echo "" > /tmp/temp_album
+      for datei in $(find $curdir -mindepth 1 -maxdepth 1 -type f -iname "*mp3")
+      do
+	exiftool "$datei" | grep -I 'Arti' | sed 's/^.*:\ //' >> /tmp/temp_artist
+	exiftool "$datei" | grep -I 'Album  ' | sed 's/^.*:\ //' >> /tmp/temp_album
+	# echo "$datei"
+      done
+      dir_album=$(uniq /tmp/temp_album | grep -v ^$)
+      dir_artist=$(uniq /tmp/temp_artist | grep -v ^$)
+      if [ -n "$dir_album" ]; then
+	echo "this one is probably $dir_artist , $dir_album"
+	echo
+	echo "" > /tmp/temp_album
+	echo "" > /tmp/temp_artist
+      fi
+    done
+    ((iter--))							    ##
+done								    ##
