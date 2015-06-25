@@ -1,0 +1,21 @@
+#!/bin/bash
+OLDIFS=$IFS	      ## Backup alter File Separator
+IFS='
+'		      ## zu verwendender FS soll eine neue Zeile sein
+iter=$(for verz in $(find $1 -type d); do echo "${verz//[^\/]}"; done | awk '{print length; }' | sort -u | tail -n1 )   ##maximale Tiefe, ggf. für mehrere Durchläufe
+
+### mögliche Fälle seien:
+## leeres Verzeichnis (löschen)
+## Verzeichnis, das keine mp3s enthält (skippen)
+## Verzeichnis, das einen gültigen Namen hat (verschieben)
+## Verzeichnis, das nur aus Nummern besteht (verschieben + umbennen)
+echo $iter
+while [[ $iter -gt 0 ]]
+do
+  echo "level $iter"
+  for verzeichnis in $(find $1 -mindepth $iter)
+  do 
+    find $verzeichnis -maxdepth 1 -empty
+  done
+  (( iter-- ))
+done

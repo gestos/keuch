@@ -1,0 +1,25 @@
+#!/bin/bash
+OLDIFS=$IFS; IFS='
+'
+
+if [[ -z $1 ]]; then echo "bitte verzeichnis angeben"; exit; fi
+
+depth=$(find "$1" -type d | sed 's:[^/]::g' | sort -u | tail -n1 | wc -c)
+echo "Verzeichnistiefe mit $1 vorneweg ist: $depth "
+
+for ((i=$depth; i>=0; i--))
+do
+  echo "leere Verzeichnisse in level: $i"
+  for verzeichnis in $(find $1 -mindepth $i -maxdepth $i -type d)
+  do
+    #echo "$verzeichnis"
+    if [[ $(find $verzeichnis -maxdepth 0 -empty) ]]; then 
+      echo "$verzeichnis in tiefe $i ist leer"
+    elif [[ ! $(find $verzeichnis -type f \( -iname "*mp3" -or -iname "*flac" -or -iname "*ogg" \)) ]]; then
+      echo "$verzeichnis enthält keine mp3, flac oder ogg-dateien"
+      if [[ $(find "${verzeichnis%/*}" -type f \( -iname "*mp3" -or -iname "*flac" -or -iname "*ogg" \)) ]]; then 
+	echo übergeordnetes Verzeichnis "${verzeichnis%/*}" enthält musikdateien
+      fi
+    fi
+  done
+done

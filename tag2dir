@@ -15,9 +15,21 @@ while [ $iter -ge 1 ]						    ## erstmal alle Verzeichnisse finden, ausgehend v
 do								    ## 
     #echo "finde dateien in level $iter"				    ##
     for curdir in $(find "$1" -mindepth $iter -maxdepth $iter -type d )	    ## 
+    
+
     do echo "$curdir"						    ##
+      if [ -n "$(find $curdir -prune -empty)" ]; then
+	echo "empty directory"
+	echo "$curdir" >> /tmp/empty_dir_list
+      fi
       echo "" > /tmp/temp_artist
       echo "" > /tmp/temp_album
+
+      if [ -z "$(find $curdir -mindepth 1 -maxdepth 1 -type f -iname "*mp3")" ]; then
+	echo "$curdir contains no mp3 files"
+	echo "$curdir" >> /tmp/no_mp3_list
+      fi
+
       for datei in $(find $curdir -mindepth 1 -maxdepth 1 -type f -iname "*mp3")
       do
 	exiftool "$datei" | grep -I 'Arti' | sed 's/^.*:\ //' >> /tmp/temp_artist
@@ -26,12 +38,21 @@ do								    ##
       done
       dir_album=$(uniq /tmp/temp_album | grep -v ^$)
       dir_artist=$(uniq /tmp/temp_artist | grep -v ^$)
-      if [ -n "$dir_album" ]; then
-	echo "this one is probably $dir_artist , $dir_album"
-	echo
-	echo "" > /tmp/temp_album
-	echo "" > /tmp/temp_artist
+      
+    if [[ -z "$dir_album" && -z "$dir_artist" ]]; then
+      echo "empty strings"
+    else
+      if [ $(echo $curdir | grep "#" ) ]; then
+	if [[ $(echo "$dir_artist" | wc -l) == 1 ]]; then
+	  echo "this one is probably $dir_artist , $dir_album" | sed -e 's/[^A-Za-z0-9_-\ ]/\ /g' | sed "s/'//g"
+	  echo
+	  echo "" > /tmp/temp_album
+	  echo "" > /tmp/temp_artist
+	fi
+      else
+	  echo "this directory is already named"
       fi
+    fi
     done
     ((iter--))							    ##
 done								    ##
