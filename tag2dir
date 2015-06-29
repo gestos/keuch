@@ -13,46 +13,63 @@ echo "max. verzeichnistiefe ist $iter"	      ## nur zur Bestätigung
 
 while [ $iter -ge 1 ]						    ## erstmal alle Verzeichnisse finden, ausgehend vom tiefsten Verzeichnislevel
 do								    ## 
-    #echo "finde dateien in level $iter"				    ##
+    #finde dateien in maximaler tiefe von hinten her			    ##
     for curdir in $(find "$1" -mindepth $iter -maxdepth $iter -type d )	    ## 
-    
-
     do echo "$curdir"						    ##
+    
+    #leere Verzeichnisse finden und gleich löschen
       if [ -n "$(find $curdir -prune -empty)" ]; then
 	echo "empty directory"
+	echo "rm $curdir"
+	rm -r $curdir
 	echo "$curdir" >> /tmp/empty_dir_list
+	echo "weitere Bearbeitung abbrechen"; echo; continue
       fi
+
+      #temporäre Listendateien leeren  
       echo "" > /tmp/temp_artist
       echo "" > /tmp/temp_album
-
-      if [ -z "$(find $curdir -mindepth 1 -maxdepth 1 -type f -iname "*mp3")" ]; then
+      
+      # nicht-leere Verzeichnisse, aber ohne musikdateien
+      if [ -z "$(find $curdir -mindepth 1 -maxdepth 1 -type f \( -iname "*mp3" -or -iname "*flac" -or -iname "*ogg" \) )" ]; then
 	echo "$curdir contains no mp3 files"
 	echo "$curdir" >> /tmp/no_mp3_list
+	echo "weitere Bearbeitung abbrechen"; echo; continue
+	
       fi
 
-      for datei in $(find $curdir -mindepth 1 -maxdepth 1 -type f -iname "*mp3")
+      # for datei in $(find $curdir -mindepth 1 -maxdepth 1 -type f -iname "*mp3")
+      for datei in $(find $curdir -mindepth 1 -maxdepth 1 -type f \( -iname "*mp3" -or -iname "*flac" -or -iname "*ogg" \) )
       do
-	exiftool "$datei" | grep -I 'Arti' | sed 's/^.*:\ //' >> /tmp/temp_artist
-	exiftool "$datei" | grep -I 'Album  ' | sed 's/^.*:\ //' >> /tmp/temp_album
+	exiftool "$datei" | grep -I 'Arti' | sed 's/^.*:\ //' | sed -e 's/[^A-Za-z0-9_-\ ]/_/g' | sed "s/'//g" | tr [[:upper:]] [[:lower:]] >> /tmp/temp_artist
+	exiftool "$datei" | grep -I 'Album  ' | sed 's/^.*:\ //' | sed -e 's/[^A-Za-z0-9_-\ ]/_/g' | sed "s/'//g" | tr [[:upper:]] [[:lower:]] >> /tmp/temp_album
 	# echo "$datei"
       done
-      dir_album=$(uniq /tmp/temp_album | grep -v ^$)
-      dir_artist=$(uniq /tmp/temp_artist | grep -v ^$)
+      dir_album=$(sort -u /tmp/temp_album | grep -v ^$)
+      dir_artist=$(sort -u /tmp/temp_artist | grep -v ^$)
       
+    # Verzeichnisse, deren Dateien keine Metadaten haben - keine Bearbeitung
     if [[ -z "$dir_album" && -z "$dir_artist" ]]; then
       echo "empty strings"
-    else
-      if [ $(echo $curdir | grep "#" ) ]; then
+    
+    # Verzeichnisse, die schon benannt sind, gleich ins Ziel verschieben
+    elif [[ $(echo ${curdir##*/} | grep -E "[[:alpha:]]{3}" ) ]]; then
+	  echo "this directory called ${curdir##*/} is probably already named"
+	  mv "$curdir" $2
+	  
+    # Verzeichnisse, die keine Buchstaben sondern nur Nummern haben
+    elif [[ $(echo ${curdir##*/} | grep -E "#[0-9]{2}") && -z $(echo ${curdir##*/} | grep [[:alpha:]] ) ]]  || [[ $(echo ${curdir##*/} | awk 'length<=5') ]]; then
+	# wenn eindeutige Metadaten vorhanden, dann Sonderzeichen killen, umbennen und verschieben
 	if [[ $(echo "$dir_artist" | wc -l) == 1 ]]; then
-	  echo "this one is probably $dir_artist , $dir_album" | sed -e 's/[^A-Za-z0-9_-\ ]/\ /g' | sed "s/'//g"
-	  echo
+	  echo "this one is probably $dir_artist , $dir_album"
+	  mv $curdir "$2$dir_artist - $dir_album"
 	  echo "" > /tmp/temp_album
 	  echo "" > /tmp/temp_artist
+	else
+	  echo "more than one possible artist / album, skipping"; echo; continue
 	fi
-      else
-	  echo "this directory is already named"
-      fi
     fi
+    echo 
     done
     ((iter--))							    ##
 done								    ##
