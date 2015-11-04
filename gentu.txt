@@ -1,0 +1,10 @@
+Installation am besten via Live Rescue
+
+Live Rescue mit isohybrid (syslinux-utils) in usb-bootbare iso umwandeln
+
+Wifi mit Rescue geht, aber vorher NetworkManager ausmachen (/etc/init.d/NetworkManager stop)
+Dann eine wpa_supplicant.conf anlegen, wpa_supplicant starten und
+/etc/init.d/dhcpcd restart um eine IP zu bekommen. Sollte dann laufen.
+
+:
+
