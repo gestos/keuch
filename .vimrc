@@ -15,8 +15,8 @@ au BufNewFile,BufRead * if &ft == '' | set ft=sh | endif  " unknown filetypes wi
 let mapleader = " "
 nmap <leader><space> :bnext<CR>
 set hidden
-autocmd BufWinLeave .* mkview		" save the folds when leaving vim
-autocmd BufWinEnter .* silent loadview  " load folds on start
+autocmd BufWinLeave * mkview		" save the folds when leaving vim
+autocmd BufWinEnter * silent loadview  " load folds on start
 
 
 let g:airline#extensions#tabline#enabled = 1
