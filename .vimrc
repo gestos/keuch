@@ -22,7 +22,7 @@ autocmd BufWinEnter * silent loadview  " load folds on start
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 set laststatus=2		" always show the statusline ; not needed cause of airline
-silent! nmap <C-t> :NERDTreeToggle<CR>
+silent! nmap <C-e> :E<CR>
 
 
 
