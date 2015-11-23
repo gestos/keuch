@@ -1,6 +1,6 @@
 execute pathogen#infect()
 set term=xterm-256color		" we're on a color terminal
-colo disciple			" we like this colorscheme_
+colo muon			" we like this colorscheme_
 syntax on			" we want syntax_highlighting
 set nu				" show lines (column to the left)
 set t_ut=			" clear the terminalbackground on start - see http://sunaku.github.io/vim-256color-bce.html
@@ -22,7 +22,7 @@ autocmd BufWinEnter * silent loadview  " load folds on start
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 set laststatus=2		" always show the statusline ; not needed cause of airline
-
+silent! nmap <C-t> :NERDTreeToggle<CR>
 
 
 
