@@ -14,6 +14,8 @@ set nowrap			" no linewrapping as starting default mode
 au BufNewFile,BufRead * if &ft == '' | set ft=sh | endif  " unknown filetypes will be recognized and highlighted as "sh" files
 let mapleader = " "
 nmap <leader><space> :bnext<CR>
+nmap <leader>t :NERDTreeToggle<CR>
+nmap <leader>e :E<CR>
 set hidden
 autocmd BufWinLeave * mkview		" save the folds when leaving vim
 autocmd BufWinEnter * silent loadview  " load folds on start
@@ -22,7 +24,6 @@ autocmd BufWinEnter * silent loadview  " load folds on start
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 set laststatus=2		" always show the statusline ; not needed cause of airline
-silent! nmap <C-e> :E<CR>
 
 
 
