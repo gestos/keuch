@@ -12,10 +12,10 @@ set mouse=a			" mousescrolling and copying without linenumbers
 set nowrap			" no linewrapping as starting default mode
 
 au BufNewFile,BufRead * if &ft == '' | set ft=sh | endif  " unknown filetypes will be recognized and highlighted as "sh" files
-let mapleader = " "
+let mapleader=" "
 nmap <leader><space> :bnext<CR>
 nmap <leader>t :NERDTreeToggle<CR>
-nmap <leader>e :E<CR>
+nmap <leader>e :Explore<CR>
 set hidden
 autocmd BufWinLeave * mkview		" save the folds when leaving vim
 autocmd BufWinEnter * silent loadview  " load folds on start
