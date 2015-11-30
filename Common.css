@@ -1,0 +1,28 @@
+div#mw-panel {
+  position: fixed;
+}
+
+#toc, .toc {
+  display: table;
+  padding: 2px;
+  position: fixed;
+  z-index: 998;
+  top: 140px;
+  left: 1px;
+  width: 150px;
+  line-height: 1.3em;
+  font-size: 75%;
+  border: none;
+}
+
+.toclevel-1 {
+  overflow: scroll;
+}
+
+.mw-body-content {
+  z-index: 900;
+}
+
+.mw-body {
+  z-index: 800;
+}
