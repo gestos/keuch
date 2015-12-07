@@ -1,0 +1,41 @@
+/* CSS placed here will affect users of the Vector skin */
+
+
+div#mw-panel {
+  position: fixed;
+}
+
+#toc, .toc {
+  display: block;
+  padding: 2px;
+  position: fixed;
+  z-index: 998;
+  top: 140px;
+  left: 1px;
+  max-width: 190px;
+  line-height: 1.3em;
+  font-size: 75%;
+  border: none;
+}
+
+.tochidden {
+ width: 160px;
+}
+
+.toclevel-1 {
+    overflow-y: scroll;
+    max-height: 400px;
+    overflow-x: hidden;
+}
+
+.mw-content-ltr .toc ul ul, .mw-content-ltr #toc ul ul {
+    margin: 0px 0px 0px 10px;
+}
+
+.mw-body-content {
+  z-index: 900;
+}
+
+.mw-body {
+  z-index: 800;
+}
