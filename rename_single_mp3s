@@ -13,7 +13,7 @@ fi
 
 
 if [ "$EXTENS" == "MP3" ]; then
-	echo "${ARTIST:-$UNKA} - ${TITEL:-$UNKT}.$EXTENS" | tr '[:upper:]' '[:lower:]'
+	echo "${ARTIST:-$UNKA} - ${TITEL:-$UNKT}.$EXTENS" | tr '[:upper:]' '[:lower:]' | tr '/' '_'
 else 
 	echo "not an mp3 file"
 	echo "file extension of "$1" is $EXTENS"
