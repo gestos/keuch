@@ -1,0 +1,5 @@
+#!/bin/bash
+
+##find files of the same size in one directory
+##this will ONLY show the filesize, not the filename, but it's sufficient for my needs
+for i in *mp3; do FILNAM=$(stat ./"$i" --format="%n"); SIZ=$(stat ./"$i" --format="%s");echo $SIZ,$FILNAM; done | awk -F',' '{print $1}' | sort | uniq -d
