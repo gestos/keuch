@@ -1,0 +1,20 @@
+### rename mp3-files by their artist and title tags 
+
+EXTENS=$(exiftool -Filetype "$1" | cut -f 2 -d ':' | sed 's;^[ \t]*;;')
+ARTIST=$(exiftool -ID3:Artist "$1" | cut -f 2 -d ':' | sed 's;^[ \t]*;;')
+TITEL=$(exiftool -ID3:Title "$1" | cut -f 2 -d ':' | sed 's;^[ \t]*;;')
+
+UNKA="unknown artist"
+UNKT="unknown title"
+
+if [ "$EXTENS" == "audio/mp3" -o "$EXTENS" = "MPG/3" ]; then
+EXTENS="MP3"
+fi
+
+
+if [ "$EXTENS" == "MP3" ]; then
+	echo "${ARTIST:-$UNKA} - ${TITEL:-$UNKT}.$EXTENS" | tr '[:upper:]' '[:lower:]' | tr '/' '_'
+else 
+	echo "not an mp3 file"
+	echo "file extension of "$1" is $EXTENS"
+fi
