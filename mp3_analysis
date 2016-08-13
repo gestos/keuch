@@ -1,0 +1,7 @@
+#!/bin/bash
+OLDIFS=$IFS
+IFS='
+'
+exiftool -t -s3 -Band -Title $1
+
+IFS=$OLDIFS
