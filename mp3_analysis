@@ -2,6 +2,29 @@
 OLDIFS=$IFS
 IFS='
 '
-exiftool -t -s3 -Band -Title $1
+get_band ()
+{
+  exiftool -s3 -Artist $1 
+}
+get_album ()
+{
+  exiftool -s3 -Album $1 
+}
+get_title ()
+{
+  exiftool -s3 -Title $1 
+}
+get_track ()
+{
+track=$(exiftool -s3 -Track $1)
+tracknum=${track%%/*}
+printf "%02d - " $((10#$tracknum))
+}
+
+
+get_band $1
+get_album $1
+get_track $1
+get_title $1
 
 IFS=$OLDIFS
