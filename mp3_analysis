@@ -2,24 +2,12 @@
 OLDIFS=$IFS
 IFS='
 '
-get_band ()
-{
-  exiftool -s3 -Artist $1 | tr '[:upper:]' '[:lower:]'
-}
-get_album ()
-{
-  exiftool -s3 -Album $1 | tr '[:upper:]' '[:lower:]'
-}
-get_title ()
-{
-  exiftool -s3 -Title $1 | tr '[:upper:]' '[:lower:]'
-}
-get_track ()
-{
+band=$(exiftool -s3 -Artist $1 | tr '[:upper:]' '[:lower:]')
+album=$(exiftool -s3 -Album $1 | tr '[:upper:]' '[:lower:]')
+title=$(exiftool -s3 -Title $1 | tr '[:upper:]' '[:lower:]')
 track=$(exiftool -s3 -Track $1)
-tracknum=${track%%/*}
-printf "%02d - " $((10#$tracknum))
-}
+tracknum=$(printf "%02d - " $((10#${track%%/*})) )
+
 
 album_identification ()
 {
@@ -28,6 +16,8 @@ album_identification ()
   done | sort -u
   }
 
+
+echo $tracknum
 album_identification $1 
 
 
