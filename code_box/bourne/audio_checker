@@ -1,5 +1,31 @@
 #!/bin/bash
 IFS='
 '
-cehck () {
+
+extension=${i##*.}
+
+
+dir_analysis () {
+if [[ -f "$1" ]]; then
+  band=$(exiftool -s3 -Artist $1 | tr '[:upper:]' '[:lower:]')
+  albu=$(exiftool -s3 -Album $1 | tr '[:upper:]' '[:lower:]')
+  song=$(exiftool -s3 -Title $1 | tr '[:upper:]' '[:lower:]')
+  trac=$(exiftool -s3 -Track $1 | tr '[:upper:]' '[:lower:]')
+  trnm=$(printf "%02d" $((10#${trac%%/*})) )
+  echo "$band - $albu - $trnm - $song"
+
+elif [[ -d "$1" ]]; then
+  for i in $(find $1 -mindepth 1 -maxdepth 1 -type f); do
+    band=$(exiftool -s3 -Artist $i | tr '[:upper:]' '[:lower:]')
+    albu=$(exiftool -s3 -Album $i | tr '[:upper:]' '[:lower:]')
+    song=$(exiftool -s3 -Title $i | tr '[:upper:]' '[:lower:]')
+    trac=$(exiftool -s3 -Track $i | tr '[:upper:]' '[:lower:]')
+    trnm=$(printf "%02d" $((10#${trac%%/*})) )
+    echo "$band - $albu - $trnm - $song"
+    #mv "$i" "$trnm - $song"
+  done
+fi
+}
+
+dir_analysis $1
 
