@@ -1,23 +1,40 @@
 #!/bin/bash
 OLDIFS=$IFS
 IFS='
-'
-band=$(exiftool -s3 -Artist $1 | tr '[:upper:]' '[:lower:]')
-album=$(exiftool -s3 -Album $1 | tr '[:upper:]' '[:lower:]')
-title=$(exiftool -s3 -Title $1 | tr '[:upper:]' '[:lower:]')
-track=$(exiftool -s3 -Track $1)
-tracknum=$(printf "%02d - " $((10#${track%%/*})) )
 
+
+case "$1" in
+  processdir=$1
+
+band () {
+  exiftool -s3 -Artist $1 | tr '[:upper:]' '[:lower:]'
+}
+
+album () {
+  exiftool -s3 -Album $1 | tr '[:upper:]' '[:lower:]'
+}
+
+title () {
+  exiftool -s3 -Title $1 | tr '[:upper:]' '[:lower:]'
+}
+
+track () {
+  exiftool -s3 -Track $1
+}
+
+tracknum () {
+  $(printf "%02d - " $((10#${track%%/*})) )
+}
 
 album_identification ()
 {
-  for mp3_file in $(find $1 -maxdepth 1 -mindepth 1 -type f)
-  do get_album $mp3_file 
+  for mp3_file in $(find $processdir -maxdepth 1 -mindepth 1 -type f)
+  do album $mp3_file 
   done | sort -u
   }
 
 
-echo $tracknum
+tracknum
 album_identification $1 
 
 

@@ -1,0 +1,9 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+my $workdir = $ARGV[0];
+
+print "$ARGV[0]\n";
+print "$workdir\n";
+print "$0\n"

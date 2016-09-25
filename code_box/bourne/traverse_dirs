@@ -1,0 +1,37 @@
+#!/bin/bash
+OLDIFS="$IFS"
+IFS='
+'
+
+RED='\033[0;31m'
+NC='\033[0m'
+
+root_dir="$1"
+
+check_for_audio () {
+  exiftool -s -S -Mimetype $1 | grep audio
+}
+
+checksb () {
+  find $1 -mindepth 1 -maxdepth 1 -type d
+}
+
+checksub () {
+if [[ -n "$(checksb $1)" ]]; then
+  echo "subdir found in $1, descending"
+  for i in $(checksb $1); do
+    checksub "$i"
+  done
+else
+  echo "$i is a leaf node"
+    if [[ $(check_for_audio "$i") ]]; then
+      echo "which contains audiofiles"
+    else
+      echo -e "${RED}that has no audiofiles in it${NC}"
+    fi
+fi
+}
+
+checksub $root_dir
+
+
