@@ -24,7 +24,7 @@ checksb () {
 ## in Unterverzeichnisse absteigen und gucken, ob's Audiodateien gibt
 checksub () {
 if [[ -n "$(checksb $1)" ]]; then		## wenn der Rückgabewert nicht leer ist, sind Unterverzeichnisse vorhanden
-  echo "subdir found in $1, descending"		
+  echo "subdir found in $1, descending"
   for i in $(checksb $1); do			## jedes Unterverzeichnis angucken und ggf. weiter absteigen
     checksub "$i"
   done
@@ -34,7 +34,7 @@ else
   echo "$i is a leaf node"			## wenn keine Unterverzeichnisse da sind, ist es ein Leaf
     if [[ $(check_for_audio "$i") ]]; then	## nachschauen, ob im Leaf Audiodateien sind
       echo "which contains audiofiles"
-      
+
 
     else
 

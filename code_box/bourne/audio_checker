@@ -2,10 +2,12 @@
 IFS='
 '
 
-extension=${i##*.}
 
 
 dir_analysis () {
+
+EXTSN=${i##*.}
+
 if [[ -f "$1" ]]; then
   band=$(exiftool -s3 -Artist $1 | tr '[:upper:]' '[:lower:]')
   albu=$(exiftool -s3 -Album $1 | tr '[:upper:]' '[:lower:]')
