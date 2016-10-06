@@ -6,26 +6,45 @@ IFS='
 
 dir_analysis () {
 
-EXTSN=${i##*.}
 
 if [[ -f "$1" ]]; then
+  extn=$(exiftool -s3 -filetypeextension $1 | tr '[:upper:]' '[:lower:]')
   band=$(exiftool -s3 -Artist $1 | tr '[:upper:]' '[:lower:]')
   albu=$(exiftool -s3 -Album $1 | tr '[:upper:]' '[:lower:]')
   song=$(exiftool -s3 -Title $1 | tr '[:upper:]' '[:lower:]')
   trac=$(exiftool -s3 -Track $1 | tr '[:upper:]' '[:lower:]')
   trnm=$(printf "%02d" $((10#${trac%%/*})) )
   echo "$band - $albu - $trnm - $song"
+  echo "Dateiendung = $extn"
 
 elif [[ -d "$1" ]]; then
+  echo "this is a directory - trying to find out, which album..."
   for i in $(find $1 -mindepth 1 -maxdepth 1 -type f); do
-    band=$(exiftool -s3 -Artist $i | tr '[:upper:]' '[:lower:]')
-    albu=$(exiftool -s3 -Album $i | tr '[:upper:]' '[:lower:]')
-    song=$(exiftool -s3 -Title $i | tr '[:upper:]' '[:lower:]')
-    trac=$(exiftool -s3 -Track $i | tr '[:upper:]' '[:lower:]')
-    trnm=$(printf "%02d" $((10#${trac%%/*})) )
-    echo "$band - $albu - $trnm - $song"
-    #mv "$i" "$trnm - $song"
+    if [[ $(exiftool -s3 -mimetype $i 2>/dev/null) == audio/* ]]; then
+      band+=($(exiftool -s3 -Artist $i | tr '[:upper:]' '[:lower:]')$'\n')
+      albu+=($(exiftool -s3 -Album $i | tr '[:upper:]' '[:lower:]')$'\n')
+      song=$(exiftool -s3 -Title $i | tr '[:upper:]' '[:lower:]')
+      trac=$(exiftool -s3 -Track $i | tr '[:upper:]' '[:lower:]')
+      trnm=$(printf "%02d" $((10#${trac%%/*})) )
+      #mv "$i" "$trnm - $song"
+    fi
+    echo -ne "\b ."
   done
+  band_bereinigt=$(echo "${band[@]}" | sort -u | sed -e 's/^\ *//' -e 's/.\ *$/')
+  albu_bereinigt=$(echo "${albu[@]}" | sort -u)
+  if [[ $(echo "$band_bereinigt" | wc -l) == 1 ]]; then
+    echo "nur ein Interpret gefunden, Band sollte $band_bereinigt sein"
+  else
+    echo "mehrere Interpreten gefunden: $band_bereinigt"
+  fi
+  if [[ $(echo "$albu_bereinigt" | wc -l) == 1 ]]; then
+    echo "nur ein Album gefunden, sollte $albu_bereinigt sein"
+  else
+    echo "mehrere möglichen Alben gefunden: $albu_bereinigt"
+  fi
+else
+  echo "invalid or non-existent filename? exiting..."
+  exit
 fi
 }
 
