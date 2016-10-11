@@ -32,22 +32,35 @@ elif [[ -d "$1" ]]; then
   done
   echo -ne "\n"
 
+  for bandresult in $(echo "${band[*]}" | sort -r | uniq -c); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse
+  echo "${band[*]}" | sort -r | uniq -c	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse
+    bandarrayzaehler+=($(echo "$bandresult" | sed 's;^\ *;;' | egrep -o ^[[:digit:]]+))	  # count der häufigsten bandnamen 
+    bandarraynamen+=($(echo "$bandresult" | sed 's;^\ *;;' | egrep -o [[:alpha:]]+$))	  # häufigste bandnamen 
+  done
+  echo "${bandarrayzaehler[0]} mal ${bandarraynamen[0]}"
+  echo "von insgesamt ${#band[*]} mp3s in diesem Ordner"
+  echo $(( 1 / (${#band[*]} / ${bandarrayzaehler[0]}) * 100 )) "prozent exakt"
+
+
+
+
 ## Hier kommt die entscheidung, ob interpret/album eindeutig sind, oder nicht
 ## bei mehreren Ergebnissen (nach Sortierung der Liste) kann evtl. mit
 ## der Länge-von-Array Funktion gearbeitet werden?
 
-  band_bereinigt=$( echo "${band[*]}" | sort -u )  # die Wiedergabe des Arrays mit * gibt ein korrektes Ergebnis
-  albu_bereinigt=$( echo "${albu[*]}" | sort -u )  # während @ alles in eine Zeile schreibt
-  if [[ $(echo "$band_bereinigt" | wc -l) == 1 ]]; then
-    echo "nur ein Interpret gefunden, Band sollte $band_bereinigt sein"
-  else
-    echo "mehrere Interpreten gefunden: $band_bereinigt"
-  fi
-  if [[ $(echo "$albu_bereinigt" | wc -l) == 1 ]]; then
-    echo "nur ein Album gefunden, sollte $albu_bereinigt sein"
-  else
-    echo "mehrere möglichen Alben gefunden: $albu_bereinigt"
-  fi
+#   band_bereinigt=$( echo "${band[*]}" | sort -u )  # die Wiedergabe des Arrays mit * gibt ein korrektes Ergebnis
+#   albu_bereinigt=$( echo "${albu[*]}" | sort -u )  # während @ alles in eine Zeile schreibt
+
+#   if [[ $(echo "$band_bereinigt" | wc -l) == 1 ]]; then
+#     echo "nur ein Interpret gefunden, Band sollte $band_bereinigt sein"
+#   else
+#     echo "mehrere Interpreten gefunden: $band_bereinigt"
+#   fi
+#   if [[ $(echo "$albu_bereinigt" | wc -l) == 1 ]]; then
+#     echo "nur ein Album gefunden, sollte $albu_bereinigt sein"
+#   else
+#     echo "mehrere möglichen Alben gefunden: $albu_bereinigt"
+#   fi
 
 else
   echo "invalid or non-existent filename? exiting..."

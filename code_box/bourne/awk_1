@@ -1,0 +1,4 @@
+#!/usr/bin/gawk -f
+# /ng/ { print $0 } $ARGV[1]
+/ng/ $ARGV[1]
+# {print $process_file}
