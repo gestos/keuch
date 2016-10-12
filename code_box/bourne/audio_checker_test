@@ -32,14 +32,10 @@ elif [[ -d "$1" ]]; then
   done
   echo -ne "\n"
 
-  for bandresult in $(echo "${band[*]}" | sort -r | uniq -c); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse
-  echo "${band[*]}" | sort -r | uniq -c	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse
-    bandarrayzaehler+=($(echo "$bandresult" | sed 's;^\ *;;' | egrep -o ^[[:digit:]]+))	  # count der häufigsten bandnamen 
-    bandarraynamen+=($(echo "$bandresult" | sed 's;^\ *;;' | egrep -o [[:alpha:]]+$))	  # häufigste bandnamen 
+  for bandresult in $(echo "${band[*]}" | sort | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse
+    echo "out of ${#band[*]} mp3 files, counting $bandresult"
+    count=$( echo $bandresult | sed 's/\(^[0-9]\+\)\s.*$/\1/' ); perc=$(echo "scale=3;($count/${#band[*]})*100.0" | bc -l); echo "$count/${#band[*]}=$perc"
   done
-  echo "${bandarrayzaehler[0]} mal ${bandarraynamen[0]}"
-  echo "von insgesamt ${#band[*]} mp3s in diesem Ordner"
-  echo $(( 1 / (${#band[*]} / ${bandarrayzaehler[0]}) * 100 )) "prozent exakt"
 
 
 
