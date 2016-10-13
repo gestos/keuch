@@ -2,13 +2,18 @@
 IFS='
 '
 
+rot='\033[1;31m'
+grn='\033[0;32m'
+blu='\033[1;34m'
+off='\033[0m'
+
 
 
 dir_analysis () {
 
-
 if [[ -f "$1" ]]; then
-  extn=$(exiftool -s3 -filetypeextension $1 | tr '[:upper:]' '[:lower:]')
+  echo -e "${blu}$1 is a regular file which does not conern us right now...${off}"
+  extn=${1##*.}
   band=$(exiftool -s3 -Artist $1 | tr '[:upper:]' '[:lower:]')
   albu=$(exiftool -s3 -Album $1 | tr '[:upper:]' '[:lower:]')
   song=$(exiftool -s3 -Title $1 | tr '[:upper:]' '[:lower:]')
@@ -18,50 +23,62 @@ if [[ -f "$1" ]]; then
   echo "Dateiendung = $extn"
 
 elif [[ -d "$1" ]]; then
-  echo "this is a directory - trying to find out, which album..."
+  echo -e "${grn}$1${off} is a directory - trying to find out, which album..."
   for i in $(find $1 -mindepth 1 -maxdepth 1 -type f); do
     if [[ $(exiftool -s3 -mimetype $i 2>/dev/null) == audio/* ]]; then
-      band+=($(exiftool -s3 -Artist "$i" | tr '[:upper:]' '[:lower:]'))
-      albu+=($(exiftool -s3 -Album "$i" | tr '[:upper:]' '[:lower:]'))
-#      song=$(exiftool -s3 -Title $i | tr '[:upper:]' '[:lower:]')  # das weglassen der 3 Zeilen
-#      trac=$(exiftool -s3 -Track $i | tr '[:upper:]' '[:lower:]')  # bringt über 30% bessere performance
-#      trnm=$(printf "%02d" $((10#${trac%%/*})) )		    # gegenüber der File-Analyse
-      #mv "$i" "$trnm - $song"
+      
+      if [[ -n $(exiftool -s3 -Artist "$i") ]]; then
+	band+=($(exiftool -s3 -Artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | tr '[:upper:]' '[:lower:]'))
+      else
+	band+=(unbekannt)
+      fi
+      
+      if [[ -n $(exiftool -s3 -Album "$i") ]]; then
+	albu+=($(exiftool -s3 -Album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | tr '[:upper:]' '[:lower:]'))
+      else
+	albu+=("unbekanntes Album")
+      fi
     fi
     echo -ne "."
   done
-  echo -ne "\n"
+  echo -ne "arrays für album und artist befüllt\n" 
 
-  for bandresult in $(echo "${band[*]}" | sort | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse
-    echo "out of ${#band[*]} mp3 files, counting $bandresult"
-    count=$( echo $bandresult | sed 's/\(^[0-9]\+\)\s.*$/\1/' ); perc=$(echo "scale=3;($count/${#band[*]})*100.0" | bc -l); echo "$count/${#band[*]}=$perc"
+  for bandresult in $(echo "${band[*]}" | sort | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse wird gezählt, wie oft der Bandname vorkommt
+    # echo "$bandresult"
+    bcount=$( echo $bandresult | sed 's/\(^[0-9]\+\)\s.*$/\1/' )			    # $count ist die reine Anzahl der identischen Ergebnisse
+    bandname=$( echo $bandresult | sed 's;^[[:digit:]]\+[[:blank:]]\+;;' )
+    # echo "$bcount"
+    bperc=$(echo "scale=4;($bcount/${#band[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = Prozent, die ein Ergebnis ausmacht
+    # echo "$bcount/${#band[*]}=$bperc Prozent der Files sind von $bandname"
+    if [[ "$bperc" -ge 66 ]]; then 
+      echo -ne "$bandname ($bperc%) - "
+      break
+    else
+      echo "keine eindeutige zuordnung möglich"
+    fi 
   done
 
+  for alburesult in $(echo "${albu[*]}" | sort | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse wird gezählt, wie oft der Bandname vorkommt
+    # echo "$alburesult"
+    acount=$( echo $alburesult | sed 's/\(^[0-9]\+\)\s.*$/\1/' )			    # $count ist die reine Anzahl der identischen Ergebnisse
+    albuname=$( echo $alburesult | sed 's;^[[:digit:]]\+[[:blank:]]\+;;' )
+    # echo "$acount"
+    aperc=$(echo "scale=4;($acount/${#albu[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = Prozent, die ein Ergebnis ausmacht
+    # echo "$acount/${#albu[*]}=$aperc Prozent der Files sind vom Album $albuname"
+    if [[ "$aperc" -ge 66 ]]; then 
+      echo "$albuname ($aperc%)"
+      break
+    else
+      echo "keine eindeutige zuordnung möglich"
+    fi 
+  done
 
-
-
-## Hier kommt die entscheidung, ob interpret/album eindeutig sind, oder nicht
-## bei mehreren Ergebnissen (nach Sortierung der Liste) kann evtl. mit
-## der Länge-von-Array Funktion gearbeitet werden?
-
-#   band_bereinigt=$( echo "${band[*]}" | sort -u )  # die Wiedergabe des Arrays mit * gibt ein korrektes Ergebnis
-#   albu_bereinigt=$( echo "${albu[*]}" | sort -u )  # während @ alles in eine Zeile schreibt
-
-#   if [[ $(echo "$band_bereinigt" | wc -l) == 1 ]]; then
-#     echo "nur ein Interpret gefunden, Band sollte $band_bereinigt sein"
-#   else
-#     echo "mehrere Interpreten gefunden: $band_bereinigt"
-#   fi
-#   if [[ $(echo "$albu_bereinigt" | wc -l) == 1 ]]; then
-#     echo "nur ein Album gefunden, sollte $albu_bereinigt sein"
-#   else
-#     echo "mehrere möglichen Alben gefunden: $albu_bereinigt"
-#   fi
 
 else
   echo "invalid or non-existent filename? exiting..."
   exit
 fi
+
 }
 
 dir_analysis $1
