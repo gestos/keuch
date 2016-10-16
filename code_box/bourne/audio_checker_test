@@ -43,7 +43,7 @@ elif [[ -d "$1" ]]; then
   done
   echo -ne "arrays für album und artist befüllt\n" 
 
-  for bandresult in $(echo "${band[*]}" | sort | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse wird gezählt, wie oft der Bandname vorkommt
+  for bandresult in $(echo "${band[*]}" | sort -r | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse wird gezählt, wie oft der Bandname vorkommt
     # echo "$bandresult"
     bcount=$( echo $bandresult | sed 's/\(^[0-9]\+\)\s.*$/\1/' )			    # $count ist die reine Anzahl der identischen Ergebnisse
     bandname=$( echo $bandresult | sed 's;^[[:digit:]]\+[[:blank:]]\+;;' )
@@ -58,8 +58,8 @@ elif [[ -d "$1" ]]; then
     fi 
   done
 
-  for alburesult in $(echo "${albu[*]}" | sort | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse wird gezählt, wie oft der Bandname vorkommt
-    # echo "$alburesult"
+  for alburesult in $(echo "${albu[*]}" | sort -r | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse wird gezählt, wie oft der Bandname vorkommt
+    echo "$alburesult"
     acount=$( echo $alburesult | sed 's/\(^[0-9]\+\)\s.*$/\1/' )			    # $count ist die reine Anzahl der identischen Ergebnisse
     albuname=$( echo $alburesult | sed 's;^[[:digit:]]\+[[:blank:]]\+;;' )
     # echo "$acount"

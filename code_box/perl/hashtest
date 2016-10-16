@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use diagnostics;
+
+my %testhash = (
+  "titel 1",10,
+  "titel 2",4,
+  "titel 3",8,
+);
+print $testhash{"titel 1"};
