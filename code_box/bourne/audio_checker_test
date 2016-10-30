@@ -59,6 +59,7 @@ dir_analysis () {
       fi
     done
 
+<<<<<<< HEAD
     for alburesult in $(echo "${albu[*]}" | sort | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse wird gezählt, wie oft der Bandname vorkommt
       # echo "$alburesult"
       acount=$( echo $alburesult | sed 's/\(^[0-9]\+\)\s.*$/\1/' )			    # $count ist die reine Anzahl der identischen Ergebnisse
@@ -73,6 +74,37 @@ dir_analysis () {
 	echo "keine eindeutige zuordnung möglich"
       fi
     done
+=======
+  for bandresult in $(echo "${band[*]}" | sort -r | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse wird gezählt, wie oft der Bandname vorkommt
+    # echo "$bandresult"
+    bcount=$( echo $bandresult | sed 's/\(^[0-9]\+\)\s.*$/\1/' )			    # $count ist die reine Anzahl der identischen Ergebnisse
+    bandname=$( echo $bandresult | sed 's;^[[:digit:]]\+[[:blank:]]\+;;' )
+    # echo "$bcount"
+    bperc=$(echo "scale=4;($bcount/${#band[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = Prozent, die ein Ergebnis ausmacht
+    # echo "$bcount/${#band[*]}=$bperc Prozent der Files sind von $bandname"
+    if [[ "$bperc" -ge 66 ]]; then 
+      echo -ne "$bandname ($bperc%) - "
+      break
+    else
+      echo "keine eindeutige zuordnung möglich"
+    fi 
+  done
+
+  for alburesult in $(echo "${albu[*]}" | sort -r | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse wird gezählt, wie oft der Bandname vorkommt
+    echo "$alburesult"
+    acount=$( echo $alburesult | sed 's/\(^[0-9]\+\)\s.*$/\1/' )			    # $count ist die reine Anzahl der identischen Ergebnisse
+    albuname=$( echo $alburesult | sed 's;^[[:digit:]]\+[[:blank:]]\+;;' )
+    # echo "$acount"
+    aperc=$(echo "scale=4;($acount/${#albu[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = Prozent, die ein Ergebnis ausmacht
+    # echo "$acount/${#albu[*]}=$aperc Prozent der Files sind vom Album $albuname"
+    if [[ "$aperc" -ge 66 ]]; then 
+      echo "$albuname ($aperc%)"
+      break
+    else
+      echo "keine eindeutige zuordnung möglich"
+    fi 
+  done
+>>>>>>> 7af0c6a84c60aa43156757dcf5596e34e784fdcd
 
 
   else
