@@ -91,12 +91,6 @@ Mod4 9 :Tab 9
 # open a dialog to run programs
 Mod1 F2 :Exec fbrun
 
-# volume settings, using common keycodes
-# if these don't work, use xev to find out your real keycodes
-176 :Exec amixer sset Master,0 1+
-174 :Exec amixer sset Master,0 1-
-160 :Exec amixer sset Master,0 toggle
-
 # current window commands
 Mod1 F4 :Close
 # Mod1 F5 :Kill
@@ -111,8 +105,8 @@ cMod1 space :WindowMenu
 Control Mod1 Delete :Exit
 
 # change to previous/next workspace
-Control Mod1 Left :PrevWorkspace
-Control Mod1 Right :NextWorkspace
+#Control Mod1 Left :PrevWorkspace
+#Control Mod1 Right :NextWorkspace
 
 # send the current window to previous/next workspace
 Mod4 Left :SendToPrevWorkspace
@@ -127,14 +121,6 @@ Control F1 :Workspace 1
 Control F2 :Workspace 2
 Control F3 :Workspace 3
 Control F4 :Workspace 4
-#Control F5 :Workspace 5
-#Control F6 :Workspace 6
-#Control F7 :Workspace 7
-#Control F8 :Workspace 8
-#Control F9 :Workspace 9
-#Control F10 :Workspace 10
-#Control F11 :Workspace 11
-#Control F12 :Workspace 12
 
 # send the current window to a specific workspace
 #Mod4 F1 :SendToWorkspace 1
@@ -171,27 +157,19 @@ Control F4 :Workspace 4
 
 ######### eigene section ##############
 
-
-# Mod1 F2         :ExecCommand nicotine
-# moc-hotkeys go with Altgr
-# wallpaper
-
-#F1 :ExecCommand urxvt -tr -tint lightblue -sh 10 -fg lightblue -hc gray -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -uc -e screen
 F1 :ExecCommand urxvt -tr -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -tint white -sh 182 -e screen
-F2 :ExecCommand iceweasel &
-F3 :ExecCommand urxvt -tr -tint lightgreen -sh 35 -fg lightblue -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -e screen -c /home/keuch/.screenrc_moc mocp -T /usr/share/moc/themes/transparent-background
+F2 :ExecCommand firefox &
+F3 :ExecCommand urxvt -tr -tint lightgreen -sh 35 -fg lightblue -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -e screen -c /home/keuch/.screenrc_moc mocp -T ~/.moc/themes/transparent_fordarkbg
 F4 :ExecCommand bluefish
 F5 :ExecCommand xfe
-#F6 :ExecCommand stickmount
 F7 :ExecCommand xo2 
 F8 :ExecCommand pidgin &
 F9 :ExecCommand /usr/local/bin/pausa
-F10 :ExecCommand /usr/bin/gamix
+F10 :ExecCommand xterm /usr/bin/alsamixer
 F11 :ExecCommand zeitling
 
-# Mod1 F1		:ExecCommand urxvt -tr -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -tint white -sh 155 -e screen
 Mod1 F1 	:ExecCommand gvim
-Mod1 F3         :ExecCommand /usr/local/bin/astf
+Mod1 F3		:ExecCommand urxvt -tr -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -tint white -sh 180 -e ssh -t kueche mocp
 Mod1 F5		:ExecCommand xfe /schrott/
 Mod1 F12        :ExecCommand idesk &
 Mod1 m :MaximizeWindow
@@ -200,7 +178,6 @@ Mod1 q :ExecCommand galculator &
 Mod1 t :ToggleDecor
 
 Mod4 m :MaximizeHorizontal
-Mod4 F3 :ExecCommand vlc
 Mod4 F12 :ExecCommand xmessage -bg lightblue -fg blue -timeout 3 -buttons , GOING DOWN! ; sudo halt
 
 Mod5 114 :ExecCommand mocp -f
@@ -210,17 +187,21 @@ Mod5 F11 :ExecCommand amixer set PCM 5%-
 Mod5 F12 :ExecCommand amixer set PCM 5%+
 Mod5 k :ExecCommand /usr/local/bin/kick "$(mocp -Q %file)"
 Mod5 l :ExecCommand /usr/local/bin/songzeiger
-Mod5 w 	:ExecCommand /usr/local/bin/wallset
+Mod5 w 	:ExecCommand fbsetbg $(find ~/.wall/ -type f | shuf -n1)
 Mod5 F3	:ExecCommand /usr/local/bin/remucke 300
 Mod5 F2 :ExecCommand /usr/bin/chromium
 
-Shift F1 :ExecCommand urxvt -tr -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -tint white -sh 155 -e screen
-Shift F2 :ExecCommand /usr/local/bin/thunderbird-bin 
+Shift F1 :ExecCommand urxvt -fg lightblue -tr -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -tint white -sh 25 -e screen
+Shift F2 :ExecCommand /usr/bin/sylpheed
 Shift F3 :ExecCommand libreoffice &
-#Shift F3 :ExecCommand abiword & 
 Shift F5 :ExecCommand urxvt -tr -tint lightblue -sh 35 -fg white -hc gray -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -e mc
-#Shift F6 :ExecCommand umount /home/keuch/stick
 Shift F7 :ExecCommand mount /home/keuch/stick
 Shift F8 :ExecCommand urxvt -tr -tint magenta -sh 30 -fg 14 -e irssi --nick=Seckel --connect=irc.freenode.net
-#Shift F10 :ExecCommand /usr/bin/gamix
+Shift F10 :ExecCommand /usr/bin/gamix
 Shift F12 :ExecCommand xmessage -bg blue -fg lightblue -timeout 2 -buttons , COMING BACK UP! ; sudo reboot
+
+# ctrl+alt left or right "tiling"
+Control Mod1 Left   :MacroCmd {ResizeTo 50% 100%} {MoveTo 00 00 Left}
+Control Mod1 Right  :MacroCmd {ResizeTo 50% 100%} {MoveTo 00 00 Right}
+
+
