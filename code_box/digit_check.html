@@ -1,0 +1,39 @@
+<html>
+<head>
+
+</head>
+
+
+<body>
+
+
+<form name="Auftragsfeld" method="post">
+  10stellige Zahl: <input type="text" maxlength="10" id="fiel" name="Auftragsnummer">
+  <input type="submit" value="Submit">
+</form>
+
+11111111112222
+
+
+
+<script>
+
+var soll = new RegExp('^\\d{10}$');
+var inbox = document.getElementById('fiel');
+/* inbox.onkeyup = function() {   das hier geht für keystrokes*/ 
+inbox.onblur = function() {  
+  if (soll.test(inbox.value)) {
+    document.getElementById('fiel').style.backgroundColor = "lightgreen";
+  }
+  else if (inbox.value == "") {
+    document.getElementById('fiel').style.backgroundColor = "initial";
+  }
+  else {
+    document.getElementById('fiel').style.backgroundColor = "red";
+  }
+}
+
+
+</script>
+</body>
+</html>
