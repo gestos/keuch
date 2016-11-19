@@ -1,5 +1,5 @@
 #!/bin/bash +xv
-set -x
+#set -x
 IFS='
 '
 
@@ -9,41 +9,68 @@ blu='\033[1;34m'
 off='\033[0m'
 
 
+lowercase () {
+  tr '[:upper:]' '[:lower:]'
+}
+
+test_empty () {
+  if [[ -z "$(ls -A $1)" ]]; then
+    echo "this one's empty"
+    exit
+  fi
+}
+test_for_audio () {
+  if [[ ${#albu[@]} -eq 0 ]]; then
+    echo -e "this directory has no audio files, anything else in it?\n"
+    exit
+  fi
+}
+gettagsfromfile () {
+  echo -e "${blu}$1 is a regular file which does not conern us right now...${off}"
+  extn=${1##*.}
+  band=$(exiftool -s3 -Artist $1 | lowercase)
+  albu=$(exiftool -s3 -Album $1 | lowercase)
+  song=$(exiftool -s3 -Title $1 | lowercase)
+  trac=$(exiftool -s3 -Track $1 | lowercase)
+  trnm=$(printf "%02d" $((10#${trac%%/*})) )
+  echo "$band - $albu - $trnm - $song"
+  echo "Dateiendung = $extn"
+}
 
 dir_analysis () {
 
   if [[ -f "$1" ]]; then
-    echo -e "${blu}$1 is a regular file which does not conern us right now...${off}"
-    extn=${1##*.}
-    band=$(exiftool -s3 -Artist $1 | tr '[:upper:]' '[:lower:]')
-    albu=$(exiftool -s3 -Album $1 | tr '[:upper:]' '[:lower:]')
-    song=$(exiftool -s3 -Title $1 | tr '[:upper:]' '[:lower:]')
-    trac=$(exiftool -s3 -Track $1 | tr '[:upper:]' '[:lower:]')
-    trnm=$(printf "%02d" $((10#${trac%%/*})) )
-    echo "$band - $albu - $trnm - $song"
-    echo "Dateiendung = $extn"
+    # wenn $1 ein normales file ist
+    gettagsfromfile
 
   elif [[ -d "$1" ]]; then
+    # wenn $1 ein verzeichnis ist
+    # skip if emtpy
+    test_empty "$1"
+    # check each file for whether it's an audio file and if so, read artist and album tags and put them in an array band[] and albu[]
     echo -e "${grn}$1${off} is a directory - trying to find out, which album..."
     for i in $(find $1 -mindepth 1 -maxdepth 1 -type f); do
-      if [[ $(exiftool -s3 -mimetype $i 2>/dev/null) == audio/* ]]; then
+      if [[ $(exiftool -s3 -mimetype $i 2>/dev/null) =~ ^audio* ]]; then
 
 	if [[ -n $(exiftool -s3 -Artist "$i") ]]; then
-	  band+=($(exiftool -s3 -Artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | tr '[:upper:]' '[:lower:]'))
+	  band+=($(exiftool -s3 -Artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
 	else
 	  band+=(unbekannt)
 	fi
 
 	if [[ -n $(exiftool -s3 -Album "$i") ]]; then
-	  albu+=($(exiftool -s3 -Album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | tr '[:upper:]' '[:lower:]'))
+	  albu+=($(exiftool -s3 -Album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
 	else
 	  albu+=("unbekanntes Album")
 	fi
       fi
+
       echo -ne "."
     done
     echo -ne "arrays für album und artist befüllt\n"
+    test_for_audio $1
 
+    #### Auswertung, ob Artist und Album eindeutig sind
     for bandresult in $(echo "${band[*]}" | sort | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse wird gezählt, wie oft der Bandname vorkommt
       # echo "$bandresult"
       bcount=$( echo $bandresult | sed 's/\(^[0-9]\+\)\s.*$/\1/' )			    # $count ist die reine Anzahl der identischen Ergebnisse
@@ -56,10 +83,10 @@ dir_analysis () {
 	break
       else
 	echo "keine eindeutige zuordnung möglich"
+	bandname="unknown artist"
       fi
     done
 
-<<<<<<< HEAD
     for alburesult in $(echo "${albu[*]}" | sort | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse wird gezählt, wie oft der Bandname vorkommt
       # echo "$alburesult"
       acount=$( echo $alburesult | sed 's/\(^[0-9]\+\)\s.*$/\1/' )			    # $count ist die reine Anzahl der identischen Ergebnisse
@@ -72,43 +99,14 @@ dir_analysis () {
 	break
       else
 	echo "keine eindeutige zuordnung möglich"
+	albuname="unknown_album"
       fi
     done
-=======
-  for bandresult in $(echo "${band[*]}" | sort -r | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse wird gezählt, wie oft der Bandname vorkommt
-    # echo "$bandresult"
-    bcount=$( echo $bandresult | sed 's/\(^[0-9]\+\)\s.*$/\1/' )			    # $count ist die reine Anzahl der identischen Ergebnisse
-    bandname=$( echo $bandresult | sed 's;^[[:digit:]]\+[[:blank:]]\+;;' )
-    # echo "$bcount"
-    bperc=$(echo "scale=4;($bcount/${#band[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = Prozent, die ein Ergebnis ausmacht
-    # echo "$bcount/${#band[*]}=$bperc Prozent der Files sind von $bandname"
-    if [[ "$bperc" -ge 66 ]]; then 
-      echo -ne "$bandname ($bperc%) - "
-      break
-    else
-      echo "keine eindeutige zuordnung möglich"
-    fi 
-  done
-
-  for alburesult in $(echo "${albu[*]}" | sort -r | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse wird gezählt, wie oft der Bandname vorkommt
-    echo "$alburesult"
-    acount=$( echo $alburesult | sed 's/\(^[0-9]\+\)\s.*$/\1/' )			    # $count ist die reine Anzahl der identischen Ergebnisse
-    albuname=$( echo $alburesult | sed 's;^[[:digit:]]\+[[:blank:]]\+;;' )
-    # echo "$acount"
-    aperc=$(echo "scale=4;($acount/${#albu[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = Prozent, die ein Ergebnis ausmacht
-    # echo "$acount/${#albu[*]}=$aperc Prozent der Files sind vom Album $albuname"
-    if [[ "$aperc" -ge 66 ]]; then 
-      echo "$albuname ($aperc%)"
-      break
-    else
-      echo "keine eindeutige zuordnung möglich"
-    fi 
-  done
->>>>>>> 7af0c6a84c60aa43156757dcf5596e34e784fdcd
-
+    echo -e "verzeichnis wird umbenannt in ${grn}\"$bandname - $albuname\"${off}\n\n"
 
   else
-    echo "invalid or non-existent filename? exiting..."
+    # wenn $1 weder ein file noch ein directory ist
+    echo "invalid or non-existent filename $1? exiting..."
     exit
   fi
 
