@@ -1,5 +1,5 @@
 #!/bin/bash +xv
-#set -x
+# set +x
 IFS='
 '
 
@@ -8,21 +8,24 @@ grn='\033[0;32m'
 blu='\033[1;34m'
 off='\033[0m'
 
+top_music_dir="$1"
 
 lowercase () {
   tr '[:upper:]' '[:lower:]'
 }
 
-test_empty () {
+test_empty_dir () {
   if [[ -z "$(ls -A $1)" ]]; then
-    echo "this one's empty"
-    exit
+    read -p "this one's empty and will be removed, do you like that?" ny
+    rm -r "$1"
   fi
 }
 test_for_audio () {
   if [[ ${#albu[@]} -eq 0 ]]; then
     echo -e "this directory has no audio files, anything else in it?\n"
-    exit
+    set +x
+    break
+    # exit
   fi
 }
 gettagsfromfile () {
@@ -38,55 +41,60 @@ gettagsfromfile () {
 }
 
 dir_analysis () {
-
   if [[ -f "$1" ]]; then
     # wenn $1 ein normales file ist
-    gettagsfromfile
+    gettagsfromfile "$1"
 
   elif [[ -d "$1" ]]; then
     # wenn $1 ein verzeichnis ist
     # skip if emtpy
-    test_empty "$1"
+    unset band
+    unset albu
+    test_empty_dir "$1"
     # check each file for whether it's an audio file and if so, read artist and album tags and put them in an array band[] and albu[]
     echo -e "${grn}$1${off} is a directory - trying to find out, which album..."
-    for i in $(find $1 -mindepth 1 -maxdepth 1 -type f); do
-      if [[ $(exiftool -s3 -mimetype $i 2>/dev/null) =~ ^audio* ]]; then
+    for i in $(find $1 -mindepth 1 -maxdepth 1 -type f); do   # should iterate over leaf directories. yet to implement the search for leaf directories
+      if [[ $(exiftool -s3 -mimetype $i 2>/dev/null) =~ ^audio* ]]; then    # if $i in $leafdirectory is an audio file
 
 	if [[ -n $(exiftool -s3 -Artist "$i") ]]; then
-	  band+=($(exiftool -s3 -Artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+	  band+=($(exiftool -s3 -Artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))    # add Artistname to array if there is one
 	else
-	  band+=(unbekannt)
+	  band+=(unbekannt)									    # or fill array with unbekannt
 	fi
 
-	if [[ -n $(exiftool -s3 -Album "$i") ]]; then
+	if [[ -n $(exiftool -s3 -Album "$i") ]]; then						    # add Albumname to array if there is one
 	  albu+=($(exiftool -s3 -Album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
 	else
-	  albu+=("unbekanntes Album")
+	  albu+=("unbekanntes Album")								    # or fill array with unbekannt
 	fi
       fi
 
       echo -ne "."
     done
     echo -ne "arrays für album und artist befüllt\n"
-    test_for_audio $1
 
-    #### Auswertung, ob Artist und Album eindeutig sind
-    for bandresult in $(echo "${band[*]}" | sort | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse wird gezählt, wie oft der Bandname vorkommt
+    set -x
+    test_for_audio "$1"
+    set +x
+
+    #### Auswertung, ob Artist eindeutig ist
+    for bandresult in $(echo "${band[*]}" | sort | uniq -c | sed 's!^\s\+!!' | head -n1); do	    # anzahl der gleichen Artistnames im Array wird in der Form "[Anzahl] [Name]" ausgegeben, es interessiert aber nur das oberste (=größte Zahl gleicher Namen)
       # echo "$bandresult"
-      bcount=$( echo $bandresult | sed 's/\(^[0-9]\+\)\s.*$/\1/' )			    # $count ist die reine Anzahl der identischen Ergebnisse
-      bandname=$( echo $bandresult | sed 's;^[[:digit:]]\+[[:blank:]]\+;;' )
+      bcount=$( echo $bandresult | sed 's/\(^[0-9]\+\)\s.*$/\1/' )			    # $bcount ist die Zahl der identischen Ergebnisse (Form zb 6 Künstler)
+      bandname=$( echo $bandresult | sed 's;^[[:digit:]]\+[[:blank:]]\+;;' )		    # $bandname ist der Name ohne die Zahl	      (Form zb 6 Künstler)
       # echo "$bcount"
       bperc=$(echo "scale=4;($bcount/${#band[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = Prozent, die ein Ergebnis ausmacht
       # echo "$bcount/${#band[*]}=$bperc Prozent der Files sind von $bandname"
-      if [[ "$bperc" -ge 66 ]]; then
+      if [[ "$bperc" -ge 60 ]]; then
 	echo -ne "$bandname ($bperc%) - "
 	break
       else
+	echo -ne "$bandname ($bperc%) - "
 	echo "keine eindeutige zuordnung möglich"
-	bandname="unknown artist"
+	bandname="unknown_artist"
       fi
     done
-
+    #### Auswertung, ob Album eindeutig ist
     for alburesult in $(echo "${albu[*]}" | sort | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse wird gezählt, wie oft der Bandname vorkommt
       # echo "$alburesult"
       acount=$( echo $alburesult | sed 's/\(^[0-9]\+\)\s.*$/\1/' )			    # $count ist die reine Anzahl der identischen Ergebnisse
@@ -94,23 +102,74 @@ dir_analysis () {
       # echo "$acount"
       aperc=$(echo "scale=4;($acount/${#albu[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = Prozent, die ein Ergebnis ausmacht
       # echo "$acount/${#albu[*]}=$aperc Prozent der Files sind vom Album $albuname"
-      if [[ "$aperc" -ge 66 ]]; then
+      if [[ "$aperc" -ge 60 ]]; then
 	echo "$albuname ($aperc%)"
 	break
       else
+	echo "$albuname ($aperc%)"
 	echo "keine eindeutige zuordnung möglich"
 	albuname="unknown_album"
       fi
     done
-    echo -e "verzeichnis wird umbenannt in ${grn}\"$bandname - $albuname\"${off}\n\n"
+
+
+    #### wenn eins von beidem  unbekannt ist, nichts tun
+    if [[ "$albuname" == "unknown_album" ]] || [[ "$bandname" == "unknown_artist" ]]; then
+      echo -e "dieses verzeichnis konnte nicht eindeutig identifiziert werden, wird gelassen, wie es ist"
+    elif [[ -d "$top_music_dir$bandname - $albuname" ]] && [[ $(dirname "$1")/? =~ "$top_music_dir" ]]; then
+      echo "this is already under top level and correctly named... skipping"
+    else
+      set -x
+      while [[ -d "$top_music_dir$bandname - $albuname" ]] && [[ ! $(dirname "$1")/? =~ "$top_music_dir" ]]; do
+	albuname="$albuname"_1
+      done
+      echo "$1 to $top_music_dir$bandname - $albuname"
+      echo -e "verzeichnis wird umbenannt und verschoben nach ${grn}\"$top_music_dir$bandname - $albuname\"${off}\n\n"
+      read -p "do you like that?" yn      
+      cp -R   "$1"  "$top_music_dir$bandname - $albuname" && rm -r "$1"
+      set +x
+    fi
 
   else
-    # wenn $1 weder ein file noch ein directory ist
-    echo "invalid or non-existent filename $1? exiting..."
+    # wenn $1 weder ein file noch ein directory ist; dieser check sollte an den Anfang, nicht ans Ende
+    echo "$1 ist weder ein vorhandenes Verzeichnis noch eine Datei? exiting..."
     exit
   fi
-
 }
 
-dir_analysis $1
+# dir_analysis $1
+
+## gucken, ob's im Ordner weitere Unterordner gibt
+checksb () {
+  find $1 -mindepth 1 -maxdepth 1 -type d
+}
+
+# in Unterverzeichnisse absteigen und gucken, ob's Audiodateien gibt
+ checksub () {
+   if [[ -n "$(checksb $1)" ]]; then		## wenn der Rückgabewert nicht leer ist, sind Unterverzeichnisse vorhanden
+     echo "subdir found in $1, descending"
+     for i in $(checksb $1); do			## jedes Unterverzeichnis angucken und ggf. weiter absteigen
+       checksub "$i"
+     done
+   else
+     echo "$i is a leaf node"			## wenn keine Unterverzeichnisse da sind, ist es ein Leaf
+     dir_analysis "$i"
+   fi
+ }
+### alternative Version mit while loop
+# checksub () {
+#   while [[ -n "$(checksb $1)" ]]; do		## wenn der Rückgabewert nicht leer ist, sind Unterverzeichnisse vorhanden
+#     echo "subdir found in $1, descending"
+#     for i in $(checksb "$1"); do			## jedes Unterverzeichnis angucken und ggf. weiter absteigen
+#       checksub "$i"
+#     done
+#     echo "$i is a leaf node"			## wenn keine Unterverzeichnisse da sind, ist es ein Leaf
+#     dir_analysis "$i"
+#   done
+# }
+
+
+
+##### MAIN
+checksub $top_music_dir
 
