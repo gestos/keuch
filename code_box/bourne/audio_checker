@@ -1,59 +1,14 @@
 #!/bin/bash
 IFS='
 '
+toplevel="$1"
 
-
-
-dir_analysis () {
-
-
-if [[ -f "$1" ]]; then
-  extn=$(exiftool -s3 -filetypeextension $1 | tr '[:upper:]' '[:lower:]')
-  band=$(exiftool -s3 -Artist $1 | tr '[:upper:]' '[:lower:]')
-  albu=$(exiftool -s3 -Album $1 | tr '[:upper:]' '[:lower:]')
-  song=$(exiftool -s3 -Title $1 | tr '[:upper:]' '[:lower:]')
-  trac=$(exiftool -s3 -Track $1 | tr '[:upper:]' '[:lower:]')
-  trnm=$(printf "%02d" $((10#${trac%%/*})) )
-  echo "$band - $albu - $trnm - $song"
-  echo "Dateiendung = $extn"
-
-elif [[ -d "$1" ]]; then
-  echo "this is a directory - trying to find out, which album..."
-  for i in $(find $1 -mindepth 1 -maxdepth 1 -type f); do
-    if [[ $(exiftool -s3 -mimetype $i 2>/dev/null) == audio/* ]]; then
-      band+=($(exiftool -s3 -Artist "$i" | tr '[:upper:]' '[:lower:]'))
-      albu+=($(exiftool -s3 -Album "$i" | tr '[:upper:]' '[:lower:]'))
-#      song=$(exiftool -s3 -Title $i | tr '[:upper:]' '[:lower:]')  # das weglassen der 3 Zeilen
-#      trac=$(exiftool -s3 -Track $i | tr '[:upper:]' '[:lower:]')  # bringt über 30% bessere performance
-#      trnm=$(printf "%02d" $((10#${trac%%/*})) )		    # gegenüber der File-Analyse
-      #mv "$i" "$trnm - $song"
-    fi
-    echo -ne "."
+find_subdirectories () {
+  cd "$1"
+  while [[ -n $(find . -maxdepth 1 -mindepth 1 -type d) ]]; do
+    pwd
+    cd $(find . -maxdepth 1 -mindepth 1 -type d)
   done
-  echo -ne "\n"
-
-## Hier kommt die entscheidung, ob interpret/album eindeutig sind, oder nicht
-## bei mehreren Ergebnissen (nach Sortierung der Liste) kann evtl. mit
-## der Länge-von-Array Funktion gearbeitet werden?
-
-  band_bereinigt=$( echo "${band[*]}" | sort -u )  # die Wiedergabe des Arrays mit * gibt ein korrektes Ergebnis
-  albu_bereinigt=$( echo "${albu[*]}" | sort -u )  # während @ alles in eine Zeile schreibt
-  if [[ $(echo "$band_bereinigt" | wc -l) == 1 ]]; then
-    echo "nur ein Interpret gefunden, Band sollte $band_bereinigt sein"
-  else
-    echo "mehrere Interpreten gefunden: $band_bereinigt"
-  fi
-  if [[ $(echo "$albu_bereinigt" | wc -l) == 1 ]]; then
-    echo "nur ein Album gefunden, sollte $albu_bereinigt sein"
-  else
-    echo "mehrere möglichen Alben gefunden: $albu_bereinigt"
-  fi
-
-else
-  echo "invalid or non-existent filename? exiting..."
-  exit
-fi
 }
 
-dir_analysis $1
-
+find_subdirectories $toplevel

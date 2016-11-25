@@ -21,11 +21,9 @@ test_empty_dir () {
   fi
 }
 test_for_audio () {
-  if [[ ${#albu[@]} -eq 0 ]]; then
-    echo -e "this directory has no audio files, anything else in it?\n"
-    set +x
-    break
-    # exit
+  if [[ -z $(file -b --mime-type "$1"/* | grep -i ^audio) ]]; then
+    echo "in diesem verzeichnis sind keine audiodateien, vielleicht bilddateien?"
+    echo "weitere analyse, bla bla"
   fi
 }
 gettagsfromfile () {
@@ -41,16 +39,17 @@ gettagsfromfile () {
 }
 
 dir_analysis () {
-  if [[ -f "$1" ]]; then
-    # wenn $1 ein normales file ist
+  if [[ -f "$1" ]]; then									    # wenn $1 ein normales file ist
     gettagsfromfile "$1"
 
-  elif [[ -d "$1" ]]; then
-    # wenn $1 ein verzeichnis ist
-    # skip if emtpy
-    unset band
-    unset albu
-    test_empty_dir "$1"
+  elif [[ -d "$1" ]]; then									    # wenn $1 ein verzeichnis ist
+    set -x
+    test_empty_dir "$1"										    # wenn komplett leer: löschen
+    test_for_audio "$1"										    # wenn keine audiodateien drin: siehe funktion
+    set +x
+    unset band											    # evtl. vom letzten Durchlauf vorhandene
+    unset albu											    # Werte in den Arrays löschen
+
     # check each file for whether it's an audio file and if so, read artist and album tags and put them in an array band[] and albu[]
     echo -e "${grn}$1${off} is a directory - trying to find out, which album..."
     for i in $(find $1 -mindepth 1 -maxdepth 1 -type f); do   # should iterate over leaf directories. yet to implement the search for leaf directories
@@ -73,9 +72,6 @@ dir_analysis () {
     done
     echo -ne "arrays für album und artist befüllt\n"
 
-    set -x
-    test_for_audio "$1"
-    set +x
 
     #### Auswertung, ob Artist eindeutig ist
     for bandresult in $(echo "${band[*]}" | sort | uniq -c | sed 's!^\s\+!!' | head -n1); do	    # anzahl der gleichen Artistnames im Array wird in der Form "[Anzahl] [Name]" ausgegeben, es interessiert aber nur das oberste (=größte Zahl gleicher Namen)
@@ -96,12 +92,9 @@ dir_analysis () {
     done
     #### Auswertung, ob Album eindeutig ist
     for alburesult in $(echo "${albu[*]}" | sort | uniq -c | sed 's!^\s\+!!'); do	    # für jede unterschiedliche Zeile der erhaltenen band-Ergebnisse wird gezählt, wie oft der Bandname vorkommt
-      # echo "$alburesult"
       acount=$( echo $alburesult | sed 's/\(^[0-9]\+\)\s.*$/\1/' )			    # $count ist die reine Anzahl der identischen Ergebnisse
       albuname=$( echo $alburesult | sed 's;^[[:digit:]]\+[[:blank:]]\+;;' )
-      # echo "$acount"
       aperc=$(echo "scale=4;($acount/${#albu[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = Prozent, die ein Ergebnis ausmacht
-      # echo "$acount/${#albu[*]}=$aperc Prozent der Files sind vom Album $albuname"
       if [[ "$aperc" -ge 60 ]]; then
 	echo "$albuname ($aperc%)"
 	break
@@ -137,36 +130,23 @@ dir_analysis () {
   fi
 }
 
-# dir_analysis $1
-
 ## gucken, ob's im Ordner weitere Unterordner gibt
 checksb () {
   find $1 -mindepth 1 -maxdepth 1 -type d
 }
 
 # in Unterverzeichnisse absteigen und gucken, ob's Audiodateien gibt
- checksub () {
-   if [[ -n "$(checksb $1)" ]]; then		## wenn der Rückgabewert nicht leer ist, sind Unterverzeichnisse vorhanden
-     echo "subdir found in $1, descending"
-     for i in $(checksb $1); do			## jedes Unterverzeichnis angucken und ggf. weiter absteigen
-       checksub "$i"
-     done
-   else
-     echo "$i is a leaf node"			## wenn keine Unterverzeichnisse da sind, ist es ein Leaf
-     dir_analysis "$i"
-   fi
- }
-### alternative Version mit while loop
-# checksub () {
-#   while [[ -n "$(checksb $1)" ]]; do		## wenn der Rückgabewert nicht leer ist, sind Unterverzeichnisse vorhanden
-#     echo "subdir found in $1, descending"
-#     for i in $(checksb "$1"); do			## jedes Unterverzeichnis angucken und ggf. weiter absteigen
-#       checksub "$i"
-#     done
-#     echo "$i is a leaf node"			## wenn keine Unterverzeichnisse da sind, ist es ein Leaf
-#     dir_analysis "$i"
-#   done
-# }
+checksub () {
+  if [[ -n "$(checksb $1)" ]]; then		## wenn der Rückgabewert nicht leer ist, sind Unterverzeichnisse vorhanden
+    echo "subdir found in $1, descending"
+    for i in $(checksb $1); do			## jedes Unterverzeichnis angucken und ggf. weiter absteigen
+      checksub "$i"
+    done
+  else
+    echo "$i is a leaf node"			## wenn keine Unterverzeichnisse da sind, ist es ein Leaf
+    dir_analysis "$i"
+  fi
+}
 
 
 
