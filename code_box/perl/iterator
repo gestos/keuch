@@ -3,17 +3,34 @@ use strict;
 use warnings;
 use diagnostics;
 use File::Spec;
+use File::Find;
 
-my $workdir = "";
-my $abs_path = File::Spec->rel2abs( $workdir ) ;
-print "$#ARGV\n"; 
-if (-d $ARGV[0] && $#ARGV == 0) {
-  my $workdir = $ARGV[0];
-  print "starting at $abs_path\n";
+my $abs_path;
+my $num_of_arguments = scalar @ARGV;
+my %leaves;
+
+
+
+if ($num_of_arguments == 1) {
+  if (-d $ARGV[0]) {
+    my $workdir = $ARGV[0];
+    $abs_path = File::Spec->rel2abs( $workdir ) ;
+    print "starting at $abs_path\n";
+  }
+  else {
+    print "you must pass exactly one directory as an argument to this script\n";
+    die "$!\n";
+  }
 }
-else {
-  print "you must pass exactly one directory as an argument to this script\n";
-  die "$!\n";
+
+# find( sub { 
+#     print "$File::Find::name \n" if -d 
+#   }, "$abs_path" );
+
+find (\&leaves, "$abs_path");
+sub leaves {
+  return unless -d && !/^\.\.?\z/;
+  ++$leaves{$File::Find::name};
+  delete $leaves{$File::Find::dir};
+  print "$_\n";
 }
-
-

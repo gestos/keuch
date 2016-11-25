@@ -1,6 +1,0 @@
-[package]
-name = "erstertest"
-version = "0.1.0"
-authors = ["keuch <master@identitaetsmanagement.eu>"]
-
-[dependencies]

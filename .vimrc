@@ -20,12 +20,8 @@ set hidden
 autocmd BufWinLeave * mkview		" save the folds when leaving vim
 autocmd BufWinEnter * silent loadview  " load folds on start
 
-
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 set laststatus=2		" always show the statusline ; not needed cause of airline
-
-
-
-
-" set statusline=%F%=%l,%c	; show filename, line numbers and character position ; not needed cause of airline
+set foldcolumn=3  
+set foldmethod=marker
