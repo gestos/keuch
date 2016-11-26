@@ -1,0 +1,942 @@
++ IFS='
+'
++ rot='\033[1;31m'
++ grn='\033[0;32m'
++ blu='\033[1;34m'
++ off='\033[0m'
++ top_music_dir=/media/mucke-local/
++ checksub /media/mucke-local/
+++ checksb /media/mucke-local/
+++ find /media/mucke-local/ -mindepth 1 -maxdepth 1 -type d
++ [[ -n /media/mucke-local/golden void - st
+/media/mucke-local/coal chamber - coal chamber
+/media/mucke-local/earthless - from the ages
+/media/mucke-local/fluxion - vibrant forms lp (remastered reissue, type, 2013)
+/media/mucke-local/leatherface - mush
+/media/mucke-local/brian ellis  brian grainger - at dusk
+/media/mucke-local/do make say think - st
+/media/mucke-local/hozier - hozier
+/media/mucke-local/mix iii - 2009
+/media/mucke-local/calexico - calexico-02 the black light
+/media/mucke-local/lovehate - lets rumble
+/media/mucke-local/red dons - fake meets failure
+/media/mucke-local/new york crasnals - faces and noises we can make
+/media/mucke-local/the lemonheads - car button cloth
+/media/mucke-local/the cure - the head on the door_1
+/media/mucke-local/ozzy osbourne - blizzard of ozz bonus track
+/media/mucke-local/morphine - good
+/media/mucke-local/big business - here comes the waterworks
+/media/mucke-local/red dons - the dead hand of tradition
+/media/mucke-local/john butler trio - grand national
+/media/mucke-local/meshuggah - chaosphere
+/media/mucke-local/carlos cipa - the monarch and the viceroy
+/media/mucke-local/crippled black phoenix - a love of shared disasters
+/media/mucke-local/mother tongue - ghost note
+/media/mucke-local/bad dudes - bad dudes
+/media/mucke-local/deuter - aum
+/media/mucke-local/carcass - swansong
+/media/mucke-local/mother love bone - apple
+/media/mucke-local/def leppard - pyromania
+/media/mucke-local/blind melon - soup
+/media/mucke-local/maserati - pyramid of the moon
+/media/mucke-local/gun club - miami
+/media/mucke-local/beasts of bourbon - the low road
+/media/mucke-local/mike oldfield - tubular bells (the original 1973 stereo album mix)
+/media/mucke-local/meshuggah - destroy erase improve
+/media/mucke-local/janos starker - janos starker - popper
+/media/mucke-local/boards of canada - the campfire headphase
+/media/mucke-local/mother tongue - streetlight
+/media/mucke-local/the cruel sea - three legged dog
+/media/mucke-local/emiliana torrini - love in the time of science
+/media/mucke-local/midnight oil - earth and sun and moon
+/media/mucke-local/psicomagia - psicomagia
+/media/mucke-local/as we draw - lines breaking circles
+/media/mucke-local/mike oldfield - hergest ridge - the original mix
+/media/mucke-local/the rolling stones - sticky fingers
+/media/mucke-local/new model army - thunder and consolation
+/media/mucke-local/parts  labor - receivers
+/media/mucke-local/mirza - last clouds
+/media/mucke-local/goldfrapp - felt mountain
+/media/mucke-local/beach slang - cheap thrills on a dead end street
+/media/mucke-local/kula shaker - peasants pigs  astronauts
+/media/mucke-local/high on fire - luminiferous
+/media/mucke-local/mick jagger - the very best of mick jagger
+/media/mucke-local/ralph towner - sargasso sea (with john abercrombie)
+/media/mucke-local/the angels - face to face remastered (2008)
+/media/mucke-local/clutch - psychic warfare
+/media/mucke-local/immortal technique - The Martyr
+/media/mucke-local/meshuggah - obzen
+/media/mucke-local/the cure -the head on the door
+/media/mucke-local/monster magnet - dopes to infinity
+/media/mucke-local/blind melon - blind melon
+/media/mucke-local/earthless  heavy blanket - in a dutch haze
+/media/mucke-local/the cure - the head on the door
+/media/mucke-local/modest mouse - good news for people who love bad news
+/media/mucke-local/fluxion - vibrant forms ii
+/media/mucke-local/clutch - earth rocker
+/media/mucke-local/morphine - the night
+/media/mucke-local/do make say think - yet  yet
+/media/mucke-local/champion - promises kept
+/media/mucke-local/against me - searching for a former clarity
+/media/mucke-local/the mars volta - octahedron
+/media/mucke-local/kyuss - blues for the red sun
+/media/mucke-local/lichens - omns
+/media/mucke-local/beasts of bourbon the - sour mash
+/media/mucke-local/red dons - death to idealism
+/media/mucke-local/corrosion of conformity - americas volume dealer
+/media/mucke-local/midnight oil - blue sky mining
+/media/mucke-local/brian ellis group - escondido sessions
+/media/mucke-local/damien jurado - maraqopa
+/media/mucke-local/deus - worst case scenario
+/media/mucke-local/i got you on tape - spinning for the cause
+/media/mucke-local/corrosion of conformity - deliverance
+/media/mucke-local/golden void - golden void
+/media/mucke-local/leatherface - the stormy petrel
+/media/mucke-local/crippled black phoenix - 200 tons of bad luck
+/media/mucke-local/peter wright - an angel fell where the kestrel hover
+/media/mucke-local/golden void - berkana
+/media/mucke-local/new model army - the love of hopeless causes [1993]
+/media/mucke-local/big rude jake - spanky productions spanky productions blue pariah
+/media/mucke-local/portishead - dummy uk
+/media/mucke-local/carlos cipa - all your life you walk
+/media/mucke-local/botch - an anthology of dead ends
+/media/mucke-local/the cure - the head on the door_1_1
+/media/mucke-local/monster magnet - god says no
+/media/mucke-local/immortal technique - unbekanntes Album
+/media/mucke-local/big rude jake - big rude jake
+/media/mucke-local/don caballero - world class listening problem
+/media/mucke-local/mob research - holy city zoo
+/media/mucke-local/lovehate - blackout in the red room
+/media/mucke-local/brian ellis - the silver creature
+/media/mucke-local/moto - bolt
+/media/mucke-local/as we draw - mirages
+/media/mucke-local/don caballero - american don
+/media/mucke-local/champion - different directions the last show
+/media/mucke-local/moto - raw power
+/media/mucke-local/zoltán kodály - cello works (janos starker)
+/media/mucke-local/nashville pussy - say something nasty
+/media/mucke-local/do make say think - goodbye enemy airship the landlord is dead
+/media/mucke-local/mother tongue - mother tongue
+/media/mucke-local/noir désir - des visages des figures
+/media/mucke-local/beats per inch - building the god dam
+/media/mucke-local/do make say think - do make say think
+/media/mucke-local/fugazi - the argument
+/media/mucke-local/monster magnet - mastermind
+/media/mucke-local/renaud - ma compil
+/media/mucke-local/justin sullivan - navigating by the stars
+/media/mucke-local/mordred - vision
+/media/mucke-local/mars volta the - noctourniquet
+/media/mucke-local/dave matthews band - some devil
+/media/mucke-local/beastwars - the death of all things
+/media/mucke-local/high on fire - snakes for the divine
+/media/mucke-local/morphine - morphine cure for pain
+/media/mucke-local/arbouretum - song of the pearl
+/media/mucke-local/i got you on tape - church of the real
+/media/mucke-local/brian ellis - in the dark
+/media/mucke-local/abwärts - herzlich willkommen im irrenhaus ]]
++ echo 'subdir found in /media/mucke-local/, descending'
+subdir found in /media/mucke-local/, descending
+++ checksb /media/mucke-local/
+++ find /media/mucke-local/ -mindepth 1 -maxdepth 1 -type d
++ for i in '$(checksb $1)'
++ echo -e '\n'
+
+
++ checksub '/media/mucke-local/golden void - st'
+++ checksb '/media/mucke-local/golden void - st'
+++ find '/media/mucke-local/golden void - st' -mindepth 1 -maxdepth 1 -type d
++ [[ -n '' ]]
++ echo '/media/mucke-local/golden void - st is a leaf node'
+/media/mucke-local/golden void - st is a leaf node
++ dir_analysis '/media/mucke-local/golden void - st'
++ [[ -f /media/mucke-local/golden void - st ]]
++ [[ -d /media/mucke-local/golden void - st ]]
++ test_empty_dir '/media/mucke-local/golden void - st'
+++ ls -A '/media/mucke-local/golden void - st'
++ [[ -z 01 - Art Of Invading.mp3
+02 - Virtue.mp3
+03 - Jetsun Dolma.mp3
+04 - Badlands.mp3
+05 - Shady Grove.mp3
+06 - The Curve.mp3
+07 - Atlantis.mp3 ]]
++ test_for_audio '/media/mucke-local/golden void - st'
+++ grep -i '^audio'
+++ file -b '/media/mucke-local/golden void - st/01 - Art Of Invading.mp3' '/media/mucke-local/golden void - st/02 - Virtue.mp3' '/media/mucke-local/golden void - st/03 - Jetsun Dolma.mp3' '/media/mucke-local/golden void - st/04 - Badlands.mp3' '/media/mucke-local/golden void - st/05 - Shady Grove.mp3' '/media/mucke-local/golden void - st/06 - The Curve.mp3' '/media/mucke-local/golden void - st/07 - Atlantis.mp3'
++ [[ -z Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
++ unset band
++ unset albu
++ echo -e '\033[0;32m/media/mucke-local/golden void - st\033[0m is a directory - trying to find out, which album...'
+[0;32m/media/mucke-local/golden void - st[0m is a directory - trying to find out, which album...
+++ find '/media/mucke-local/golden void - st' -mindepth 1 -maxdepth 1 -type f
++ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ file -b '/media/mucke-local/golden void - st/05 - Shady Grove.mp3'
+++ grep -i '^audio'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/golden void - st/05 - Shady Grove.mp3'
+++ id3info '/media/mucke-local/golden void - st/05 - Shady Grove.mp3'
+++ grep TPE1
+++ id3info '/media/mucke-local/golden void - st/05 - Shady Grove.mp3'
+++ sed 's/==.*: //'
++ [[ -n Golden Void ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ get_artist '/media/mucke-local/golden void - st/05 - Shady Grove.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/golden void - st/05 - Shady Grove.mp3'
+++ id3info '/media/mucke-local/golden void - st/05 - Shady Grove.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
+++ get_album '/media/mucke-local/golden void - st/05 - Shady Grove.mp3'
+++ id3info '/media/mucke-local/golden void - st/05 - Shady Grove.mp3'
+++ id3info '/media/mucke-local/golden void - st/05 - Shady Grove.mp3'
+++ sed 's/==.*: //'
+++ grep TALB
++ [[ -n Golden Void ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ get_album '/media/mucke-local/golden void - st/05 - Shady Grove.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/golden void - st/05 - Shady Grove.mp3'
+++ id3info '/media/mucke-local/golden void - st/05 - Shady Grove.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ grep -i '^audio'
+++ file -b '/media/mucke-local/golden void - st/01 - Art Of Invading.mp3'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/golden void - st/01 - Art Of Invading.mp3'
+++ id3info '/media/mucke-local/golden void - st/01 - Art Of Invading.mp3'
+++ grep TPE1
+++ id3info '/media/mucke-local/golden void - st/01 - Art Of Invading.mp3'
+++ sed 's/==.*: //'
++ [[ -n Golden Void ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_artist '/media/mucke-local/golden void - st/01 - Art Of Invading.mp3'
+++ id3info '/media/mucke-local/golden void - st/01 - Art Of Invading.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/golden void - st/01 - Art Of Invading.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
+++ get_album '/media/mucke-local/golden void - st/01 - Art Of Invading.mp3'
+++ id3info '/media/mucke-local/golden void - st/01 - Art Of Invading.mp3'
+++ id3info '/media/mucke-local/golden void - st/01 - Art Of Invading.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ [[ -n Golden Void ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ get_album '/media/mucke-local/golden void - st/01 - Art Of Invading.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/golden void - st/01 - Art Of Invading.mp3'
+++ id3info '/media/mucke-local/golden void - st/01 - Art Of Invading.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ grep -i '^audio'
+++ file -b '/media/mucke-local/golden void - st/03 - Jetsun Dolma.mp3'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/golden void - st/03 - Jetsun Dolma.mp3'
+++ id3info '/media/mucke-local/golden void - st/03 - Jetsun Dolma.mp3'
+++ id3info '/media/mucke-local/golden void - st/03 - Jetsun Dolma.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
++ [[ -n Golden Void ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ get_artist '/media/mucke-local/golden void - st/03 - Jetsun Dolma.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/golden void - st/03 - Jetsun Dolma.mp3'
+++ id3info '/media/mucke-local/golden void - st/03 - Jetsun Dolma.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
+++ get_album '/media/mucke-local/golden void - st/03 - Jetsun Dolma.mp3'
+++ id3info '/media/mucke-local/golden void - st/03 - Jetsun Dolma.mp3'
+++ id3info '/media/mucke-local/golden void - st/03 - Jetsun Dolma.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ [[ -n Golden Void ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_album '/media/mucke-local/golden void - st/03 - Jetsun Dolma.mp3'
+++ id3info '/media/mucke-local/golden void - st/03 - Jetsun Dolma.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/golden void - st/03 - Jetsun Dolma.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ file -b '/media/mucke-local/golden void - st/02 - Virtue.mp3'
+++ grep -i '^audio'
++ [[ -n Audio file with ID3 version 2.3.0 ]]
+++ get_artist '/media/mucke-local/golden void - st/02 - Virtue.mp3'
+++ id3info '/media/mucke-local/golden void - st/02 - Virtue.mp3'
+++ id3info '/media/mucke-local/golden void - st/02 - Virtue.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
++ [[ -n Golden Void ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ get_artist '/media/mucke-local/golden void - st/02 - Virtue.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/golden void - st/02 - Virtue.mp3'
+++ id3info '/media/mucke-local/golden void - st/02 - Virtue.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
+++ get_album '/media/mucke-local/golden void - st/02 - Virtue.mp3'
+++ id3info '/media/mucke-local/golden void - st/02 - Virtue.mp3'
+++ id3info '/media/mucke-local/golden void - st/02 - Virtue.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ [[ -n Golden Void ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_album '/media/mucke-local/golden void - st/02 - Virtue.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ id3info '/media/mucke-local/golden void - st/02 - Virtue.mp3'
+++ id3info '/media/mucke-local/golden void - st/02 - Virtue.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ file -b '/media/mucke-local/golden void - st/04 - Badlands.mp3'
+++ grep -i '^audio'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/golden void - st/04 - Badlands.mp3'
+++ id3info '/media/mucke-local/golden void - st/04 - Badlands.mp3'
+++ grep TPE1
+++ id3info '/media/mucke-local/golden void - st/04 - Badlands.mp3'
+++ sed 's/==.*: //'
++ [[ -n Golden Void ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ get_artist '/media/mucke-local/golden void - st/04 - Badlands.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/golden void - st/04 - Badlands.mp3'
+++ grep TPE1
+++ id3info '/media/mucke-local/golden void - st/04 - Badlands.mp3'
+++ sed 's/==.*: //'
+++ get_album '/media/mucke-local/golden void - st/04 - Badlands.mp3'
+++ id3info '/media/mucke-local/golden void - st/04 - Badlands.mp3'
+++ id3info '/media/mucke-local/golden void - st/04 - Badlands.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ [[ -n Golden Void ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_album '/media/mucke-local/golden void - st/04 - Badlands.mp3'
+++ id3info '/media/mucke-local/golden void - st/04 - Badlands.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/golden void - st/04 - Badlands.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ file -b '/media/mucke-local/golden void - st/06 - The Curve.mp3'
+++ grep -i '^audio'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/golden void - st/06 - The Curve.mp3'
+++ id3info '/media/mucke-local/golden void - st/06 - The Curve.mp3'
+++ id3info '/media/mucke-local/golden void - st/06 - The Curve.mp3'
+++ sed 's/==.*: //'
+++ grep TPE1
++ [[ -n Golden Void ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ get_artist '/media/mucke-local/golden void - st/06 - The Curve.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/golden void - st/06 - The Curve.mp3'
+++ id3info '/media/mucke-local/golden void - st/06 - The Curve.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
+++ get_album '/media/mucke-local/golden void - st/06 - The Curve.mp3'
+++ id3info '/media/mucke-local/golden void - st/06 - The Curve.mp3'
+++ id3info '/media/mucke-local/golden void - st/06 - The Curve.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ [[ -n Golden Void ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_album '/media/mucke-local/golden void - st/06 - The Curve.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ id3info '/media/mucke-local/golden void - st/06 - The Curve.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/golden void - st/06 - The Curve.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ grep -i '^audio'
+++ file -b '/media/mucke-local/golden void - st/07 - Atlantis.mp3'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/golden void - st/07 - Atlantis.mp3'
+++ id3info '/media/mucke-local/golden void - st/07 - Atlantis.mp3'
+++ grep TPE1
+++ id3info '/media/mucke-local/golden void - st/07 - Atlantis.mp3'
+++ sed 's/==.*: //'
++ [[ -n Golden Void ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_artist '/media/mucke-local/golden void - st/07 - Atlantis.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/golden void - st/07 - Atlantis.mp3'
+++ id3info '/media/mucke-local/golden void - st/07 - Atlantis.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
+++ get_album '/media/mucke-local/golden void - st/07 - Atlantis.mp3'
+++ id3info '/media/mucke-local/golden void - st/07 - Atlantis.mp3'
+++ id3info '/media/mucke-local/golden void - st/07 - Atlantis.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ [[ -n Golden Void ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_album '/media/mucke-local/golden void - st/07 - Atlantis.mp3'
+++ id3info '/media/mucke-local/golden void - st/07 - Atlantis.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/golden void - st/07 - Atlantis.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ echo -ne .
+.+ echo -ne 'arrays für album und artist befüllt\n'
+arrays für album und artist befüllt
+++ echo 'golden void
+golden void
+golden void
+golden void
+golden void
+golden void
+golden void'
+++ uniq -c
+++ sort
+++ sed 's!^\s\+!!'
+++ head -n1
++ for bandresult in '$(echo "${band[*]}" | sort | uniq -c | sed '\''s!^\s\+!!'\'' | head -n1)'
+++ echo '7 golden void'
+++ sed 's/\(^[0-9]\+\)\s.*$/\1/'
++ bcount=7
+++ echo '7 golden void'
+++ sed 's;^[[:digit:]]\+[[:blank:]]\+;;'
++ bandname='golden void'
+++ bc -l
+++ echo 'scale=4;(7/7)*100.0'
+++ cut -d . -f1
++ bperc=100
++ [[ 100 -ge 60 ]]
++ echo -ne 'golden void (100%) - '
+golden void (100%) - + break
+++ echo 'golden void
+golden void
+golden void
+golden void
+golden void
+golden void
+golden void'
+++ sort
+++ uniq -c
+++ sed 's!^\s\+!!'
++ for alburesult in '$(echo "${albu[*]}" | sort | uniq -c | sed '\''s!^\s\+!!'\'')'
+++ sed 's/\(^[0-9]\+\)\s.*$/\1/'
+++ echo '7 golden void'
++ acount=7
+++ sed 's;^[[:digit:]]\+[[:blank:]]\+;;'
+++ echo '7 golden void'
++ albuname='golden void'
+++ bc -l
+++ echo 'scale=4;(7/7)*100.0'
+++ cut -d . -f1
++ aperc=100
++ [[ 100 -ge 60 ]]
++ echo 'golden void (100%)'
+golden void (100%)
++ break
++ [[ golden void == \u\n\k\n\o\w\n\_\a\l\b\u\m ]]
++ [[ golden void == \u\n\k\n\o\w\n\_\a\r\t\i\s\t ]]
++ [[ -d /media/mucke-local/golden void - golden void ]]
+++ dirname '/media/mucke-local/golden void - st'
++ [[ /media/mucke-local/? =~ /media/mucke-local/ ]]
++ echo 'this is already under top level and correctly named... skipping'
+this is already under top level and correctly named... skipping
++ for i in '$(checksb $1)'
++ echo -e '\n'
+
+
++ checksub '/media/mucke-local/coal chamber - coal chamber'
+++ checksb '/media/mucke-local/coal chamber - coal chamber'
+++ find '/media/mucke-local/coal chamber - coal chamber' -mindepth 1 -maxdepth 1 -type d
++ [[ -n '' ]]
++ echo '/media/mucke-local/coal chamber - coal chamber is a leaf node'
+/media/mucke-local/coal chamber - coal chamber is a leaf node
++ dir_analysis '/media/mucke-local/coal chamber - coal chamber'
++ [[ -f /media/mucke-local/coal chamber - coal chamber ]]
++ [[ -d /media/mucke-local/coal chamber - coal chamber ]]
++ test_empty_dir '/media/mucke-local/coal chamber - coal chamber'
+++ ls -A '/media/mucke-local/coal chamber - coal chamber'
++ [[ -z 01 - loco.mp3
+02 - bradley.mp3
+03 - oddity.mp3
+04 - unspoiled.mp3
+05 - big truck.mp3
+06 - sway.mp3
+07 - first.mp3
+08 - maricon puto.mp3
+09 - i.mp3
+10 - clock.mp3
+11 - my frustration.mp3
+12 - amir of the desert.mp3
+13 - dreamtime.mp3
+14 - pig.mp3
+coal chamber - coal chamber (1997).jpg ]]
++ test_for_audio '/media/mucke-local/coal chamber - coal chamber'
+++ grep -i '^audio'
+++ file -b '/media/mucke-local/coal chamber - coal chamber/01 - loco.mp3' '/media/mucke-local/coal chamber - coal chamber/02 - bradley.mp3' '/media/mucke-local/coal chamber - coal chamber/03 - oddity.mp3' '/media/mucke-local/coal chamber - coal chamber/04 - unspoiled.mp3' '/media/mucke-local/coal chamber - coal chamber/05 - big truck.mp3' '/media/mucke-local/coal chamber - coal chamber/06 - sway.mp3' '/media/mucke-local/coal chamber - coal chamber/07 - first.mp3' '/media/mucke-local/coal chamber - coal chamber/08 - maricon puto.mp3' '/media/mucke-local/coal chamber - coal chamber/09 - i.mp3' '/media/mucke-local/coal chamber - coal chamber/10 - clock.mp3' '/media/mucke-local/coal chamber - coal chamber/11 - my frustration.mp3' '/media/mucke-local/coal chamber - coal chamber/12 - amir of the desert.mp3' '/media/mucke-local/coal chamber - coal chamber/13 - dreamtime.mp3' '/media/mucke-local/coal chamber - coal chamber/14 - pig.mp3' '/media/mucke-local/coal chamber - coal chamber/coal chamber - coal chamber (1997).jpg'
++ [[ -z Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo
+Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
++ unset band
++ unset albu
++ echo -e '\033[0;32m/media/mucke-local/coal chamber - coal chamber\033[0m is a directory - trying to find out, which album...'
+[0;32m/media/mucke-local/coal chamber - coal chamber[0m is a directory - trying to find out, which album...
+++ find '/media/mucke-local/coal chamber - coal chamber' -mindepth 1 -maxdepth 1 -type f
++ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ grep -i '^audio'
+++ file -b '/media/mucke-local/coal chamber - coal chamber/03 - oddity.mp3'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/03 - oddity.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/03 - oddity.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/03 - oddity.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/03 - oddity.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/03 - oddity.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/03 - oddity.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
+++ get_album '/media/mucke-local/coal chamber - coal chamber/03 - oddity.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/03 - oddity.mp3'
+++ grep TALB
+++ id3info '/media/mucke-local/coal chamber - coal chamber/03 - oddity.mp3'
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_album '/media/mucke-local/coal chamber - coal chamber/03 - oddity.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/03 - oddity.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/03 - oddity.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ grep -i '^audio'
+++ file -b '/media/mucke-local/coal chamber - coal chamber/10 - clock.mp3'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/10 - clock.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/10 - clock.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/10 - clock.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/10 - clock.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/10 - clock.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/10 - clock.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
+++ get_album '/media/mucke-local/coal chamber - coal chamber/10 - clock.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/10 - clock.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/10 - clock.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_album '/media/mucke-local/coal chamber - coal chamber/10 - clock.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/10 - clock.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/10 - clock.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ file -b '/media/mucke-local/coal chamber - coal chamber/09 - i.mp3'
+++ grep -i '^audio'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/09 - i.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/09 - i.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/09 - i.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/09 - i.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/09 - i.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/09 - i.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
+++ get_album '/media/mucke-local/coal chamber - coal chamber/09 - i.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/09 - i.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/09 - i.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_album '/media/mucke-local/coal chamber - coal chamber/09 - i.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/09 - i.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/09 - i.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ grep -i '^audio'
+++ file -b '/media/mucke-local/coal chamber - coal chamber/14 - pig.mp3'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/14 - pig.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/14 - pig.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/14 - pig.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/14 - pig.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/14 - pig.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/14 - pig.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
+++ get_album '/media/mucke-local/coal chamber - coal chamber/14 - pig.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/14 - pig.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/14 - pig.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ lowercase
+++ get_album '/media/mucke-local/coal chamber - coal chamber/14 - pig.mp3'
+++ tr '[:upper:]' '[:lower:]'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/14 - pig.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/14 - pig.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ grep -i '^audio'
+++ file -b '/media/mucke-local/coal chamber - coal chamber/07 - first.mp3'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/07 - first.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/07 - first.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/07 - first.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/07 - first.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/07 - first.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/07 - first.mp3'
+++ sed 's/==.*: //'
+++ grep TPE1
+++ get_album '/media/mucke-local/coal chamber - coal chamber/07 - first.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/07 - first.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/07 - first.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_album '/media/mucke-local/coal chamber - coal chamber/07 - first.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/07 - first.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/07 - first.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ grep -i '^audio'
+++ file -b '/media/mucke-local/coal chamber - coal chamber/12 - amir of the desert.mp3'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/12 - amir of the desert.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/12 - amir of the desert.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/12 - amir of the desert.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/12 - amir of the desert.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/12 - amir of the desert.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ grep TPE1
+++ id3info '/media/mucke-local/coal chamber - coal chamber/12 - amir of the desert.mp3'
+++ sed 's/==.*: //'
+++ get_album '/media/mucke-local/coal chamber - coal chamber/12 - amir of the desert.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/12 - amir of the desert.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/12 - amir of the desert.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ get_album '/media/mucke-local/coal chamber - coal chamber/12 - amir of the desert.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/12 - amir of the desert.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/12 - amir of the desert.mp3'
+++ sed 's/==.*: //'
+++ grep TALB
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ file -b '/media/mucke-local/coal chamber - coal chamber/02 - bradley.mp3'
+++ grep -i '^audio'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/02 - bradley.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/02 - bradley.mp3'
+++ grep TPE1
+++ id3info '/media/mucke-local/coal chamber - coal chamber/02 - bradley.mp3'
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/02 - bradley.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/02 - bradley.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ grep TPE1
+++ id3info '/media/mucke-local/coal chamber - coal chamber/02 - bradley.mp3'
+++ sed 's/==.*: //'
+++ get_album '/media/mucke-local/coal chamber - coal chamber/02 - bradley.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/02 - bradley.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/02 - bradley.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ get_album '/media/mucke-local/coal chamber - coal chamber/02 - bradley.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/02 - bradley.mp3'
+++ grep TALB
+++ id3info '/media/mucke-local/coal chamber - coal chamber/02 - bradley.mp3'
+++ sed 's/==.*: //'
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ file -b '/media/mucke-local/coal chamber - coal chamber/coal chamber - coal chamber (1997).jpg'
+++ grep -i '^audio'
++ [[ -n '' ]]
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ grep -i '^audio'
+++ file -b '/media/mucke-local/coal chamber - coal chamber/04 - unspoiled.mp3'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/04 - unspoiled.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/04 - unspoiled.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/04 - unspoiled.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/04 - unspoiled.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/04 - unspoiled.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/04 - unspoiled.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
+++ get_album '/media/mucke-local/coal chamber - coal chamber/04 - unspoiled.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/04 - unspoiled.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/04 - unspoiled.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_album '/media/mucke-local/coal chamber - coal chamber/04 - unspoiled.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/04 - unspoiled.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/04 - unspoiled.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ grep -i '^audio'
+++ file -b '/media/mucke-local/coal chamber - coal chamber/13 - dreamtime.mp3'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/13 - dreamtime.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/13 - dreamtime.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/13 - dreamtime.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/13 - dreamtime.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/13 - dreamtime.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/13 - dreamtime.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
+++ get_album '/media/mucke-local/coal chamber - coal chamber/13 - dreamtime.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/13 - dreamtime.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/13 - dreamtime.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_album '/media/mucke-local/coal chamber - coal chamber/13 - dreamtime.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/13 - dreamtime.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ grep TALB
+++ id3info '/media/mucke-local/coal chamber - coal chamber/13 - dreamtime.mp3'
+++ sed 's/==.*: //'
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ grep -i '^audio'
+++ file -b '/media/mucke-local/coal chamber - coal chamber/06 - sway.mp3'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/06 - sway.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/06 - sway.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/06 - sway.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/06 - sway.mp3'
+++ lowercase
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/06 - sway.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/06 - sway.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
+++ get_album '/media/mucke-local/coal chamber - coal chamber/06 - sway.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/06 - sway.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/06 - sway.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ get_album '/media/mucke-local/coal chamber - coal chamber/06 - sway.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/06 - sway.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/06 - sway.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ file -b '/media/mucke-local/coal chamber - coal chamber/11 - my frustration.mp3'
+++ grep -i '^audio'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/11 - my frustration.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/11 - my frustration.mp3'
+++ grep TPE1
+++ id3info '/media/mucke-local/coal chamber - coal chamber/11 - my frustration.mp3'
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/11 - my frustration.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/11 - my frustration.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/11 - my frustration.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
+++ get_album '/media/mucke-local/coal chamber - coal chamber/11 - my frustration.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/11 - my frustration.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/11 - my frustration.mp3'
+++ grep TALB
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_album '/media/mucke-local/coal chamber - coal chamber/11 - my frustration.mp3'
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/11 - my frustration.mp3'
+++ lowercase
+++ tr '[:upper:]' '[:lower:]'
+++ grep TALB
+++ id3info '/media/mucke-local/coal chamber - coal chamber/11 - my frustration.mp3'
+++ sed 's/==.*: //'
++ echo -ne .
+.+ for i in '$(find $1 -mindepth 1 -maxdepth 1 -type f)'
+++ file -b '/media/mucke-local/coal chamber - coal chamber/05 - big truck.mp3'
+++ grep -i '^audio'
++ [[ -n Audio file with ID3 version 2.3.0, contains: MPEG ADTS, layer III, v1, 320 kbps, 44.1 kHz, JntStereo ]]
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/05 - big truck.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/05 - big truck.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/05 - big truck.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
++ [[ -n Coal Chamber ]]
++ band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]()-];;g' | lowercase))
+++ get_artist '/media/mucke-local/coal chamber - coal chamber/05 - big truck.mp3'
+++ lowercase
+++ sed 's;[^[:alnum:][:space:]()-];;g'
+++ tr '[:upper:]' '[:lower:]'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/05 - big truck.mp3'
+++ id3info '/media/mucke-local/coal chamber - coal chamber/05 - big truck.mp3'
+++ grep TPE1
+++ sed 's/==.*: //'
