@@ -22,7 +22,7 @@ get_artist () {
 }
 
 get_album () {
-  TAL=$(id3info "$1" | sed -n 's;^=.*TALB*.*: ;;p')
+  TAL=$(id3info "$1" | sed -n 's;^=.*TALB*.*): ;;p')
   if [[ -z "$TAL" ]]; then
     TAL=$(exiftool -s3 -album "$1")
   fi
@@ -45,10 +45,27 @@ test_empty_dir () {							    #### statt ls koennte du -s hier besser sein (4 by
 
 test_for_audio () {
   #### besser: until schleife first audio file 
-  if [[ -z $(file -b "$1"/* | grep -i ^audio) ]]; then
+  if [[ -z $(file -b "$1"/* | grep -i "audio") ]]; then
     echo "in diesem verzeichnis sind keine audiodateien, vielleicht bilddateien?"
-    echo "weitere analyse, bla bla"
-    continue
+    if [[ $(dirname "$1") =~ "_noaudio" ]]; then
+      echo "eh schon im noaudio-verzeichnis"
+      continue
+    else
+      read -n 1 -p "verschieben nach ${top_music_dir}_noaudio/$(basename ${1})? [y/n]" yn
+      case "$yn" in
+	[Yy] ) 
+	  set -x
+	  if [[ -d "${top_music_dir}_noaudio" ]]; then 
+	    cp -R "$1" "${top_music_dir}_noaudio" && rm -r "$1"
+	  else
+	    mkdir "${top_music_dir}_noaudio" && cp -R "$1" "${top_music_dir}_noaudio" && rm -r "$1"
+	  fi
+	  set +x ;;
+	[Nn] ) continue ;;
+      esac
+
+      continue
+    fi
   fi
 }
 
