@@ -196,4 +196,4 @@ checksub () {
 ##### MAIN
 checksub $top_music_dir
 echo -e "verzeichnisse, die nicht zufriedenstellend ausgelesen werden konnten:"
-echo "${prob[*]}" 
+echo "${rot}${prob[*]}${off}" 
