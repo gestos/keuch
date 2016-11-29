@@ -1,19 +1,16 @@
 #!/bin/bash
 
 ### fehlen noch command line switches um die Nachfragrerei zu unterbinden bzw zu ermöglichen
-IFS='
-'
+#IFS='
+#'
 
-top_music_dir="$1"
-
-## colors
 rot='\033[1;31m'
 grn='\033[0;32m'
 blu='\033[1;34m'
 off='\033[0m'
 
+top_music_dir="$1"
 
-## extract tag information of individual files
 get_artist () {
   TPE=$(id3info "$1" | sed -n 's;^=.*TPE*1.*: ;;p')
   if [[ -z "$TPE" ]]; then
@@ -30,30 +27,29 @@ get_album () {
   echo "$TAL"
 }
 
-## sanitize filenames for final renaming
 lowercase () {
- sed 's;[^[:alnum:][:space:]&_()-];;g' | tr '[:upper:]' '[:lower:]'
+  tr '[:upper:]' '[:lower:]'
 }
 
-## test for empty directories; possibly better with 'du -s'?
-test_empty_dir () {
+test_empty_dir () {							    #### statt ls koennte du -s hier besser sein (4 bytes = leeres dir)
   if [[ -z "$(ls -A $1)" ]]; then
-    read -n 1 -p "this one's empty and will be removed, do you like that? [y/n]" ny
+    read -n 1 -p "this one's empty and will be removed, do you like that?" ny
     case "$ny" in
       [Yy]) set -x; rm -r "$1"; set +x; continue ;;
-	 *) continue;;
+      [Nn]) continue;;
     esac
   fi
 }
 
-## test whether directory contains any audio files
 test_for_audio () {
+  #### besser: until schleife first audio file 
   if [[ -z $(file -b "$1"/* | grep -i "audio") ]]; then
-    echo -e " there are no audio files in this directory. maybe images or playlists?"
-    if [[ $(dirname "$1") =~ "_noaudio" ]]; then						  # skip, if already under the _noaudio directory
+    echo -e " in diesem verzeichnis sind keine audiodateien, vielleicht bilddateien?"
+    if [[ $(dirname "$1") =~ "_noaudio" ]]; then
+      echo "eh schon im noaudio-verzeichnis"
       continue
     else
-      read -n 1 -p "move to ${top_music_dir}_noaudio/$(basename ${1})? [y/n]" yn
+      read -n 1 -p "verschieben nach ${top_music_dir}_noaudio/$(basename ${1})? [y/n]" yn
       case "$yn" in
 	[Yy] ) 
 	  set -x
@@ -63,8 +59,10 @@ test_for_audio () {
 	    mkdir "${top_music_dir}_noaudio" && cp -R "$1" "${top_music_dir}_noaudio" && rm -r "$1"
 	  fi
 	  set +x ;;
-	* ) continue ;;
+	[Nn] ) continue ;;
       esac
+
+      continue
     fi
   fi
 }
@@ -82,29 +80,30 @@ gettagsfromfile () {
 }
 
 dir_analysis () {
-  if [[ -f "$1" ]]; then									    # if $1 is a regular file, get tracknumber and stuff
+  if [[ -f "$1" ]]; then									    # wenn $1 ein normales file ist
     gettagsfromfile "$1"
 
-  elif [[ -d "$1" ]]; then									    # if $1 is a regular directory...
-    test_empty_dir "$1"										    # ... check, whether empty
-    test_for_audio "$1"										    # ... check, whether there's audio files
-    unset band											    # reset array
-    unset albu											    # reset array
+  elif [[ -d "$1" ]]; then									    # wenn $1 ein verzeichnis ist
+    test_empty_dir "$1"										    # wenn komplett leer: löschen
+    test_for_audio "$1"										    # wenn keine audiodateien drin: siehe funktion
+    unset band											    # evtl. vom letzten Durchlauf vorhandene
+    unset albu											    # Werte in den Arrays löschen
+												    # Werte in den Arrays löschen
 
     # check each file for whether it's an audio file and if so, read artist and album tags and put them in an array band[] and albu[]
     echo -e -n " ...and is a directory - analysing\n..."
     for i in $(find $1 -mindepth 1 -maxdepth 1 -type f); do   # should iterate over leaf directories. yet to implement the search for leaf directories
-      if [[ -n $(file -b "$i" | grep -i "audio\|mpeg\|44.1") ]]; then
+      if [[ -n $(file -b "$i" | grep -i ^audio) ]]; then
 	if [[ -n $(get_artist "$i") ]]; then
-	  band+=($(get_artist "$i" | lowercase))    # band/artistname ins array schieben und vorher unsichere zeichen ersetzen
+	  band+=($(get_artist "$i" | sed 's;[^[:alnum:][:space:]&_()-];;g' | lowercase))    # band/artistname ins array schieben und vorher unsichere zeichen ersetzen
 	else
-	  band+=("unidentified")									    # or fill array with unbekannt
+	  band+=(unbekannt)									    # or fill array with unbekannt
 	fi
 
 	if [[ -n $(get_album "$i") ]]; then						    # add Albumname to array if there is one
-	  albu+=($(get_album "$i" | lowercase))
+	  albu+=($(get_album "$i" | sed 's;[^[:alnum:][:space:]&_()-];;g' | lowercase))
 	else
-	  albu+=("unidentified")								    # or fill array with unbekannt
+	  albu+=("unbekanntes Album")								    # or fill array with unbekannt
 	fi
       fi
       echo -ne "."
@@ -173,14 +172,14 @@ prob+=("$1")
 
 ## gucken, ob's im Ordner weitere Unterordner gibt
 checksb () {
-  find $1 -mindepth 1 -maxdepth 1 -type d
+  find "$1" -mindepth 1 -maxdepth 1 -type d
 }
 
 # in Unterverzeichnisse absteigen und gucken, ob's Audiodateien gibt
 checksub () {
   if [[ -n "$(checksb $1)" ]]; then		## wenn der Rückgabewert nicht leer ist, sind Unterverzeichnisse vorhanden
     echo "subdir found in $1, descending"
-    for i in $(checksb $1); do			## jedes Unterverzeichnis angucken und ggf. weiter absteigen
+    for i in "$(checksb $1)"; do			## jedes Unterverzeichnis angucken und ggf. weiter absteigen
       echo -e "\n"
       checksub "$i"
     done
@@ -193,6 +192,6 @@ checksub () {
 
 
 ##### MAIN
-checksub $top_music_dir
-echo -e "audio dirs that were problematic:"
-echo -e "${rot}${prob[*]}${off}" 
+checksub "$top_music_dir"
+echo -e "verzeichnisse, die nicht zufriedenstellend ausgelesen werden konnten:"
+echo "${rot}${prob[*]}${off}" 
