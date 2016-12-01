@@ -104,8 +104,8 @@ dir_analysis () {
     test_for_audio "$1"			# ... check, whether there's audio files
     echo -e -n " ...and is a directory - analysing\n..."
     filecount=0
-    for i in $(find $1 -mindepth 1 -maxdepth 1 -type f); do   # should iterate over leaf directories. yet to implement the search for leaf directories
-      if [[ -n $(file -b "$i" | grep -i "audio\|mpeg\|4.*khz") ]]; then	    #if this is an audio file, check for artist and album id3-tags
+    for i in $(find $1 -mindepth 1 -maxdepth 1 -type f); do		# iterate over files; i in $1/* (?)
+      if [[ -n $(file -b "$i" | grep -i "audio\|mpeg\|4.*khz") ]]; then	# only audio files
 	((filecount+=1))
 	get_artist "$i"
 	get_album "$i"
@@ -117,38 +117,38 @@ dir_analysis () {
 
     #### Auswertung, ob Artist eindeutig ist
     ## für alle arrays zusammen
-    bandall=("${band[@]}" "${band1[@]}" "${band2[@]}") 
+    bandall=("${band[@]}" "${band1[@]}" "${band2[@]}")
     bandlist_allresult=$( echo -e "${bandall[*]}" | sort |  uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' )
     bandlist_topresult=$( echo -e "${bandall[*]}" | sort |  uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' | head -n1 )
     mosthits_number=$(sed 's;\(^[[:digit:]]*\).*;\1;' <<< "$bandlist_topresult")
     mosthits_value=$(sed 's;^[[:digit:]]*[[:space:]]*;;' <<< "$bandlist_topresult")
-    bperc=$(echo "scale=4;($mosthits_number/${#bandall[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = oberster Treffer aller bandarrays zusammen / ergebnisse aller bandarrays
+    bperc=$(echo "scale=4;($mosthits_number/${#bandall[*]})*100.0" | bc -l | cut -d '.' -f1)	# $bperc = oberster Treffer aller bandarrays zusammen
     ## nur tp1
-    if [[ -n "${band1[*]}" ]]; then 
+    if [[ -n "${band1[*]}" ]]; then
       bandlist1_allresult=$( echo "${band1[*]}" | sort |  uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' | grep -v ^$ )
       bandlist1_topresult=$( echo "${band1[*]}" | sort |  uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' | head -n1 )
       mosthits1_number=$(sed 's;\(^[[:digit:]]*\).*;\1;' <<< "$bandlist1_topresult")
       mosthits1_value=$(sed 's;^[[:digit:]]*[[:space:]]*;;' <<< "$bandlist1_topresult")
-      bperc1=$(echo "scale=4;($mosthits1_number/${#band1[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = oberster Treffer aller bandarrays zusammen / ergebnisse aller bandarrays
+      bperc1=$(echo "scale=4;($mosthits1_number/${#band1[*]})*100.0" | bc -l | cut -d '.' -f1)
     fi
     ## nur tp2
-    if [[ -n "${band2[*]}" ]]; then 
+    if [[ -n "${band2[*]}" ]]; then
       bandlist2_allresult=$( echo "${band2[*]}" | sort |  uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' | grep -v ^$ )
       bandlist2_topresult=$( echo "${band2[*]}" | sort |  uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' | head -n1 )
       mosthits2_number=$(sed 's;\(^[[:digit:]]*\).*;\1;' <<< "$bandlist2_topresult")
       mosthits2_value=$(sed 's;^[[:digit:]]*[[:space:]]*;;' <<< "$bandlist2_topresult")
-      bperc2=$(echo "scale=4;($mosthits2_number/${#band2[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = oberster Treffer aller bandarrays zusammen / ergebnisse aller bandarrays
+      bperc2=$(echo "scale=4;($mosthits2_number/${#band2[*]})*100.0" | bc -l | cut -d '.' -f1)
     fi
 
-    if [[ "$bperc" -ge 60 ]] && [[ -n "$mosthits_value" ]]; then    # wenn das oberste ergebnis nicht leer ist und über 60% der gefundenen Namen darstellt
+    if [[ "$bperc" -ge 60 ]] && [[ -n "$mosthits_value" ]]; then	# wenn das oberste ergebnis nicht leer ist und über 60% der gefundenen Namen ausmacht
       echo -ne "$mosthits_value ($bperc%) - "
       bandname="$mosthits_value"
-    else					# wenn das oberste Ergebnis weniger als 60% ausmacht
+    else								# wenn das oberste Ergebnis weniger als 60% ausmacht
 
-      if [[ -n $bandlist1_allresult ]] && [[ $(echo "$bandlist1_allresult" | wc -l) -eq 1 ]]; then # if tpe1 exists and has only one entry
+      if [[ -n $bandlist1_allresult ]] && [[ $(echo "$bandlist1_allresult" | wc -l) -eq 1 ]]; then	# if tpe1 exists and has only one entry
 	echo -en "tpe1 contains only one artist"
 	bandname="$mosthits1_value"
-      elif [[ -n $bandlist2_allresult ]] && [[ $(echo "$bandlist2_allresult" | grep -v ^$ | wc -l) -eq 1 ]]; then # if tpe2 exists; tpe1 takes precedence  because it's the first checked
+      elif [[ -n $bandlist2_allresult ]] && [[ $(echo "$bandlist2_allresult" | grep -v ^$ | wc -l) -eq 1 ]]; then	# if tpe2 exists; tpe1 takes precedence  because it's the first checked
 	echo -en "tpe2 contains only one artist:\n"
 	echo "${bandlist2_allresult}"
 	bandname="$mosthits2_value"
