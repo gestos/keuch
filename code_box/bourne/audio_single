@@ -13,15 +13,17 @@ off='\033[0m'
 
 ## sanitize filenames for final renaming
 lowercase () {
-  sed 's;[^[:alnum:][:space:]&_()-];;g' | tr '[:upper:]' '[:lower:]'
+  sed 's;[^[:alnum:][:space:]&_()-];;g' | tr '[:upper:]' '[:lower:]' | sed 's;[[:space:]]*$;;'
 }
 
 
 ## extract tag information of individual files
 get_artist () {
-  TPEX=($(id3info "$1" | grep TPE))
+  #  set -x
+  TPEX=($(id3info "$1" | grep TP))
   TPE1=$( sed -n 's;^=.*TPE*1.*: ;;p' <<< "${TPEX[*]}" | lowercase )
   TPE2=$( sed -n 's;^=.*TPE*2.*: ;;p' <<< "${TPEX[*]}" | lowercase )
+  # set +x
   if [[ -z "$TPE1" ]] && [[ -z "$TPE2" ]]; then
     TPE=$( exiftool -s3 -artist "$1" | lowercase )
     band+=("$TPE")
@@ -49,14 +51,14 @@ test_empty_dir () {
     read -n 1 -p "this one's empty and will be removed, do you like that? [y/n]" ny
     case "$ny" in
       [Yy]) set -x; rm -r "$1"; set +x; continue ;;
-    *) continue;;
-  esac
-fi
+      *) continue;;
+    esac
+  fi
 }
 
 ## test whether directory contains any audio files
 test_for_audio () {
-  if [[ -z $(file -b "$1"/* | grep -i "audio") ]]; then
+  if [[ -z $(file -b "$1"/* | grep -i "audio\|mpeg.*iii\|4.*khz") ]]; then
     echo -e " there are no audio files in this directory. maybe images or playlists?"
     if [[ $(dirname "$1") =~ "_noaudio" ]]; then						  # skip, if already under the _noaudio directory
       echo -e "already under _noaudio, ${blu}skipping...${off}"
@@ -91,119 +93,151 @@ gettagsfromfile () {
 }
 
 dir_analysis () {
+unset bandlist1_allresult bandlist2_allresult bandlist_allresult bandlist_topresult bandlist1_topresult bandlist2_topresult
+unset mosthits_number mosthits_value mosthits1_number mosthits1_value mosthits2_number mosthits2_value bperc bperc1 bperc2
+unset band band1 band2 bandall albu											    # reset array
+
   if [[ -f "$1" ]]; then									    # if $1 is a regular file, get tracknumber and stuff
     gettagsfromfile "$1"
 
   elif [[ -d "$1" ]]; then									    # if $1 is a regular directory...
     test_empty_dir "$1"										    # ... check, whether empty
     test_for_audio "$1"										    # ... check, whether there's audio files
-    unset band band1 band2 bandall albu											    # reset array
     echo -e -n " ...and is a directory - analysing\n..."
-
+    filecount=0
     for i in $(find $1 -mindepth 1 -maxdepth 1 -type f); do   # should iterate over leaf directories. yet to implement the search for leaf directories
-      if [[ -n $(file -b "$i" | grep -i "audio\|mpeg\|44.1") ]]; then	    #if this is an audio file, check for artist and album id3-tags
+      if [[ -n $(file -b "$i" | grep -i "audio\|mpeg\|44*khz") ]]; then	    #if this is an audio file, check for artist and album id3-tags
+	((filecount+=1))
 	get_artist "$i"
 	get_album "$i"
       fi
       echo -ne "."
     done
+    echo "$filecount audio files in directory"
     echo -ne "arrays für album und artist befüllt\n"
 
 
     #### Auswertung, ob Artist eindeutig ist
+    ## für alle arrays zusammen
     bandall=("${band[@]}" "${band1[@]}" "${band2[@]}") 
+    bandlist_allresult=$( echo "${bandall[*]}" | sort |  uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' )
     bandlist_topresult=$( echo "${bandall[*]}" | sort |  uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' | head -n1 )
     mosthits_number=$(sed 's;\(^[[:digit:]]*\).*;\1;' <<< "$bandlist_topresult")
     mosthits_value=$(sed 's;^[[:digit:]]*[[:space:]]*;;' <<< "$bandlist_topresult")
     bperc=$(echo "scale=4;($mosthits_number/${#bandall[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = oberster Treffer aller bandarrays zusammen / ergebnisse aller bandarrays
+    ## nur tp1
+    if [[ -n "${band1[*]}" ]]; then 
+      bandlist1_allresult=$( echo "${band1[*]}" | sort |  uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' | grep -v ^$ )
+      bandlist1_topresult=$( echo "${band1[*]}" | sort |  uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' | head -n1 )
+      mosthits1_number=$(sed 's;\(^[[:digit:]]*\).*;\1;' <<< "$bandlist1_topresult")
+      mosthits1_value=$(sed 's;^[[:digit:]]*[[:space:]]*;;' <<< "$bandlist1_topresult")
+      bperc1=$(echo "scale=4;($mosthits1_number/${#band1[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = oberster Treffer aller bandarrays zusammen / ergebnisse aller bandarrays
+    fi
+    ## nur tp2
+    if [[ -n "${band2[*]}" ]]; then 
+      bandlist2_allresult=$( echo "${band2[*]}" | sort |  uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' | grep -v ^$ )
+      bandlist2_topresult=$( echo "${band2[*]}" | sort |  uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' | head -n1 )
+      mosthits2_number=$(sed 's;\(^[[:digit:]]*\).*;\1;' <<< "$bandlist2_topresult")
+      mosthits2_value=$(sed 's;^[[:digit:]]*[[:space:]]*;;' <<< "$bandlist2_topresult")
+      bperc2=$(echo "scale=4;($mosthits2_number/${#band2[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = oberster Treffer aller bandarrays zusammen / ergebnisse aller bandarrays
+    fi
+
 
     if [[ "$bperc" -ge 60 ]] && [[ -n "$mosthits_value" ]]; then    # wenn das oberste ergebnis nicht leer ist und über 60% der gefundenen Namen darstellt
       echo -ne "$mosthits_value ($bperc%) - "
       bandname="$mosthits_value"
-    elif [[ "$bperc" -le 60 ]]; then					# wenn das oberste Ergebnis weniger als 60% ausmacht
+    else					# wenn das oberste Ergebnis weniger als 60% ausmacht
 
+      if [[ -n $bandlist1_allresult ]] && [[ $(echo "$bandlist1_allresult" | wc -l) -eq 1 ]]; then
+	echo -en "tpe1 contains only one artist"
+	bandname="$mosthits1_value"
+      elif [[ -n $bandlist2_allresult ]] && [[ $(echo "$bandlist2_allresult" | grep -v ^$ | wc -l) -eq 1 ]]; then
+	echo -en "tpe2 contains only one artist:\n"
+	echo "${bandlist2_allresult}"
+	bandname="$mosthits2_value"
+      else
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-      band1_nooflines=$( sort <<< "${band1[*]}" | uniq -c | wc -l )	# oberste ergebnisse der einzelnen arrays lesen
-      band2_nooflines=$( sort <<< "${band2[*]}" | uniq -c | wc -l )
-      if [[ "$bperc" -eq "50" ]] && [[ $band1_nooflines == $band2_nooflines ]] ; then
-	bandname="$mosthits_value"
-      elif [[ "$bperc" -ne "50" ]] && ( [[ -n "$mosthits_value" ]] && [[ $band1_nooflines == 1 ]] || [[ $band2_nooflines == 1 ]] ); then  ## wenn eins der arrays nur aus einem ergebnis besteht
-	mosthits_value_1=$(sort -u <<< "${band1[*]}" | head -n1)
-	mosthits_value_2=$(sort -u <<< "${band2[*]}" | head -n1)
-	echo -e "equally frequent results for band are:\n$mosthits_value_1 [1]\n$mosthits_value_2 [2]\n choose [1] or [2] for given results or [3] for unknown"
+	echo -e "most frequent results for band are:\n$mosthits1_value [1]\n$mosthits2_value [2]\n choose [1] or [2] for given results or [3] for unknown"
 	read -n 1 selectband
 	case "$selectband" in
-	  1) bandname="$mosthits_value_1";;
-	  2) bandname="$mosthits_value_2";;
-          *) bandname="unknown_artist" ;;
-        esac
+	  1) bandname="$mosthits1_value";;
+	  2) bandname="$mosthits2_value";;
+	  *) bandname="unknown_artist" ;;
+	esac
+
       fi
+    fi 
+
+
+
+
+
+
+
+
+
+    #   if [[ "$bperc" -eq "50" ]] && [[ $band1_nooflines == $band2_nooflines ]] ; then
+    #     bandname="$mosthits_value"
+    #   elif [[ "$bperc" -ne "50" ]] && ( [[ -n "$mosthits_value" ]] && [[ $band1_nooflines == 1 ]] || [[ $band2_nooflines == 1 ]] ); then  ## wenn eins der arrays nur aus einem ergebnis besteht
+    #     mosthits_value_1=$(sort -u <<< "${band1[*]}" | head -n1)
+    #     mosthits_value_2=$(sort -u <<< "${band2[*]}" | head -n1)
+    #     echo -e "equally frequent results for band are:\n$mosthits_value_1 [1]\n$mosthits_value_2 [2]\n choose [1] or [2] for given results or [3] for unknown"
+    #     read -n 1 selectband
+    #     case "$selectband" in
+    #       1) bandname="$mosthits_value_1";;
+    #       2) bandname="$mosthits_value_2";;
+    #       *) bandname="unknown_artist" ;;
+    #     esac
+    #   fi
+    # else
+    #   echo -ne "$mosthits_value ($bperc%) - "
+    #   echo "keine eindeutige zuordnung möglich"
+    #   echo "mögliche artists: "
+    #   possible_hits=$( sort <<< "${bandall[*]}" | uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' | head -n3 )
+    #   echo "$possible_hits"
+    #   echo -e "${1}:\n$possible_hits\n----\n" >> "$top_music_dir$( date +%s )" 
+    #   bandname="unknown_artist"
+    # fi
+
+    #### Auswertung, ob Album eindeutig ist
+    albulist_topresult=$( echo "${albu[*]}" | sort | uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' | head -n1 )
+    mosthits_number=$(sed 's;\(^[[:digit:]]*\).*;\1;' <<< "$albulist_topresult")
+    mosthits_value=$(sed 's;^[[:digit:]]*[[:space:]]*;;' <<< "$albulist_topresult")
+    aperc=$(echo "scale=4;($mosthits_number/${#albu[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = Prozent, die ein Ergebnis ausmacht
+    if [[ "$aperc" -ge 60 ]] && [[ -n "$mosthits_value" ]]; then
+      echo -ne "$mosthits_value ($aperc%) - "
+      albuname="$mosthits_value"
     else
-  echo -ne "$mosthits_value ($bperc%) - "
-  echo "keine eindeutige zuordnung möglich"
-  echo "mögliche artists: "
-  possible_hits=$( sort <<< "${bandall[*]}" | uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' | head -n3 )
-  echo "$possible_hits"
-  echo -e "${1}:\n$possible_hits\n----\n" >> "$top_music_dir$( date +%s )" 
-  bandname="unknown_artist"
-fi
-unset mosthits_number
-unset mosthits_value
-
-#### Auswertung, ob Album eindeutig ist
-albulist_topresult=$( echo "${albu[*]}" | sort -nr | uniq -c | sed 's;^[[:space:]]*;;g' | head -n1 )
-mosthits_number=$(sed 's;\(^[[:digit:]]*\).*;\1;' <<< "$albulist_topresult")
-mosthits_value=$(sed 's;^[[:digit:]]*[[:space:]]*;;' <<< "$albulist_topresult")
-aperc=$(echo "scale=4;($mosthits_number/${#albu[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = Prozent, die ein Ergebnis ausmacht
-if [[ "$aperc" -ge 60 ]] && [[ -n "$mosthits_value" ]]; then
-  echo -ne "$mosthits_value ($aperc%) - "
-  albuname="$mosthits_value"
-else
-  echo -ne "$mosthits_value ($aperc%) - "
-  echo "keine eindeutige zuordnung möglich"
-  albuname="unknown_album"
-fi
-unset mosthits_number
-unset mosthits_value
+      echo -ne "$mosthits_value ($aperc%) - "
+      echo "keine eindeutige zuordnung möglich"
+      albuname="unknown_album"
+    fi
 
 
-#### wenn eins von beidem  unbekannt ist, nichts tun
-if [[ "$albuname" == "unknown_album" ]] && [[ "$bandname" == "unknown_artist" ]]; then
-  echo -e "${rot}dieses verzeichnis konnte nicht eindeutig identifiziert werden, wird gelassen, wie es ist${off}\n hier sollten optionen zur auswahl hin"
-  prob+=("$1")
+    #### wenn eins von beidem  unbekannt ist, nichts tun
+    if [[ "$albuname" == "unknown_album" ]] && [[ "$bandname" == "unknown_artist" ]]; then
+      echo -e "${rot}dieses verzeichnis konnte nicht eindeutig identifiziert werden, wird gelassen, wie es ist${off}\n hier sollten optionen zur auswahl hin"
+      prob+=("$1")
 
-elif [[ -d "$top_music_dir$bandname - $albuname" ]] && [[ $(dirname "${1}")/ == "$top_music_dir" ]]; then
-  echo -e "this is already under top level and correctly named... ${blu}skipping${off}"
+    elif [[ -d "$top_music_dir$bandname - $albuname" ]] && [[ $(dirname "${1}")/ == "$top_music_dir" ]]; then
+      echo -e "this is already under top level and correctly named... ${blu}skipping${off}"
 
-else
-  while [[ -d "$top_music_dir$bandname - $albuname" ]] && [[ ! $(dirname "$1")/ == "$top_music_dir" ]]; do
-    albuname="$albuname"_1
-  done
-  echo "$1 to $top_music_dir$bandname - $albuname"
-  echo -e "$1 wird umbenannt und verschoben nach ${grn}\"$top_music_dir$bandname - $albuname\"${off}\n\n"
-  read -n 1 -p "do you like that [y/n]?" yn
-  case "$yn" in
-    [Yy] ) set -x; cp -R   "$1"  "$top_music_dir$bandname - $albuname" && rm -r "$1"; set +x;;
-  [Nn] ) continue ;;
-esac
+    else
+      while [[ -d "$top_music_dir$bandname - $albuname" ]] && [[ ! $(dirname "$1")/ == "$top_music_dir" ]]; do
+	albuname="$albuname"_1
+      done
+      echo "$1 to $top_music_dir$bandname - $albuname"
+      echo -e "$1 wird umbenannt und verschoben nach ${grn}\"$top_music_dir$bandname - $albuname\"${off}\n\n"
+      read -n 1 -p "do you like that [y/n]?" yn
+      case "$yn" in
+	[Yy] ) set -x; cp -R   "$1"  "$top_music_dir$bandname - $albuname" && rm -r "$1"; set +x;;
+	[Nn] ) continue ;;
+      esac
+    fi
+  else
+    echo "$1 ist weder ein vorhandenes Verzeichnis noch eine Datei? exiting..."    # wenn $1 weder ein file noch ein directory ist; dieser check sollte an den Anfang, nicht ans Ende
+    exit
   fi
-else
-  echo "$1 ist weder ein vorhandenes Verzeichnis noch eine Datei? exiting..."    # wenn $1 weder ein file noch ein directory ist; dieser check sollte an den Anfang, nicht ans Ende
-  exit
-fi
 }
 
 ## gucken, ob's im Ordner weitere Unterordner gibt
@@ -229,5 +263,6 @@ checksub () {
 
 ##### MAIN
 checksub "$top_music_dir"
+#dir_analysis "$top_music_dir"
 echo -e "audio dirs that were problematic:"
 echo -e "${rot}${prob[*]}${off}" 
