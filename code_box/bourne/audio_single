@@ -105,7 +105,7 @@ dir_analysis () {
     echo -e -n " ...and is a directory - analysing\n..."
     filecount=0
     for i in $(find $1 -mindepth 1 -maxdepth 1 -type f); do   # should iterate over leaf directories. yet to implement the search for leaf directories
-      if [[ -n $(file -b "$i" | grep -i "audio\|mpeg\|44*khz") ]]; then	    #if this is an audio file, check for artist and album id3-tags
+      if [[ -n $(file -b "$i" | grep -i "audio\|mpeg\|4.*khz") ]]; then	    #if this is an audio file, check for artist and album id3-tags
 	((filecount+=1))
 	get_artist "$i"
 	get_album "$i"
