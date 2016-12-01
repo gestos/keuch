@@ -94,14 +94,14 @@ gettagsfromfile () {
 dir_analysis () {
   unset bandlist1_allresult bandlist2_allresult bandlist_allresult bandlist_topresult bandlist1_topresult bandlist2_topresult
   unset mosthits_number mosthits_value mosthits1_number mosthits1_value mosthits2_number mosthits2_value bperc bperc1 bperc2
-  unset band band1 band2 bandall albu											    # reset array
+  unset band band1 band2 bandall albu	# reset array
 
-  if [[ -f "$1" ]]; then									    # if $1 is a regular file, get tracknumber and stuff
+  if [[ -f "$1" ]]; then		# if $1 is a regular file, get tracknumber and stuff
     gettagsfromfile "$1"
 
-  elif [[ -d "$1" ]]; then									    # if $1 is a regular directory...
-    test_empty_dir "$1"										    # ... check, whether empty
-    test_for_audio "$1"										    # ... check, whether there's audio files
+  elif [[ -d "$1" ]]; then		# if $1 is a regular directory...
+    test_empty_dir "$1"			# ... check, whether empty
+    test_for_audio "$1"			# ... check, whether there's audio files
     echo -e -n " ...and is a directory - analysing\n..."
     filecount=0
     for i in $(find $1 -mindepth 1 -maxdepth 1 -type f); do   # should iterate over leaf directories. yet to implement the search for leaf directories
