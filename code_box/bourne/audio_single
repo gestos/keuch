@@ -115,7 +115,6 @@ dir_analysis () {
     echo "$filecount audio files in directory"
     echo -ne "arrays für album und artist befüllt\n"
 
-
     #### Auswertung, ob Artist eindeutig ist
     ## für alle arrays zusammen
     bandall=("${band[@]}" "${band1[@]}" "${band2[@]}") 
@@ -141,7 +140,6 @@ dir_analysis () {
       bperc2=$(echo "scale=4;($mosthits2_number/${#band2[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = oberster Treffer aller bandarrays zusammen / ergebnisse aller bandarrays
     fi
 
-
     if [[ "$bperc" -ge 60 ]] && [[ -n "$mosthits_value" ]]; then    # wenn das oberste ergebnis nicht leer ist und über 60% der gefundenen Namen darstellt
       echo -ne "$mosthits_value ($bperc%) - "
       bandname="$mosthits_value"
@@ -164,42 +162,10 @@ dir_analysis () {
       3) bandname="unknown_artist" ;;
     *) continue ;;
   esac
-
 fi
 fi 
 
-
-
-
-
-
-
-
-
-#   if [[ "$bperc" -eq "50" ]] && [[ $band1_nooflines == $band2_nooflines ]] ; then
-#     bandname="$mosthits_value"
-#   elif [[ "$bperc" -ne "50" ]] && ( [[ -n "$mosthits_value" ]] && [[ $band1_nooflines == 1 ]] || [[ $band2_nooflines == 1 ]] ); then  ## wenn eins der arrays nur aus einem ergebnis besteht
-#     mosthits_value_1=$(sort -u <<< "${band1[*]}" | head -n1)
-#     mosthits_value_2=$(sort -u <<< "${band2[*]}" | head -n1)
-#     echo -e "equally frequent results for band are:\n$mosthits_value_1 [1]\n$mosthits_value_2 [2]\n choose [1] or [2] for given results or [3] for unknown"
-#     read -n 1 selectband
-#     case "$selectband" in
-#       1) bandname="$mosthits_value_1";;
-    #       2) bandname="$mosthits_value_2";;
-  #       *) bandname="unknown_artist" ;;
-  #     esac
-  #   fi
-  # else
-  #   echo -ne "$mosthits_value ($bperc%) - "
-  #   echo "keine eindeutige zuordnung möglich"
-  #   echo "mögliche artists: "
-  #   possible_hits=$( sort <<< "${bandall[*]}" | uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' | head -n3 )
-  #   echo "$possible_hits"
-  #   echo -e "${1}:\n$possible_hits\n----\n" >> "$top_music_dir$( date +%s )" 
-  #   bandname="unknown_artist"
-  # fi
-
-  #### Auswertung, ob Album eindeutig ist
+#### Auswertung, ob Album eindeutig ist
   albulist_topresult=$( echo "${albu[*]}" | sort | uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' | head -n1 )
   mosthits_number=$(sed 's;\(^[[:digit:]]*\).*;\1;' <<< "$albulist_topresult")
   mosthits_value=$(sed 's;^[[:digit:]]*[[:space:]]*;;' <<< "$albulist_topresult")
