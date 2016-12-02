@@ -4,7 +4,8 @@
 IFS='
 '
 
-top_music_dir="$1"
+path1=$( realpath "${1}" )
+top_music_dir="${path1}/"
 
 ## colors
 rot='\033[1;31m'
@@ -286,6 +287,7 @@ checksub () {
 
 
 ##### MAIN
+unset $prob
 checksub "$top_music_dir"
 #dir_analysis "$top_music_dir"
 echo -e "audio dirs that were problematic:"
