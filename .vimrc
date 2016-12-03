@@ -6,7 +6,7 @@ set nu				" show lines (column to the left)
 set t_ut=			" clear the terminalbackground on start - see http://sunaku.github.io/vim-256color-bce.html
 filetype plugin indent on	" use plugins, or so i guess
 set omnifunc=syntaxcomplete#Complete
-set softtabstop=2		" while in edit mode, tab is 2 chars wide
+set tabstop=2		" while in edit mode, tab is 2 chars wide
 set shiftwidth=2		" same is true for identation of lines and blocks
 set mouse=a			" mousescrolling and copying without linenumbers
 set nowrap			" no linewrapping as starting default mode
@@ -24,4 +24,4 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 set laststatus=2		" always show the statusline ; not needed cause of airline
 set foldcolumn=3  
-set foldmethod=marker
+set foldmethod=manual
