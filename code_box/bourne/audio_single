@@ -101,7 +101,7 @@ fi
 ## test whether directory contains any audio files
 ## hier gehört noch ein test rein, ob das dir nur 2 level tief liegt; bei tiefer anbieten, den content einfach ins mutterverzeichnis zu schieben
 test_for_audio () {
-  if [[ -z $(file -b "$1"/* | grep -i "audio\|mpeg.*iii\|4.*khz") ]]; then
+  if [[ -z $(file -b "${1}/"* | grep -i "audio\|mpeg.*iii\|4.*khz") ]]; then
     echo -e " there are no audio files in this directory. maybe images or playlists?"
     if [[ $(dirname "$1") =~ "_noaudio" ]]; then						  # skip, if already under the _noaudio directory
       echo -e "already under _noaudio, ${blu}skipping...${off}"
@@ -149,7 +149,7 @@ dir_analysis () {
     test_for_audio "$1"			# ... check, whether there's audio files
     echo -e -n " ...and is a directory - analysing\n..."
     filecount=0
-    for i in $(find $1 -mindepth 1 -maxdepth 1 -type f); do		# iterate over files; i in $1/* (?)
+    for i in "${1}/"*; do		# iterate over files; i in $1/* (?)
       if [[ -n $(file -b "$i" | grep -i "audio\|mpeg\|4.*khz") ]]; then	# only audio files
 	((filecount+=1))
 	get_artist "$i"
