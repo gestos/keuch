@@ -12,7 +12,8 @@ rot='\033[1;31m'
 grn='\033[0;32m'
 blu='\033[1;34m'
 off='\033[0m'
-
+iton=$( tput bold   || tput ZH ) # Start italic
+itof=$( tput sgr0   || tput ZR ) # End   italic
 ## sanitize filenames for final renaming
 ## mit 'file' lässt sich die codierung feststellen. dann nach utf8
 sanitize () {
@@ -51,7 +52,7 @@ get_artist () {
     TP2=$( echo "$TPE2" | charconv2 | lowercase )
   fi
   if [[ -z "$TP1" ]] && [[ -z "$TP2" ]]; then
-    TPE=$( exiftool -s3 -artist "$1" | sanitize )
+    TPE=$( exiftool -m -q -q -s3 -artist "$1" | sanitize )
     if [[ -n "$TPE" ]]; then
       TPE_enc=$( echo "$TPE" | file -i - | sed 's;^.*charset=\(.*\);\1;g' ) 
       TP=$( echo "$TPE" | charconv | lowercase )
@@ -77,14 +78,17 @@ get_album () {
   fi
 
   if [[ -z "$TAL" ]]; then
-    TAL=$( exiftool -s3 -album "$1" | sanitize )
+    TAL=$( exiftool -m -q -q -s3 -album "$1" | sanitize )
+    if [[ -n "$TAL" ]]; then
     TAL_enc=$( echo "$TAL" | file -i - | sed 's;^.*charset=\(.*\);\1;g' ) 
     TA=$( echo "$TAL" | charconva | lowercase )
+  fi
   fi
 
   if [[ -n "$TA" ]]; then
     albu+=("$TA")
   fi
+      echo -ne "."
 }
 
 ## test for empty directories; possibly better with 'du -s'?
@@ -149,16 +153,15 @@ dir_analysis () {
     test_for_audio "$1"			# ... check, whether there's audio files
     echo -e -n " ...and is a directory - analysing\n..."
     filecount=0
-    for i in "${1}/"*; do		# iterate over files; i in $1/* (?)
+    for i in "${1}/"*; do		# iterate over files; i in $1/* works, we're already in a leaf directory
       if [[ -n $(file -b "$i" | grep -i "audio\|mpeg\|4.*khz") ]]; then	# only audio files
 	((filecount+=1))
 	get_artist "$i"
 	get_album "$i"
       fi
-      echo -ne "."
     done
     echo "$filecount audio files in directory"
-    echo -ne "arrays für album und artist befüllt\n"
+    echo -ne "all available artist/album tags pushed to arrays, now evaluating...\n"
 
     #### Auswertung, ob Artist eindeutig ist
     ## für alle arrays zusammen
@@ -189,27 +192,24 @@ dir_analysis () {
     fi
 
     if [[ ${#bandall[@]} -eq 0  ]]; then
-      echo -en "artist array is empty; bandname set to unknown_artist"
+      echo -en "artist array is empty; bandname set to unknown_artist\n"
       bandname="unknown_artist"
     elif [[ "$bperc" -ge 60 ]] && [[ -n "$mosthits_value" ]]; then	# wenn das oberste ergebnis nicht leer ist und über 60% der gefundenen Namen ausmacht
-      echo -ne "$mosthits_value is over 60 (actually $bperc)% of all retrieved artist names- \n"
+      echo -ne "${iton}$mosthits_value${itof} is $bperc% of all retrieved artist names - "
       bandname="$mosthits_value"
     else								# wenn das oberste Ergebnis weniger als 60% ausmacht
       echo -ne "most common of all retrieved artist names is below 60%\n"
 
       if [[ -n $bandlist1_allresult ]] && [[ $(echo "$bandlist1_allresult" | wc -l) -eq 1 ]]; then	# if tpe1 exists and has only one entry
-	echo -en "but tpe1 is unambiguous and takes precedence over tpe2 \n"
 	bandname="$mosthits1_value"
-	echo "$bandname"
+	echo -en "but tpe1 (${iton}$bandname${itof}) is unambiguous and takes precedence over tpe2 - "
       elif [[ -n $bandlist2_allresult ]] && [[ $(echo "$bandlist2_allresult" | grep -v ^$ | wc -l) -eq 1 ]]; then	# if tpe2 exists; tpe1 takes precedence  because it's the first checked
-	echo -en "tpe2 is unambiguous while tpe1 isn't:\n"
 	bandname="$mosthits2_value"
-	echo "$bandname"
+	echo -en "tpe2 (${iton}$bandname${itof}) is unambiguous while tpe1 isn't - "
       else    # if neither tp1 nor tp2 are unambiguous
 	echo -en "neither tp1 nor tp2 are unambiguous \n"
 	vorschlag1="${bandlist_topresults[0]}"
 	vorschlag2="${bandlist_topresults[1]}"
-
 	echo -e "most frequent results for band are:\n$vorschlag1 [1]\n$vorschlag2 [2]\n choose ${blu}[1]${off} or ${blu}[2]${off} for given results, ${blu}[3]${off} for unknown or ${blu}[4]${off} to skip"
 	read -n 1 selectband
 	case "$selectband" in
@@ -227,7 +227,7 @@ if [[ -n "${albu[@]}" ]]; then
   mosthits_value=$(sed 's;^[[:digit:]]*[[:space:]]*;;' <<< "$albulist_topresult")
   aperc=$(echo "scale=4;($mosthits_number/${#albu[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = Prozent, die ein Ergebnis ausmacht
   if [[ "$aperc" -ge 60 ]] && [[ -n "$mosthits_value" ]]; then
-    echo -ne "$mosthits_value ($aperc%) - "
+    echo -ne "album ${iton}$mosthits_value${itof} seems ok ($aperc%)\n"
     albuname="$mosthits_value"
   else
     echo -ne "$mosthits_value ($aperc%) - "
@@ -251,8 +251,7 @@ else
   while [[ -d "$top_music_dir$bandname - $albuname" ]] && [[ ! $(dirname "$1")/ == "$top_music_dir" ]]; do
     albuname="$albuname"_1
   done
-  echo "$1 to $top_music_dir$bandname - $albuname"
-  echo -e "$1 wird umbenannt und verschoben nach ${grn}\"$top_music_dir$bandname - $albuname\"${off}\n\n"
+  echo -e "${iton}$1${itof} to be renamed and moved to \n ${blu}$top_music_dir$bandname - $albuname${off}\n"
   read -n 1 -p "do you like that [y/n]?" yn
   case "$yn" in
     [Yy] ) set -x; cp -R   "$1"  "$top_music_dir$bandname - $albuname" && rm -r "$1"; set +x;;
