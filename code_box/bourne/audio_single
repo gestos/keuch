@@ -17,22 +17,22 @@ itof=$( tput sgr0   || tput ZR ) # End   italic
 ## sanitize filenames for final renaming
 ## mit 'file' lässt sich die codierung feststellen. dann nach utf8
 sanitize () {
-  sed 's;[^[:alnum:][:space:]&_()-];;g' | sed 's;[[:space:]]*$;;' 
+  sed 's;[^[:alnum:][:space:]&_()-];;g' | sed 's;[[:space:]]*$;;'
 }
 lowercase () {
   sed -e 's/./\L\0/g'
 }
 charconv1 () {
-  iconv -f "$TPE1_enc" -t utf-8 
+  iconv -f "$TPE1_enc" -t utf-8
 }
 charconv2 () {
-  iconv -f "$TPE2_enc" -t utf-8 
+  iconv -f "$TPE2_enc" -t utf-8
 }
 charconv () {
-  iconv -f "$TPE_enc" -t utf-8 
+  iconv -f "$TPE_enc" -t utf-8
 }
 charconva () {
-  iconv -f "$TAL_enc" -t utf-8 
+  iconv -f "$TAL_enc" -t utf-8
 }
 ## extract tag information of individual files
 get_artist () {
@@ -42,19 +42,19 @@ get_artist () {
 
   TPE1=$( sed -n 's;^=.*TPE*1.*: ;;p' <<< "${TPEX[*]}" | sanitize )
   if [[ -n "$TPE1" ]]; then
-    TPE1_enc=$( echo "$TPE1" | file -i - | sed 's;^.*charset=\(.*\);\1;g' ) 
+    TPE1_enc=$( echo "$TPE1" | file -i - | sed 's;^.*charset=\(.*\);\1;g' )
     TP1=$( echo "$TPE1" | iconv -f "$TPE1_enc" -t utf-8 | lowercase )
   fi
 
   TPE2=$( sed -n 's;^=.*TPE*2.*: ;;p' <<< "${TPEX[*]}" | sanitize )
   if [[ -n "$TPE2" ]]; then
-    TPE2_enc=$( echo "$TPE2" | file -i - | sed 's;^.*charset=\(.*\);\1;g' ) 
+    TPE2_enc=$( echo "$TPE2" | file -i - | sed 's;^.*charset=\(.*\);\1;g' )
     TP2=$( echo "$TPE2" | charconv2 | lowercase )
   fi
   if [[ -z "$TP1" ]] && [[ -z "$TP2" ]]; then
     TPE=$( exiftool -m -q -q -s3 -artist "$1" | sanitize )
     if [[ -n "$TPE" ]]; then
-      TPE_enc=$( echo "$TPE" | file -i - | sed 's;^.*charset=\(.*\);\1;g' ) 
+      TPE_enc=$( echo "$TPE" | file -i - | sed 's;^.*charset=\(.*\);\1;g' )
       TP=$( echo "$TPE" | charconv | lowercase )
     fi
     if [[ -n "$TP" ]];  then
@@ -73,22 +73,22 @@ get_artist () {
 get_album () {
   TAL=$( id3info "$1" | sed -n 's;^=.*TALB*.*): ;;p' | sanitize )
   if [[ -n "$TAL" ]]; then
-    TAL_enc=$( echo "$TAL" | file -i - | sed 's;^.*charset=\(.*\);\1;g' ) 
+    TAL_enc=$( echo "$TAL" | file -i - | sed 's;^.*charset=\(.*\);\1;g' )
     TA=$( echo "$TAL" | charconva | lowercase )
   fi
 
   if [[ -z "$TAL" ]]; then
     TAL=$( exiftool -m -q -q -s3 -album "$1" | sanitize )
     if [[ -n "$TAL" ]]; then
-    TAL_enc=$( echo "$TAL" | file -i - | sed 's;^.*charset=\(.*\);\1;g' ) 
-    TA=$( echo "$TAL" | charconva | lowercase )
-  fi
+      TAL_enc=$( echo "$TAL" | file -i - | sed 's;^.*charset=\(.*\);\1;g' )
+      TA=$( echo "$TAL" | charconva | lowercase )
+    fi
   fi
 
   if [[ -n "$TA" ]]; then
     albu+=("$TA")
   fi
-      echo -ne "."
+  echo -ne "."
 }
 
 ## test for empty directories; possibly better with 'du -s'?
@@ -97,9 +97,9 @@ test_empty_dir () {
     read -n 1 -p "this one's empty and will be removed, do you like that? [y/n]" ny
     case "$ny" in
       [Yy]) set -x; rm -r "$1"; set +x; continue ;;
-    *) continue;;
-  esac
-fi
+      *) continue;;
+    esac
+  fi
 }
 
 ## test whether directory contains any audio files
@@ -113,9 +113,9 @@ test_for_audio () {
     else
       read -n 1 -p "move to ${top_music_dir}_noaudio/$(basename ${1})? [y/n]" yn
       case "$yn" in
-	[Yy] ) 
+	[Yy] )
 	  set -x
-	  if [[ -d "${top_music_dir}_noaudio" ]]; then 
+	  if [[ -d "${top_music_dir}_noaudio" ]]; then
 	    cp -R "$1" "${top_music_dir}_noaudio" && rm -r "$1"
 	  else
 	    mkdir "${top_music_dir}_noaudio" && cp -R "$1" "${top_music_dir}_noaudio" && rm -r "$1"
@@ -214,50 +214,50 @@ dir_analysis () {
 	read -n 1 selectband
 	case "$selectband" in
 	  1) bandname="$vorschlag1";;
-	2) bandname="$vorschlag2";;
-      3) bandname="unknown_artist" ;;
-    *) continue ;;
-  esac
-fi
-fi 
-#### Auswertung, ob Album eindeutig ist
-if [[ -n "${albu[@]}" ]]; then
-  albulist_topresult=$( echo "${albu[*]}" | sort | uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' | head -n1 )
-  mosthits_number=$(sed 's;\(^[[:digit:]]*\).*;\1;' <<< "$albulist_topresult")
-  mosthits_value=$(sed 's;^[[:digit:]]*[[:space:]]*;;' <<< "$albulist_topresult")
-  aperc=$(echo "scale=4;($mosthits_number/${#albu[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = Prozent, die ein Ergebnis ausmacht
-  if [[ "$aperc" -ge 60 ]] && [[ -n "$mosthits_value" ]]; then
-    echo -ne "album ${iton}$mosthits_value${itof} seems ok ($aperc%)\n"
-    albuname="$mosthits_value"
-  else
-    echo -ne "$mosthits_value ($aperc%) - "
-    echo "keine eindeutige zuordnung möglich"
-    albuname="unknown_album"
-  fi
-else 
-  echo "keine eindeutige zuordnung möglich"
-  albuname="unknown_album"
-fi
+	  2) bandname="$vorschlag2";;
+	  3) bandname="unknown_artist" ;;
+	  *) continue ;;
+	esac
+      fi
+    fi
+    #### Auswertung, ob Album eindeutig ist
+    if [[ -n "${albu[@]}" ]]; then
+      albulist_topresult=$( echo "${albu[*]}" | sort | uniq -c | sort -nr | sed 's;^[[:space:]]*;;g' | head -n1 )
+      mosthits_number=$(sed 's;\(^[[:digit:]]*\).*;\1;' <<< "$albulist_topresult")
+      mosthits_value=$(sed 's;^[[:digit:]]*[[:space:]]*;;' <<< "$albulist_topresult")
+      aperc=$(echo "scale=4;($mosthits_number/${#albu[*]})*100.0" | bc -l | cut -d '.' -f1)	    # $perc = Prozent, die ein Ergebnis ausmacht
+      if [[ "$aperc" -ge 60 ]] && [[ -n "$mosthits_value" ]]; then
+	echo -ne "album ${iton}$mosthits_value${itof} seems ok ($aperc%)\n"
+	albuname="$mosthits_value"
+      else
+	echo -ne "$mosthits_value ($aperc%) - "
+	echo "keine eindeutige zuordnung möglich"
+	albuname="unknown_album"
+      fi
+    else
+      echo "keine eindeutige zuordnung möglich"
+      albuname="unknown_album"
+    fi
 
-#### wenn eins von beidem  unbekannt ist, nichts tun
-if [[ "$albuname" == "unknown_album" ]] && [[ "$bandname" == "unknown_artist" ]]; then
-  echo -e "${rot}dieses verzeichnis konnte nicht eindeutig identifiziert werden, wird gelassen, wie es ist${off}\n hier sollten optionen zur auswahl hin"
-  prob+=("$1")
+    #### wenn eins von beidem  unbekannt ist, nichts tun
+    if [[ "$albuname" == "unknown_album" ]] && [[ "$bandname" == "unknown_artist" ]]; then
+      echo -e "${rot}dieses verzeichnis konnte nicht eindeutig identifiziert werden, wird gelassen, wie es ist${off}\n hier sollten optionen zur auswahl hin"
+      prob+=("$1")
 
-elif [[ -d "$top_music_dir$bandname - $albuname" ]] && [[ $(dirname "${1}")/ == "$top_music_dir" ]]; then
-  echo -e "this is already under top level and correctly named... ${blu}skipping${off}"
+    elif [[ -d "$top_music_dir$bandname - $albuname" ]] && [[ $(dirname "${1}")/ == "$top_music_dir" ]]; then
+      echo -e "this is already under top level and correctly named... ${blu}skipping${off}"
 
-else
-  while [[ -d "$top_music_dir$bandname - $albuname" ]] && [[ ! $(dirname "$1")/ == "$top_music_dir" ]]; do
-    albuname="$albuname"_1
-  done
-  echo -e "${iton}$1${itof} to be renamed and moved to \n${blu}$top_music_dir$bandname - $albuname${off}\n"
-  read -n 1 -p "do you like that [y/n]?" yn
-  case "$yn" in
-    [Yy] ) set -x; cp -R   "$1"  "$top_music_dir$bandname - $albuname" && rm -r "$1"; set +x;;
-  [Nn] ) continue ;;
-esac
-fi
+    else
+      while [[ -d "$top_music_dir$bandname - $albuname" ]] && [[ ! $(dirname "$1")/ == "$top_music_dir" ]]; do
+	albuname="$albuname"_1
+      done
+      echo -e "${iton}$1${itof} to be renamed and moved to \n${blu}$top_music_dir$bandname - $albuname${off}\n"
+      read -n 1 -p "do you like that [y/n]?" yn
+      case "$yn" in
+	[Yy] ) set -x; cp -R   "$1"  "$top_music_dir$bandname - $albuname" && rm -r "$1"; set +x;;
+	[Nn] ) continue ;;
+      esac
+    fi
   else
     echo "$1 ist weder ein vorhandenes Verzeichnis noch eine Datei? exiting..."    # wenn $1 weder ein file noch ein directory ist; dieser check sollte an den Anfang, nicht ans Ende
     exit
@@ -290,4 +290,4 @@ unset $prob
 checksub "$top_music_dir"
 #dir_analysis "$top_music_dir"
 echo -e "audio dirs that were problematic:"
-echo -e "${rot}${prob[*]}${off}" 
+echo -e "${rot}${prob[*]}${off}"
