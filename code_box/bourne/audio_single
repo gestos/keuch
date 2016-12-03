@@ -251,7 +251,7 @@ else
   while [[ -d "$top_music_dir$bandname - $albuname" ]] && [[ ! $(dirname "$1")/ == "$top_music_dir" ]]; do
     albuname="$albuname"_1
   done
-  echo -e "${iton}$1${itof} to be renamed and moved to \n ${blu}$top_music_dir$bandname - $albuname${off}\n"
+  echo -e "${iton}$1${itof} to be renamed and moved to \n${blu}$top_music_dir$bandname - $albuname${off}\n"
   read -n 1 -p "do you like that [y/n]?" yn
   case "$yn" in
     [Yy] ) set -x; cp -R   "$1"  "$top_music_dir$bandname - $albuname" && rm -r "$1"; set +x;;
