@@ -1,6 +1,7 @@
 #!/bin/bash
 ### fehlen noch command line switches um die Nachfragrerei zu unterbinden bzw zu ermöglichen
 #set -x
+set -o posix
 IFS='
 '
 

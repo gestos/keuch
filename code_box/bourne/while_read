@@ -1,0 +1,27 @@
+#!/bin/bash
+#set -x
+
+ scanner() {
+while read ddir ; do
+		if [[ -z $( scanner "$ddir" ) ]]; then
+			echo -en "$ddir\n"
+		else continue
+		fi
+	done < <(find "$1" -mindepth 1 -maxdepth 1 -type d)
+}
+
+
+scanner "$1"
+
+
+find "$1" -type d | while read dir;  do [[ ! $prev =~ $dir ]] && echo "${dir}" ; prev="$dir"; done
+
+
+scan2 () {
+	find "$1" -mindepth 1 -maxdepth 1 -type d
+}
+
+while read dirr; do
+	echo "$dirr"
+	scan2 "$dirr"
+done < <(scan2 "$1")

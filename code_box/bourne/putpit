@@ -1,0 +1,889 @@
++ scanner /media/mucke-local/
++ read ddir
+++ find /media/mucke-local/ -mindepth 1 -maxdepth 1 -type d
+++ scanner '/media/mucke-local/golden void - st'
+++ read ddir
++++ find '/media/mucke-local/golden void - st' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/golden void - st'
+/media/mucke-local/golden void - st
++ read ddir
+++ scanner '/media/mucke-local/coal chamber - coal chamber'
+++ read ddir
++++ find '/media/mucke-local/coal chamber - coal chamber' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/coal chamber - coal chamber'
+/media/mucke-local/coal chamber - coal chamber
++ read ddir
+++ scanner '/media/mucke-local/earthless - from the ages'
+++ read ddir
++++ find '/media/mucke-local/earthless - from the ages' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/earthless - from the ages'
+/media/mucke-local/earthless - from the ages
++ read ddir
+++ scanner '/media/mucke-local/leatherface - mush'
+++ read ddir
++++ find '/media/mucke-local/leatherface - mush' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/leatherface - mush'
+/media/mucke-local/leatherface - mush
++ read ddir
+++ scanner '/media/mucke-local/hozier - hozier'
+++ read ddir
++++ find '/media/mucke-local/hozier - hozier' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/hozier - hozier'
+/media/mucke-local/hozier - hozier
++ read ddir
+++ scanner '/media/mucke-local/mix iii - 2009'
+++ read ddir
++++ find '/media/mucke-local/mix iii - 2009' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/mix iii - 2009'
+/media/mucke-local/mix iii - 2009
++ read ddir
+++ scanner '/media/mucke-local/calexico - calexico-02 the black light'
+++ read ddir
++++ find '/media/mucke-local/calexico - calexico-02 the black light' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/calexico - calexico-02 the black light'
+/media/mucke-local/calexico - calexico-02 the black light
++ read ddir
+++ scanner '/media/mucke-local/lovehate - lets rumble'
+++ read ddir
++++ find '/media/mucke-local/lovehate - lets rumble' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/lovehate - lets rumble'
+/media/mucke-local/lovehate - lets rumble
++ read ddir
+++ scanner '/media/mucke-local/red dons - fake meets failure'
+++ read ddir
++++ find '/media/mucke-local/red dons - fake meets failure' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/red dons - fake meets failure'
+/media/mucke-local/red dons - fake meets failure
++ read ddir
+++ scanner '/media/mucke-local/new york crasnals - faces and noises we can make'
+++ read ddir
++++ find '/media/mucke-local/new york crasnals - faces and noises we can make' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/new york crasnals - faces and noises we can make'
+/media/mucke-local/new york crasnals - faces and noises we can make
++ read ddir
+++ scanner '/media/mucke-local/the lemonheads - car button cloth'
+++ read ddir
++++ find '/media/mucke-local/the lemonheads - car button cloth' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/the lemonheads - car button cloth'
+/media/mucke-local/the lemonheads - car button cloth
++ read ddir
+++ scanner '/media/mucke-local/the cure - the head on the door_1'
+++ read ddir
++++ find '/media/mucke-local/the cure - the head on the door_1' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/the cure - the head on the door_1'
+/media/mucke-local/the cure - the head on the door_1
++ read ddir
+++ scanner '/media/mucke-local/ozzy osbourne - blizzard of ozz bonus track'
+++ read ddir
++++ find '/media/mucke-local/ozzy osbourne - blizzard of ozz bonus track' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/ozzy osbourne - blizzard of ozz bonus track'
+/media/mucke-local/ozzy osbourne - blizzard of ozz bonus track
++ read ddir
+++ scanner '/media/mucke-local/morphine - good'
+++ read ddir
++++ find '/media/mucke-local/morphine - good' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/morphine - good'
+/media/mucke-local/morphine - good
++ read ddir
+++ scanner '/media/mucke-local/big business - here comes the waterworks'
+++ read ddir
++++ find '/media/mucke-local/big business - here comes the waterworks' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/big business - here comes the waterworks'
+/media/mucke-local/big business - here comes the waterworks
++ read ddir
+++ scanner '/media/mucke-local/red dons - the dead hand of tradition'
+++ read ddir
++++ find '/media/mucke-local/red dons - the dead hand of tradition' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/red dons - the dead hand of tradition'
+/media/mucke-local/red dons - the dead hand of tradition
++ read ddir
+++ scanner '/media/mucke-local/john butler trio - grand national'
+++ read ddir
++++ find '/media/mucke-local/john butler trio - grand national' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/john butler trio - grand national'
+/media/mucke-local/john butler trio - grand national
++ read ddir
+++ scanner '/media/mucke-local/meshuggah - chaosphere'
+++ read ddir
++++ find '/media/mucke-local/meshuggah - chaosphere' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/meshuggah - chaosphere'
+/media/mucke-local/meshuggah - chaosphere
++ read ddir
+++ scanner '/media/mucke-local/carlos cipa - the monarch and the viceroy'
+++ read ddir
++++ find '/media/mucke-local/carlos cipa - the monarch and the viceroy' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/carlos cipa - the monarch and the viceroy'
+/media/mucke-local/carlos cipa - the monarch and the viceroy
++ read ddir
+++ scanner /media/mucke-local/_noaudio
+++ read ddir
++++ find /media/mucke-local/_noaudio -mindepth 1 -maxdepth 1 -type d
++++ scanner '/media/mucke-local/_noaudio/fluxion - vibrant forms lp (remastered reissue, type, 2013)'
++++ read ddir
+++++ find '/media/mucke-local/_noaudio/fluxion - vibrant forms lp (remastered reissue, type, 2013)' -mindepth 1 -maxdepth 1 -type d
+++ [[ -z '' ]]
+++ echo '/media/mucke-local/_noaudio/fluxion - vibrant forms lp (remastered reissue, type, 2013)'
+++ read ddir
++++ scanner /media/mucke-local/_noaudio/covers
++++ read ddir
+++++ find /media/mucke-local/_noaudio/covers -mindepth 1 -maxdepth 1 -type d
+++ [[ -z '' ]]
+++ echo /media/mucke-local/_noaudio/covers
+++ read ddir
++ [[ -z /media/mucke-local/_noaudio/fluxion - vibrant forms lp (remastered reissue, type, 2013)
+/media/mucke-local/_noaudio/covers ]]
++ read ddir
+++ scanner '/media/mucke-local/crippled black phoenix - a love of shared disasters'
+++ read ddir
++++ find '/media/mucke-local/crippled black phoenix - a love of shared disasters' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/crippled black phoenix - a love of shared disasters'
+/media/mucke-local/crippled black phoenix - a love of shared disasters
++ read ddir
+++ scanner '/media/mucke-local/mother tongue - ghost note'
+++ read ddir
++++ find '/media/mucke-local/mother tongue - ghost note' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/mother tongue - ghost note'
+/media/mucke-local/mother tongue - ghost note
++ read ddir
+++ scanner '/media/mucke-local/bad dudes - bad dudes'
+++ read ddir
++++ find '/media/mucke-local/bad dudes - bad dudes' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/bad dudes - bad dudes'
+/media/mucke-local/bad dudes - bad dudes
++ read ddir
+++ scanner '/media/mucke-local/deuter - aum'
+++ read ddir
++++ find '/media/mucke-local/deuter - aum' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/deuter - aum'
+/media/mucke-local/deuter - aum
++ read ddir
+++ scanner '/media/mucke-local/carcass - swansong'
+++ read ddir
++++ find '/media/mucke-local/carcass - swansong' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/carcass - swansong'
+/media/mucke-local/carcass - swansong
++ read ddir
+++ scanner '/media/mucke-local/mother love bone - apple'
+++ read ddir
++++ find '/media/mucke-local/mother love bone - apple' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/mother love bone - apple'
+/media/mucke-local/mother love bone - apple
++ read ddir
+++ scanner '/media/mucke-local/parts & labor - receivers'
+++ read ddir
++++ find '/media/mucke-local/parts & labor - receivers' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/parts & labor - receivers'
+/media/mucke-local/parts & labor - receivers
++ read ddir
+++ scanner '/media/mucke-local/def leppard - pyromania'
+++ read ddir
++++ find '/media/mucke-local/def leppard - pyromania' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/def leppard - pyromania'
+/media/mucke-local/def leppard - pyromania
++ read ddir
+++ scanner '/media/mucke-local/blind melon - soup'
+++ read ddir
++++ find '/media/mucke-local/blind melon - soup' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/blind melon - soup'
+/media/mucke-local/blind melon - soup
++ read ddir
+++ scanner '/media/mucke-local/maserati - pyramid of the moon'
+++ read ddir
++++ find '/media/mucke-local/maserati - pyramid of the moon' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/maserati - pyramid of the moon'
+/media/mucke-local/maserati - pyramid of the moon
++ read ddir
+++ scanner '/media/mucke-local/gun club - miami'
+++ read ddir
++++ find '/media/mucke-local/gun club - miami' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/gun club - miami'
+/media/mucke-local/gun club - miami
++ read ddir
+++ scanner '/media/mucke-local/beasts of bourbon - the low road'
+++ read ddir
++++ find '/media/mucke-local/beasts of bourbon - the low road' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/beasts of bourbon - the low road'
+/media/mucke-local/beasts of bourbon - the low road
++ read ddir
+++ scanner '/media/mucke-local/mike oldfield - tubular bells (the original 1973 stereo album mix)'
+++ read ddir
++++ find '/media/mucke-local/mike oldfield - tubular bells (the original 1973 stereo album mix)' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/mike oldfield - tubular bells (the original 1973 stereo album mix)'
+/media/mucke-local/mike oldfield - tubular bells (the original 1973 stereo album mix)
++ read ddir
+++ scanner '/media/mucke-local/meshuggah - destroy erase improve'
+++ read ddir
++++ find '/media/mucke-local/meshuggah - destroy erase improve' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/meshuggah - destroy erase improve'
+/media/mucke-local/meshuggah - destroy erase improve
++ read ddir
+++ scanner '/media/mucke-local/janos starker - janos starker - popper'
+++ read ddir
++++ find '/media/mucke-local/janos starker - janos starker - popper' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/janos starker - janos starker - popper'
+/media/mucke-local/janos starker - janos starker - popper
++ read ddir
+++ scanner '/media/mucke-local/boards of canada - the campfire headphase'
+++ read ddir
++++ find '/media/mucke-local/boards of canada - the campfire headphase' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/boards of canada - the campfire headphase'
+/media/mucke-local/boards of canada - the campfire headphase
++ read ddir
+++ scanner '/media/mucke-local/mother tongue - streetlight'
+++ read ddir
++++ find '/media/mucke-local/mother tongue - streetlight' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/mother tongue - streetlight'
+/media/mucke-local/mother tongue - streetlight
++ read ddir
+++ scanner '/media/mucke-local/the cruel sea - three legged dog'
+++ read ddir
++++ find '/media/mucke-local/the cruel sea - three legged dog' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/the cruel sea - three legged dog'
+/media/mucke-local/the cruel sea - three legged dog
++ read ddir
+++ scanner '/media/mucke-local/emiliana torrini - love in the time of science'
+++ read ddir
++++ find '/media/mucke-local/emiliana torrini - love in the time of science' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/emiliana torrini - love in the time of science'
+/media/mucke-local/emiliana torrini - love in the time of science
++ read ddir
+++ scanner '/media/mucke-local/midnight oil - earth and sun and moon'
+++ read ddir
++++ find '/media/mucke-local/midnight oil - earth and sun and moon' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/midnight oil - earth and sun and moon'
+/media/mucke-local/midnight oil - earth and sun and moon
++ read ddir
+++ scanner '/media/mucke-local/psicomagia - psicomagia'
+++ read ddir
++++ find '/media/mucke-local/psicomagia - psicomagia' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/psicomagia - psicomagia'
+/media/mucke-local/psicomagia - psicomagia
++ read ddir
+++ scanner '/media/mucke-local/as we draw - lines breaking circles'
+++ read ddir
++++ find '/media/mucke-local/as we draw - lines breaking circles' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/as we draw - lines breaking circles'
+/media/mucke-local/as we draw - lines breaking circles
++ read ddir
+++ scanner '/media/mucke-local/mike oldfield - hergest ridge - the original mix'
+++ read ddir
++++ find '/media/mucke-local/mike oldfield - hergest ridge - the original mix' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/mike oldfield - hergest ridge - the original mix'
+/media/mucke-local/mike oldfield - hergest ridge - the original mix
++ read ddir
+++ scanner '/media/mucke-local/the rolling stones - sticky fingers'
+++ read ddir
++++ find '/media/mucke-local/the rolling stones - sticky fingers' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/the rolling stones - sticky fingers'
+/media/mucke-local/the rolling stones - sticky fingers
++ read ddir
+++ scanner '/media/mucke-local/new model army - thunder and consolation'
+++ read ddir
++++ find '/media/mucke-local/new model army - thunder and consolation' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/new model army - thunder and consolation'
+/media/mucke-local/new model army - thunder and consolation
++ read ddir
+++ scanner '/media/mucke-local/mirza - last clouds'
+++ read ddir
++++ find '/media/mucke-local/mirza - last clouds' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/mirza - last clouds'
+/media/mucke-local/mirza - last clouds
++ read ddir
+++ scanner '/media/mucke-local/the beasts of bourbon - sour mash'
+++ read ddir
++++ find '/media/mucke-local/the beasts of bourbon - sour mash' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/the beasts of bourbon - sour mash'
+/media/mucke-local/the beasts of bourbon - sour mash
++ read ddir
+++ scanner '/media/mucke-local/goldfrapp - felt mountain'
+++ read ddir
++++ find '/media/mucke-local/goldfrapp - felt mountain' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/goldfrapp - felt mountain'
+/media/mucke-local/goldfrapp - felt mountain
++ read ddir
+++ scanner '/media/mucke-local/beach slang - cheap thrills on a dead end street'
+++ read ddir
++++ find '/media/mucke-local/beach slang - cheap thrills on a dead end street' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/beach slang - cheap thrills on a dead end street'
+/media/mucke-local/beach slang - cheap thrills on a dead end street
++ read ddir
+++ scanner '/media/mucke-local/high on fire - luminiferous'
+++ read ddir
++++ find '/media/mucke-local/high on fire - luminiferous' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/high on fire - luminiferous'
+/media/mucke-local/high on fire - luminiferous
++ read ddir
+++ scanner '/media/mucke-local/mick jagger - the very best of mick jagger'
+++ read ddir
++++ find '/media/mucke-local/mick jagger - the very best of mick jagger' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/mick jagger - the very best of mick jagger'
+/media/mucke-local/mick jagger - the very best of mick jagger
++ read ddir
+++ scanner '/media/mucke-local/ralph towner - sargasso sea (with john abercrombie)'
+++ read ddir
++++ find '/media/mucke-local/ralph towner - sargasso sea (with john abercrombie)' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/ralph towner - sargasso sea (with john abercrombie)'
+/media/mucke-local/ralph towner - sargasso sea (with john abercrombie)
++ read ddir
+++ scanner '/media/mucke-local/the angels - face to face remastered (2008)'
+++ read ddir
++++ find '/media/mucke-local/the angels - face to face remastered (2008)' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/the angels - face to face remastered (2008)'
+/media/mucke-local/the angels - face to face remastered (2008)
++ read ddir
+++ scanner '/media/mucke-local/clutch - psychic warfare'
+++ read ddir
++++ find '/media/mucke-local/clutch - psychic warfare' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/clutch - psychic warfare'
+/media/mucke-local/clutch - psychic warfare
++ read ddir
+++ scanner '/media/mucke-local/immortal technique - unknown_album'
+++ read ddir
++++ find '/media/mucke-local/immortal technique - unknown_album' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/immortal technique - unknown_album'
+/media/mucke-local/immortal technique - unknown_album
++ read ddir
+++ scanner '/media/mucke-local/meshuggah - obzen'
+++ read ddir
++++ find '/media/mucke-local/meshuggah - obzen' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/meshuggah - obzen'
+/media/mucke-local/meshuggah - obzen
++ read ddir
+++ scanner '/media/mucke-local/the cure -the head on the door'
+++ read ddir
++++ find '/media/mucke-local/the cure -the head on the door' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/the cure -the head on the door'
+/media/mucke-local/the cure -the head on the door
++ read ddir
+++ scanner '/media/mucke-local/monster magnet - dopes to infinity'
+++ read ddir
++++ find '/media/mucke-local/monster magnet - dopes to infinity' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/monster magnet - dopes to infinity'
+/media/mucke-local/monster magnet - dopes to infinity
++ read ddir
+++ scanner '/media/mucke-local/do make say think - & yet & yet'
+++ read ddir
++++ find '/media/mucke-local/do make say think - & yet & yet' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/do make say think - & yet & yet'
+/media/mucke-local/do make say think - & yet & yet
++ read ddir
+++ scanner '/media/mucke-local/blind melon - blind melon'
+++ read ddir
++++ find '/media/mucke-local/blind melon - blind melon' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/blind melon - blind melon'
+/media/mucke-local/blind melon - blind melon
++ read ddir
+++ scanner '/media/mucke-local/immortal technique - the martyr'
+++ read ddir
++++ find '/media/mucke-local/immortal technique - the martyr' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/immortal technique - the martyr'
+/media/mucke-local/immortal technique - the martyr
++ read ddir
+++ scanner '/media/mucke-local/the cure - the head on the door'
+++ read ddir
++++ find '/media/mucke-local/the cure - the head on the door' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/the cure - the head on the door'
+/media/mucke-local/the cure - the head on the door
++ read ddir
+++ scanner '/media/mucke-local/modest mouse - good news for people who love bad news'
+++ read ddir
++++ find '/media/mucke-local/modest mouse - good news for people who love bad news' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/modest mouse - good news for people who love bad news'
+/media/mucke-local/modest mouse - good news for people who love bad news
++ read ddir
+++ scanner '/media/mucke-local/fluxion - vibrant forms ii'
+++ read ddir
++++ find '/media/mucke-local/fluxion - vibrant forms ii' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/fluxion - vibrant forms ii'
+/media/mucke-local/fluxion - vibrant forms ii
++ read ddir
+++ scanner '/media/mucke-local/clutch - earth rocker'
+++ read ddir
++++ find '/media/mucke-local/clutch - earth rocker' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/clutch - earth rocker'
+/media/mucke-local/clutch - earth rocker
++ read ddir
+++ scanner '/media/mucke-local/brian ellis & brian grainger - at dusk'
+++ read ddir
++++ find '/media/mucke-local/brian ellis & brian grainger - at dusk' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/brian ellis & brian grainger - at dusk'
+/media/mucke-local/brian ellis & brian grainger - at dusk
++ read ddir
+++ scanner '/media/mucke-local/morphine - the night'
+++ read ddir
++++ find '/media/mucke-local/morphine - the night' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/morphine - the night'
+/media/mucke-local/morphine - the night
++ read ddir
+++ scanner '/media/mucke-local/champion - promises kept'
+++ read ddir
++++ find '/media/mucke-local/champion - promises kept' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/champion - promises kept'
+/media/mucke-local/champion - promises kept
++ read ddir
+++ scanner '/media/mucke-local/against me - searching for a former clarity'
+++ read ddir
++++ find '/media/mucke-local/against me - searching for a former clarity' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/against me - searching for a former clarity'
+/media/mucke-local/against me - searching for a former clarity
++ read ddir
+++ scanner '/media/mucke-local/the mars volta - octahedron'
+++ read ddir
++++ find '/media/mucke-local/the mars volta - octahedron' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/the mars volta - octahedron'
+/media/mucke-local/the mars volta - octahedron
++ read ddir
+++ scanner '/media/mucke-local/kyuss - blues for the red sun'
+++ read ddir
++++ find '/media/mucke-local/kyuss - blues for the red sun' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/kyuss - blues for the red sun'
+/media/mucke-local/kyuss - blues for the red sun
++ read ddir
+++ scanner '/media/mucke-local/kula shaker - peasants pigs & astronauts'
+++ read ddir
++++ find '/media/mucke-local/kula shaker - peasants pigs & astronauts' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/kula shaker - peasants pigs & astronauts'
+/media/mucke-local/kula shaker - peasants pigs & astronauts
++ read ddir
+++ scanner '/media/mucke-local/lichens - omns'
+++ read ddir
++++ find '/media/mucke-local/lichens - omns' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/lichens - omns'
+/media/mucke-local/lichens - omns
++ read ddir
+++ scanner '/media/mucke-local/red dons - death to idealism'
+++ read ddir
++++ find '/media/mucke-local/red dons - death to idealism' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/red dons - death to idealism'
+/media/mucke-local/red dons - death to idealism
++ read ddir
+++ scanner '/media/mucke-local/corrosion of conformity - americas volume dealer'
+++ read ddir
++++ find '/media/mucke-local/corrosion of conformity - americas volume dealer' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/corrosion of conformity - americas volume dealer'
+/media/mucke-local/corrosion of conformity - americas volume dealer
++ read ddir
+++ scanner '/media/mucke-local/abwdrts - herzlich willkommen im irrenhaus'
+++ read ddir
++++ find '/media/mucke-local/abwdrts - herzlich willkommen im irrenhaus' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/abwdrts - herzlich willkommen im irrenhaus'
+/media/mucke-local/abwdrts - herzlich willkommen im irrenhaus
++ read ddir
+++ scanner '/media/mucke-local/midnight oil - blue sky mining'
+++ read ddir
++++ find '/media/mucke-local/midnight oil - blue sky mining' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/midnight oil - blue sky mining'
+/media/mucke-local/midnight oil - blue sky mining
++ read ddir
+++ scanner '/media/mucke-local/new model army - the love of hopeless causes'
+++ read ddir
++++ find '/media/mucke-local/new model army - the love of hopeless causes' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/new model army - the love of hopeless causes'
+/media/mucke-local/new model army - the love of hopeless causes
++ read ddir
+++ scanner '/media/mucke-local/brian ellis group - escondido sessions'
+++ read ddir
++++ find '/media/mucke-local/brian ellis group - escondido sessions' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/brian ellis group - escondido sessions'
+/media/mucke-local/brian ellis group - escondido sessions
++ read ddir
+++ scanner '/media/mucke-local/damien jurado - maraqopa'
+++ read ddir
++++ find '/media/mucke-local/damien jurado - maraqopa' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/damien jurado - maraqopa'
+/media/mucke-local/damien jurado - maraqopa
++ read ddir
+++ scanner '/media/mucke-local/deus - worst case scenario'
+++ read ddir
++++ find '/media/mucke-local/deus - worst case scenario' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/deus - worst case scenario'
+/media/mucke-local/deus - worst case scenario
++ read ddir
+++ scanner '/media/mucke-local/i got you on tape - spinning for the cause'
+++ read ddir
++++ find '/media/mucke-local/i got you on tape - spinning for the cause' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/i got you on tape - spinning for the cause'
+/media/mucke-local/i got you on tape - spinning for the cause
++ read ddir
+++ scanner '/media/mucke-local/corrosion of conformity - deliverance'
+++ read ddir
++++ find '/media/mucke-local/corrosion of conformity - deliverance' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/corrosion of conformity - deliverance'
+/media/mucke-local/corrosion of conformity - deliverance
++ read ddir
+++ scanner '/media/mucke-local/golden void - golden void'
+++ read ddir
++++ find '/media/mucke-local/golden void - golden void' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/golden void - golden void'
+/media/mucke-local/golden void - golden void
++ read ddir
+++ scanner '/media/mucke-local/leatherface - the stormy petrel'
+++ read ddir
++++ find '/media/mucke-local/leatherface - the stormy petrel' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/leatherface - the stormy petrel'
+/media/mucke-local/leatherface - the stormy petrel
++ read ddir
+++ scanner '/media/mucke-local/crippled black phoenix - 200 tons of bad luck'
+++ read ddir
++++ find '/media/mucke-local/crippled black phoenix - 200 tons of bad luck' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/crippled black phoenix - 200 tons of bad luck'
+/media/mucke-local/crippled black phoenix - 200 tons of bad luck
++ read ddir
+++ scanner '/media/mucke-local/peter wright - an angel fell where the kestrel hover'
+++ read ddir
++++ find '/media/mucke-local/peter wright - an angel fell where the kestrel hover' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/peter wright - an angel fell where the kestrel hover'
+/media/mucke-local/peter wright - an angel fell where the kestrel hover
++ read ddir
+++ scanner '/media/mucke-local/golden void - berkana'
+++ read ddir
++++ find '/media/mucke-local/golden void - berkana' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/golden void - berkana'
+/media/mucke-local/golden void - berkana
++ read ddir
+++ scanner '/media/mucke-local/big rude jake - spanky productions spanky productions blue pariah'
+++ read ddir
++++ find '/media/mucke-local/big rude jake - spanky productions spanky productions blue pariah' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/big rude jake - spanky productions spanky productions blue pariah'
+/media/mucke-local/big rude jake - spanky productions spanky productions blue pariah
++ read ddir
+++ scanner '/media/mucke-local/noir disir - des visages des figures'
+++ read ddir
++++ find '/media/mucke-local/noir disir - des visages des figures' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/noir disir - des visages des figures'
+/media/mucke-local/noir disir - des visages des figures
++ read ddir
+++ scanner '/media/mucke-local/portishead - dummy uk'
+++ read ddir
++++ find '/media/mucke-local/portishead - dummy uk' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/portishead - dummy uk'
+/media/mucke-local/portishead - dummy uk
++ read ddir
+++ scanner '/media/mucke-local/earthless & heavy blanket - in a dutch haze'
+++ read ddir
++++ find '/media/mucke-local/earthless & heavy blanket - in a dutch haze' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/earthless & heavy blanket - in a dutch haze'
+/media/mucke-local/earthless & heavy blanket - in a dutch haze
++ read ddir
+++ scanner '/media/mucke-local/carlos cipa - all your life you walk'
+++ read ddir
++++ find '/media/mucke-local/carlos cipa - all your life you walk' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/carlos cipa - all your life you walk'
+/media/mucke-local/carlos cipa - all your life you walk
++ read ddir
+++ scanner '/media/mucke-local/botch - an anthology of dead ends'
+++ read ddir
++++ find '/media/mucke-local/botch - an anthology of dead ends' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/botch - an anthology of dead ends'
+/media/mucke-local/botch - an anthology of dead ends
++ read ddir
+++ scanner '/media/mucke-local/the cure - the head on the door_1_1'
+++ read ddir
++++ find '/media/mucke-local/the cure - the head on the door_1_1' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/the cure - the head on the door_1_1'
+/media/mucke-local/the cure - the head on the door_1_1
++ read ddir
+++ scanner '/media/mucke-local/monster magnet - god says no'
+++ read ddir
++++ find '/media/mucke-local/monster magnet - god says no' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/monster magnet - god says no'
+/media/mucke-local/monster magnet - god says no
++ read ddir
+++ scanner '/media/mucke-local/big rude jake - big rude jake'
+++ read ddir
++++ find '/media/mucke-local/big rude jake - big rude jake' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/big rude jake - big rude jake'
+/media/mucke-local/big rude jake - big rude jake
++ read ddir
+++ scanner '/media/mucke-local/don caballero - world class listening problem'
+++ read ddir
++++ find '/media/mucke-local/don caballero - world class listening problem' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/don caballero - world class listening problem'
+/media/mucke-local/don caballero - world class listening problem
++ read ddir
+++ scanner '/media/mucke-local/mob research - holy city zoo'
+++ read ddir
++++ find '/media/mucke-local/mob research - holy city zoo' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/mob research - holy city zoo'
+/media/mucke-local/mob research - holy city zoo
++ read ddir
+++ scanner '/media/mucke-local/lovehate - blackout in the red room'
+++ read ddir
++++ find '/media/mucke-local/lovehate - blackout in the red room' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/lovehate - blackout in the red room'
+/media/mucke-local/lovehate - blackout in the red room
++ read ddir
+++ scanner '/media/mucke-local/brian ellis - the silver creature'
+++ read ddir
++++ find '/media/mucke-local/brian ellis - the silver creature' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/brian ellis - the silver creature'
+/media/mucke-local/brian ellis - the silver creature
++ read ddir
+++ scanner '/media/mucke-local/moto - bolt'
+++ read ddir
++++ find '/media/mucke-local/moto - bolt' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/moto - bolt'
+/media/mucke-local/moto - bolt
++ read ddir
+++ scanner '/media/mucke-local/as we draw - mirages'
+++ read ddir
++++ find '/media/mucke-local/as we draw - mirages' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/as we draw - mirages'
+/media/mucke-local/as we draw - mirages
++ read ddir
+++ scanner '/media/mucke-local/don caballero - american don'
+++ read ddir
++++ find '/media/mucke-local/don caballero - american don' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/don caballero - american don'
+/media/mucke-local/don caballero - american don
++ read ddir
+++ scanner '/media/mucke-local/champion - different directions the last show'
+++ read ddir
++++ find '/media/mucke-local/champion - different directions the last show' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/champion - different directions the last show'
+/media/mucke-local/champion - different directions the last show
++ read ddir
+++ scanner '/media/mucke-local/moto - raw power'
+++ read ddir
++++ find '/media/mucke-local/moto - raw power' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/moto - raw power'
+/media/mucke-local/moto - raw power
++ read ddir
+++ scanner '/media/mucke-local/zoltán kodály - cello works (janos starker)'
+++ read ddir
++++ find '/media/mucke-local/zoltán kodály - cello works (janos starker)' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/zoltán kodály - cello works (janos starker)'
+/media/mucke-local/zoltán kodály - cello works (janos starker)
++ read ddir
+++ scanner '/media/mucke-local/nashville pussy - say something nasty'
+++ read ddir
++++ find '/media/mucke-local/nashville pussy - say something nasty' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/nashville pussy - say something nasty'
+/media/mucke-local/nashville pussy - say something nasty
++ read ddir
+++ scanner '/media/mucke-local/do make say think - goodbye enemy airship the landlord is dead'
+++ read ddir
++++ find '/media/mucke-local/do make say think - goodbye enemy airship the landlord is dead' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/do make say think - goodbye enemy airship the landlord is dead'
+/media/mucke-local/do make say think - goodbye enemy airship the landlord is dead
++ read ddir
+++ scanner '/media/mucke-local/mother tongue - mother tongue'
+++ read ddir
++++ find '/media/mucke-local/mother tongue - mother tongue' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/mother tongue - mother tongue'
+/media/mucke-local/mother tongue - mother tongue
++ read ddir
+++ scanner '/media/mucke-local/beats per inch - building the god dam'
+++ read ddir
++++ find '/media/mucke-local/beats per inch - building the god dam' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/beats per inch - building the god dam'
+/media/mucke-local/beats per inch - building the god dam
++ read ddir
+++ scanner '/media/mucke-local/do make say think - do make say think'
+++ read ddir
++++ find '/media/mucke-local/do make say think - do make say think' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/do make say think - do make say think'
+/media/mucke-local/do make say think - do make say think
++ read ddir
+++ scanner '/media/mucke-local/fugazi - the argument'
+++ read ddir
++++ find '/media/mucke-local/fugazi - the argument' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/fugazi - the argument'
+/media/mucke-local/fugazi - the argument
++ read ddir
+++ scanner '/media/mucke-local/monster magnet - mastermind'
+++ read ddir
++++ find '/media/mucke-local/monster magnet - mastermind' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/monster magnet - mastermind'
+/media/mucke-local/monster magnet - mastermind
++ read ddir
+++ scanner '/media/mucke-local/renaud - ma compil'
+++ read ddir
++++ find '/media/mucke-local/renaud - ma compil' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/renaud - ma compil'
+/media/mucke-local/renaud - ma compil
++ read ddir
+++ scanner '/media/mucke-local/justin sullivan - navigating by the stars'
+++ read ddir
++++ find '/media/mucke-local/justin sullivan - navigating by the stars' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/justin sullivan - navigating by the stars'
+/media/mucke-local/justin sullivan - navigating by the stars
++ read ddir
+++ scanner '/media/mucke-local/mordred - vision'
+++ read ddir
++++ find '/media/mucke-local/mordred - vision' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/mordred - vision'
+/media/mucke-local/mordred - vision
++ read ddir
+++ scanner '/media/mucke-local/mars volta the - noctourniquet'
+++ read ddir
++++ find '/media/mucke-local/mars volta the - noctourniquet' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/mars volta the - noctourniquet'
+/media/mucke-local/mars volta the - noctourniquet
++ read ddir
+++ scanner '/media/mucke-local/dave matthews band - some devil'
+++ read ddir
++++ find '/media/mucke-local/dave matthews band - some devil' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/dave matthews band - some devil'
+/media/mucke-local/dave matthews band - some devil
++ read ddir
+++ scanner '/media/mucke-local/beastwars - the death of all things'
+++ read ddir
++++ find '/media/mucke-local/beastwars - the death of all things' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/beastwars - the death of all things'
+/media/mucke-local/beastwars - the death of all things
++ read ddir
+++ scanner '/media/mucke-local/high on fire - snakes for the divine'
+++ read ddir
++++ find '/media/mucke-local/high on fire - snakes for the divine' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/high on fire - snakes for the divine'
+/media/mucke-local/high on fire - snakes for the divine
++ read ddir
+++ scanner '/media/mucke-local/morphine - morphine cure for pain'
+++ read ddir
++++ find '/media/mucke-local/morphine - morphine cure for pain' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/morphine - morphine cure for pain'
+/media/mucke-local/morphine - morphine cure for pain
++ read ddir
+++ scanner '/media/mucke-local/arbouretum - song of the pearl'
+++ read ddir
++++ find '/media/mucke-local/arbouretum - song of the pearl' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/arbouretum - song of the pearl'
+/media/mucke-local/arbouretum - song of the pearl
++ read ddir
+++ scanner '/media/mucke-local/i got you on tape - church of the real'
+++ read ddir
++++ find '/media/mucke-local/i got you on tape - church of the real' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/i got you on tape - church of the real'
+/media/mucke-local/i got you on tape - church of the real
++ read ddir
+++ scanner '/media/mucke-local/brian ellis - in the dark'
+++ read ddir
++++ find '/media/mucke-local/brian ellis - in the dark' -mindepth 1 -maxdepth 1 -type d
++ [[ -z '' ]]
++ echo '/media/mucke-local/brian ellis - in the dark'
+/media/mucke-local/brian ellis - in the dark
++ read ddir
