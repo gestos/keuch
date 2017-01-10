@@ -3,9 +3,15 @@ import os
 import csv
 import xlrd
 import re
+import sys
 from natsort import natsorted, ns
 
-daily_report_dir_path = '/home/keuch/gits/wiki_carex/stats/Hotlineber1458Gesing_taegl_217_HOURLY/'
+if sys.argv[1]:
+    print "there's a command line argument"
+    daily_report_dir_path = os.path.abspath(sys.argv[1])
+else:
+    daily_report_dir_path = '/home/keuch/gits/wiki_carex/stats/Hotlineber1458Gesing_taegl_217_HOURLY/'
+    
 print (daily_report_dir_path)
 
 liste_aller_gelesenen_files = list()
