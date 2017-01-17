@@ -8,6 +8,7 @@ from natsort import natsorted, ns
 import xlwt
 from xlutils import copy as xlcopy
 from colorama import Fore as coly, Style as coln
+from datetime import datetime
 
 grn = coly.GREEN
 blu = coly.BLUE
@@ -35,19 +36,18 @@ def read_data_from_whole_dir():
             zeilen = erstes_sheet.nrows
             Datum_B2 = erstes_sheet.cell(1,1).value
             Datum_korrekt = re.sub(r' ', '.', Datum_B2[:10]) 
-            Date_usable = Datum_korrekt.encode("utf-8")
+            Date_usable = datetime.strptime(Datum_korrekt, "%d.%m.%Y")
             wanted_cols = [2,3,4,5,12] # this is a comment 2=alle anrufe 3=telefonierte anrufe 4=gesamtanrufzeit 5=gesamtverbindungszeit 12=gesamtNBzeit
             datensatz_fuer_dieses_sheet = list()
-            
             datensatz_fuer_dieses_sheet.append(Date_usable)
             for Spalte in wanted_cols:
-                summe = int()
+                summe = float() 
                 for summenreihen in range(4,28):
                     summand = erstes_sheet.cell(summenreihen,Spalte).value
                     summe = summe+summand
                 datensatz_fuer_dieses_sheet.append(summe)
             datensaetze_aller_files.append(datensatz_fuer_dieses_sheet)
-            return datensaetze_aller_files
+    return datensaetze_aller_files
 
 #### END READER ####
 
@@ -68,15 +68,30 @@ print (grn + "Zieldatei hat folgende Sheets:\t\t" + rst + ",".join(sheets_in_tar
 print(grn + "vorhandene Zeilen in Zieldatei:\t\t" + rst + str(schon_befueelt) + ", ab " + str(row_to_write_in) + " wird weitergeschrieben")
 print (grn + "Datenformat:\t\t\t\t" + rst + ", ".join(str(p) for p in liste_aller_gelesenen_files[0])) # This shows that the list from above is still populated and available even outside the for loop
 
-for einzelner_datensatz in liste_aller_gelesenen_files:
-    idx = 0
-    for spalte_eines_datensatzes in einzelner_datensatz:
-        sheet_rw.write(row_to_write_in, idx, spalte_eines_datensatzes)
-        idx = idx + 1
-    row_to_write_in = row_to_write_in + 1
 
-target_workbook_writeable.save(targetfile)
+for tag in sorted(liste_aller_gelesenen_files):
+    print(tag)
 
 
+def write_out():
+    start_writing = row_to_write_in
+    for einzelner_datensatz in sorted(liste_aller_gelesenen_files):
+        idx = 0
+        for spalte_eines_datensatzes in einzelner_datensatz:
+            sheet_rw.write(start_writing, idx, spalte_eines_datensatzes, zellformatierung)
+            idx += 1
+        start_writing += 1
+    target_workbook_writeable.save(targetfile)
+
+def writedate():
+    start_writing = row_to_write_in
+    Beispieldatum = (liste_aller_gelesenen_files[0][0])
+    dateformat = xlwt.XFStyle()
+    dateformat.num_format_str = "nn, dd.mm.yy"
+    sheet_rw.write(start_writing, 1, Beispieldatum, dateformat)
+    target_workbook_writeable.save(targetfile)
+
+#writedate()
+write_out()
 # xlrd can't get the values of formula cells because those are only created when the file was saved (with "recalculate" option) in excel (or LO)
 # so cells with formulas always return value "0.0" until they've been saved locally
