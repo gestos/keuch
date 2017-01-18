@@ -75,23 +75,21 @@ for tag in sorted(liste_aller_gelesenen_files):
 
 def write_out():
     start_writing = row_to_write_in
+    style_datum = xlwt.easyxf(num_format_str = "nn, dd.mm.yy")
+    style_stunden = xlwt.easyxf(num_format_str = "HH:MM:SS")
     for einzelner_datensatz in sorted(liste_aller_gelesenen_files):
         idx = 0
         for spalte_eines_datensatzes in einzelner_datensatz:
-            sheet_rw.write(start_writing, idx, spalte_eines_datensatzes, zellformatierung)
+            if idx == 0:
+                sheet_rw.write(start_writing, idx, spalte_eines_datensatzes, style_datum)
+            elif idx in (1, 2):
+                sheet_rw.write(start_writing, idx, spalte_eines_datensatzes)
+            elif idx in (3, 4, 5):
+                sheet_rw.write(start_writing, idx, spalte_eines_datensatzes, style_stunden)
             idx += 1
         start_writing += 1
     target_workbook_writeable.save(targetfile)
 
-def writedate():
-    start_writing = row_to_write_in
-    Beispieldatum = (liste_aller_gelesenen_files[0][0])
-    dateformat = xlwt.XFStyle()
-    dateformat.num_format_str = "nn, dd.mm.yy"
-    sheet_rw.write(start_writing, 1, Beispieldatum, dateformat)
-    target_workbook_writeable.save(targetfile)
-
-#writedate()
 write_out()
 # xlrd can't get the values of formula cells because those are only created when the file was saved (with "recalculate" option) in excel (or LO)
 # so cells with formulas always return value "0.0" until they've been saved locally
