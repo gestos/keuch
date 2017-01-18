@@ -15,10 +15,18 @@ alias evime='vim -u ~/.vimcryp -x'
 #	fi
 #	}
 alias cal='cal -Nwy'
-echo "$HOME/.bashrc"
+echo $(pwd)/"$BASH_SOURCE"
 #env > /home/keuch/env_bashrc
-export LESSHISTFILE="/dev/null"
+
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-eval "$(dircolors ~/.config/custom_dircolors)"
+
+if [ "$TERM" == "xterm" ]; then
+	# No it isn't, it's gnome-terminal
+	export TERM=xterm-256color
+fi
+if [ "$TERM" == "screen" ]; then
+	# No it isn't, it's gnome-terminal
+	export TERM=screen-256color
+fi

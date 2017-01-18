@@ -187,7 +187,7 @@ Mod5 F11 :ExecCommand amixer set PCM 5%-
 Mod5 F12 :ExecCommand amixer set PCM 5%+
 Mod5 k :ExecCommand /usr/local/bin/kick "$(mocp -Q %file)"
 Mod5 l :ExecCommand /usr/local/bin/songzeiger
-Mod5 w 	:ExecCommand fbsetbg $(find ~/.wall/ -type f | shuf -n1)
+Mod5 w 	:ExecCommand feh --bg-scale $(find ~/.wall/ -type f | shuf -n1)
 Mod5 F3	:ExecCommand /usr/local/bin/remucke 300
 Mod5 F2 :ExecCommand /usr/bin/chromium
 
@@ -203,5 +203,7 @@ Shift F12 :ExecCommand xmessage -bg blue -fg lightblue -timeout 2 -buttons , COM
 # ctrl+alt left or right "tiling"
 Control Mod1 Left   :MacroCmd {ResizeTo 50% 100%} {MoveTo 00 00 Left}
 Control Mod1 Right  :MacroCmd {ResizeTo 50% 100%} {MoveTo 00 00 Right}
+Control Mod1 Up  :MacroCmd {ResizeTo 100% 50%} {MoveTo 00 00 Up}
+Control Mod1 Down  :MacroCmd {ResizeTo 100% 50%} {MoveTo 00 50% Down}
 
 
