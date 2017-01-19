@@ -17,6 +17,7 @@ red = coly.RED
 rst = coln.RESET_ALL
 
 def check_xls_path():
+    ## first check if args=2, then check whether arg1=dir and arg2=xlsfile. If not, offer default values or path completion
     if len(sys.argv) > 1:
         xlspath = os.path.abspath(sys.argv[1])
     else:
@@ -35,13 +36,13 @@ def read_data_from_whole_dir():
             erstes_sheet = ganze_tabelle.sheet_by_index(0)
             zeilen = erstes_sheet.nrows
             Datum_B2 = erstes_sheet.cell(1,1).value
-            Datum_korrekt = re.sub(r' ', '.', Datum_B2[:10]) 
+            Datum_korrekt = re.sub(r' ', '.', Datum_B2[:10])
             Date_usable = datetime.strptime(Datum_korrekt, "%d.%m.%Y")
             wanted_cols = [2,3,4,5,12] # this is a comment 2=alle anrufe 3=telefonierte anrufe 4=gesamtanrufzeit 5=gesamtverbindungszeit 12=gesamtNBzeit
             datensatz_fuer_dieses_sheet = list()
             datensatz_fuer_dieses_sheet.append(Date_usable)
             for Spalte in wanted_cols:
-                summe = float() 
+                summe = float()
                 for summenreihen in range(4,28):
                     summand = erstes_sheet.cell(summenreihen,Spalte).value
                     summe = summe+summand

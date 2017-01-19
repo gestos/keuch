@@ -1,92 +1,95 @@
-" This color scheme was derived from:
-"
-" Blueshift color scheme
-" by Jan Zwiener, mail: jan@zwiener.org
-" Based upon the pyte color scheme by Henning Hasemann
-"
-" 2010/11/16: Version 1.0
-"
+"Maintainer:    Greg Sexton <gregsexton@gmail.com>
+"Last Change:   2012-08-04
+"Version:       1.0
+"URL:           http://www.gregsexton.org/vim-color-schemes/muon/
 
-set background=light
+set background=dark
+if version > 580
+    "no guarantees for version 5.8 and below, but this makes it stop complaining
+    hi clear
+    if exists("syntax_on")
+    syntax reset
+    endif
+endif
+let g:colors_name="muon"
 
-hi clear
-if exists("syntax_on")
-  syntax reset
+hi Normal       ctermfg=117 ctermbg=234                             gui=None        guifg=#bcbcbc       guibg=#1c1c1c
+hi LineNr       ctermfg=239 ctermbg=234                             gui=None        guifg=#4e4e4e       guibg=#1c1c1c
+hi NonText      ctermfg=234 ctermbg=234                             gui=None        guifg=#1c1c1c       guibg=#1c1c1c
+
+hi VertSplit    ctermfg=237 ctermbg=235 cterm=none                  gui=None        guifg=#3a3a3a       guibg=#262626
+hi StatusLine   ctermfg=249 ctermbg=235 cterm=underline             gui=underline   guifg=#b2b2b2       guibg=#262626
+hi StatusLineNC ctermfg=243 ctermbg=235 cterm=none                  gui=None        guifg=#767676       guibg=#262626
+
+hi DiffDelete   ctermfg=234 ctermbg=233                             gui=None        guifg=#1c1c1c       guibg=#121212
+hi DiffAdd      ctermbg=236                                         gui=None        guibg=#303030
+hi DiffChange   ctermbg=235                                         gui=None        guibg=#262626
+hi DiffText     ctermfg=161 ctermbg=234 cterm=underline             gui=underline   guifg=#df005f       guibg=#1c1c1c
+
+hi Cursor       ctermfg=234 ctermbg=250                             gui=None        guifg=#1c1c1c       guibg=#bcbcbc
+
+hi Visual       ctermfg=234 ctermbg=122                             gui=None        guifg=#1c1c1c       guibg=#87ffdf
+
+hi Folded       ctermfg=244 ctermbg=235                             gui=None        guifg=#808080       guibg=#262626
+hi FoldColumn   ctermfg=244 ctermbg=234                             gui=None        guifg=#808080       guibg=#1c1c1c
+
+hi IncSearch    ctermfg=234 ctermbg=214 cterm=underline             gui=underline   guifg=#1c1c1c       guibg=#ffaf00
+hi Search       ctermfg=234 ctermbg=214 cterm=none                  gui=None        guifg=#1c1c1c       guibg=#ffaf00
+
+hi ModeMsg      ctermfg=117 ctermbg=234 cterm=bold                  gui=bold        guifg=#87dfff       guibg=#1c1c1c
+hi MoreMsg      ctermfg=122 ctermbg=234 cterm=none                  gui=None        guifg=#87ffdf       guibg=#1c1c1c
+hi Question     ctermfg=122 ctermbg=234 cterm=bold                  gui=bold        guifg=#87ffdf       guibg=#1c1c1c
+hi WarningMsg   ctermfg=122 ctermbg=234 cterm=none                  gui=None        guifg=#87ffdf       guibg=#1c1c1c
+hi ErrorMsg     ctermfg=255 ctermbg=160 cterm=none                  gui=None        guifg=#eeeeee       guibg=#df0000
+hi Error        ctermfg=196 ctermbg=234 cterm=none                  gui=None        guifg=#ff0000       guibg=#1c1c1c
+
+hi SpecialKey   ctermfg=214 ctermbg=234                             gui=None        guifg=#ffaf00       guibg=#1c1c1c
+hi Title        ctermfg=075 ctermbg=234 cterm=bold                  gui=bold        guifg=#5fafff       guibg=#1c1c1c
+hi Directory    ctermfg=117 ctermbg=234 cterm=bold                  gui=bold        guifg=#87dfff       guibg=#1c1c1c
+
+hi SignColumn   ctermfg=214 ctermbg=235                             gui=None        guifg=#ffaf00       guibg=#262626
+
+hi WildMenu     ctermfg=075 ctermbg=235 cterm=bold                  gui=bold        guifg=#5fafff       guibg=#262626
+
+if version >= 700 " Vim 7.x specific colors
+    hi CursorLine   ctermbg=235 cterm=none                          gui=None        guibg=#262626
+    hi CursorColumn ctermbg=235 cterm=none                          gui=None        guibg=#262626
+
+    hi MatchParen   ctermfg=196 ctermbg=234 cterm=bold,reverse      gui=bold,reverse    guifg=#ff0000       guibg=#1c1c1c
+
+    hi Tabline      ctermfg=245 ctermbg=235 cterm=underline         gui=underline   guifg=#8a8a8a       guibg=#262626
+    hi TablineSel   ctermfg=250 ctermbg=234 cterm=bold              gui=bold        guifg=#bcbcbc       guibg=#1c1c1c
+    hi TablineFill  ctermfg=250 ctermbg=237 cterm=underline         gui=underline   guifg=#bcbcbc       guibg=#3a3a3a
+
+    hi Pmenu        ctermfg=250 ctermbg=235 cterm=none              gui=None        guifg=#bcbcbc       guibg=#262626
+    hi PmenuSel     ctermfg=117 ctermbg=234 cterm=underline         gui=underline   guifg=#87dfff       guibg=#1c1c1c
+    hi PmenuSbar    ctermfg=116 ctermbg=234 cterm=none              gui=None        guifg=#87dfdf       guibg=#1c1c1c
+    hi PmenuThumb   ctermfg=116 ctermbg=116 cterm=none              gui=None        guifg=#87dfdf       guibg=#87dfdf
+
+    hi SpellBad     ctermfg=198 ctermbg=234 cterm=underline         gui=underline   guifg=#ff0087       guibg=#1c1c1c
+    hi SpellCap     ctermfg=198 ctermbg=234 cterm=none              gui=None        guifg=#ff0087       guibg=#1c1c1c
+    hi SpellRare    ctermfg=198 ctermbg=234 cterm=none              gui=None        guifg=#ff0087       guibg=#1c1c1c
+    hi SpellLocal   ctermfg=198 ctermbg=234 cterm=none              gui=None        guifg=#ff0087       guibg=#1c1c1c
 endif
 
-let colors_name = "visualstudio"
-
-" Taglist colors
-hi MyTagListFileName    guifg=black   guibg=#c0d0e0
-hi MyTagListTagName     guifg=black   guibg=#ffbc29
-
-if version >= 700
-  hi CursorLine     guibg=#f6f6f6
-  hi CursorColumn   guibg=#f6f6f6
-  hi MatchParen     guifg=black     guibg=#bfbfbf
-
-  hi TabLine        guifg=black     guibg=#b0b8c0
-  hi TabLineFill    guifg=#9098a0
-  hi TabLineSel     guifg=black     guibg=#f0f0f0 gui=bold
-
-  hi Pmenu          guifg=white     guibg=#808080
-  hi PmenuSel       guifg=black     guibg=#ffbc29
+if version >= 703 " Vim 7.3 specific colors
+    hi ColorColumn ctermbg=235                                      gui=None        guibg=#262626
 endif
 
-hi Title        guifg=#202020   gui=none
-hi Underlined   guifg=#202020   gui=underline
+" syntax highlighting groups
+hi Comment    ctermfg=240 ctermbg=234                               gui=None        guifg=#585858       guibg=#1c1c1c
+hi Constant   ctermfg=086 ctermbg=234                               gui=None        guifg=#5fffdf       guibg=#1c1c1c
+hi Identifier ctermfg=009 ctermbg=234 cterm=bold                    gui=bold        guifg=#5fdfdf       guibg=#1c1c1c
+hi String     ctermfg=045 ctermbg=234                               gui=None        guifg=#5fafdf       guibg=#1c1c1c
+hi Statement  ctermfg=039 ctermbg=234 cterm=none                    gui=None        guifg=#afffff       guibg=#1c1c1c
+hi PreProc    ctermfg=162 ctermbg=234                               gui=None        guifg=#87ffdf       guibg=#1c1c1c
+hi Function   ctermfg=026 ctermbg=234 cterm=bold                    gui=bold        guifg=#87ffaf       guibg=#1c1c1c
+hi Type       ctermfg=150 ctermbg=234 cterm=bold                    gui=bold        guifg=#87dfff       guibg=#1c1c1c
+hi Special    ctermfg=050 ctermbg=234                               gui=None        guifg=#00ffdf       guibg=#1c1c1c
+hi Delimiter  ctermfg=009 ctermbg=234                               gui=None        guifg=#afdfff       guibg=#1c1c1c
+hi Number     ctermfg=099 ctermbg=234                               gui=None        guifg=#5fffdf       guibg=#1c1c1c
+hi Ignore     ctermfg=214 ctermbg=234                               gui=None        guifg=#ffaf00       guibg=#1c1c1c
+hi Todo       ctermfg=196 ctermbg=234                               gui=None        guifg=#ff0000       guibg=#1c1c1c
+hi Exception  ctermfg=080 ctermbg=234 cterm=bold                    gui=bold        guifg=#5fdfdf       guibg=#1c1c1c
 
-hi Normal       guifg=blue     guibg=#f2f2f2
-hi ModeMsg      guifg=black     guibg=#f2f2f2
-hi Cursor       guifg=#f0f0f0   guibg=#101010
-hi LineNr       guifg=#2b91af   guibg=#f2f2f2 gui=none
-hi Visual       guifg=white     guibg=#5381bc
-hi WildMenu     guifg=black     guibg=#ffbc29
-hi IncSearch    guibg=black     guifg=#ffbc29
-hi Question     guifg=black     guibg=#ffbc29
-
-hi StatusLine   guifg=white     guibg=black   gui=bold
-hi StatusLineNC guifg=white     guibg=#8090a0 gui=bold
-hi VertSplit    guifg=#a0b0c0   guibg=#a0b0c0 gui=none
-
-hi NonText      guifg=#bebebe   guibg=#f2f2f2
-hi Comment      guifg=#008000   gui=none
-hi Folded       guifg=#708090   guibg=#c0d0e0
-hi Folded       guifg=#708090   guibg=#c0d0e0
-hi FoldColumn   guifg=#708090   guibg=#c0d0e0
-
-hi Constant     guifg=#ca5656   gui=none
-hi Number       guifg=black
-hi Float        guifg=black
-hi Boolean      guifg=#ca5656   gui=none
-hi String       guifg=#ca5656   gui=none
-
-hi Statement    guifg=blue      gui=none
-hi StorageClass guifg=#CA5656   gui=none
-hi Type         guifg=#CA5656  gui=none
-hi Typedef      guifg=blue      gui=none
-hi Structure    guifg=blue      gui=none
-hi Identifier   guifg=#CA5656   gui=none
-hi Function     guifg=#0070af   gui=none
-hi Repeat       guifg=blue      gui=none
-hi Conditional  guifg=blue      gui=none
-hi Operator     guifg=blue      gui=none
-
-hi PreProc      guifg=#2222ff   gui=none
-hi Define       guifg=#2222ff   gui=none
-hi Include      guifg=#2222ff   gui=none
-
-hi Error        guifg=red       guibg=#f2f2f2   gui=bold,underline
-hi Todo         guifg=blue      guibg=yellow    gui=none
-hi Search       guifg=black     guibg=yellow    gui=none
-hi SpecialKey	guifg=#1060a0   guibg=#f2f2f2
-hi Special      guifg=#666600   guibg=#f2f2f2
-
-" Diff
-hi DiffChange   guifg=NONE      guibg=#e0e0e0   gui=bold
-hi DiffText     guifg=NONE      guibg=#f0c8c8   gui=bold
-hi DiffAdd      guifg=NONE      guibg=#c0e0d0   gui=bold
-hi DiffDelete   guifg=NONE      guibg=#f0e0b0   gui=bold
-
-set guifont=Consolas\ for\ Powerline\ FixedD\ 11
-
+"vim: sw=4
