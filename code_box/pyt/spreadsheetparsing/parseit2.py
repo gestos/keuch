@@ -11,12 +11,14 @@ from colorama import Fore as coly, Style as coln
 from datetime import datetime
 from datetime import date
 
+# define some colors for output later
 grn = coly.GREEN
 blu = coly.BLUE
 cya = coly.CYAN
 red = coly.RED
 rst = coln.RESET_ALL
 
+# check validity of args
 def check_cmdline_params():
     global xlspath
     global targetfile
@@ -35,7 +37,22 @@ def check_cmdline_params():
         print("source:\t" + xlspath)
         print("target:\t" + targetfile)
 
-# check_cmdline_params()
+check_cmdline_params()
+
+# clean up directory of badly named xls files
+# for file_in_path:
+#     check timestamp
+#     if timestamp is in multiple files:
+#         compare files (maybe checksum md5 or something?)
+#         if files are identical:
+#             keep only one, delete others
+#         else:
+#             print filenames and message: please clean up this mess
+
+
+
+
+
 
 def parsedate(daily_sheet):
     date_crap = daily_sheet.cell(1,1).value # comes like this from upstream, date always lives at 1,1
@@ -46,33 +63,34 @@ def parsedate(daily_sheet):
 
 
 
-targetfile = os.path.abspath(sys.argv[2])
-def read_single_to_dict():
-    single_xls_file = sys.argv[1]
+# targetfile = os.path.abspath(sys.argv[2])
+def read_single_to_dict(single_xls_file):
     input_sheet = xlrd.open_workbook(single_xls_file).sheet_by_index(0)
     rows_read, cols_read = input_sheet.nrows, input_sheet.ncols
-    print ("has " + str(rows_read) + " rows and " + str(cols_read) + " cols")
+    # print (str(single_xls_file[-13:]) + " has " + str(rows_read) + " rows and " + str(cols_read) + " cols"),
 
     if rows_read == 29 and cols_read == 23: # this is a daily report that we want to read from
         datum = parsedate(input_sheet)[0] # useable date
         xlint = parsedate(input_sheet)[1] # excel date float
-        print('this is a daily report for ' + str(datum) + "(" + str(xlint) + ")")
-        
+
         if xlint in read_date_from_target():
+            return
+            print(str(single_xls_file[-13:]) + ' is a daily report for ' + str(datum) + "(" + str(xlint) + ")")
             print ("xlint is already in date list")
         else:
+            print(str(single_xls_file[-13:]) + ' is a daily report for ' + str(datum) + "(" + str(xlint) + ")")
             wanted_cols = [3,21,5,12] # 3=telefonierte anrufe, 21=verlorene, 5=gesamtverbindungszeit 12=gesamtNBzeit
             wanted_colsd = {3: 'verbundene' ,21: 'verlorene', 5: 'verbindungszeit', 12: 'nacharbeitszeit'} # 3=telefonierte anrufe, 21=verlorene, 5=gesamtverbindungszeit 12=gesamtNBzeit
             sheet_data = list()
             sheet_data.append(xlint)
             for col in wanted_cols:
                 col_total = float()
-                print(wanted_colsd[col])
+                print(wanted_colsd[col]),
                 for row in range(4,27):
                     cellvalue = input_sheet.cell(row,col).value
                     col_total = col_total+cellvalue
                 sheet_data.append(col_total)
-                print(col_total)
+                print(col_total),
             print(sheet_data)
 
 
@@ -113,7 +131,16 @@ def read_date_from_target():
             days_already.append(i.value)
     return days_already
 
-read_single_to_dict()
+# read_single_to_dict()
+for item in natsorted(os.listdir(xlspath), alg=ns.IGNORECASE, reverse=True):
+    fullp_item = os.path.join(xlspath, item)
+    read_single_to_dict(fullp_item)
+
+
+
+
+
+
 
 
 
