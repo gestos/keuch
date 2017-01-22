@@ -20,7 +20,7 @@ def check_cmdline_params():
     global xlspath
     global targetfile
     if len(sys.argv) != 3:
-        print("parseity need two parameters in the following order: $DIR where xls files lie and an xls $FILE to write into.")
+        print(sys.argv[0] +" needs two parameters in the following order: $DIR where xls files lie and an xls $FILE to write into.")
         exit()
     elif not os.path.isdir(sys.argv[1]):
         print(sys.argv[1] + " is not a directory")
@@ -36,7 +36,6 @@ def check_cmdline_params():
 
 check_cmdline_params()
 
-
 def read_data_from_whole_dir():
     datensaetze_aller_files = list()
     for item in natsorted(os.listdir(xlspath), alg=ns.IGNORECASE, reverse=True):
@@ -48,7 +47,7 @@ def read_data_from_whole_dir():
             Datum_B2 = sheet0.cell(1,1).value
             Datum_korrekt = re.sub(r' ', '.', Datum_B2[:10])
             Date_usable = datetime.strptime(Datum_korrekt, "%d.%m.%Y")
-            
+
             wanted_cols = [2,3,4,5,12] # this is a comment 2=alle anrufe 3=telefonierte anrufe 4=gesamtanrufzeit 5=gesamtverbindungszeit 12=gesamtNBzeit
             sheet_data = list()
             sheet_data.append(Date_usable)
@@ -74,10 +73,6 @@ all_data_from_dir = read_data_from_whole_dir()
 print(grn + "vorhandene Zeilen in Zieldatei:\t\t" + rst + str(schon_befueelt) + ", ab " + str(row_to_write_in) + " wird weitergeschrieben")
 print (grn + "Datenformat:\t\t\t\t" + rst + ", ".join(str(p) for p in all_data_from_dir[0])) # This shows that the list from above is still populated and available even outside the for loop
 print("collected " + str(len(all_data_from_dir)) + " days of data")
-
-#for single_day in sorted(all_data_from_dir):
-#    print(single_day)
-
 
 def write_out():
     start_writing = row_to_write_in
