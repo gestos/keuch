@@ -67,6 +67,7 @@ def parsedate(daily_sheet):
 def read_single_to_dict(single_xls_file):
     input_sheet = xlrd.open_workbook(single_xls_file).sheet_by_index(0)
     rows_read, cols_read = input_sheet.nrows, input_sheet.ncols
+    sheet_data = list()
     # print (str(single_xls_file[-13:]) + " has " + str(rows_read) + " rows and " + str(cols_read) + " cols"),
 
     if rows_read == 29 and cols_read == 23: # this is a daily report that we want to read from
@@ -74,24 +75,27 @@ def read_single_to_dict(single_xls_file):
         xlint = parsedate(input_sheet)[1] # excel date float
 
         if xlint in read_date_from_target():
-            return
+            sheet_data.append("duplicate")
+            return sheet_data
             print(str(single_xls_file[-13:]) + ' is a daily report for ' + str(datum) + "(" + str(xlint) + ")")
             print ("xlint is already in date list")
         else:
-            print(str(single_xls_file[-13:]) + ' is a daily report for ' + str(datum) + "(" + str(xlint) + ")")
+            #print(str(single_xls_file[-13:]) + ' is a daily report for ' + str(datum) + "(" + str(xlint) + ")")
             wanted_cols = [3,21,5,12] # 3=telefonierte anrufe, 21=verlorene, 5=gesamtverbindungszeit 12=gesamtNBzeit
             wanted_colsd = {3: 'verbundene' ,21: 'verlorene', 5: 'verbindungszeit', 12: 'nacharbeitszeit'} # 3=telefonierte anrufe, 21=verlorene, 5=gesamtverbindungszeit 12=gesamtNBzeit
-            sheet_data = list()
             sheet_data.append(xlint)
             for col in wanted_cols:
                 col_total = float()
-                print(wanted_colsd[col]),
+                #print(wanted_colsd[col]),
                 for row in range(4,27):
                     cellvalue = input_sheet.cell(row,col).value
                     col_total = col_total+cellvalue
                 sheet_data.append(col_total)
-                print(col_total),
-            print(sheet_data)
+                #print(col_total),
+            return sheet_data
+    else:
+        sheet_data.append("no_report")
+        return sheet_data
 
 
 
@@ -132,11 +136,18 @@ def read_date_from_target():
     return days_already
 
 # read_single_to_dict()
+
+filepool = {}
+
+
 for item in natsorted(os.listdir(xlspath), alg=ns.IGNORECASE, reverse=True):
     fullp_item = os.path.join(xlspath, item)
-    read_single_to_dict(fullp_item)
+    filepool[str(fullp_item)] = read_single_to_dict(fullp_item)
+    print read_single_to_dict(fullp_item)
 
 
+
+print (filepool)
 
 
 
