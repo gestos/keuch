@@ -1,6 +1,5 @@
 execute pathogen#infect()
 set term=xterm-256color		" we're on a color terminal
-colo muon			" we like this colorscheme_
 syntax on			" we want syntax_highlighting
 set nu				" show lines (column to the left)
 set t_ut=			" clear the terminalbackground on start - see http://sunaku.github.io/vim-256color-bce.html
@@ -17,11 +16,16 @@ nmap <leader><space> :bnext<CR>
 nmap <leader>t :NERDTreeToggle<CR>
 nmap <leader>e :Explore<CR>
 set hidden
-autocmd BufWinLeave * mkview		" save the folds when leaving vim
-autocmd BufWinEnter * silent loadview  " load folds on start
+autocmd BufWinLeave ?* mkview 1	" save the folds when leaving vim
+autocmd BufWinEnter ?* silent loadview 1 " load folds on start
+
+command Trailclean %s:\s\+$::
+command! -nargs=* -complete=shellcmd Pexec execute "below new | 0read ! python # <args>"
+command! -nargs=* -complete=shellcmd Rsplit execute "new | setlocal buftype=nofile bufhidden=hide noswapfile | r! <args>"
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 set laststatus=2		" always show the statusline ; not needed cause of airline
-set foldcolumn=3  
+set foldcolumn=3
 set foldmethod=manual
+colo gesterich
