@@ -18,7 +18,16 @@ cya = coly.CYAN
 red = coly.RED
 rst = coln.RESET_ALL
 
-# check validity of args
+# todo: clean up directory of badly named xls files
+# for file_in_path:
+#     check timestamp
+#     if timestamp is in multiple files:
+#         compare files (maybe checksum md5 or something?)
+#         if files are identical:
+#             keep only one, delete others
+#         else:
+#             print filenames and message: please clean up this mess
+
 def check_cmdline_params():
     global xlspath
     global targetfile
@@ -39,22 +48,8 @@ def check_cmdline_params():
 
 check_cmdline_params()
 
-# clean up directory of badly named xls files
-# for file_in_path:
-#     check timestamp
-#     if timestamp is in multiple files:
-#         compare files (maybe checksum md5 or something?)
-#         if files are identical:
-#             keep only one, delete others
-#         else:
-#             print filenames and message: please clean up this mess
 
-
-
-
-
-
-def parsedate(daily_sheet):
+def parsedate(daily_sheet): # turn crap date into nice date
     date_crap = daily_sheet.cell(1,1).value # comes like this from upstream, date always lives at 1,1
     date_clea = re.sub(r' ', '.', date_crap[:10]) # transform to a string that strptime can parse
     date_objt = datetime.strptime(date_clea, "%d.%m.%Y").date() # this is a python datetime.date object
@@ -63,11 +58,12 @@ def parsedate(daily_sheet):
 
 
 
-# targetfile = os.path.abspath(sys.argv[2])
 def read_single_to_dict(single_xls_file):
     input_sheet = xlrd.open_workbook(single_xls_file).sheet_by_index(0)
     rows_read, cols_read = input_sheet.nrows, input_sheet.ncols
-    sheet_data = list()
+    uniqs = []
+    dupes = []
+    other = []
     # print (str(single_xls_file[-13:]) + " has " + str(rows_read) + " rows and " + str(cols_read) + " cols"),
 
     if rows_read == 29 and cols_read == 23: # this is a daily report that we want to read from
@@ -75,27 +71,28 @@ def read_single_to_dict(single_xls_file):
         xlint = parsedate(input_sheet)[1] # excel date float
 
         if xlint in read_date_from_target():
-            sheet_data.append("duplicate")
-            return sheet_data
+            dupes.extend(("d", datum, single_xls_file))
+            return dupes
             print(str(single_xls_file[-13:]) + ' is a daily report for ' + str(datum) + "(" + str(xlint) + ")")
             print ("xlint is already in date list")
         else:
             #print(str(single_xls_file[-13:]) + ' is a daily report for ' + str(datum) + "(" + str(xlint) + ")")
             wanted_cols = [3,21,5,12] # 3=telefonierte anrufe, 21=verlorene, 5=gesamtverbindungszeit 12=gesamtNBzeit
             wanted_colsd = {3: 'verbundene' ,21: 'verlorene', 5: 'verbindungszeit', 12: 'nacharbeitszeit'} # 3=telefonierte anrufe, 21=verlorene, 5=gesamtverbindungszeit 12=gesamtNBzeit
-            sheet_data.append(xlint)
+            uniqs.append("u")
+            uniqs.append(xlint)
             for col in wanted_cols:
                 col_total = float()
                 #print(wanted_colsd[col]),
                 for row in range(4,27):
                     cellvalue = input_sheet.cell(row,col).value
                     col_total = col_total+cellvalue
-                sheet_data.append(col_total)
+                uniqs.append(col_total)
                 #print(col_total),
-            return sheet_data
+            return uniqs
     else:
-        sheet_data.append("no_report")
-        return sheet_data
+        other.append(single_xls_file)
+        return other
 
 
 
@@ -113,16 +110,17 @@ def read_data_from_whole_dir():
             Date_usable = datetime.strptime(Datum_korrekt, "%d.%m.%Y")
 
             wanted_cols = [2,3,4,5,12] # 2=alle anrufe 3=telefonierte anrufe 4=gesamtanrufzeit 5=gesamtverbindungszeit 12=gesamtNBzeit
-            sheet_data = list()
-            sheet_data.append(Date_usable)
+            uniqs = list()
+            uniqs.append(Date_usable)
             for col in wanted_cols:
                 col_total = float()
                 for row in range(4,28):
                     cellvalue = sheet0.cell(row,col).value
                     col_total = col_total+cellvalue
-                sheet_data.append(col_total)
-            datensaetze_aller_files.append(sheet_data)
+                uniqs.append(col_total)
+            datensaetze_aller_files.append(uniqs)
     return datensaetze_aller_files
+
 
 
 
@@ -137,17 +135,28 @@ def read_date_from_target():
 
 # read_single_to_dict()
 
-filepool = {}
+neue = {}
+dupes = {}
+neue1 = {}
+dupes1 = {}
+dupes1_reslist = list()
 
-
+### Schluessel/Wert mue andersum sein. Output der Duplikate sollte "20.01.2017" : [file1, file2, file2] sein....
+### wohl am besten dictionary of lists
 for item in natsorted(os.listdir(xlspath), alg=ns.IGNORECASE, reverse=True):
     fullp_item = os.path.join(xlspath, item)
-    filepool[str(fullp_item)] = read_single_to_dict(fullp_item)
-    print read_single_to_dict(fullp_item)
+    file_examined = read_single_to_dict(fullp_item)
+    print (str(fullp_item) + ": " + str(type(file_examined)))
+    if file_examined[0] == "d":
+        print("is a dupe")
+    elif file_examined[0] == "u":
+        print("is a new entry")
+    elif file_examined[0] == None:
+        print("???" + str(fullp_item))
+    else:
+        print("huh?")
 
-
-
-print (filepool)
+print(file_examined)
 
 
 
