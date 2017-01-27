@@ -10,6 +10,7 @@ from xlutils import copy as xlcopy
 from colorama import Fore as coly, Style as coln
 from datetime import datetime
 from datetime import date
+from collections import defaultdict
 
 # define some colors for output later
 grn = coly.GREEN
@@ -149,36 +150,17 @@ for item in natsorted(os.listdir(xlspath), alg=ns.IGNORECASE, reverse=True):
     print (str(fullp_item) + ": " + str(type(file_examined)))
     if file_examined[0] == "d":
         print("is a dupe")
+        dupes.update({file_examined[1]: file_examined[2]})
     elif file_examined[0] == "u":
         print("is a new entry")
-    elif file_examined[0] == None:
-        print("???" + str(fullp_item))
+        neue.update({fullp_item: file_examined[1:]})
+    #elif file_examined[0] == None:
+    #    print("???" + str(fullp_item))
     else:
         print("huh?")
 
-print(file_examined)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print (dir(dupes))
+print(neue)
 #### END READ, BEGIN WRITE ####
 
 #target_workbook = xlrd.open_workbook(targetfile)
