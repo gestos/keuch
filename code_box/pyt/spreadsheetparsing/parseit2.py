@@ -144,23 +144,30 @@ dupes1_reslist = list()
 
 ### Schluessel/Wert mue andersum sein. Output der Duplikate sollte "20.01.2017" : [file1, file2, file2] sein....
 ### wohl am besten dictionary of lists
+wholdir = natsorted(os.listdir(xlspath), alg=ns.IGNORECASE, reverse=True)
 for item in natsorted(os.listdir(xlspath), alg=ns.IGNORECASE, reverse=True):
-    fullp_item = os.path.join(xlspath, item)
-    file_examined = read_single_to_dict(fullp_item)
-    print (str(fullp_item) + ": " + str(type(file_examined)))
-    if file_examined[0] == "d":
-        print("is a dupe")
-        dupes.update({file_examined[1]: file_examined[2]})
-    elif file_examined[0] == "u":
-        print("is a new entry")
-        neue.update({fullp_item: file_examined[1:]})
-    #elif file_examined[0] == None:
-    #    print("???" + str(fullp_item))
-    else:
-        print("huh?")
+    if item.endswith('xls'):
+        fullp_item = os.path.join(xlspath, item)
+        file_examined = read_single_to_dict(fullp_item)
+        print (str(fullp_item) + ": " + str(type(file_examined)))
+        if file_examined[0] == "d":
+            print("is a dupe")
+            print type(file_examined[1])
+            # dupes.update({file_examined[1]: file_examined[2]})
+            # print(dupes.update({file_examined[1]: file_examined[2]}))
+        elif file_examined[0] == "u":
+            print("is a new entry")
+            neue.update({fullp_item: file_examined[1:]})
+        #elif file_examined[0] == None:
+        #    print("???" + str(fullp_item))
+        else:
+            print("huh?")
 
-print (dir(dupes))
+print(dir(dupes))
 print(neue)
+print len(wholdir)
+for k in sorted(dupes):
+    print(str(k) + " " + str(dupes[k]))
 #### END READ, BEGIN WRITE ####
 
 #target_workbook = xlrd.open_workbook(targetfile)
