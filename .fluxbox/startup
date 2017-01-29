@@ -50,12 +50,12 @@
 #	conky &
 #	sudo wpa_gui -t &
 
-	fbdesk -rc ~/.fluxbox/init &
-	synclient TapButton1=1 &
-	/usr/local/bin/zz_mount_nfs_on_startx &
-	idesk &
+#	fbdesk -rc ~/.fluxbox/init &
+#	synclient TapButton1=1 &
+#	idesk &
+	volumeicon &
 	exec /usr/bin/fluxbox
-
+	setxkbmap de	
 
 # or if you want to keep a log:
 # exec /usr/bin/fluxbox -log "/home/biblioteca/.fluxbox/log"

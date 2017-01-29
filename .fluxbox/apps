@@ -22,12 +22,12 @@
   [Close]	{yes}
 [end]
 [app] (name=gamix) (class=Gamix)
-  [Dimensions]	{53% 38%}
-  [Maximized]	{no}
+  [Maximized]	{yes}
   [Close]	{yes}
 [end]
 [app] (name=urxvt) (class=URxvt)
-  [Dimensions]	{88% 39%}
-  [Position]	(UPPERLEFT)	{1% 8%}
+  [Dimensions]	{100% 49%}
+  [Position]	(UPPERLEFT)	{0% 0%}
   [Close]	{yes}
+  [Alpha]	{60 6}
 [end]
