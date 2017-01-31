@@ -28,4 +28,3 @@ for pathname,subdirs,files in os.walk(toplevel, topdown=False):  # the python fo
             print tag.isV2("/media/mucke-local/alan watts - still the mind - introduction to meditation/Alan Watts - Still the Mind - Introduction to Meditation-002.mp3")
             print(tag.isV2)
 #            print help(id3.Tag)
-
