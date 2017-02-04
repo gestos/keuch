@@ -179,7 +179,11 @@ def write_out(startrow):
                     sheet_rw.write(startrow, idx, col, style_stunden)
                 idx += 1
             startrow += 1
-        target_workbook_writeable.save(targetfile)
+        #target_workbook_writeable.save(targetfile)
+        print(dir(xlrd))
+        print(targetsheet.cell(0,0).xf_index)
+        print(targetsheet.cell(0,0).ctype)
+        print(targetsheet.cell(0,0).dump)
         print("data written to " + targetfile)
 
 write_out(start_writing)
