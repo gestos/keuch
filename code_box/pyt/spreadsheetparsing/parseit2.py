@@ -87,12 +87,12 @@ def read_single_to_dict(single_xls_file):   # this func will determine what kind
                     col_total = col_total+cellvalue
                 uniqs.append(col_total)                             # append the total of each column to the list; list will be [flag, date, col3, col5, col12, col21]
             return uniqs
-    
+
     elif identifier == "Carexpert_Agent_Gesing":        # this would be a sheet for all agents with individual times
         agnts.append("a")
         agnts.append(single_xls_file)
         return agnts
-    
+
     else:
         other.append("o")
         other.append(single_xls_file)
@@ -156,12 +156,12 @@ targetsheet = target_workbook.sheet_by_index(0)
 sheet_rw = target_workbook_writeable.get_sheet(0)
 start_writing = targetsheet.nrows
 new_entries_by_date = sorted(neue_global, key=lambda k: neue_global[k][0]) #this actually sorts by the first entry of the list (k)'s first item, which is the date integer
+style_datum = xlwt.easyxf(num_format_str = "nn, dd.mm.yy")
+style_stunden = xlwt.easyxf(num_format_str = "HH:MM:SS")
 
 print(grn + "vorhandene Zeilen in Zieldatei:\t\t" + rst + str(start_writing-1) + ", ab " + str(start_writing) + " wird weitergeschrieben")
 
 def write_out(startrow):
-    style_datum = xlwt.easyxf(num_format_str = "nn, dd.mm.yy")
-    style_stunden = xlwt.easyxf(num_format_str = "HH:MM:SS")
     ask = raw_input("do you really want that? [y/n]")[:1]
     if not ask.lower() == 'y':
         print("ok; bye :-)")
