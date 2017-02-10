@@ -173,6 +173,6 @@ def write_out(startrow):
 
 write_out(start_writing)
 
-print("dude, there's still" + str(agenten) + " to be parsed")
+# print("dude, there's still" + str(agenten) + " to be parsed")
 # xlrd can't get the values of formula cells because those are only created when the file was saved (with "recalculate" option) in excel (or LO)
 # so cells with formulas always return value "0.0" until they've been saved locally
