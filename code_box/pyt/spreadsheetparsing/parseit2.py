@@ -49,8 +49,8 @@ neue_global = {}    # a dictionary of all files that aren't present in the targe
 neue_daten = []     # a list, only used for checking duplicates on the fly in the read_single_to_dict() function
 dupes_global = {}       # a dictionary that contains list of files for duplicate dates
 dupes_filelist = []     # a list of duplicate files that is referenced by the date key in dupes_global
-agenten = {}
-agenten_daten = []
+agenten = {}            # a dictionary of files that are "monthly" stats for each single agent
+agenten_daten = []      # a list of filenames of that dict
 other_global = {}       # a dictionary that contains files that aren't daily reports
 
 xlspath, targetfile = check_cmdline_params()              # check for matching input / output files
@@ -132,23 +132,6 @@ for item in wholdir:                    # iterates over every file in directory 
         else:
             print("huh? not a file format I can work with " + str(fullp_item))
 
-# print("total files in this directory: " + str(len(wholdir)))
-# print("dictionary of dupes\t\t\t"),
-# print(dupes_global)
-# print("dictionary of new uniques\t\t\t"),
-# print(neue_global)
-
-#print('liste aller doppelten: '),
-#for k in sorted(dupes_global):
-#    print(str(k) + " | " + str(dupes_global[k]))
-
-#print('liste aller neuen:')
-#for k in sorted(neue_global, key=lambda k: neue_global[k][0]): #this actually sorts by the first entry of the list (k)'s first item, which is the date integer
-#    input_sheet = xlrd.open_workbook(k).sheet_by_index(0)
-#    datu, integ = parsedate(input_sheet)
-#    print(datu),
-#    print(str(k) + "\t | \t" + str(neue_global[k]))
-
 ###############################
 #### END READ, BEGIN WRITE ####
 ###############################
@@ -158,7 +141,7 @@ target_workbook_writeable = xlcopy.copy(target_workbook)
 targetsheet = target_workbook.sheet_by_index(0)
 sheet_rw = target_workbook_writeable.get_sheet(0)
 start_writing = targetsheet.nrows
-new_entries_by_date = sorted(neue_global, key=lambda k: neue_global[k][0]) #this actually sorts by the first entry of the list (k)'s first item, which is the date integer
+new_entries_by_date = sorted(neue_global, key=lambda k: neue_global[k][0]) #this actually sorts by the first entry of the list (k)'s first item, which is the date integer; this will return a list of filenames
 style_zahl_int = xlwt.easyxf('alignment: horiz centre')
 style_datum = xlwt.easyxf('alignment: horiz centre; borders: right medium', num_format_str = "nn, dd.mm.yy")
 style_stunden = xlwt.easyxf('alignment: horiz centre', num_format_str = "HH:MM:SS")
@@ -166,21 +149,13 @@ style_stunden = xlwt.easyxf('alignment: horiz centre', num_format_str = "HH:MM:S
 print(grn + "vorhandene Zeilen in Zieldatei:\t\t" + rst + str(start_writing-1) + ", ab " + str(start_writing) + " wird weitergeschrieben")
 
 def write_out(startrow):
+    print(str(len(new_entries_by_date)) + " days that aren't already listed")
     ask = raw_input("do you really want that? [y/n]")[:1]
     if not ask.lower() == 'y':
         print("ok; bye :-)")
         exit()
     else:
         for row in new_entries_by_date:
-            # idx = 0
-            # for col in neue_global[row]:    # go through each column of the data set
-            #     if idx == 0:    #0 ist das Datum wanted_cols = [3,21,5,12] # 3=telefonierte anrufe, 21=verlorene, 5=gesamtverbindungszeit 12=gesamtNBzeit
-            #         sheet_rw.write(startrow, idx, col, style_datum)
-            #     elif idx in (1, 2): # 1,2 = spalten 3, 21 im urpsrungssheet = telefonierte und verlorene. Format sollte Integer sein
-            #         sheet_rw.write(startrow, idx, col)
-            #     elif idx in (3, 4): # 3,4 = spalten 5, 12 im ursprunssheet = gesamtVBzeit und gesamtNBzeit. Format sollte HH:MM:SS sein (es geht jeweils nur um einen Tag, 24 HH sind ausreichend)
-            #         sheet_rw.write(startrow, idx, col, style_stunden)
-            #     idx += 1
             dat = neue_global[row][0] # Datum
             tel = neue_global[row][1] # Telefoniert
             ver = neue_global[row][2] # Verloren
@@ -190,16 +165,14 @@ def write_out(startrow):
 
             sheet_rw.write(startrow, 0, dat, style_datum)   #Datum
             sheet_rw.write(startrow, 1, tel, style_zahl_int)    #Calls
-            sheet_rw.write(startrow, 2, Formula("IF(%s=0,0,%s/%s)" % (tel, tot, tel)), style_stunden) 
-            sheet_rw.write(startrow, 3, Formula("IF(%s=0,0,%s/%s)" % (tel, ges, tel)), style_stunden)
-            sheet_rw.write(startrow, 4, Formula("IF(%s=0,0,%s/%s)" % (tel, nac, tel)), style_stunden)
+            sheet_rw.write(startrow, 2, Formula("IF(%s=0,0,%s/%s)" % (tel, tot, tel)), style_stunden) # av. total
+            sheet_rw.write(startrow, 3, Formula("IF(%s=0,0,%s/%s)" % (tel, ges, tel)), style_stunden) # av. talk
+            sheet_rw.write(startrow, 4, Formula("IF(%s=0,0,%s/%s)" % (tel, nac, tel)), style_stunden) # av. after
             startrow += 1
         target_workbook_writeable.save(targetfile)
-        # print(dir(xlrd))
-        # print(targetsheet.cell(0,0).ctype)
-        # print(targetsheet.cell(0,0).dump)
-        # print("data written to " + targetfile)
 
 write_out(start_writing)
+
+print("dude, there's still" + str(agenten) + " to be parsed")
 # xlrd can't get the values of formula cells because those are only created when the file was saved (with "recalculate" option) in excel (or LO)
 # so cells with formulas always return value "0.0" until they've been saved locally
