@@ -143,8 +143,9 @@ sheet_rw = target_workbook_writeable.get_sheet(0)
 start_writing = targetsheet.nrows
 new_entries_by_date = sorted(neue_global, key=lambda k: neue_global[k][0]) #this actually sorts by the first entry of the list (k)'s first item, which is the date integer; this will return a list of filenames
 style_zahl_int = xlwt.easyxf('alignment: horiz centre')
-style_datum = xlwt.easyxf('alignment: horiz centre; borders: right medium', num_format_str = "nn, dd.mm.yy")
-style_stunden = xlwt.easyxf('alignment: horiz centre', num_format_str = "HH:MM:SS")
+style_datum             = xlwt.easyxf('alignment: horiz centre; borders: right double, right_color 0x28, left double, left_color 0x28', num_format_str = "nn, dd.mm.yy")
+style_minuten           = xlwt.easyxf('alignment: horiz centre', num_format_str = "HH:MM:SS")
+style_minuten_gesamt    = xlwt.easyxf('alignment: horiz centre; borders: right double, right_color 0x28, left double, left_color 0x28; pattern: pattern solid, fore_color ice_blue', num_format_str = "HH:MM:SS")
 
 print(grn + "vorhandene Zeilen in Zieldatei:\t\t" + rst + str(start_writing-1) + ", ab " + str(start_writing) + " wird weitergeschrieben")
 
@@ -165,9 +166,9 @@ def write_out(startrow):
 
             sheet_rw.write(startrow, 0, dat, style_datum)   #Datum
             sheet_rw.write(startrow, 1, tel, style_zahl_int)    #Calls
-            sheet_rw.write(startrow, 2, Formula("IF(%s=0,0,%s/%s)" % (tel, tot, tel)), style_stunden) # av. total
-            sheet_rw.write(startrow, 3, Formula("IF(%s=0,0,%s/%s)" % (tel, ges, tel)), style_stunden) # av. talk
-            sheet_rw.write(startrow, 4, Formula("IF(%s=0,0,%s/%s)" % (tel, nac, tel)), style_stunden) # av. after
+            sheet_rw.write(startrow, 2, Formula("IF(%s=0,0,%s/%s)" % (tel, ges, tel)), style_minuten) # av. total
+            sheet_rw.write(startrow, 3, Formula("IF(%s=0,0,%s/%s)" % (tel, nac, tel)), style_minuten) # av. talk
+            sheet_rw.write(startrow, 4, Formula("IF(%s=0,0,%s/%s)" % (tel, tot, tel)), style_minuten_gesamt) # av. after
             startrow += 1
         target_workbook_writeable.save(targetfile)
 
