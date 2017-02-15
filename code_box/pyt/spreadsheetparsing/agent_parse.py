@@ -25,30 +25,34 @@ rows_read, cols_read = input_sheet.nrows, input_sheet.ncols
 
 col_agentname = 1
 
-startrow = 4
-endrow = rows_read-1
-
-print(input_sheet.cell(endrow,col_agentname).value)
-
-print(endrow)
-
-for i in range(startrow,endrow):
-    print(str(i) + " "),
-    print(input_sheet.cell(i,col_agentname).value)
+startrow = 4            #die ersten 4 sind der fixe header, Daten beginnen bei Reihe 5 (in xlrd mit index 0 = 4)
+endrow = rows_read-1    #letzte Reihe ist eine "Summe"-Reihe, Daten enden eine Reihe darueber
 
 
 
+def get_uniq_agents():
+    ag_ids = set()
+    for i in range(startrow,endrow):
+        ag_id = str(input_sheet.cell(i,col_agentname).value)
+        ag_ids.add(ag_id)
+    return ag_ids
+
+vorhandene_agenten = get_uniq_agents()
+
+agentenliste = []
+for i in vorhandene_agenten:
+    agent_kuerzel = i[2:9]
+    agent_standor = i[0]
+    agentenliste.append(agent_kuerzel)
+
+print(agentenliste)
+
+for ag in agentenliste:
+    print(ag)
+    ag = {}
 
 
-
-
-
-
-
-
-
-
-
+print(type(gesinst))
 # 
 # 
 # 
