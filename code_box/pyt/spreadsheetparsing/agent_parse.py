@@ -38,24 +38,30 @@ def get_uniq_agents():
     return ag_ids
 
 vorhandene_agenten = get_uniq_agents()
-ag_dict = dict.fromkeys(vorhandene_agenten) 
+ag_dic = {}
 
-agentenliste = []
 for i in vorhandene_agenten:
     agent_kuerzel = i[2:9]
     agent_standor = i[0]
-    agentenliste.append(agent_kuerzel)
-    ag_dict[i].append
+    ag_dic[agent_kuerzel] = {}
+    ag_dic[agent_kuerzel]["standort"] = agent_standor
 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
+for i in range(startrow,endrow):
+    if input_sheet.cell(i,1).value == "B pletaan 335334":
+        print(input_sheet.cell(i,0).value),
+        print(input_sheet.cell(i,4).value),
+        print(input_sheet.cell(i,24).value)
+
+
+#
+#
+#
+#
+#
+#
+#
+#
+#
 # # todo: clean up directory of badly named xls files
 # # for file_in_path:
 # #     check timestamp
@@ -65,7 +71,7 @@ for i in vorhandene_agenten:
 # #             keep only one, delete others
 # #         else:
 # #             print filenames and message: please clean up this mess
-# 
+#
 # def check_cmdline_params():
 #     if len(sys.argv) != 3:
 #         print(sys.argv[0] +" needs two parameters in the following order: $DIR where xls files lie and an xls $FILE to write into.")
@@ -90,17 +96,17 @@ for i in vorhandene_agenten:
 # agenten = {}            # a dictionary of files that are "monthly" stats for each single agent
 # agenten_daten = []      # a list of filenames of that dict
 # other_global = {}       # a dictionary that contains files that aren't daily reports
-# 
+#
 # xlspath, targetfile = check_cmdline_params()              # check for matching input / output files
 # wholdir = natsorted(os.listdir(xlspath), alg=ns.IGNORECASE, reverse=True)  # the list of all files in the specified directory
-# 
+#
 # def parsedate(daily_sheet): # turn crap date into nice date
 #     date_crap = daily_sheet.cell(1,1).value # comes like this from upstream, date always lives at 1,1
 #     date_clea = re.sub(r' ', '.', date_crap[:10]) # transform to a string that strptime can parse
 #     date_objt = datetime.strptime(date_clea, "%d.%m.%Y").date() # this is a python datetime.date object
 #     xlint = (date_objt - date(1899, 12, 30)).days # this is an integer that excel uses internally
 #     return date_objt, xlint
-# 
+#
 # def read_single_to_dict(single_xls_file):   # this func will determine what kind of file it has been passed (a report or something else), find out if it's a duplicate or unique and return a list of values depending on the file type
 #     input_sheet = xlrd.open_workbook(single_xls_file, formatting_info=True).sheet_by_index(0)
 #     rows_read, cols_read = input_sheet.nrows, input_sheet.ncols
@@ -110,7 +116,7 @@ for i in vorhandene_agenten:
 #     agnts = []
 #     other = []
 #     identifier = input_sheet.cell(0,0).value
-# 
+#
 #     if identifier == "Hotlineber1458Gesing taegl":      # this would be a daily report of times and number of calls
 #         datum = parsedate(input_sheet)[0] # useable date
 #         xlint = parsedate(input_sheet)[1] # excel date float
@@ -128,17 +134,17 @@ for i in vorhandene_agenten:
 #                     col_total = col_total+cellvalue
 #                 uniqs.append(col_total)                             # append the total of each column to the list; list will be [flag, date, col3, col5, col12, col21]
 #             return uniqs
-# 
+#
 #     elif identifier == "Carexpert_Agent_Gesing":        # this would be a sheet for all agents with individual times
 #         agnts.append("a")
 #         agnts.append(single_xls_file)
 #         return agnts
-# 
+#
 #     else:
 #         other.append("o")
 #         other.append(single_xls_file)
 #         return other
-# 
+#
 # def read_date_from_target():
 #     target_xls = sys.argv[2]
 #     target_sheet = xlrd.open_workbook(target_xls).sheet_by_index(0)
@@ -147,7 +153,7 @@ for i in vorhandene_agenten:
 #         if i.ctype == 3:
 #             days_already.append(i.value)
 #     return days_already
-# 
+#
 # for item in wholdir:                    # iterates over every file in directory and returns a dictionary of 'duplicates', 'uniqes' with values and others
 #     if item.endswith('xls'):
 #         fullp_item = os.path.join(xlspath, item)
@@ -169,26 +175,26 @@ for i in vorhandene_agenten:
 #             other_global.update({fullp_item: file_examined[1:]})
 #         else:
 #             print("huh? not a file format I can work with " + str(fullp_item))
-# 
+#
 # ###############################
 # #### END READ, BEGIN WRITE ####
 # ###############################
-# 
+#
 # target_workbook = xlrd.open_workbook(targetfile, formatting_info=True)
 # target_workbook_writeable = xlcopy.copy(target_workbook)
 # targetsheet = target_workbook.sheet_by_index(0)
 # sheet_rw = target_workbook_writeable.get_sheet(0)
 # start_writing = targetsheet.nrows
 # new_entries_by_date = sorted(neue_global, key=lambda k: neue_global[k][0]) #this actually sorts by the first entry of the list (k)'s first item, which is the date integer; this will return a list of filenames
-# 
+#
 # style_calls             = xlwt.easyxf('alignment: horiz centre')
 # style_verlo             = xlwt.easyxf('alignment: horiz centre; font: color gray25')
 # style_datum             = xlwt.easyxf('alignment: horiz right; borders: right double, right_color 0x28, left double, left_color 0x28', num_format_str = "ddd dd.mm.yy")
 # style_minuten           = xlwt.easyxf('alignment: horiz centre', num_format_str = "HH:MM:SS")
 # style_minuten_gesamt    = xlwt.easyxf('alignment: horiz centre; borders: right double, right_color 0x28, left double, left_color 0x28; pattern: pattern solid, fore_color ice_blue', num_format_str = "HH:MM:SS")
-# 
+#
 # print(grn + "vorhandene Zeilen in Zieldatei:\t\t" + rst + str(start_writing-1) + ", ab " + str(start_writing) + " wird weitergeschrieben")
-# 
+#
 # def write_out(startrow):
 #     print(str(len(new_entries_by_date)) + " days that aren't already listed")
 #     ask = raw_input("do you really want that? [y/n]")[:1]
@@ -203,7 +209,7 @@ for i in vorhandene_agenten:
 #             ges = neue_global[row][3] # Gespraechszeit
 #             nac = neue_global[row][4] # Nacharbeitszeit
 #             tot = ges+nac # Gesamtzeit
-# 
+#
 #             sheet_rw.write(startrow, 0, dat, style_datum)   #Datum
 #             sheet_rw.write(startrow, 1, tel, style_calls)    #Calls
 #             sheet_rw.write(startrow, 2, Formula("IF(%s=0,0,%s/%s)" % (tel, ges, tel)), style_minuten) # av. total
@@ -212,9 +218,9 @@ for i in vorhandene_agenten:
 #             sheet_rw.write(startrow, 6, ver, style_verlo) # Verlorene
 #             startrow += 1
 #         target_workbook_writeable.save(targetfile)
-# 
+#
 # write_out(start_writing)
-# 
+#
 # # print("dude, there's still" + str(agenten) + " to be parsed")
 # # xlrd can't get the values of formula cells because those are only created when the file was saved (with "recalculate" option) in excel (or LO)
 # # so cells with formulas always return value "0.0" until they've been saved locally
