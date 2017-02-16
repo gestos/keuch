@@ -38,21 +38,15 @@ def get_uniq_agents():
     return ag_ids
 
 vorhandene_agenten = get_uniq_agents()
+ag_dict = dict.fromkeys(vorhandene_agenten) 
 
 agentenliste = []
 for i in vorhandene_agenten:
     agent_kuerzel = i[2:9]
     agent_standor = i[0]
     agentenliste.append(agent_kuerzel)
+    ag_dict[i].append
 
-print(agentenliste)
-
-for ag in agentenliste:
-    print(ag)
-    ag = {}
-
-
-print(type(gesinst))
 # 
 # 
 # 
