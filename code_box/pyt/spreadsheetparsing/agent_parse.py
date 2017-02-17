@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import os
 import csv
+import math
 import xlrd
 import re
 import sys
@@ -23,7 +24,12 @@ agentsfile = sys.argv[1]
 input_sheet = xlrd.open_workbook(agentsfile, formatting_info=True).sheet_by_index(0)
 rows_read, cols_read = input_sheet.nrows, input_sheet.ncols
 
+col_timestamp = 0
 col_agentname = 1
+col_angenomme = 4
+col_abgebroch = 22
+col_bearbeitu = 24
+col_verbindun = 29
 
 startrow = 4            #die ersten 4 sind der fixe header, Daten beginnen bei Reihe 5 (in xlrd mit index 0 = 4)
 endrow = rows_read-1    #letzte Reihe ist eine "Summe"-Reihe, Daten enden eine Reihe darueber
@@ -46,11 +52,33 @@ for i in vorhandene_agenten:
     ag_dic[agent_kuerzel] = {}
     ag_dic[agent_kuerzel]["standort"] = agent_standor
 
-for i in range(startrow,endrow):
-    if input_sheet.cell(i,1).value == "B pletaan 335334":
-        print(input_sheet.cell(i,0).value),
-        print(input_sheet.cell(i,4).value),
-        print(input_sheet.cell(i,24).value)
+def parsetime(cellstring): # turn crap date into nice date
+    date_clea = re.sub(r' ', '.', date_crap[:10]) # transform to a string that strptime can parse
+    date_objt = datetime.strptime(date_clea, "%d.%m.%Y").date() # this is a python datetime.date object
+    xlint = (date_objt - date(1899, 12, 30)).days # this is an integer that excel uses internally
+    return date_objt, xlint
+
+for ag in ag_dic:
+    for i in range(startrow,endrow):
+        if ag in input_sheet.cell(i,1).value:
+            # print("Agent: " + str(ag)),
+            # print("Datum: " + str(input_sheet.cell(i,0).value)),
+            # print("angenommene Anrufe: " + str(input_sheet.cell(i,4).value)),
+            # print("abgebrochene Anrufe: " + str(input_sheet.cell(i,22).value)),
+            # print("Bearbeitungszeit: " + str(input_sheet.cell(i,24).value)),
+            # print("Gespraechszeit: " + str(input_sheet.cell(i,29).value))
+            cellmin=input_sheet.cell(i,24).value
+            frac,minu=math.modf(cellmin)
+            print(str(cellmin) + " = "),
+            print(str(minu) + ", " + str(frac))
+            frac_hhmm=(frac*60)
+            print("= " + str(minu) + str(frac_hhmm))
+            print(math.trunc(minu)),
+            print(math.trunc(frac_hhmm))
+            print "{:.0f}".format(frac_hhmm)
+
+    print("end of agent dataset "+ str(ag))
+    print
 
 
 #
