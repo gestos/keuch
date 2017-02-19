@@ -59,26 +59,45 @@ def parseminutes(cellstring): # turn crap time into nice hh:mm:ss
     date_objt = datetime.strptime(str(zeit), "%M.%S").time() # this is a python datetime.date object
     return date_objt
 
-for ag in ag_dic:
-    for i in range(startrow,endrow):
-        if ag in input_sheet.cell(i,1).value:
-            print("Agent: " + str(ag)),
-            print("Ort: " + ag_dic[ag]["standort"]),
-            print("Datum: " + str(input_sheet.cell(i,0).value)),
-            print("angenommen: " + str(input_sheet.cell(i,4).value)),
-            print("abgebrochen: " + str(input_sheet.cell(i,22).value)),
-            bearbeitung = input_sheet.cell(i,24).value
-            verbindung  = input_sheet.cell(i,29).value
-            nacharbeit  = bearbeitung - verbindung
-            print("Gesamt: " + str(parseminutes(bearbeitung))),
-            print("Verbindung: " + str(parseminutes(verbindung))),
-            print("Nacharbeit: " + str(parseminutes(nacharbeit)))
+def verbose_stats():
+    for ag in ag_dic:
+        for i in range(startrow,endrow):
+            if ag in input_sheet.cell(i,1).value:
+                print("Agent: " + str(ag)),
+                print("Ort: " + ag_dic[ag]["standort"]),
+                print("Datum: " + str(input_sheet.cell(i,0).value)),
+                print("angenommen: " + str(input_sheet.cell(i,4).value)),
+                print("abgebrochen: " + str(input_sheet.cell(i,22).value)),
+                bearbeitung = input_sheet.cell(i,24).value
+                verbindung  = input_sheet.cell(i,29).value
+                nacharbeit  = bearbeitung - verbindung
+                print("Gesamt: " + str(parseminutes(bearbeitung))),
+                print("Verbindung: " + str(parseminutes(verbindung))),
+                print("Nacharbeit: " + str(parseminutes(nacharbeit)))
+        print("end of agent dataset "+ str(ag))
+        print
 
-    print("end of agent dataset "+ str(ag))
-    print
+# verbose_stats()
 
-
-#
+def average_stats():
+    for ag in ag_dic:
+        angenommene = []
+        abgebrochne = []
+        bearbeitung = []
+        verbindung  = []
+        for i in range(startrow,endrow):
+            if ag in input_sheet.cell(i,1).value:
+                angenommene.append(input_sheet.cell(i,4).value)
+                abgebrochne.append(input_sheet.cell(i,22).value)
+                bearbeitung.append(input_sheet.cell(i,24).value)
+                verbindung.append(input_sheet.cell(i,29).value)
+        print(str(ag))
+        print sum(bearbeitung), sum(angenommene)
+        av_bearb = sum(bearbeitung)/sum(angenommene)
+        print(av_bearb)
+        print(parseminutes(av_bearb))
+        print
+average_stats()
 #
 #
 #
