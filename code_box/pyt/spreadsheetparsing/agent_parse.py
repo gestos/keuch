@@ -52,30 +52,27 @@ for i in vorhandene_agenten:
     ag_dic[agent_kuerzel] = {}
     ag_dic[agent_kuerzel]["standort"] = agent_standor
 
-def parsetime(cellstring): # turn crap date into nice date
-    date_clea = re.sub(r' ', '.', date_crap[:10]) # transform to a string that strptime can parse
-    date_objt = datetime.strptime(date_clea, "%d.%m.%Y").date() # this is a python datetime.date object
-    xlint = (date_objt - date(1899, 12, 30)).days # this is an integer that excel uses internally
-    return date_objt, xlint
+def parseminutes(cellstring): # turn crap time into nice hh:mm:ss
+    dec_s,minute = math.modf(cellstring)
+    seconds= round(((dec_s*60)/100),2)
+    zeit=minute+seconds
+    date_objt = datetime.strptime(str(zeit), "%M.%S").time() # this is a python datetime.date object
+    return date_objt
 
 for ag in ag_dic:
     for i in range(startrow,endrow):
         if ag in input_sheet.cell(i,1).value:
-            # print("Agent: " + str(ag)),
-            # print("Datum: " + str(input_sheet.cell(i,0).value)),
-            # print("angenommene Anrufe: " + str(input_sheet.cell(i,4).value)),
-            # print("abgebrochene Anrufe: " + str(input_sheet.cell(i,22).value)),
-            # print("Bearbeitungszeit: " + str(input_sheet.cell(i,24).value)),
-            # print("Gespraechszeit: " + str(input_sheet.cell(i,29).value))
-            cellmin=input_sheet.cell(i,24).value
-            frac,minu=math.modf(cellmin)
-            print(str(cellmin) + " = "),
-            print(str(minu) + ", " + str(frac))
-            frac_hhmm=(frac*60)
-            print("= " + str(minu) + str(frac_hhmm))
-            print(math.trunc(minu)),
-            print(math.trunc(frac_hhmm))
-            print "{:.0f}".format(frac_hhmm)
+            print("Agent: " + str(ag)),
+            print("Ort: " + ag_dic[ag]["standort"]),
+            print("Datum: " + str(input_sheet.cell(i,0).value)),
+            print("angenommen: " + str(input_sheet.cell(i,4).value)),
+            print("abgebrochen: " + str(input_sheet.cell(i,22).value)),
+            bearbeitung = input_sheet.cell(i,24).value
+            verbindung  = input_sheet.cell(i,29).value
+            nacharbeit  = bearbeitung - verbindung
+            print("Gesamt: " + str(parseminutes(bearbeitung))),
+            print("Verbindung: " + str(parseminutes(verbindung))),
+            print("Nacharbeit: " + str(parseminutes(nacharbeit)))
 
     print("end of agent dataset "+ str(ag))
     print

@@ -22,3 +22,6 @@ print b
 c= round(((a*60)/100),2)
 print c
 print b+c
+print dir(datetime.strptime)
+date_objt = datetime.strptime(str(b+c), "%M.%S").time() # this is a python datetime.date object
+print(date_objt)
