@@ -88,25 +88,20 @@ def average_stats(calweek):
                 abgebrochne.append(input_sheet.cell(i,22).value)
                 bearbeitung.append(input_sheet.cell(i,24).value)
                 verbindung.append(input_sheet.cell(i,29).value)
-        print(str(ag) +"(" + str(ag_dic[ag]["standort"])+")")
-        print("KW: " + str(calweek))
-        print("ges. Bearbeitungszeit: " + str(parseminutes(sum(bearbeitung))))
-        print("Agenommene Calls: " + str(int(sum(angenommene))))
         av_bearb = sum(bearbeitung)/sum(angenommene)
         av_verbi = sum(verbindung)/sum(angenommene)
         av_nacha = av_bearb-av_verbi
-        print("av. Bearbeitungszeit: " + str(parseminutes(av_bearb)))
-        print("av. Verbidungszeit: " + str(parseminutes(av_verbi)))
-        print("av. Nacharbeitszeit: " + str(parseminutes(av_nacha)))
-        print
+        ag_dic[ag]["calls"]= int((sum(angenommene)))
+        ag_dic[ag]["ges_bea"]= parseminutes(sum(bearbeitung))
+        ag_dic[ag]["av_bearbeitung"]= parseminutes(av_bearb)
+        ag_dic[ag]["av_verbindung"]= parseminutes(av_verbi)
+        ag_dic[ag]["av_nacharbeit"]= parseminutes(av_nacha)
 
 def check_sheet_type():
     if input_sheet.cell(0,0).value.startswith("Carexpert_Agent_Gesing"):
         flag="agent_stats"
-        print(flag)
     elif input_sheet.cell(0,0).value.startswith("Hotlineber1458"):
         flag="hotline_stats"
-        print(flag)
     return flag
 
 def get_agent_reports(filesdir):
@@ -119,7 +114,7 @@ def get_agent_reports(filesdir):
 ##############START OF PROGRAM############################################
 ##########################################################################
 
-filesdir = check_cmdline_params()[0]
+filesdir,targetfile = check_cmdline_params()
 agentsfiles = get_agent_reports(filesdir)
 weeks = {}
 
@@ -127,19 +122,18 @@ for i in agentsfiles:
 
     full_file = os.path.join(filesdir,i)
     input_sheet = xlrd.open_workbook(full_file, formatting_info=True).sheet_by_index(0)
-    rows_read, cols_read = input_sheet.nrows, input_sheet.ncols
 
     if "agent_stats" not in check_sheet_type(): # determine by title-cell (always 0,0) what type of datasheet this is
         print("not an agent report sheet, skipping")
         exit()
 
+    rows_read, cols_read = input_sheet.nrows, input_sheet.ncols
     startrow = 4            #die ersten 4 sind der fixe header, Daten beginnen bei Reihe 5 (in xlrd mit index 0 = 4)
     endrow = rows_read-1    #letzte Reihe ist eine "Summe"-Reihe, Daten enden eine Reihe darueber
     sheet_startdate = parsedate(input_sheet.cell(1,1)) # gives a set of date-object(YY,MM,DD) xlint, calendarweek
     sheet_enddate = parsedate(input_sheet.cell(2,1))
     sheet_calweek = "%0*d" % (2, parsedate(input_sheet.cell(1,1))[2]) # calendar week with a leading zero
 
-    print sheet_calweek
     weeks[sheet_calweek] = {}
 
     vorhandene_agenten = get_uniq_agents()
@@ -156,5 +150,39 @@ for i in agentsfiles:
 
     weeks[sheet_calweek] = ag_dic
 
-print weeks["02"]
+#####################  START WRITEOUT ####################
+
+
+
+target_workbook = xlrd.open_workbook(targetfile, formatting_info=True)
+target_workbook_writeable = xlcopy.copy(target_workbook)
+targetsheet = target_workbook.sheet_by_index(0)
+sheet_rw = target_workbook_writeable.get_sheet(0)
+start_writing = targetsheet.nrows
+
+style_week              = xlwt.easyxf('alignment: horiz centre')
+style_times           = xlwt.easyxf('alignment: horiz centre', num_format_str = "HH:MM:SS")
+
+
+def write_out(startrow):
+    ask = raw_input("do you really want that? [y/n]")[:1]
+    if not ask.lower() == 'y':
+        print("ok; bye :-)")
+        exit()
+    else:
+        for calweek in sorted(weeks):
+            for agent in sorted(weeks[calweek].keys()):
+                sheet_rw.write(startrow, 0, calweek, style_week)   #Woche
+                sheet_rw.write(startrow, 1, weeks[calweek][agent]["standort"], style_week)    #Standort
+                sheet_rw.write(startrow, 2, agent, style_week)    #Standort
+                sheet_rw.write(startrow, 3, weeks[calweek][agent]["calls"], style_week)    #Standort
+                sheet_rw.write(startrow, 4, weeks[calweek][agent]["ges_bea"], style_times)    #Standort
+                sheet_rw.write(startrow, 5, weeks[calweek][agent]["av_verbindung"], style_times)    #Standort
+                sheet_rw.write(startrow, 6, weeks[calweek][agent]["av_nacharbeit"], style_times)    #Standort
+                sheet_rw.write(startrow, 7, weeks[calweek][agent]["av_bearbeitung"], style_times)    #Standort
+                startrow += 1
+            startrow += 1
+        target_workbook_writeable.save(targetfile)
+
+write_out(start_writing)
 
