@@ -161,7 +161,7 @@ sheet_rw = target_workbook_writeable.get_sheet(0)
 start_writing = targetsheet.nrows
 
 style_week              = xlwt.easyxf('alignment: horiz centre')
-style_times           = xlwt.easyxf('alignment: horiz centre', num_format_str = "HH:MM:SS")
+style_times           = xlwt.easyxf('alignment: horiz centre', num_format_str = "[H]:MM:SS")
 
 
 def write_out(startrow):
@@ -186,3 +186,5 @@ def write_out(startrow):
 
 write_out(start_writing)
 
+
+print("dont forget: 12.75 Minutes / 1440 = 0.00885416666667. THIS NUMBER is the one excel needs for a time format!!!")

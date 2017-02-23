@@ -158,20 +158,17 @@ def create_report_by_week(agentsfiles):
         weeks[sheet_calweek] = ag_dic
 
 def create_report_by_month(agentsfiles):
-    kernzeit={}
-    nebnzeit={}
     ag_monthly_dic = {}
     vorhandene_agenten = get_uniq_agents_multi(agentsfiles)
+
     for agent in vorhandene_agenten:
         agent_kuerzel = agent[2:9]
         agent_standor = agent[0]
         ag_monthly_dic[agent_kuerzel] = {}
         ag_monthly_dic[agent_kuerzel]["standort"] = agent_standor
-        ag_monthly_dic[agent_kuerzel]["calls"] = list()
-        print type(ag_monthly_dic[agent_kuerzel]["calls"])
+        ag_monthly_dic[agent_kuerzel]["calls"] = dict()
 
     for i in agentsfiles:
-        print i
         full_file = os.path.join(filesdir,i)
         input_sheet = xlrd.open_workbook(full_file, formatting_info=True).sheet_by_index(0)
     
@@ -184,20 +181,20 @@ def create_report_by_month(agentsfiles):
         endrow = rows_read-1    #letzte Reihe ist eine "Summe"-Reihe, Daten enden eine Reihe darueber
         sheet_startdate = parsedate(input_sheet.cell(1,1)) # gives a set of date-object(YY,MM,DD) xlint, calendarweek
         sheet_enddate = parsedate(input_sheet.cell(2,1))
+
         for agent in ag_monthly_dic:
-            print agent
             for row in range(startrow, endrow):
                 if agent in input_sheet.cell(row,1).value:
                     timestamp=parsedate_full(input_sheet.cell(row,0))
                     datum=timestamp.strftime("%Y-%b-%d %H")
-                    monat=timestamp.strftime("%b")
-                    stunde=timestamp.strftime("%H")
                     calls_this_hour=int(input_sheet.cell(row,4).value)
-                    
-                    print type(ag_monthly_dic[agent]["calls"])
-                    ag_monthly_dic[agent]["calls"].append(calls_this_hour)
-    print ag_monthly_dic["meyergu"]["calls"]
-    print sum(ag_monthly_dic["meyergu"]["calls"])
+                    abgebrochne=int(input_sheet.cell(row,22).value)
+                    bearbeitung=input_sheet.cell(row,24).value
+                    verbindung=input_sheet.cell(row,29).value
+                    nacharbeit=bearbeitung-verbindung
+                    ag_monthly_dic[agent]["calls"][timestamp] = [calls_this_hour, abgebrochne, bearbeitung, verbindung, nacharbeit]
+
+    return ag_monthly_dic
 
 
         #for row in range(startrow, endrow):
@@ -219,9 +216,19 @@ months = {}
 # create_report_by_week(agentsfiles) # this produces a dictionary that can be used for weekly output
 
 
-create_report_by_month(agentsfiles)
+all_data=create_report_by_month(agentsfiles)
+print 
+
+for agent in sorted(all_data):
+    for entry in all_data[agent]["calls"]:
+        if entry.day == 6 and entry.month == 2 and agent == "tetzlva":
+            if 11 <= entry.hour <=19:
+                print agent, entry.day
+                print entry,
+                print all_data[agent]["calls"][entry]
 
 
+print type(parseminutes(1372.75))
 
 #####################  START WRITEOUT ####################
 
