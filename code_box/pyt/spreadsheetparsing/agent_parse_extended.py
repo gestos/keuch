@@ -218,17 +218,40 @@ def split_zeiten(all_data):
     return kernzeit, nebenzeit
 
 
-def datenfilter_per_monat(agent, monat, neben_oder_kern):
-    wunschdir = {}
-    wunschdir[agent] = {}
-    wunschdir[agent]["standort"] = neben_oder_kern[agent]["standort"]
-    wunschdir[agent]["calls"] = { key: value for key, value in neben_oder_kern[agent]["calls"].items() if key.month == monat } # BEI RANGE gilt immer die zweite Zahl NICHT included. Range fuer 2 ist 2,3 !!!
-    #wunschdir[agent]["calls"] = { key: value for key, value in neben_oder_kern[agent]["calls"].items() if key.month == monat }
-    return wunschdir
+def create_month_dictionaries():
+    months = {}
+    for monat in range(1,13):    # RANGE CUTS THE LAST ELEMENT! so it's always range (start, end+1)!
+        monthname = calendar.month_abbr[monat]
+        months[monthname] = {}
+        months[monthname]["nebenzeit"] = {}
+        months[monthname]["kernzeit"] = {}
+    return months
 
+def kernzeit_fuer_monat(monat_nummer, months_dic):
+    monthname = calendar.month_abbr[monat_nummer]
+    for agent in data_kernzeit.keys():
+        for dataset in data_kernzeit[agent]["calls"]:
+            if dataset.month == monat_nummer:
+                if not agent in months_dic[monthname]["kernzeit"]:
+                    months_dic[monthname]["kernzeit"][agent] = dict()
+                    months_dic[monthname]["kernzeit"][agent]["calls"] = dict()
+                    months_dic[monthname]["kernzeit"][agent]["calls"][dataset] = data_kernzeit[agent]["calls"][dataset]
+                else:
+                    months_dic[monthname]["kernzeit"][agent]["calls"][dataset] = data_kernzeit[agent]["calls"][dataset]
+    return months_dic
 
-
-
+def nebenzeit_fuer_monat(monat_nummer, months_dic):
+    monthname = calendar.month_abbr[monat_nummer]
+    for agent in data_nebenzeit.keys():
+        for dataset in data_nebenzeit[agent]["calls"]:
+            if dataset.month == monat_nummer:
+                if not agent in months_dic[monthname]["nebenzeit"]:
+                    months_dic[monthname]["nebenzeit"][agent] = dict()
+                    months_dic[monthname]["nebenzeit"][agent]["calls"] = dict()
+                    months_dic[monthname]["nebenzeit"][agent]["calls"][dataset] = data_nebenzeit[agent]["calls"][dataset]
+                else:
+                    months_dic[monthname]["nebenzeit"][agent]["calls"][dataset] = data_nebenzeit[agent]["calls"][dataset]
+    return months_dic
 ##########################################################################
 ##############START OF PROGRAM############################################
 ##########################################################################
@@ -236,34 +259,28 @@ def datenfilter_per_monat(agent, monat, neben_oder_kern):
 filesdir,targetfile = check_cmdline_params()
 agentsfiles = get_agent_reports(filesdir)
 weeks = {}
-months = {}
-# create_report_by_week(agentsfiles) # this produces a dictionary that can be used for weekly output
+months = create_month_dictionaries()
 all_data=create_dic_from_all_files(agentsfiles) ## this will gives us every row of every agents_stats file available into one big dict
 data_kernzeit, data_nebenzeit = split_zeiten(all_data)  ## now we have two separate dicts for kern and nebenzeit
 
-for month in range(1,3):    # RANGE CUTS THE LAST ELEMENT! so it's always range (start, end+1)!
-    monthname = calendar.month_abbr[month]
-    mname = calendar.month_abbr[month]
-    for agent in data_nebenzeit.keys():
-        monthname = datenfilter_per_monat(agent, month, data_nebenzeit)
-        if not monthname[agent]["calls"]:
-            print (str(agent) + " is empty HAS BEEN REMOVED")
-            del monthname[agent]
-            continue
-        print ("daten fuer " + agent + " in nebenzeit" + mname + " :" + str(month)),
-        print len(monthname[agent]["calls"])   # This result is correct
+for i in range(1,12):
+    months = nebenzeit_fuer_monat(i, months)
+    months = kernzeit_fuer_monat(i, months)      # NOW we have a "months" dictionary with all months inside. each month has kern- and nebenzeit. each kern- or nebenzeit has agents and their calls inside
 
-    for agent in data_kernzeit.keys():
-        monthname = datenfilter_per_monat(agent, month, data_nebenzeit)
-        if not monthname[agent]["calls"]:
-            print (str(agent) + " is empty HAS BEEN REMOVED")
-            del monthname[agent]
-            continue
-        print ("daten fuer " + agent + " in kernzeit" + mname + " :" + str(month)),
-        print len(monthname[agent]["calls"])   # This result is correct
-        print monthname
-print monthname
+for agent in months["Jan"]["nebenzeit"]:
+    print (agent + " Januar Nebenzeit Datensaetze: "),
+    print len(months["Jan"]["nebenzeit"][agent]["calls"])
+    datensaetze = list()
+    for dataset in range(0,len(months["Jan"]["nebenzeit"][agent]["calls"])):
+        datensaetze.append(months["Jan"]["nebenzeit"][agent]["calls"].values()[dataset][1])
+    print (" calls: " + str(sum(datensaetze)))
 
+print
+for agent in months["Jan"]["kernzeit"]:
+    print (agent + "Januar Kernzeit: "),
+    print len(months["Jan"]["kernzeit"][agent]["calls"])
+
+print ("bitte mal von Hand nachzaehlen").upper()
 ## ! now to do : thinking of what to do with data ;-)
 
 #####################  START WRITEOUT ####################
