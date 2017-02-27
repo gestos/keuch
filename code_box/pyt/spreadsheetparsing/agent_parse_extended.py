@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import os, csv, math, xlrd, re, sys, xlwt
+import os, csv, math, xlrd, re, sys, xlwt, calendar
 from natsort import natsorted, ns
 from xlwt import Formula
 from xlutils import copy as xlcopy
@@ -127,37 +127,37 @@ def get_agent_reports(filesdir):
 
 def create_report_by_week(agentsfiles):
     for i in agentsfiles:
-    
+
         full_file = os.path.join(filesdir,i)
         input_sheet = xlrd.open_workbook(full_file, formatting_info=True).sheet_by_index(0)
-    
+
         if "agent_stats" not in check_sheet_type(input_sheet): # determine by title-cell (always 0,0) what type of datasheet this is
             print("not an agent report sheet, skipping")
             exit()
-    
+
         rows_read, cols_read = input_sheet.nrows, input_sheet.ncols
         startrow = 4            #die ersten 4 sind der fixe header, Daten beginnen bei Reihe 5 (in xlrd mit index 0 = 4)
         endrow = rows_read-1    #letzte Reihe ist eine "Summe"-Reihe, Daten enden eine Reihe darueber
         sheet_startdate = parsedate(input_sheet.cell(1,1)) # gives a set of date-object(YY,MM,DD) xlint, calendarweek
         sheet_enddate = parsedate(input_sheet.cell(2,1))
         sheet_calweek = "%0*d" % (2, parsedate(input_sheet.cell(1,1))[2]) # calendar week with a leading zero
-    
+
         weeks[sheet_calweek] = {}
-    
+
         vorhandene_agenten = get_uniq_agents(startrow, endrow, input_sheet)
         ag_dic = {}
-        
+
         for i in vorhandene_agenten:
             agent_kuerzel = i[2:9]
             agent_standor = i[0]
             ag_dic[agent_kuerzel] = {}
             ag_dic[agent_kuerzel]["standort"] = agent_standor
-        
+
         average_stats(sheet_calweek, ag_dic, startrow, endrow, input_sheet)
         #### use return values from average_stats() to fill dictionary ####
         weeks[sheet_calweek] = ag_dic
 
-def create_report_by_month(agentsfiles):
+def create_dic_from_all_files(agentsfiles):
     ag_monthly_dic = {}
     vorhandene_agenten = get_uniq_agents_multi(agentsfiles)
 
@@ -171,11 +171,11 @@ def create_report_by_month(agentsfiles):
     for i in agentsfiles:
         full_file = os.path.join(filesdir,i)
         input_sheet = xlrd.open_workbook(full_file, formatting_info=True).sheet_by_index(0)
-    
+
         if "agent_stats" not in check_sheet_type(input_sheet): # determine by title-cell (always 0,0) what type of datasheet this is
             print("not an agent report sheet, skipping")
             exit()
-    
+
         rows_read, cols_read = input_sheet.nrows, input_sheet.ncols
         startrow = 4            #die ersten 4 sind der fixe header, Daten beginnen bei Reihe 5 (in xlrd mit index 0 = 4)
         endrow = rows_read-1    #letzte Reihe ist eine "Summe"-Reihe, Daten enden eine Reihe darueber
@@ -187,19 +187,44 @@ def create_report_by_month(agentsfiles):
                 if agent in input_sheet.cell(row,1).value:
                     timestamp=parsedate_full(input_sheet.cell(row,0))
                     datum=timestamp.strftime("%Y-%b-%d %H")
+                    calweek = timestamp.isocalendar()[1]
                     calls_this_hour=int(input_sheet.cell(row,4).value)
                     abgebrochne=int(input_sheet.cell(row,22).value)
-                    bearbeitung=input_sheet.cell(row,24).value
+                    bearbeitung=input_sheet.cell(row,24).value # die Zeiten bleiben nach dem Komma dezimal; geschrieben wird am Ende als Bruch /1440 = excel interne floating zahl, die eine Zeit ergibt
                     verbindung=input_sheet.cell(row,29).value
                     nacharbeit=bearbeitung-verbindung
-                    ag_monthly_dic[agent]["calls"][timestamp] = [calls_this_hour, abgebrochne, bearbeitung, verbindung, nacharbeit]
+                    ag_monthly_dic[agent]["calls"][timestamp] = [calweek, calls_this_hour, abgebrochne, bearbeitung, verbindung, nacharbeit]
 
     return ag_monthly_dic
 
+def split_zeiten(all_data):
+    kernzeit = {}
+    nebenzeit = {}
 
-        #for row in range(startrow, endrow):
-        #    timestamp=parsedate_full(input_sheet.cell(row,0))
-        #    print timestamp.strftime("%")
+    for agent in sorted(all_data):
+        kernzeit[agent] = {}
+        kernzeit[agent]["standort"] = all_data[agent]["standort"]
+        kernzeit[agent]["calls"] = {}
+        nebenzeit[agent] = {}
+        nebenzeit[agent]["standort"] = all_data[agent]["standort"]
+        nebenzeit[agent]["calls"] = {}
+
+        for entry in all_data[agent]["calls"]:
+            if 11 <= entry.hour <=19:
+                kernzeit[agent]["calls"][entry] = all_data[agent]["calls"][entry]
+            else:
+                nebenzeit[agent]["calls"][entry] = all_data[agent]["calls"][entry]
+
+    return kernzeit, nebenzeit
+
+
+def datenfilter_per_monat(agent, monat, neben_oder_kern):
+    wunschdir = {}
+    wunschdir[agent] = {}
+    wunschdir[agent]["standort"] = neben_oder_kern[agent]["standort"]
+    wunschdir[agent]["calls"] = { key: value for key, value in neben_oder_kern[agent]["calls"].items() if key.month == monat } # BEI RANGE gilt immer die zweite Zahl NICHT included. Range fuer 2 ist 2,3 !!!
+    #wunschdir[agent]["calls"] = { key: value for key, value in neben_oder_kern[agent]["calls"].items() if key.month == monat }
+    return wunschdir
 
 
 
@@ -212,23 +237,34 @@ filesdir,targetfile = check_cmdline_params()
 agentsfiles = get_agent_reports(filesdir)
 weeks = {}
 months = {}
-
 # create_report_by_week(agentsfiles) # this produces a dictionary that can be used for weekly output
+all_data=create_dic_from_all_files(agentsfiles) ## this will gives us every row of every agents_stats file available into one big dict
+data_kernzeit, data_nebenzeit = split_zeiten(all_data)  ## now we have two separate dicts for kern and nebenzeit
 
+for month in range(1,3):    # RANGE CUTS THE LAST ELEMENT! so it's always range (start, end+1)!
+    monthname = calendar.month_abbr[month]
+    mname = calendar.month_abbr[month]
+    for agent in data_nebenzeit.keys():
+        monthname = datenfilter_per_monat(agent, month, data_nebenzeit)
+        if not monthname[agent]["calls"]:
+            print (str(agent) + " is empty HAS BEEN REMOVED")
+            del monthname[agent]
+            continue
+        print ("daten fuer " + agent + " in nebenzeit" + mname + " :" + str(month)),
+        print len(monthname[agent]["calls"])   # This result is correct
 
-all_data=create_report_by_month(agentsfiles)
-print 
+    for agent in data_kernzeit.keys():
+        monthname = datenfilter_per_monat(agent, month, data_nebenzeit)
+        if not monthname[agent]["calls"]:
+            print (str(agent) + " is empty HAS BEEN REMOVED")
+            del monthname[agent]
+            continue
+        print ("daten fuer " + agent + " in kernzeit" + mname + " :" + str(month)),
+        print len(monthname[agent]["calls"])   # This result is correct
+        print monthname
+print monthname
 
-for agent in sorted(all_data):
-    for entry in all_data[agent]["calls"]:
-        if entry.day == 6 and entry.month == 2 and agent == "tetzlva":
-            if 11 <= entry.hour <=19:
-                print agent, entry.day
-                print entry,
-                print all_data[agent]["calls"][entry]
-
-
-print type(parseminutes(1372.75))
+## ! now to do : thinking of what to do with data ;-)
 
 #####################  START WRITEOUT ####################
 
