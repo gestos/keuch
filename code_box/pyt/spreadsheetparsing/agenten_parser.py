@@ -125,37 +125,6 @@ def get_agent_reports(filesdir):
             agentsfiles.append(i)
     return agentsfiles
 
-def create_report_by_week(agentsfiles):
-    for i in agentsfiles:
-
-        full_file = os.path.join(filesdir,i)
-        input_sheet = xlrd.open_workbook(full_file, formatting_info=True).sheet_by_index(0)
-
-        if "agent_stats" not in check_sheet_type(input_sheet): # determine by title-cell (always 0,0) what type of datasheet this is
-            print("not an agent report sheet, skipping")
-            exit()
-
-        rows_read, cols_read = input_sheet.nrows, input_sheet.ncols
-        startrow = 4            #die ersten 4 sind der fixe header, Daten beginnen bei Reihe 5 (in xlrd mit index 0 = 4)
-        endrow = rows_read-1    #letzte Reihe ist eine "Summe"-Reihe, Daten enden eine Reihe darueber
-        sheet_startdate = parsedate(input_sheet.cell(1,1)) # gives a set of date-object(YY,MM,DD) xlint, calendarweek
-        sheet_enddate = parsedate(input_sheet.cell(2,1))
-        sheet_calweek = "%0*d" % (2, parsedate(input_sheet.cell(1,1))[2]) # calendar week with a leading zero
-
-        weeks[sheet_calweek] = {}
-
-        vorhandene_agenten = get_uniq_agents(startrow, endrow, input_sheet)
-        ag_dic = {}
-
-        for i in vorhandene_agenten:
-            agent_kuerzel = i[2:9]
-            agent_standor = i[0]
-            ag_dic[agent_kuerzel] = {}
-            ag_dic[agent_kuerzel]["standort"] = agent_standor
-
-        average_stats(sheet_calweek, ag_dic, startrow, endrow, input_sheet)
-        #### use return values from average_stats() to fill dictionary ####
-        weeks[sheet_calweek] = ag_dic
 
 def create_dic_from_all_files(agentsfiles):
     ag_monthly_dic = {}
@@ -218,104 +187,180 @@ def split_zeiten(all_data):
     return kernzeit, nebenzeit
 
 
-def create_month_dictionaries():
-    months = {}
-    for monat in range(1,13):    # RANGE CUTS THE LAST ELEMENT! so it's always range (start, end+1)!
-        monthname = calendar.month_abbr[monat]
-        months[monthname] = {}
-        months[monthname]["nebenzeit"] = {}
-        months[monthname]["kernzeit"] = {}
-    return months
+def filter_weeks(startwoche, endwoche, source_dict):
+    target_dict = {}    # empty dictionary to be filled and returned
+    for woche in range(startwoche, endwoche+1):
+        target_dict[woche] = {}
+        for agent in source_dict:
+            target_dict[woche][agent] = {}
+            target_dict[woche][agent]["total"] = {}
+            target_dict[woche][agent]["average"] = {}
+            anrufe, abgebr, gesamtzeit, gespraechszeit, nacharbeitszeit = ([] for i in range(5))
+            for timestamp in source_dict[agent]["calls"]:
+                if source_dict[agent]["calls"][timestamp][0] == woche:
+                    dataset = source_dict[agent]["calls"][timestamp]
+                    anrufe.append(dataset[1]), abgebr.append(dataset[2]), gesamtzeit.append(dataset[3]), gespraechszeit.append(dataset[4]), nacharbeitszeit.append(dataset[5])
+            agent_total_woche = list()
+            agent_average_woche = list()
 
-def kernzeit_fuer_monat(monat_nummer, months_dic):
-    monthname = calendar.month_abbr[monat_nummer]
-    for agent in data_kernzeit.keys():
-        for dataset in data_kernzeit[agent]["calls"]:
-            if dataset.month == monat_nummer:
-                if not agent in months_dic[monthname]["kernzeit"]:
-                    months_dic[monthname]["kernzeit"][agent] = dict()
-                    months_dic[monthname]["kernzeit"][agent]["calls"] = dict()
-                    months_dic[monthname]["kernzeit"][agent]["calls"][dataset] = data_kernzeit[agent]["calls"][dataset]
-                else:
-                    months_dic[monthname]["kernzeit"][agent]["calls"][dataset] = data_kernzeit[agent]["calls"][dataset]
-    return months_dic
+            for field in [anrufe, abgebr, gesamtzeit, gespraechszeit, nacharbeitszeit]:
+                agent_total_woche.append(sum(field))
+            if agent_total_woche[0] == 0:
+                del target_dict[woche][agent] # von diesem Agenten wurden keine Anrufe angenommen, also fliegt er aus dem dictionary
+            else:
+                target_dict[woche][agent]["total"] = agent_total_woche
 
-def nebenzeit_fuer_monat(monat_nummer, months_dic):
-    monthname = calendar.month_abbr[monat_nummer]
-    for agent in data_nebenzeit.keys():
-        for dataset in data_nebenzeit[agent]["calls"]:
-            if dataset.month == monat_nummer:
-                if not agent in months_dic[monthname]["nebenzeit"]:
-                    months_dic[monthname]["nebenzeit"][agent] = dict()
-                    months_dic[monthname]["nebenzeit"][agent]["calls"] = dict()
-                    months_dic[monthname]["nebenzeit"][agent]["calls"][dataset] = data_nebenzeit[agent]["calls"][dataset]
-                else:
-                    months_dic[monthname]["nebenzeit"][agent]["calls"][dataset] = data_nebenzeit[agent]["calls"][dataset]
-    return months_dic
+                anrufe_woche = sum(anrufe)
+                av_gesamt = sum(gesamtzeit)/anrufe_woche
+                av_telefon = sum(gespraechszeit)/anrufe_woche
+                av_nacharb = sum(nacharbeitszeit)/anrufe_woche
+
+                agent_average_woche.extend((av_gesamt, av_telefon, av_nacharb))
+                target_dict[woche][agent]["average"] = agent_average_woche
+
+
+        if not target_dict[woche]:
+            del target_dict[woche]
+    return target_dict
+
+def filter_months(startmonat, endmonat, source_dict):
+    target_dict = {}    # empty dictionary to be filled and returned
+    for monat in range(startmonat, endmonat+1):
+        target_dict[monat] = {}
+        for agent in source_dict:
+            target_dict[monat][agent] = {}
+            target_dict[monat][agent]["total"] = {}
+            target_dict[monat][agent]["average"] = {}
+            anrufe, abgebr, gesamtzeit, gespraechszeit, nacharbeitszeit = ([] for i in range(5))
+            for timestamp in source_dict[agent]["calls"]:
+                if timestamp.month == monat:
+                    dataset = source_dict[agent]["calls"][timestamp]
+                    anrufe.append(dataset[1]), abgebr.append(dataset[2]), gesamtzeit.append(dataset[3]), gespraechszeit.append(dataset[4]), nacharbeitszeit.append(dataset[5])
+            agent_total_monat = list()
+            agent_average_monat = list()
+
+            for field in [anrufe, abgebr, gesamtzeit, gespraechszeit, nacharbeitszeit]:
+                agent_total_monat.append(sum(field))
+            if agent_total_monat[0] == 0:
+                del target_dict[monat][agent] # von diesem Agenten wurden keine Anrufe angenommen, also fliegt er aus dem dictionary
+            else:
+                target_dict[monat][agent]["total"] = agent_total_monat
+
+                anrufe_monat = sum(anrufe)
+                av_gesamt = sum(gesamtzeit)/anrufe_monat
+                av_telefon = sum(gespraechszeit)/anrufe_monat
+                av_nacharb = sum(nacharbeitszeit)/anrufe_monat
+
+                agent_average_monat.extend((av_gesamt, av_telefon, av_nacharb))
+                target_dict[monat][agent]["average"] = agent_average_monat
+
+
+        if not target_dict[monat]:
+            del target_dict[monat]
+    return target_dict
+
+def write_out(zeit_dict):
+
+    if zeit_dict == weeks["kernzeit"]:
+        sheet = target_workbook_writeable.get_sheet(0)
+        startrow = target_workbook.sheet_by_index(0).nrows+1
+        style_header1   = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color head_kern1')
+        style_header2   = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color head_kern2')
+    elif zeit_dict == weeks["nebenzeit"]:
+        sheet = target_workbook_writeable.get_sheet(1)
+        startrow = target_workbook.sheet_by_index(1).nrows+1
+        style_header1   = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color head_neben1')
+        style_header2   = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color head_neben2')
+    elif zeit_dict == weeks["kern+neben"]:
+        sheet = target_workbook_writeable.get_sheet(2)
+        startrow = target_workbook.sheet_by_index(2).nrows+1
+        style_header1   = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color head_gesamt1')
+        style_header2   = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color head_gesamt2')
+
+    ask = raw_input("do you really want to overwrite [y/n]")[:1]
+    if not ask.lower() == 'y':
+        print("ok; bye :-)")
+        exit()
+
+    else:
+        for calweek_k in sorted(zeit_dict):
+            sheet.write(startrow, 0, "", style_header2)   #Woche
+            sheet.write(startrow, 1, "Kalenderwoche", style_header2)   #Woche
+            sheet.write(startrow, 2, calweek_k, style_header2)   #Woche
+            sheet.write(startrow, 3, "", style_header2)   #Woche
+            sheet.write(startrow, 4, "", style_header2)   #Woche
+            sheet.write(startrow, 5, "", style_header2)   #Woche
+            startrow += 1
+            sheet.write(startrow, 0, "Standort", style_header1)
+            sheet.write(startrow, 1, "Agent", style_header1)
+            sheet.write(startrow, 2, "Angenommene", style_header1)
+            sheet.write(startrow, 3, "Ges.Zeit", style_header1)
+            sheet.write(startrow, 4, "Tel.Zeit", style_header1)
+            sheet.write(startrow, 5, "Nachb.Zeit", style_header1)
+            startrow += 1
+            for agent in sorted(zeit_dict[calweek_k].keys()):
+                excelzeit=list()
+                for zeit in zeit_dict[calweek_k][agent]['average']:
+                    excelzeit.append(zeit/1440)
+
+                sheet.write(startrow, 0, all_data[agent]["standort"], style_week)    #Standort
+                sheet.write(startrow, 1, agent, style_week)    #Agent
+                sheet.write(startrow, 2, zeit_dict[calweek_k][agent]["total"][0], style_week)    #Anzahl der angenommenen
+                sheet.write(startrow, 3, excelzeit[0], style_times)    # Av_Gesamtzeit
+                sheet.write(startrow, 4, excelzeit[1], style_times)    #Av_Telefonzeit
+                sheet.write(startrow, 5, excelzeit[2], style_times)    #Av_Nacharbeit
+                startrow += 1
+            startrow += 1
+    target_workbook_writeable.save(targetfile)
 ##########################################################################
 ##############START OF PROGRAM############################################
 ##########################################################################
 
 filesdir,targetfile = check_cmdline_params()
 agentsfiles = get_agent_reports(filesdir)
-weeks = {}
-months = create_month_dictionaries()
 all_data=create_dic_from_all_files(agentsfiles) ## this will gives us every row of every agents_stats file available into one big dict
+alle_agenten=all_data.keys()
 data_kernzeit, data_nebenzeit = split_zeiten(all_data)  ## now we have two separate dicts for kern and nebenzeit
 
-for i in range(1,12):
-    months = nebenzeit_fuer_monat(i, months)
-    months = kernzeit_fuer_monat(i, months)      # NOW we have a "months" dictionary with all months inside. each month has kern- and nebenzeit. each kern- or nebenzeit has agents and their calls inside
+weeks = {}
+weeks["kernzeit"] = filter_weeks(1, 53, data_kernzeit)  # hier bitte noch bei der all_data generierung die start-kalenderwoche und die max_kalenderwoche rausholen
+weeks["nebenzeit"] = filter_weeks(1, 53, data_nebenzeit)
+weeks["kern+neben"] = filter_weeks(1, 53, all_data)
 
-for agent in months["Jan"]["nebenzeit"]:
-    print (agent + " Januar Nebenzeit Datensaetze: "),
-    print len(months["Jan"]["nebenzeit"][agent]["calls"])
-    datensaetze = list()
-    for dataset in range(0,len(months["Jan"]["nebenzeit"][agent]["calls"])):
-        datensaetze.append(months["Jan"]["nebenzeit"][agent]["calls"].values()[dataset][1])
-    print (" calls: " + str(sum(datensaetze)))
+months = {}
+months["kernzeit"] = filter_months(1, 3, data_kernzeit)
+months["nebenzeit"] = filter_months(1, 3, data_nebenzeit)
+months["kern+neben"] = filter_months(1, 3, all_data)
 
-print
-for agent in months["Jan"]["kernzeit"]:
-    print (agent + "Januar Kernzeit: "),
-    print len(months["Jan"]["kernzeit"][agent]["calls"])
-
-print ("bitte mal von Hand nachzaehlen").upper()
-## ! now to do : thinking of what to do with data ;-)
 
 #####################  START WRITEOUT ####################
 
 
 
-target_workbook = xlrd.open_workbook(targetfile, formatting_info=True)
-target_workbook_writeable = xlcopy.copy(target_workbook)
-targetsheet = target_workbook.sheet_by_index(0)
-sheet_rw = target_workbook_writeable.get_sheet(0)
-start_writing = targetsheet.nrows
-
-style_week              = xlwt.easyxf('alignment: horiz centre')
-style_times           = xlwt.easyxf('alignment: horiz centre', num_format_str = "HH:MM:SS")
+target_workbook = xlrd.open_workbook(targetfile, formatting_info=True)  # this is the file
+target_workbook_writeable = xlcopy.copy(target_workbook)                # a copy is needed to write into
 
 
-def write_out(startrow):
-    ask = raw_input("do you really want that? [y/n]")[:1]
-    if not ask.lower() == 'y':
-        print("ok; bye :-)")
-        exit()
-    else:
-        for calweek in sorted(weeks):
-            for agent in sorted(weeks[calweek].keys()):
-                sheet_rw.write(startrow, 0, calweek, style_week)   #Woche
-                sheet_rw.write(startrow, 1, weeks[calweek][agent]["standort"], style_week)    #Standort
-                sheet_rw.write(startrow, 2, agent, style_week)    #Standort
-                sheet_rw.write(startrow, 3, weeks[calweek][agent]["calls"], style_week)    #Standort
-                sheet_rw.write(startrow, 4, weeks[calweek][agent]["ges_bea"], style_times)    #Standort
-                sheet_rw.write(startrow, 5, weeks[calweek][agent]["av_verbindung"], style_times)    #Standort
-                sheet_rw.write(startrow, 6, weeks[calweek][agent]["av_nacharbeit"], style_times)    #Standort
-                sheet_rw.write(startrow, 7, weeks[calweek][agent]["av_bearbeitung"], style_times)    #Standort
-                startrow += 1
-            startrow += 1
-        target_workbook_writeable.save(targetfile)
+xlwt.add_palette_colour("head_kern1", 0x21)
+target_workbook_writeable.set_colour_RGB(0x21, 106, 188, 255)
+xlwt.add_palette_colour("head_kern2", 0x22)
+target_workbook_writeable.set_colour_RGB(0x22, 171, 218, 255)
+xlwt.add_palette_colour("head_neben1", 0x23)
+target_workbook_writeable.set_colour_RGB(0x23, 236, 171, 255)
+xlwt.add_palette_colour("head_neben2", 0x24)
+target_workbook_writeable.set_colour_RGB(0x24, 227, 133, 255)
+xlwt.add_palette_colour("head_gesamt1", 0x25)
+target_workbook_writeable.set_colour_RGB(0x25, 169, 255, 133)
+xlwt.add_palette_colour("head_gesamt2", 0x26)
+target_workbook_writeable.set_colour_RGB(0x26, 131, 255, 79)
 
-#write_out(start_writing)
+style_week      = xlwt.easyxf('alignment: horiz centre')
+style_times     = xlwt.easyxf('alignment: horiz centre', num_format_str = "HH:MM:SS")
+
+
+
+
+write_out(weeks["kernzeit"])
+write_out(weeks["nebenzeit"])
+write_out(weeks["kern+neben"])
 

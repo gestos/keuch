@@ -1,12 +1,5 @@
 #!/usr/bin/python
-import os
-import csv
-import math
-import shutil
-import xlrd
-import re
-import sys
-import xlwt
+import os, csv, math, shutil, xlrd, re, sys, xlwt
 from natsort import natsorted, ns
 from xlwt import Formula
 from xlutils import copy as xlcopy
@@ -14,7 +7,11 @@ from colorama import Fore as coly, Style as coln
 from datetime import datetime,date
 
 def check_cmdline_params():
-    if len(sys.argv) != 2:
+    if len(sys.argv) == 1:
+        print ("Verwendung: entweder eine Datei oder einen ganzen Ordner als Parameter eingeben")
+        print ("Programm sucht nach Excel-Dateien, identifiziert die Art des Reports und benennt die Datei anhand des vorgefundenen Datums um")
+        exit()
+    elif len(sys.argv) != 2:
         print(sys.argv[0] +" will take one argument: either a $DIR or a $FILE to process")
         exit()
     elif os.path.isfile(sys.argv[1]):
