@@ -120,14 +120,18 @@ def check_sheet_type(sheet):
 
 def get_agent_reports(filesdir):
     agentsfiles = list()
+    print ("searching files called 'Agenten_Stats...'"),
     for i in os.listdir(filesdir):
         if i.startswith("Agenten_Stats"):
+            print ("found "+str(i)+" "),
             agentsfiles.append(i)
+    print
     return agentsfiles
 
 
 def create_dic_from_all_files(agentsfiles):
     ag_monthly_dic = {}
+    weeks_found = set()
     vorhandene_agenten = get_uniq_agents_multi(agentsfiles)
 
     for agent in vorhandene_agenten:
@@ -157,6 +161,7 @@ def create_dic_from_all_files(agentsfiles):
                     timestamp=parsedate_full(input_sheet.cell(row,0))
                     datum=timestamp.strftime("%Y-%b-%d %H")
                     calweek = timestamp.isocalendar()[1]
+                    weeks_found.add(calweek)
                     calls_this_hour=int(input_sheet.cell(row,4).value)
                     abgebrochne=int(input_sheet.cell(row,22).value)
                     bearbeitung=input_sheet.cell(row,24).value # die Zeiten bleiben nach dem Komma dezimal; geschrieben wird am Ende als Bruch /1440 = excel interne floating zahl, die eine Zeit ergibt
@@ -164,7 +169,7 @@ def create_dic_from_all_files(agentsfiles):
                     nacharbeit=bearbeitung-verbindung
                     ag_monthly_dic[agent]["calls"][timestamp] = [calweek, calls_this_hour, abgebrochne, bearbeitung, verbindung, nacharbeit]
 
-    return ag_monthly_dic
+    return ag_monthly_dic, weeks_found
 
 def split_zeiten(all_data):
     kernzeit = {}
@@ -277,13 +282,23 @@ def write_out(zeit_dict):
         style_header1   = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color head_gesamt1')
         style_header2   = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color head_gesamt2')
 
+    weeks_in_dict = set()
+    weeks_in_dict = set(sorted(zeit_dict))
+
+    if max(weeks_in_dict) > max(weeks_in_target):
+        print ("new weeks found")
+        weeks_to_write = weeks_in_dict.difference(weeks_in_target)
+    else:
+        print (str(weeks_in_target)+" weeks are already present, nothing to write")
+        exit()
+
     ask = raw_input("do you really want to overwrite [y/n]")[:1]
     if not ask.lower() == 'y':
         print("ok; bye :-)")
         exit()
 
     else:
-        for calweek_k in sorted(zeit_dict):
+        for calweek_k in sorted(weeks_to_write):
             sheet.write(startrow, 0, "", style_header2)   #Woche
             sheet.write(startrow, 1, "Kalenderwoche", style_header2)   #Woche
             sheet.write(startrow, 2, calweek_k, style_header2)   #Woche
@@ -312,15 +327,29 @@ def write_out(zeit_dict):
                 startrow += 1
             startrow += 1
     target_workbook_writeable.save(targetfile)
+
+def find_target_maxweek(book_to_write_to):
+    all_times = book_to_write_to.sheet_by_index(2)
+    rows = all_times.nrows
+    weeks_found_in_target = set()
+    if not rows:
+        print("nothing there")
+        weeks_found_in_target.add(0)
+    for row in range(0,rows):
+        if "Kalenderwoche" in all_times.cell(row,1).value:
+            weeks_found_in_target.add(int(all_times.cell(row,2).value))
+        else:
+            weeks_found_in_target.add(0)
+    return weeks_found_in_target
 ##########################################################################
 ##############START OF PROGRAM############################################
 ##########################################################################
 
-filesdir,targetfile = check_cmdline_params()
-agentsfiles = get_agent_reports(filesdir)
-all_data=create_dic_from_all_files(agentsfiles) ## this will gives us every row of every agents_stats file available into one big dict
-alle_agenten=all_data.keys()
-data_kernzeit, data_nebenzeit = split_zeiten(all_data)  ## now we have two separate dicts for kern and nebenzeit
+filesdir,targetfile         = check_cmdline_params()
+agentsfiles                 = get_agent_reports(filesdir)
+all_data,weeks_found        = create_dic_from_all_files(agentsfiles) ## this will gives us every row of every agents_stats file available into one big dict
+alle_agenten                = all_data.keys()
+data_kernzeit,data_nebenzeit = split_zeiten(all_data)  ## now we have two separate dicts for kern and nebenzeit
 
 weeks = {}
 weeks["kernzeit"] = filter_weeks(1, 53, data_kernzeit)  # hier bitte noch bei der all_data generierung die start-kalenderwoche und die max_kalenderwoche rausholen
@@ -339,6 +368,12 @@ months["kern+neben"] = filter_months(1, 3, all_data)
 
 target_workbook = xlrd.open_workbook(targetfile, formatting_info=True)  # this is the file
 target_workbook_writeable = xlcopy.copy(target_workbook)                # a copy is needed to write into
+
+
+weeks_in_target=find_target_maxweek(target_workbook)
+print type(weeks_in_target)
+print weeks_in_target
+
 
 
 xlwt.add_palette_colour("head_kern1", 0x21)
