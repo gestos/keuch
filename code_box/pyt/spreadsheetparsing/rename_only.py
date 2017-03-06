@@ -55,6 +55,14 @@ def rename_xls(excelfile):
         euroFilename = os.path.join(directory,filenew)
         print('Renaming "%s" to "%s"...' % (excelfile, euroFilename))
         shutil.move(excelfile, euroFilename)   # uncomment after testing
+    elif filename_only.startswith("CE_alles_ta"):
+        input_sheet = xlrd.open_workbook(excelfile, formatting_info=True).sheet_by_index(0)
+        datecell = input_sheet.cell(1,1).value
+        date_day = str(parsedate(datecell)[0]) # calendar week with a leading zero
+        filenew=("CE_alle_Agenten_taeglich_"+date_day+str(extension))
+        euroFilename = os.path.join(directory,filenew)
+        print('Renaming "%s" to "%s"...' % (excelfile, euroFilename))
+        shutil.move(excelfile, euroFilename)   # uncomment after testing
         ##### !!!!! Exception Handling !!!! This will just always overwrite with the newest file !! ######
     else:
         print

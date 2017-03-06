@@ -30,29 +30,40 @@ def parsedate_full(daily_sheet_cell): # turn crap date into nice date
     date_objt = datetime.strptime(date_clea, "%d.%m.%Y.%H") # this is a python datetime.date object
     return date_objt
 
-def filerows_into_dict(daily_file,filldict):
+def filerows_into_dict(daily_file,filldict,index_dict):
     sheet = xlrd.open_workbook(daily_file, formatting_info=True).sheet_by_index(0)
     rows_start = 4
     rows_end = sheet.nrows
     id_num = re.compile(r'.*\b(\d\d*)$')
+    rowsofdict = len(filldict)  # we'll have an index of the overall rows
     for i in range(rows_start,rows_end-1):
+        rowsofdict += 1
         timestamp = parsedate_full(sheet.cell(i,0).value) # this will be the dictionary key as it is the unique overall key
+        filldict[rowsofdict] = {}
+        filldict[rowsofdict]["timestamp"] = timestamp
         idnummer = int(id_num.match(sheet.cell(i,1).value).group(1).strip())
+        filldict[rowsofdict]["bearbeiter"] = agent_ids[idnummer]
+        filldict[rowsofdict]["calweek"] = timestamp.isocalendar()[1]
+        filldict[rowsofdict]["weekday"] = timestamp.strftime("%a")
+        filldict[rowsofdict]["year"] = timestamp.year
+        filldict[rowsofdict]["month"] = timestamp.strftime("%b")
+        filldict[rowsofdict]["day"] = timestamp.day
+        filldict[rowsofdict]["hour"] = timestamp.hour
+        if 11 <= timestamp.hour <=19:
+            filldict[rowsofdict]["bzeit"] = "kern"
+        else:
+            filldict[rowsofdict]["bzeit"] = "neben"
+        filldict[rowsofdict]["ang_anrufe"] = int(sheet.cell(i,4).value)
+        filldict[rowsofdict]["gesamt"] = sheet.cell(i,24).value
+        filldict[rowsofdict]["verbindung"] = sheet.cell(i,29).value
 
-        if not idnummer in filldict.keys():
-            filldict[idnummer] = {}
+        index_dict["agents_actual"].add(idnummer)
+        index_dict["weeks"].add(timestamp.isocalendar()[1])
+        index_dict["years"].add(timestamp.year)
+        index_dict["months"].add(timestamp.strftime("%b"))
+        index_dict["days"].add(timestamp.day)
 
-        filldict[idnummer][timestamp] = {}
-        filldict[idnummer][timestamp]["calweek"] = timestamp.isocalendar()[1]
-        filldict[idnummer][timestamp]["weekday"] = timestamp.strftime("%a")
-        filldict[idnummer][timestamp]["year"] = timestamp.year
-        filldict[idnummer][timestamp]["month"] = timestamp.strftime("%b")
-        filldict[idnummer][timestamp]["day"] = timestamp.day
-        filldict[idnummer][timestamp]["hour"] = timestamp.hour
-        filldict[idnummer][timestamp]["ang_anrufe"] = int(sheet.cell(i,4).value)
-        filldict[idnummer][timestamp]["gesamt"] = sheet.cell(i,24).value
-        filldict[idnummer][timestamp]["verbindung"] = sheet.cell(i,29).value
-    return filldict
+    return filldict, index_dict
 #date_of_sheet = parsedate(sheet.cell(1,1).value)
 #print date_of_sheet
 ##########################################################################
@@ -61,13 +72,20 @@ def filerows_into_dict(daily_file,filldict):
 # agent_ids needs to be passed as a parameter and on return will be updated with new entries if they don't already exist
 # will be updated for every file / every run
 agent_ids=dict()
-dict_of_everything = dict()
-agent_ids = get_cw_ma(sys.argv[1], agent_ids)
-agent_ids = get_cw_ma(sys.argv[2], agent_ids)
+doe = dict()    # dict of everything
+index_dict = dict()
+index_dict["years"] = set()
+index_dict["months"] = set()
+index_dict["weeks"] = set()
+index_dict["days"] = set()
+index_dict["agents_actual"] = set()
 
-dict_of_everything = filerows_into_dict(sys.argv[1],dict_of_everything)
-dict_of_everything = filerows_into_dict(sys.argv[2],dict_of_everything)
-print type(dict_of_everything)
-for i in sorted(dict_of_everything.keys()):
-    print i,
-    print dict_of_everything[i].keys()
+agent_ids = get_cw_ma(sys.argv[1], agent_ids)
+
+doe,index_dict = filerows_into_dict(sys.argv[1],doe,index_dict)
+
+for day in index_dict["days"]:
+    print day
+    for entry in doe:
+        if doe[entry]["day"] == day:
+            print doe[entry]
