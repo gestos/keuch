@@ -72,7 +72,7 @@ def filerows_into_dict(daily_file,filldict,index_dict):
 # agent_ids needs to be passed as a parameter and on return will be updated with new entries if they don't already exist
 # will be updated for every file / every run
 agent_ids=dict()
-doe = dict()    # dict of everything
+doe = dict()    # dict of everything, from here all selections (by agent, by agent and date, by hours etc) are possible
 index_dict = dict()
 index_dict["years"] = set()
 index_dict["months"] = set()
@@ -81,11 +81,15 @@ index_dict["days"] = set()
 index_dict["agents_actual"] = set()
 
 agent_ids = get_cw_ma(sys.argv[1], agent_ids)
-
 doe,index_dict = filerows_into_dict(sys.argv[1],doe,index_dict)
 
-for day in index_dict["days"]:
-    print day
-    for entry in doe:
-        if doe[entry]["day"] == day:
-            print doe[entry]
+neben = {day:doe[day] for day in doe if doe[day]["bzeit"] == "neben" }
+kern = {day:doe[day] for day in doe if doe[day]["bzeit"] == "kern" }
+
+for agent in index_dict["agents_actual"]:
+    print
+    print agent_ids[agent]
+    for data in neben:
+        if neben[data]["bearbeiter"]["kuerzel"] == agent_ids[agent]["kuerzel"]:
+            print neben[data]
+
