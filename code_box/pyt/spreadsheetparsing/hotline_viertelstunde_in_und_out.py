@@ -10,6 +10,7 @@ import datetime
 def check_cmdline_params():
     if len(sys.argv) != 4:
         print(sys.argv[0] +" needs three parameters in the following order: $SOURCEFILE_INBOUND, $SOURCEFILE_OUTBOUND to read from and $TARGETFILE to write to")
+        print("will produce in- and outbound daily stats for connected and lost calls, separate for acd/acw; takes one date at a time")
         exit()
     elif not os.path.isfile(sys.argv[1]):
         print(sys.argv[1] + " is not a regular file")

@@ -26,6 +26,7 @@ def get_cw_ma(ma_file, agent_id_set):
 def check_cmdline_params():
     if len(sys.argv) != 3:
         print(sys.argv[0] +" needs two parameters in the following order: $DIR where xls files lie and an xls $FILE to write into.")
+        print("will produce acd and acw stats for each agent in calendar-week blocks")
         exit()
     elif not os.path.isdir(sys.argv[1]):
         print(sys.argv[1] + " is not a directory")

@@ -28,7 +28,7 @@ def check_cmdline_params():
 flag=check_cmdline_params()
 
 def parsedate(daily_sheet_cell): # turn crap date into nice date
-    date_crap = daily_sheet_cell # comes like this from upstream, date always lives at 1,1
+    date_crap = daily_sheet_cell.strip() # comes like this from upstream, date always lives at 1,1
     date_clea = re.sub(r' ', '.', date_crap[:10]) # transform to a string that strptime can parse
     date_objt = datetime.strptime(date_clea, "%d.%m.%Y").date() # this is a python datetime.date object
     xlint = (date_objt - date(1899, 12, 30)).days # this is an integer that excel uses internally
@@ -60,6 +60,14 @@ def rename_xls(excelfile):
         datecell = input_sheet.cell(1,1).value
         date_day = str(parsedate(datecell)[0]) # calendar week with a leading zero
         filenew=("CE_alle_Agenten_taeglich_"+date_day+str(extension))
+        euroFilename = os.path.join(directory,filenew)
+        print('Renaming "%s" to "%s"...' % (excelfile, euroFilename))
+        shutil.move(excelfile, euroFilename)   # uncomment after testing
+    elif filename_only.startswith("CE_Out_taeglich"):
+        input_sheet = xlrd.open_workbook(excelfile, formatting_info=True).sheet_by_index(0)
+        datecell = input_sheet.cell(1,1).value
+        date_day = str(parsedate(datecell)[0]) # calendar week with a leading zero
+        filenew=("CE_Outbound_"+date_day+str(extension))
         euroFilename = os.path.join(directory,filenew)
         print('Renaming "%s" to "%s"...' % (excelfile, euroFilename))
         shutil.move(excelfile, euroFilename)   # uncomment after testing
