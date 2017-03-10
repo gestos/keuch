@@ -65,6 +65,8 @@ def rename_xls(excelfile):
         renamefile("1458_daily_")
     elif filename_only.startswith("CE_Out_taeglich"):
         renamefile("CE_Outbound_")
+    elif filename_only.startswith("CE_alles_taeglich_83"):
+        renamefile("CE_alle_Agenten_taeglich_")
     else:
         print(".")
 
