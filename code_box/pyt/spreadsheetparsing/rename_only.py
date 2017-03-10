@@ -38,84 +38,44 @@ def parsedate(daily_sheet_cell): # turn crap date into nice date
 def rename_xls(excelfile):
     directory,filename_only=(os.path.split(excelfile))
     extension=(os.path.splitext(filename_only)[1])
-    if filename_only.startswith("Carexpert_Agent_Gesing"):
+
+    def renamefile_kw(newprefix,KW=None):
         input_sheet = xlrd.open_workbook(excelfile, formatting_info=True).sheet_by_index(0)
         datecell = input_sheet.cell(1,1).value
         calweek = "%0*d" % (2, parsedate(datecell)[2]) # calendar week with a leading zero
         year = str(parsedate(datecell)[0]) # calendar week with a leading zero
-        filenew=("Agenten_Stats_"+year[:4]+"_KW"+str(calweek)+str(extension))
+        filenew=(newprefix+year[:4]+KW+str(calweek)+str(extension))
         euroFilename = os.path.join(directory,filenew)
         print('Renaming "%s" to "%s"...' % (excelfile, euroFilename))
         shutil.move(excelfile, euroFilename)   # uncomment after testing
+
+    def renamefile(newprefix):
+        input_sheet = xlrd.open_workbook(excelfile, formatting_info=True).sheet_by_index(0)
+        datecell = input_sheet.cell(1,1).value
+        date_day = str(parsedate(datecell)[0]) # calendar week with a leading zero
+        filenew=(newprefix+date_day+str(extension))
+        euroFilename = os.path.join(directory,filenew)
+        print('Renaming "%s" to "%s"...' % (excelfile, euroFilename))
+        shutil.move(excelfile, euroFilename)   # uncomment after testing
+
+
+    if filename_only.startswith("Carexpert_Agent_Gesing"):
+        renamefile_kw("Agenten_Stats_","_KW")
     elif filename_only.startswith("Hotlineber1458"):
-        input_sheet = xlrd.open_workbook(excelfile, formatting_info=True).sheet_by_index(0)
-        datecell = input_sheet.cell(1,1).value
-        date_day = str(parsedate(datecell)[0]) # calendar week with a leading zero
-        filenew=("1458_daily_"+date_day+str(extension))
-        euroFilename = os.path.join(directory,filenew)
-        print('Renaming "%s" to "%s"...' % (excelfile, euroFilename))
-        shutil.move(excelfile, euroFilename)   # uncomment after testing
-    elif filename_only.startswith("CE_alles_ta"):
-        input_sheet = xlrd.open_workbook(excelfile, formatting_info=True).sheet_by_index(0)
-        datecell = input_sheet.cell(1,1).value
-        date_day = str(parsedate(datecell)[0]) # calendar week with a leading zero
-        filenew=("CE_alle_Agenten_taeglich_"+date_day+str(extension))
-        euroFilename = os.path.join(directory,filenew)
-        print('Renaming "%s" to "%s"...' % (excelfile, euroFilename))
-        shutil.move(excelfile, euroFilename)   # uncomment after testing
+        renamefile("1458_daily_")
     elif filename_only.startswith("CE_Out_taeglich"):
-        input_sheet = xlrd.open_workbook(excelfile, formatting_info=True).sheet_by_index(0)
-        datecell = input_sheet.cell(1,1).value
-        date_day = str(parsedate(datecell)[0]) # calendar week with a leading zero
-        filenew=("CE_Outbound_"+date_day+str(extension))
-        euroFilename = os.path.join(directory,filenew)
-        print('Renaming "%s" to "%s"...' % (excelfile, euroFilename))
-        shutil.move(excelfile, euroFilename)   # uncomment after testing
-        ##### !!!!! Exception Handling !!!! This will just always overwrite with the newest file !! ######
+        renamefile("CE_Outbound_")
     else:
-        print
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        print(".")
 
 
 if "single" in flag:
     print ("rename the file")
     rename_xls(sys.argv[1])
-
-
-
-
-
-
 elif "multi" in flag:
     print ("begin processing dir")
     fullpath=os.path.abspath(sys.argv[1])
     allfiles=os.listdir(fullpath)
     for i in allfiles:
-        print(i)
         fullfile=os.path.join(fullpath,i)
-        print(fullfile)
         rename_xls(fullfile)
-
-
-        

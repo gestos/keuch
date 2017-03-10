@@ -58,7 +58,9 @@ def filerows_into_dict(daily_file,filldict):
             filldict[rowsofdict]["day"] = timestamp.day
             filldict[rowsofdict]["hour"] = timestamp.hour
             filldict[rowsofdict]["minute"] = timestamp.minute
-            if startkern <= timestamp.time() < endkern:
+            if timestamp.weekday() in [5,6]:
+                filldict[rowsofdict]["bzeit"] = "neben"
+            elif startkern <= timestamp.time() < endkern:
                 filldict[rowsofdict]["bzeit"] = "kern"
             else:
                 filldict[rowsofdict]["bzeit"] = "neben"
@@ -113,7 +115,7 @@ def write_out(row):
     xlwt.add_palette_colour("ob_farbe", 0x23)
     target_workbook_writeable.set_colour_RGB(0x23, 255, 255, 178)
     
-    style_datum             = xlwt.easyxf('alignment: horiz right; borders: right double, right_color 0x28, left double, left_color 0x28', num_format_str = "dd.mm.yy")
+    style_datum             = xlwt.easyxf('alignment: horiz right; borders: right double, right_color 0x28, left double, left_color 0x28', num_format_str = "ddd, dd.mm.yy")
     style_calls_k           = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color kern_farbe')
     style_calls_n           = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color neben_farbe')
     style_verlo             = xlwt.easyxf('alignment: horiz centre; font: color gray25')
@@ -167,7 +169,5 @@ startrow = targetsheet.nrows
 
 target_workbook_writeable = xlcopy.copy(target_workbook)
 sheet_rw = target_workbook_writeable.get_sheet(0)
-
-
 
 write_out(startrow)
