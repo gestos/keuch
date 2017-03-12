@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import os, csv, math, xlrd, re, sys, xlwt, calendar
+import os, csv, math, xlrd, re, sys, xlwt, calendar, textwrap
 from natsort import natsorted, ns
 from xlwt import Formula
 from xlutils import copy as xlcopy
@@ -9,8 +9,15 @@ import datetime
 
 def check_cmdline_params():
     if len(sys.argv) != 4:
-        print(sys.argv[0] +" needs three parameters in the following order: $SOURCEFILE_INBOUND, $SOURCEFILE_OUTBOUND to read from and $TARGETFILE to write to")
-        print("will produce in- and outbound daily stats for connected and lost calls, separate for acd/acw; takes one date at a time")
+        print(sys.argv[0])
+        print(textwrap.fill("1. Argument muss eine HOTLINEstatistik (nicht Agenten- oder Terminierungsstatistik) sein. Diese muss viertelstuendlich aufgedroeselt sein, um eine Trennung nach Kern- und Nebenzeiten zu ermoeglichen.",80))
+        print(textwrap.fill("2. Argument muss eine Outbound-AGENTENstatistik sein, hieraus wird die Gesamtzahl der Outboundcalls fuer einen Mandanten gefiltert und nach verbunden/abgebrochen gezaehlt, sowie die Zeiten summiert",80))
+        print
+        print(textwrap.fill("Aus den beiden Dateien (welche jeweils nur einen Tag beinhalten duerfen!) wird eine Zeile aus Inbound-Kernzeit(Anrufe, verlorene Anrufe, Zeiten) und Nebenzeit(ebenda) und Outbound(Anwahlversuche, erfolgreich/nicht erfolgreich, Zeiten) gebaut.",80))
+        print
+        print(textwrap.fill("3. Argument ist die Ziel-Exceldatei, dorthin wird die generierte Zeile unten eingefuegt",80))
+        print
+        print(textwrap.fill("Beispiel mit jetzigem Setup: ./programm[0] test_stats/archiv/1458_daily_2017-03-08.xls[1] test_stats/archiv/CE_Outbound_2017-03-08.xls[2] taegliche_hotline_halbstunden.xls[3] ",280))
         exit()
     elif not os.path.isfile(sys.argv[1]):
         print(sys.argv[1] + " is not a regular file")
@@ -66,9 +73,9 @@ def filerows_into_dict(daily_file,filldict):
                 filldict[rowsofdict]["bzeit"] = "neben"
             filldict[rowsofdict]["angenomme"] = int(sheet.cell(i,2).value)
             filldict[rowsofdict]["verbunden"] = int(sheet.cell(i,3).value)
-            filldict[rowsofdict]["gesamtzei"] = sheet.cell(i,4).value
-            filldict[rowsofdict]["telefonze"] = sheet.cell(i,5).value
-            filldict[rowsofdict]["nacharbei"] = (sheet.cell(i,4).value)-(sheet.cell(i,5).value)
+            filldict[rowsofdict]["TT"] = sheet.cell(i,5).value
+            filldict[rowsofdict]["ACW"] = sheet.cell(i,12).value
+            filldict[rowsofdict]["HT"] = sheet.cell(i,5).value + sheet.cell(i,12).value
     return filldict,datum
 
 def filerows_into_dict_OB(daily_file):
@@ -79,32 +86,32 @@ def filerows_into_dict_OB(daily_file):
     connects = []
     non_connects = []
     for i in range(rows_start,rows_end-1):
-        if str(sheet.cell(i,2).value).startswith("1458 CarExpert") and str(sheet.cell(i,4).value).startswith("CONNECT"):
-            connects.append(sheet.cell(i,5).value)
-        elif str(sheet.cell(i,2).value).startswith("1458 CarExpert") and not str(sheet.cell(i,4).value).startswith("CONNECT"):
-            non_connects.append(sheet.cell(i,5).value)
+        if str(sheet.cell(i,2).value).startswith("1458") and str(sheet.cell(i,4).value).startswith("CONNECT"):
+            connects.append(sheet.cell(i,6).value)   # Spalte 6 = nur Verbindung (TT). Groessere Abweichungen bei Verbidnungs- zu Anrufzeit, die nicht nur Klingeln sind... Einflussnahme der Agenten nur auf Verbindungszeit moeglich
+        elif str(sheet.cell(i,2).value).startswith("1458") and not str(sheet.cell(i,4).value).startswith("CONNECT"):
+            non_connects.append(sheet.cell(i,5).value) # auch nicht verbundene Anrufe haben Zeitaufwand, aber wie der genau gerechnet wird, geht aus Agntcntrl nicht wirklich hervor
     connect_ob=len(connects)
     non_connect_ob=len(non_connects)
-    time_connect=sum(connects)/86400
+    time_connect=sum(connects)/86400  # Sekunde geteilt durch 86400 ergibt eine float, die dem internen Excelforat entspricht
     time_non_connect=sum(non_connects)/86400
     return connect_ob,non_connect_ob,time_connect,time_non_connect,datum
 
 def calc_day_split(bearbeitungszeit):
-    angenommen = int()
-    verbundene = int()
-    gesamtzeit = float()
-    telefozeit = float()
-    nacharzeit = float()
+    angenommen  = int()
+    verbundene  = int()
+    handling    = float()
+    talk        = float()
+    acw         = float()
     for i in sorted(doe):
         if doe[i]["bzeit"] == bearbeitungszeit:
-            angenommen += doe[i]["angenomme"]
-            verbundene += doe[i]["verbunden"]
-            gesamtzeit += doe[i]["gesamtzei"]
-            telefozeit += doe[i]["telefonze"]
-            nacharzeit += doe[i]["nacharbei"]
+            angenommen  += doe[i]["angenomme"]
+            verbundene  += doe[i]["verbunden"]
+            handling    += doe[i]["HT"]
+            talk        += doe[i]["TT"]
+            acw         += doe[i]["ACW"]
     verlorene = angenommen-verbundene
 
-    writelist=[gesamtzeit, telefozeit, nacharzeit, angenommen, verbundene, verlorene]
+    writelist=[handling, talk, acw, angenommen, verbundene, verlorene]
     return writelist
 
 def write_out(row):
