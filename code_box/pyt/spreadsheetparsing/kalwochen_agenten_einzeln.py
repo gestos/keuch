@@ -14,6 +14,7 @@ def get_cw_ma(ma_file, agent_id_set):
         try:
 	    standort = teile.match(i).group(1).strip()
             kuerzel = teile.match(i).group(2).strip()
+            print kuerzel
 	    id_num = int(teile.match(i).group(3).strip())
 	    if not id_num in agent_id_set:
 	        agent_id_set[id_num] = dict()
@@ -150,10 +151,11 @@ def create_dic_from_all_files(agentsfiles):
     ag_monthly_dic = {}
     weeks_found = set()
     vorhandene_agenten = get_uniq_agents_multi(agentsfiles)
+    teile = re.compile(r'(^\D)\s(.*)(\b\d[\d\s]*$)')
 
     for agent in vorhandene_agenten:
-        agent_kuerzel = agent[2:9]
-        agent_standor = agent[0]
+        agent_standor = teile.match(agent).group(1).strip()
+        agent_kuerzel = teile.match(agent).group(2).strip()
         ag_monthly_dic[agent_kuerzel] = {}
         ag_monthly_dic[agent_kuerzel]["standort"] = agent_standor
         ag_monthly_dic[agent_kuerzel]["calls"] = dict()
@@ -283,6 +285,19 @@ def filter_months(startmonat, endmonat, source_dict):
 
 def write_out(zeit_dict):
 
+    xlwt.add_palette_colour("head_kern1", 0x21)
+    target_workbook_writeable.set_colour_RGB(0x21, 106, 188, 255)
+    xlwt.add_palette_colour("head_kern2", 0x22)
+    target_workbook_writeable.set_colour_RGB(0x22, 171, 218, 255)
+    xlwt.add_palette_colour("head_neben1", 0x23)
+    target_workbook_writeable.set_colour_RGB(0x23, 236, 171, 255)
+    xlwt.add_palette_colour("head_neben2", 0x24)
+    target_workbook_writeable.set_colour_RGB(0x24, 227, 133, 255)
+    xlwt.add_palette_colour("head_gesamt1", 0x25)
+    target_workbook_writeable.set_colour_RGB(0x25, 169, 255, 133)
+    xlwt.add_palette_colour("head_gesamt2", 0x26)
+    target_workbook_writeable.set_colour_RGB(0x26, 131, 255, 79)
+
     if zeit_dict == weeks["kernzeit"]:
         sheet = target_workbook_writeable.get_sheet(0)
         startrow = target_workbook.sheet_by_index(0).nrows+1
@@ -393,23 +408,9 @@ print weeks_in_target
 
 
 
-xlwt.add_palette_colour("head_kern1", 0x21)
-target_workbook_writeable.set_colour_RGB(0x21, 106, 188, 255)
-xlwt.add_palette_colour("head_kern2", 0x22)
-target_workbook_writeable.set_colour_RGB(0x22, 171, 218, 255)
-xlwt.add_palette_colour("head_neben1", 0x23)
-target_workbook_writeable.set_colour_RGB(0x23, 236, 171, 255)
-xlwt.add_palette_colour("head_neben2", 0x24)
-target_workbook_writeable.set_colour_RGB(0x24, 227, 133, 255)
-xlwt.add_palette_colour("head_gesamt1", 0x25)
-target_workbook_writeable.set_colour_RGB(0x25, 169, 255, 133)
-xlwt.add_palette_colour("head_gesamt2", 0x26)
-target_workbook_writeable.set_colour_RGB(0x26, 131, 255, 79)
 
 style_week      = xlwt.easyxf('alignment: horiz centre')
 style_times     = xlwt.easyxf('alignment: horiz centre', num_format_str = "HH:MM:SS")
-
-
 
 
 write_out(weeks["kernzeit"])
