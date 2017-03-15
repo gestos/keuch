@@ -94,15 +94,10 @@ def write_out(in_dict,target_file):
     sheet_verloren_rw           = target_workbook_writeable.get_sheet(1)
     sheet_sla_rw                = target_workbook_writeable.get_sheet(2)
 
-    xlwt.add_palette_colour("kern_farbe", 0x21)
-    target_workbook_writeable.set_colour_RGB(0x21, 152, 209, 255)
-    xlwt.add_palette_colour("neben_farbe", 0x22)
-    target_workbook_writeable.set_colour_RGB(0x22, 176, 255, 218)
-    xlwt.add_palette_colour("ob_farbe", 0x23)
-    target_workbook_writeable.set_colour_RGB(0x23, 255, 255, 178)
     style_datum             = xlwt.easyxf('alignment: horiz right; borders: right double, right_color 0x28, left double, left_color 0x28', num_format_str = "ddd, dd.mm.yy")
-    style_calls_k           = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color kern_farbe')
-    style_sla               = xlwt.easyxf('alignment: horiz right;', num_format_str = "0.00")
+    style_conn           = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color 0x2c')
+    style_n_conn           = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color 0x1f')
+    style_sla               = xlwt.easyxf('alignment: horiz centre;', num_format_str = "0.00")
 
     sheet_verbunden_rw.write(row_verbunden, 0, tag, style_datum)   #Datum
     sheet_verloren_rw.write(row_verloren, 0, tag, style_datum)   #Datum
@@ -113,10 +108,10 @@ def write_out(in_dict,target_file):
     for index in in_dict:   # der Stunden_index faengt bei 0 an und ist analog zu den Spalten im Sheet
     
         conn  = in_dict[index]['verbunden']
-        sheet_verbunden_rw.write(row_verbunden,index+2, conn, style_calls_k)
+        sheet_verbunden_rw.write(row_verbunden,index+2, conn, style_conn)
 
         n_conn  = in_dict[index]['verloren']
-        sheet_verloren_rw.write(row_verloren,index+2,n_conn, style_calls_k)
+        sheet_verloren_rw.write(row_verloren,index+2,n_conn, style_n_conn)
     
         sla  = in_dict[index]['servicelevel']
         sheet_sla_rw.write(row_sla,index+2,sla, style_sla)

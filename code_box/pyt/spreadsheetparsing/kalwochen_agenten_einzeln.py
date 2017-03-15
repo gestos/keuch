@@ -361,7 +361,7 @@ def write_out(zeit_dict):
     target_workbook_writeable.save(targetfile)
 
 def find_target_maxweek(book_to_write_to):
-    all_times = book_to_write_to.sheet_by_index(2)
+    all_times = book_to_write_to.sheet_by_index(2) # sheet 3 ist kern+nebenzeit, hier sind alle wochen drin, die es gibt
     rows = all_times.nrows
     weeks_found_in_target = set()
     if not rows:
@@ -397,14 +397,9 @@ months["kern+neben"] = filter_months(1, 3, all_data)
 #####################  START WRITEOUT ####################
 
 
-
 target_workbook = xlrd.open_workbook(targetfile, formatting_info=True)  # this is the file
 target_workbook_writeable = xlcopy.copy(target_workbook)                # a copy is needed to write into
-
-
 weeks_in_target=find_target_maxweek(target_workbook)
-print type(weeks_in_target)
-print weeks_in_target
 
 
 
