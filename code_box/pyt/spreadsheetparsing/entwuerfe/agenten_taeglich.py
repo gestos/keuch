@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import os, csv, math, xlrd, re, sys, xlwt, calendar, textwrap
+import os, csv, math, xlrd, re, sys, xlwt, calendar, textwrap, itertools
 from natsort import natsorted, ns
 from xlwt import Formula
 from xlutils import copy as xlcopy
@@ -43,28 +43,94 @@ def parsedate_header(daily_sheet_cell): # turn crap date into nice date
     date_objt = datetime.datetime.strptime(date_clea, "%d.%m.%Y") # this is a python datetime.date object
     return date_objt
 
+def parsedate_full(daily_sheet_cell): # turn crap date into nice date
+    date_crap = daily_sheet_cell.strip() # comes like this from upstream, date always lives at 1,1
+    day, mon, yea, hou, mnt = date_crap[0:2], date_crap[3:5], date_crap[6:10], date_crap[11:13], date_crap[14:16]
+    date_clea=str(day+"."+mon+"."+yea+"."+hou+"."+mnt)
+    date_objt = datetime.datetime.strptime(date_clea, "%d.%m.%Y.%H.%M") # this is a python datetime.date object
+    return date_objt
+
+def get_cw_ma(agent_cell):
+    teile = re.compile(r'(^\D)\s(.*)(\b\d[\d\s]*$)')
+    agent_id_set = list()
+    try:
+        stdort = teile.match(agent_cell).group(1).strip()
+        kuerzel = teile.match(agent_cell).group(2).strip()
+        number = int(teile.match(agent_cell).group(3).strip())
+        agent_id_set.extend((stdort,kuerzel,number))
+    except:
+        print("sth wrong with " + str(agent_cell))
+    return agent_id_set
+
 def get_filelist(folder):
-    print ("scanning " + str(folder) + " ")
+    print ("scanning " + str(folder) + " "),
     agentsfiles = dict()
+    spinner = itertools.cycle(['-', '\\', '|', '/'])
     for i in (s for s in os.listdir(folder) if s.endswith(".xls")):
-        print ".",
-        sys.stdout.flush()
+        sys.stdout.write(spinner.next())  # write the next character
+        sys.stdout.flush()                # flush stdout buffer (actual character display)
+        sys.stdout.write('\b') 
         datei = os.path.join(folder,i)
         sheet = xlrd.open_workbook(datei, formatting_info=True).sheet_by_index(0)
-        sheet_date = parsedate_header(sheet.cell(1,1).value).date() # this will be the dictionary key as it is the unique overall key
-        if sheet.cell(0,0).value == "CE_alles_taeglich":
+        if sheet.nrows == 0:
+            continue
+        if sheet.cell(0,0) and sheet.cell(0,0).value == "CE_alles_taeglich":
+            sheet_date = parsedate_header(sheet.cell(1,1).value).date() # this will be the dictionary key as it is the unique overall key
             agentsfiles[sheet_date] = datei
     print
     return agentsfiles
+
+def read_entries(datei,doe):
+    sheet = xlrd.open_workbook(datei, formatting_info=True).sheet_by_index(0)
+    out_dict = dict()
+    if sheet.nrows < 3:
+        print ("that's a file without entries")
+        return
+
+    rows = sheet.nrows
+    for i in range(4,sheet.nrows-1):
+        stamp = parsedate_full(sheet.cell(i,0).value)
+        agent = get_cw_ma(sheet.cell(i,1).value)
+        year = stamp.year
+        month = stamp.month
+        day = stamp.day
+        weekday = stamp.strftime('%a')
+        hour = stamp.hour
+        if 11 < hour < 20:
+            bzeit = "k"
+        else:
+            bzeit = "n"
+        week = stamp.isocalendar()[1]
+        primkey = tuple((stamp,agent[1]))
+        doe[primkey] = dict()
+        o = doe[primkey]
+        o["ag"] = agent[1]
+        o["lo"] = agent[0]
+        o["yy"] = year
+        o["mm"] = month
+        o["dd"] = day
+        o["hh"] = hour
+        o["bz"] = bzeit
+        o["ww"] = week
+        o["wd"] = weekday
+    return doe
+
+
+        
+
 
 
 ############## END OF FUNCTION DEFINITTIONS ############
 
 source,target,pmode = check_cmdline_params()
-
+dict_o_e = dict()
 if pmode == "dir":
     filelist=get_filelist(source)
     for k in sorted(filelist.keys()):
         print k,
         print filelist[k]
+        dict_o_e = read_entries(filelist[k],dict_o_e)
+for prim in dict_o_e.keys():
+    if dict_o_e[prim]["hh"] == 18:
+        print dict_o_e[prim]
 
