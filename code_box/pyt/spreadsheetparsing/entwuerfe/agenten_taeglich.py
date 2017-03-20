@@ -96,11 +96,24 @@ def read_entries(datei,doe):
         day = stamp.day
         weekday = stamp.strftime('%a')
         hour = stamp.hour
-        if 11 < hour < 20:
-            bzeit = "k"
-        else:
+
+        if weekday in ("Sat", "Sun"):
             bzeit = "n"
+        else:
+            if 11 < hour < 20:
+                bzeit = "k"
+            else:
+                bzeit = "n"
+        
         week = stamp.isocalendar()[1]
+        angeboten = sheet.cell(i,3).value
+        bearbeitet = sheet.cell(i,4).value
+        verloren = angeboten - bearbeitet
+        ht = sheet.cell(i,24).value
+        tt = sheet.cell(i,29).value
+        aht = sheet.cell(i,24).value / bearbeitet
+        att = sheet.cell(i,29).value / bearbeitet
+        acw = aht - att
         primkey = tuple((stamp,agent[1]))
         doe[primkey] = dict()
         o = doe[primkey]
@@ -113,6 +126,14 @@ def read_entries(datei,doe):
         o["bz"] = bzeit
         o["ww"] = week
         o["wd"] = weekday
+        o["an"] = angeboten
+        o["be"] = bearbeitet
+        o["vl"] = verloren
+        o["tt"] = tt
+        o["ht"] = ht
+        o["att"] = att
+        o["aht"] = aht
+        o["acw"] = acw
     return doe
 
 
@@ -130,7 +151,15 @@ if pmode == "dir":
         print k,
         print filelist[k]
         dict_o_e = read_entries(filelist[k],dict_o_e)
+
+csumme = list()
+zsumme = list()
+
 for prim in dict_o_e.keys():
-    if dict_o_e[prim]["hh"] == 18:
-        print dict_o_e[prim]
+    if dict_o_e[prim]["dd"] == 15 and dict_o_e[prim]["be"] > 0:
+        csumme.append(dict_o_e[prim]["be"])
+        zsumme.append(dict_o_e[prim]["tt"])
+print sum(zsumme)/sum(csumme)
+print zsumme
+print csumme
 
