@@ -1,9 +1,10 @@
 #!/usr/bin/python
-import os, csv, math, xlrd, re, sys, xlwt, calendar, textwrap, itertools
+import os, csv, math, xlrd, re, sys, xlwt, calendar, textwrap, itertools, pandas
 from natsort import natsorted, ns
 from xlwt import Formula
 from xlutils import copy as xlcopy
 from colorama import Fore as coly, Style as coln
+from pandas import Series, DataFrame, ExcelWriter
 import datetime
 
 def check_cmdline_params():
@@ -148,18 +149,30 @@ dict_o_e = dict()
 if pmode == "dir":
     filelist=get_filelist(source)
     for k in sorted(filelist.keys()):
-        print k,
-        print filelist[k]
         dict_o_e = read_entries(filelist[k],dict_o_e)
 
-csumme = list()
-zsumme = list()
+#callsumme = list()
+#zeitsumme = list()
 
-for prim in dict_o_e.keys():
-    if dict_o_e[prim]["dd"] == 15 and dict_o_e[prim]["be"] > 0:
-        csumme.append(dict_o_e[prim]["be"])
-        zsumme.append(dict_o_e[prim]["tt"])
-print sum(zsumme)/sum(csumme)
-print zsumme
-print csumme
+#for prim in dict_o_e.keys():
+#    if dict_o_e[prim]["ww"] == 9 and dict_o_e[prim]["ag"] == "tetzlva":
+#        callsumme.append(dict_o_e[prim]["be"])
+#        zeitsumme.append(dict_o_e[prim]["tt"])
 
+writer = ExcelWriter(target)
+frame = DataFrame(dict_o_e)
+frame1 = DataFrame.transpose(frame)
+kws = frame1.ww.unique()
+monate = frame1.mm.unique()
+cols = list(frame1.columns.values)
+print cols
+frame1=frame1[['ww','wd', 'lo', 'ag', 'be','att', 'acw', 'aht', 'bz', 'vl']]
+
+for woche in kws:
+    srow = xlrd.open_workbook(target, formatting_info=True).sheet_by_index(0).nrows+1
+    kw = (frame1[frame1.ww == woche])
+    kw.to_excel(writer,'Colors',startrow=srow,header=False,index=False)
+    writer.save()
+    uniq_agents = kw.ag.unique()
+    #for agent in uniq_agents:
+    #    suma = kw[['be','tt']][kw.ag == agent].sum()
