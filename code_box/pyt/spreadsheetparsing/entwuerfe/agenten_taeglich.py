@@ -112,9 +112,10 @@ def read_entries(datei,doe):
         verloren = angeboten - bearbeitet
         ht = sheet.cell(i,24).value
         tt = sheet.cell(i,29).value
-        aht = sheet.cell(i,24).value / bearbeitet
-        att = sheet.cell(i,29).value / bearbeitet
-        acw = aht - att
+        acw = ht - tt
+        #aht = sheet.cell(i,24).value / bearbeitet
+        #att = sheet.cell(i,29).value / bearbeitet
+        #aacw = aht - att
         primkey = tuple((stamp,agent[1]))
         doe[primkey] = dict()
         o = doe[primkey]
@@ -132,15 +133,17 @@ def read_entries(datei,doe):
         o["vl"] = verloren
         o["tt"] = tt
         o["ht"] = ht
-        o["att"] = att
-        o["aht"] = aht
         o["acw"] = acw
+        #o["att"] = att
+        #o["aht"] = aht
+        #o["aacw"] = aacw
     return doe
 
 
         
 
-
+column_order = ['ww','wd','lo','ag','an','be','vl','ht','tt','acw','bz','hh']
+print type(column_order)
 
 ############## END OF FUNCTION DEFINITTIONS ############
 
@@ -165,14 +168,21 @@ frame1 = DataFrame.transpose(frame)
 kws = frame1.ww.unique()
 monate = frame1.mm.unique()
 cols = list(frame1.columns.values)
-print cols
-frame1=frame1[['ww','wd', 'lo', 'ag', 'be','att', 'acw', 'aht', 'bz', 'vl']]
+frame1=frame1[column_order]
 
-for woche in kws:
-    srow = xlrd.open_workbook(target, formatting_info=True).sheet_by_index(0).nrows+1
-    kw = (frame1[frame1.ww == woche])
-    kw.to_excel(writer,'Colors',startrow=srow,header=False,index=False)
-    writer.save()
-    uniq_agents = kw.ag.unique()
-    #for agent in uniq_agents:
-    #    suma = kw[['be','tt']][kw.ag == agent].sum()
+#for woche in 10:
+srow = xlrd.open_workbook(target, formatting_info=True).sheet_by_index(0).nrows+1
+kw = (frame1[frame1.ww == 10])
+overall = kw.groupby('ag')[['be','ht','tt','acw']].sum()
+print overall[['be','ht','tt','acw']]
+print overall
+
+kern = kw.groupby(['ag','bz'])[['be','ht','tt','acw']].sum()
+print kern ### this is an actual representation of kern and nebenzeit
+#print result[['be','ht']].loc[result['bz'] == 'n']
+#df.loc[df['column_name'] == some_value]
+#kw.to_excel(writer,'Colors',startrow=srow,header=False,index=False)
+#writer.save()
+uniq_agents = kw.ag.unique()
+#for agent in uniq_agents:
+#    suma = kw[['be','tt']][kw.ag == agent].sum()
