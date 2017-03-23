@@ -1,11 +1,13 @@
 #!/usr/bin/python
-import os, csv, math, xlrd, re, sys, xlwt, calendar, textwrap, itertools, pandas
+import os, csv, math, xlrd, re, sys, openpyxl, calendar, textwrap, itertools, pandas
 from natsort import natsorted, ns
 from xlwt import Formula
 from xlutils import copy as xlcopy
 from colorama import Fore as coly, Style as coln
 from pandas import Series, DataFrame, ExcelWriter
 import datetime
+
+pandas.options.mode.chained_assignment = None
 
 def check_cmdline_params():
     if len(sys.argv) != 3:
@@ -162,7 +164,11 @@ if pmode == "dir":
 #        callsumme.append(dict_o_e[prim]["be"])
 #        zeitsumme.append(dict_o_e[prim]["tt"])
 
-writer = ExcelWriter(target)
+book = openpyxl.load_workbook(target)
+writer = ExcelWriter(target,engine="openpyxl")
+writer.book = book
+writer.sheets = dict((ws.title, ws) for ws in book.worksheets)
+
 frame = DataFrame(dict_o_e)
 frame1 = DataFrame.transpose(frame)
 kws = frame1.ww.unique()
@@ -170,19 +176,42 @@ monate = frame1.mm.unique()
 cols = list(frame1.columns.values)
 frame1=frame1[column_order]
 
-#for woche in 10:
-srow = xlrd.open_workbook(target, formatting_info=True).sheet_by_index(0).nrows+1
+srow = xlrd.open_workbook(target).sheet_by_index(0).nrows+1
 kw = (frame1[frame1.ww == 10])
-overall = kw.groupby('ag')[['be','ht','tt','acw']].sum()
-print overall[['be','ht','tt','acw']]
-print overall
+kw_filt = kw[['ag','bz','be','ht','tt','acw']]
 
-kern = kw.groupby(['ag','bz'])[['be','ht','tt','acw']].sum()
-print kern ### this is an actual representation of kern and nebenzeit
-#print result[['be','ht']].loc[result['bz'] == 'n']
-#df.loc[df['column_name'] == some_value]
-#kw.to_excel(writer,'Colors',startrow=srow,header=False,index=False)
-#writer.save()
+kw_filt.loc[kw_filt['bz'] == 'k', 'kbe'] = kw_filt['be']
+kw_filt.loc[kw_filt['bz'] == 'k', 'kht'] = kw_filt['ht']
+kw_filt.loc[kw_filt['bz'] == 'k', 'ktt'] = kw_filt['tt']
+kw_filt.loc[kw_filt['bz'] == 'k', 'kacw'] = kw_filt['acw']
+
+kw_filt.loc[kw_filt['bz'] == 'n', 'nbe'] = kw_filt['be']
+kw_filt.loc[kw_filt['bz'] == 'n', 'nht'] = kw_filt['ht']
+kw_filt.loc[kw_filt['bz'] == 'n', 'ntt'] = kw_filt['tt']
+kw_filt.loc[kw_filt['bz'] == 'n', 'nacw'] = kw_filt['acw']
+
+total=kw_filt.groupby('ag').sum()
+total.fillna(0, inplace=True)
+
+total['o_be'] = total['kbe']+total['nbe']
+total['o_ht'] = ((total['kht']+total['nht'])/total['o_be'])/1440
+total['o_tt'] = ((total['ktt']+total['ntt'])/total['o_be'])/1440
+total['o_acw'] = ((total['kacw']+total['nacw'])/total['o_be'])/1440
+
+total['kht'] = (total['kht']/total['kbe'])/1440
+total['ktt'] = (total['ktt']/total['kbe'])/1440
+total['kacw'] = (total['kacw']/total['kbe'])/1440
+
+total['nht'] = (total['nht']/total['nbe'])/1440
+total['ntt'] = (total['ntt']/total['nbe'])/1440
+total['nacw'] = (total['nacw']/total['nbe'])/1440
+
+total.fillna(0, inplace=True)
+total=total[['o_be','o_ht','o_tt','o_acw','kbe','kht','ktt','kacw','nbe','nht','ntt','nacw']]
+#print total
+print srow
+total.to_excel(writer,'Colors',startrow=srow,header=False)
+writer.save()
 uniq_agents = kw.ag.unique()
 #for agent in uniq_agents:
 #    suma = kw[['be','tt']][kw.ag == agent].sum()
