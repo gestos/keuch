@@ -6,7 +6,7 @@ from xlutils import copy as xlcopy
 from colorama import Fore as coly, Style as coln
 from pandas import Series, DataFrame, ExcelWriter
 import datetime
-
+from openpyxl.utils.dataframe import dataframe_to_rows
 pandas.options.mode.chained_assignment = None
 
 def check_cmdline_params():
@@ -115,14 +115,12 @@ def read_entries(datei,doe):
         ht = sheet.cell(i,24).value
         tt = sheet.cell(i,29).value
         acw = ht - tt
-        #aht = sheet.cell(i,24).value / bearbeitet
-        #att = sheet.cell(i,29).value / bearbeitet
-        #aacw = aht - att
         primkey = tuple((stamp,agent[1]))
         doe[primkey] = dict()
         o = doe[primkey]
         o["ag"] = agent[1]
         o["lo"] = agent[0]
+        o["dt"] = stamp.date()
         o["yy"] = year
         o["mm"] = month
         o["dd"] = day
@@ -141,77 +139,119 @@ def read_entries(datei,doe):
         #o["aacw"] = aacw
     return doe
 
+def week_start_end(year, week):
+    d = datetime.date(year,1,1)
+    if(d.weekday()>3):
+        d = d+datetime.timedelta(7-d.weekday())
+    else:
+        d = d - datetime.timedelta(d.weekday())
+    dlt = datetime.timedelta(days = (week-1)*7)
+    return d + dlt,  d + dlt + datetime.timedelta(days=6)
 
-        
+def chk_wk_complete(year='2017',week='1'):
+    sta,end=week_start_end(year, week)
+    if dates_in_dir.min() < sta and dates_in_dir.max() > end:
+        return "complete"
+    else:
+        return "incomplete"
 
-column_order = ['ww','wd','lo','ag','an','be','vl','ht','tt','acw','bz','hh']
-print type(column_order)
+def week_from_frame(year,week_num,frame):
+    if chk_wk_complete(year,week_num) == "incomplete":
+        return "incomplete"
+    
+    kw = (frame[frame.ww == week_num])
+    kw_filt = kw[['ag','bz','be','ht','tt','acw']]
+
+    if kw_filt.loc[kw_filt['bz'] == 'k'].empty:
+        kw_filt['kbe'] = 0
+        kw_filt['kht'] = 0
+        kw_filt['ktt'] = 0
+        kw_filt['kacw'] = 0
+    else:
+        kw_filt.loc[kw_filt['bz'] == 'k', 'kbe'] = kw_filt['be']
+        kw_filt.loc[kw_filt['bz'] == 'k', 'kht'] = kw_filt['ht']
+        kw_filt.loc[kw_filt['bz'] == 'k', 'ktt'] = kw_filt['tt']
+        kw_filt.loc[kw_filt['bz'] == 'k', 'kacw'] = kw_filt['acw']
+
+    if kw_filt.loc[kw_filt['bz'] == 'n'].empty:
+        kw_filt['nbe'] = 0
+        kw_filt['nht'] = 0
+        kw_filt['ntt'] = 0
+        kw_filt['nacw'] = 0
+    else:
+        kw_filt.loc[kw_filt['bz'] == 'n', 'nbe'] = kw_filt['be']
+        kw_filt.loc[kw_filt['bz'] == 'n', 'nht'] = kw_filt['ht']
+        kw_filt.loc[kw_filt['bz'] == 'n', 'ntt'] = kw_filt['tt']
+        kw_filt.loc[kw_filt['bz'] == 'n', 'nacw'] = kw_filt['acw']
+
+    total=kw_filt.groupby('ag').sum()
+    total.fillna(0, inplace=True)
+
+    total['o_be'] = total['kbe']+total['nbe']
+    total['o_ht'] = ((total['kht']+total['nht'])/total['o_be'])/1440
+    total['o_tt'] = ((total['ktt']+total['ntt'])/total['o_be'])/1440
+    total['o_acw'] = ((total['kacw']+total['nacw'])/total['o_be'])/1440
+
+    total['kht'] = (total['kht']/total['kbe'])/1440
+    total['ktt'] = (total['ktt']/total['kbe'])/1440
+    total['kacw'] = (total['kacw']/total['kbe'])/1440
+
+    total['nht'] = (total['nht']/total['nbe'])/1440
+    total['ntt'] = (total['ntt']/total['nbe'])/1440
+    total['nacw'] = (total['nacw']/total['nbe'])/1440
+
+    total.fillna(0, inplace=True)
+    total=total[['o_be','o_ht','o_tt','o_acw','kbe','kht','ktt','kacw','nbe','nht','ntt','nacw']]
+    ### dataframe ist hier komplett ###
+    
+    ### rueckgabewert moechte ich aber als liste von listen, damit xlwt schreiben kann ###
+   
+    week_as_list = list()
+    print week_num
+    for agent,row in total.iterrows():
+        vallist = row.tolist()
+        vallist.insert(0,agent)
+        week_as_list.append(vallist)
+    return week_as_list
+
 
 ############## END OF FUNCTION DEFINITTIONS ############
 
 source,target,pmode = check_cmdline_params()
+srow = xlrd.open_workbook(target).sheet_by_index(0).nrows+1
 dict_o_e = dict()
+
 if pmode == "dir":
     filelist=get_filelist(source)
     for k in sorted(filelist.keys()):
         dict_o_e = read_entries(filelist[k],dict_o_e)
 
-#callsumme = list()
-#zeitsumme = list()
 
-#for prim in dict_o_e.keys():
-#    if dict_o_e[prim]["ww"] == 9 and dict_o_e[prim]["ag"] == "tetzlva":
-#        callsumme.append(dict_o_e[prim]["be"])
-#        zeitsumme.append(dict_o_e[prim]["tt"])
+column_order = ['dt','yy','dd','mm','ww','wd','lo','ag','an','be','vl','ht','tt','acw','bz','hh']
+doe_frame = DataFrame(dict_o_e).T[column_order]
+dates_in_dir = doe_frame.dt.unique()
+years_in_dir = doe_frame.yy.unique()
+kws_in_dir = doe_frame.ww.unique()
+monate_in_dir = doe_frame.mm.unique()
 
-book = openpyxl.load_workbook(target)
-writer = ExcelWriter(target,engine="openpyxl")
-writer.book = book
-writer.sheets = dict((ws.title, ws) for ws in book.worksheets)
 
-frame = DataFrame(dict_o_e)
-frame1 = DataFrame.transpose(frame)
-kws = frame1.ww.unique()
-monate = frame1.mm.unique()
-cols = list(frame1.columns.values)
-frame1=frame1[column_order]
 
-srow = xlrd.open_workbook(target).sheet_by_index(0).nrows+1
-kw = (frame1[frame1.ww == 10])
-kw_filt = kw[['ag','bz','be','ht','tt','acw']]
+for yy in years_in_dir:
+    for wk in kws_in_dir:
+        week_frame=week_from_frame(yy,wk,doe_frame)
+        if week_frame == "incomplete":
+            continue
+        else:
+            for i in week_frame:
+                print i
+        print
 
-kw_filt.loc[kw_filt['bz'] == 'k', 'kbe'] = kw_filt['be']
-kw_filt.loc[kw_filt['bz'] == 'k', 'kht'] = kw_filt['ht']
-kw_filt.loc[kw_filt['bz'] == 'k', 'ktt'] = kw_filt['tt']
-kw_filt.loc[kw_filt['bz'] == 'k', 'kacw'] = kw_filt['acw']
 
-kw_filt.loc[kw_filt['bz'] == 'n', 'nbe'] = kw_filt['be']
-kw_filt.loc[kw_filt['bz'] == 'n', 'nht'] = kw_filt['ht']
-kw_filt.loc[kw_filt['bz'] == 'n', 'ntt'] = kw_filt['tt']
-kw_filt.loc[kw_filt['bz'] == 'n', 'nacw'] = kw_filt['acw']
-
-total=kw_filt.groupby('ag').sum()
-total.fillna(0, inplace=True)
-
-total['o_be'] = total['kbe']+total['nbe']
-total['o_ht'] = ((total['kht']+total['nht'])/total['o_be'])/1440
-total['o_tt'] = ((total['ktt']+total['ntt'])/total['o_be'])/1440
-total['o_acw'] = ((total['kacw']+total['nacw'])/total['o_be'])/1440
-
-total['kht'] = (total['kht']/total['kbe'])/1440
-total['ktt'] = (total['ktt']/total['kbe'])/1440
-total['kacw'] = (total['kacw']/total['kbe'])/1440
-
-total['nht'] = (total['nht']/total['nbe'])/1440
-total['ntt'] = (total['ntt']/total['nbe'])/1440
-total['nacw'] = (total['nacw']/total['nbe'])/1440
-
-total.fillna(0, inplace=True)
-total=total[['o_be','o_ht','o_tt','o_acw','kbe','kht','ktt','kacw','nbe','nht','ntt','nacw']]
-#print total
 print srow
-total.to_excel(writer,'Colors',startrow=srow,header=False)
-writer.save()
-uniq_agents = kw.ag.unique()
+
+
+#total.to_excel(writer,'Colors',startrow=srow,header=False)
+#writer.save()
+#uniq_agents = kw.ag.unique()
 #for agent in uniq_agents:
 #    suma = kw[['be','tt']][kw.ag == agent].sum()
