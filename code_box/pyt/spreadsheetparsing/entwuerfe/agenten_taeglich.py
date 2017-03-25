@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import os, csv, math, xlrd, re, sys, openpyxl, calendar, textwrap, itertools, pandas
+import os, csv, math, xlrd, re, sys, xlwt, calendar, textwrap, itertools, pandas
 from natsort import natsorted, ns
 from xlwt import Formula
 from xlutils import copy as xlcopy
@@ -77,7 +77,8 @@ def get_filelist(folder):
         sheet = xlrd.open_workbook(datei, formatting_info=True).sheet_by_index(0)
         if sheet.nrows == 0:
             continue
-        if sheet.cell(0,0) and sheet.cell(0,0).value == "CE_alles_taeglich":
+        if sheet.cell(0,0) and (sheet.cell(0,0).value == "CE_alles_taeglich" or sheet.cell(0,0).value == "Carexpert_Agent_Gesing"):
+        #if sheet.cell(0,0) and sheet.cell(0,0).value == "CE_alles_taeglich":
             sheet_date = parsedate_header(sheet.cell(1,1).value).date() # this will be the dictionary key as it is the unique overall key
             agentsfiles[sheet_date] = datei
     print
@@ -155,12 +156,21 @@ def chk_wk_complete(year='2017',week='1'):
     else:
         return "incomplete"
 
+def frame2list(dataframe):
+    week_as_list = list()
+    for agent,row in dataframe.iterrows():
+        values = row.tolist()
+        values.insert(0,agent[0])
+        values.insert(1,agent[1])
+        week_as_list.append(values)
+    return week_as_list
+
 def week_from_frame(year,week_num,frame):
     if chk_wk_complete(year,week_num) == "incomplete":
         return "incomplete"
     
     kw = (frame[frame.ww == week_num])
-    kw_filt = kw[['ag','bz','be','ht','tt','acw']]
+    kw_filt = kw[['ag','lo','bz','be','ht','tt','acw']]
 
     if kw_filt.loc[kw_filt['bz'] == 'k'].empty:
         kw_filt['kbe'] = 0
@@ -184,7 +194,7 @@ def week_from_frame(year,week_num,frame):
         kw_filt.loc[kw_filt['bz'] == 'n', 'ntt'] = kw_filt['tt']
         kw_filt.loc[kw_filt['bz'] == 'n', 'nacw'] = kw_filt['acw']
 
-    total=kw_filt.groupby('ag').sum()
+    total=kw_filt.groupby(['lo','ag']).sum()
     total.fillna(0, inplace=True)
 
     total['o_be'] = total['kbe']+total['nbe']
@@ -206,52 +216,95 @@ def week_from_frame(year,week_num,frame):
     
     ### rueckgabewert moechte ich aber als liste von listen, damit xlwt schreiben kann ###
    
-    week_as_list = list()
-    print week_num
-    for agent,row in total.iterrows():
-        vallist = row.tolist()
-        vallist.insert(0,agent)
-        week_as_list.append(vallist)
+    week_as_list = frame2list(total)
+
     return week_as_list
 
+def target_week_found(sheet):
+    found_weeks = [0]
+    for row in range (0,s_row-1):
+        s = target_workbook.sheet_by_index(0)
+        c = s.cell(row,0)
+        if c.value == "KW":
+            found_weeks.append(s.cell(row,1).value)
+    return found_weeks
 
-############## END OF FUNCTION DEFINITTIONS ############
+def write_weeks(week,vals):
+    global s_row
+
+    style_head      = xlwt.easyxf('alignment: horiz centre; font: bold on')
+    style_string    = xlwt.easyxf('alignment: horiz centre')
+    style_times     = xlwt.easyxf('alignment: horiz centre', num_format_str = "MM:SS")
+
+    w_sheet = target_workbook_w.get_sheet(0)
+    w_sheet.write(s_row,0,"KW",style_head)
+    w_sheet.write(s_row,1,wk,style_head)
+    s_row += 1
+    
+    num_datasets=len(vals)
+
+    for dataset in range(0,num_datasets):
+        data = vals[dataset]
+        data_row = len(data)
+        for val in range(0,data_row):
+            if val in (0,1):
+                w_sheet.write(s_row,val,data[val],style_string)
+            elif val == 2:
+                w_sheet.write(s_row,val,data[val],style_string)
+            elif val == 6:
+                w_sheet.write(s_row,val+1,data[val],style_string)
+            elif val == 10:
+                w_sheet.write(s_row,val+2,data[val],style_string)
+            elif val in (3,4,5):
+                w_sheet.write(s_row,val,data[val],style_times)
+            elif val in (7,8,9):
+                w_sheet.write(s_row,val+1,data[val],style_times)
+            elif val in (11,12,13):
+                w_sheet.write(s_row,val+2,data[val],style_times)
+        s_row += 1
+    s_row += 1
+    target_workbook_w.save(target)
+
+############## END OF FUNCTION DEFINITIONS ############
 
 source,target,pmode = check_cmdline_params()
-srow = xlrd.open_workbook(target).sheet_by_index(0).nrows+1
 dict_o_e = dict()
 
+
+## read everything from directory into a dict and create a dataframe from it
 if pmode == "dir":
     filelist=get_filelist(source)
     for k in sorted(filelist.keys()):
         dict_o_e = read_entries(filelist[k],dict_o_e)
 
-
 column_order = ['dt','yy','dd','mm','ww','wd','lo','ag','an','be','vl','ht','tt','acw','bz','hh']
 doe_frame = DataFrame(dict_o_e).T[column_order]
-dates_in_dir = doe_frame.dt.unique()
-years_in_dir = doe_frame.yy.unique()
-kws_in_dir = doe_frame.ww.unique()
-monate_in_dir = doe_frame.mm.unique()
+dates_in_dir = doe_frame.dt.unique()    # numpy.ndarray of datetime.date objects
+years_in_dir = doe_frame.yy.unique()    # numpy.ndarray of year values
+kws_in_dir = doe_frame.ww.unique()      # numpy.ndarray of week numbers
+monate_in_dir = doe_frame.mm.unique()   # numpy.ndarray of month numbers
+
+
+target_workbook = xlrd.open_workbook(target, formatting_info=True)  # this is the file
+target_sheet = target_workbook.sheet_by_index(0)
+target_workbook_w = xlcopy.copy(target_workbook)                # a copy is needed to write into
+s_row = target_sheet.nrows+1
+
+weeks_in_target = max(target_week_found(target_sheet))
+weeks_to_add = kws_in_dir[weeks_in_target:]
 
 
 
 for yy in years_in_dir:
-    for wk in kws_in_dir:
-        week_frame=week_from_frame(yy,wk,doe_frame)
-        if week_frame == "incomplete":
+    for wk in weeks_to_add:
+        week_as_a_list=week_from_frame(yy,wk,doe_frame) # returns a list of lists, but week_from_frame has a dataframe to plot from
+        if week_as_a_list == "incomplete":
             continue
         else:
-            for i in week_frame:
-                print i
-        print
+            print ("############## " + str(wk) + " #################")
+            for i in week_as_a_list:
+                print ("."),
+            write_weeks(wk,week_as_a_list)
 
 
-print srow
-
-
-#total.to_excel(writer,'Colors',startrow=srow,header=False)
-#writer.save()
-#uniq_agents = kw.ag.unique()
-#for agent in uniq_agents:
-#    suma = kw[['be','tt']][kw.ag == agent].sum()
+### TODO add summary line to each week
