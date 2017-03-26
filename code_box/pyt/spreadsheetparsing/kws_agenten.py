@@ -211,6 +211,20 @@ def week_from_frame(year,week_num,frame):
 
     total.fillna(0, inplace=True)
     total=total[['o_be','o_ht','o_tt','o_acw','kbe','kht','ktt','kacw','nbe','nht','ntt','nacw']].sort_values('o_be',ascending=False)
+    
+    sums=total.sum()
+    sums.name = ("N","Summe KW " + str(week_num))
+    sums.o_ht=sums.o_ht/len(total.index)
+    sums.o_tt=sums.o_tt/len(total.index)
+    sums.o_acw=sums.o_acw/len(total.index)
+    sums.kht=sums.kht/len(total.index)
+    sums.ktt=sums.ktt/len(total.index)
+    sums.kacw=sums.kacw/len(total.index)
+    sums.nht=sums.nht/len(total.index)
+    sums.ntt=sums.ntt/len(total.index)
+    sums.nacw=sums.nacw/len(total.index)
+    total = total.append(sums)
+    print total
     ### dataframe ist hier komplett ###
 
     ### rueckgabewert moechte ich aber als liste von listen, damit xlwt schreiben kann ###
@@ -246,20 +260,23 @@ def write_weeks(week,vals):
         data = vals[dataset]
         data_row = len(data)
         for val in range(0,data_row):
-          if val in (0,1):
+            if val in (0,1):
+                if dataset == num_datasets:
+                    w_sheet.write(s_row,val,data[val],style_head)
+                else:
+                    w_sheet.write(s_row,val,data[val],style_string)
+            elif val == 2:
                 w_sheet.write(s_row,val,data[val],style_string)
-          elif val == 2:
-              w_sheet.write(s_row,val,data[val],style_string)
-          elif val == 6:
-              w_sheet.write(s_row,val+1,data[val],style_string)
-          elif val == 10:
-              w_sheet.write(s_row,val+2,data[val],style_string)
-          elif val in (3,4,5):
-              w_sheet.write(s_row,val,data[val],style_times)
-          elif val in (7,8,9):
-              w_sheet.write(s_row,val+1,data[val],style_times)
-          elif val in (11,12,13):
-              w_sheet.write(s_row,val+2,data[val],style_times)
+            elif val == 6:
+                w_sheet.write(s_row,val+1,data[val],style_string)
+            elif val == 10:
+                w_sheet.write(s_row,val+2,data[val],style_string)
+            elif val in (3,4,5):
+                w_sheet.write(s_row,val,data[val],style_times)
+            elif val in (7,8,9):
+                w_sheet.write(s_row,val+1,data[val],style_times)
+            elif val in (11,12,13):
+                w_sheet.write(s_row,val+2,data[val],style_times)
         s_row += 1
     s_row += 1
     target_workbook_w.save(target)
@@ -301,8 +318,6 @@ for yy in years_in_dir:
             continue
         else:
             print ("############## " + str(wk) + " #################")
-            for i in week_as_a_list:
-                print ("."),
             write_weeks(wk,week_as_a_list)
 
 
