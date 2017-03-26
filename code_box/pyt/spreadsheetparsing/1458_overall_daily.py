@@ -31,6 +31,7 @@ rst = coln.RESET_ALL
 def check_cmdline_params():
     if len(sys.argv) != 3:
         print(sys.argv[0] +" needs two parameters in the following order: $DIR where xls files lie and an xls $FILE to write into.")
+        print("will produce simple daily overall hotline stats with # 3=telefonierte anrufe, 21=verlorene, 5=gesamtverbindungszeit 12=gesamtNBzeit")
         exit()
     elif not os.path.isdir(sys.argv[1]):
         print(sys.argv[1] + " is not a directory")
