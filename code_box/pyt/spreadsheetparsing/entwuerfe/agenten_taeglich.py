@@ -72,13 +72,13 @@ def get_filelist(folder):
     for i in (s for s in os.listdir(folder) if s.endswith(".xls")):
         sys.stdout.write(spinner.next())  # write the next character
         sys.stdout.flush()                # flush stdout buffer (actual character display)
-        sys.stdout.write('\b') 
+        sys.stdout.write('\b')
         datei = os.path.join(folder,i)
         sheet = xlrd.open_workbook(datei, formatting_info=True).sheet_by_index(0)
         if sheet.nrows == 0:
             continue
         if sheet.cell(0,0) and (sheet.cell(0,0).value == "CE_alles_taeglich" or sheet.cell(0,0).value == "Carexpert_Agent_Gesing"):
-        #if sheet.cell(0,0) and sheet.cell(0,0).value == "CE_alles_taeglich":
+            #if sheet.cell(0,0) and sheet.cell(0,0).value == "CE_alles_taeglich":
             sheet_date = parsedate_header(sheet.cell(1,1).value).date() # this will be the dictionary key as it is the unique overall key
             agentsfiles[sheet_date] = datei
     print
@@ -103,12 +103,11 @@ def read_entries(datei,doe):
 
         if weekday in ("Sat", "Sun"):
             bzeit = "n"
+        elif 11 < hour < 20:
+            bzeit = "k"
         else:
-            if 11 < hour < 20:
-                bzeit = "k"
-            else:
-                bzeit = "n"
-        
+            bzeit = "n"
+
         week = stamp.isocalendar()[1]
         angeboten = sheet.cell(i,3).value
         bearbeitet = sheet.cell(i,4).value
@@ -168,7 +167,7 @@ def frame2list(dataframe):
 def week_from_frame(year,week_num,frame):
     if chk_wk_complete(year,week_num) == "incomplete":
         return "incomplete"
-    
+
     kw = (frame[frame.ww == week_num])
     kw_filt = kw[['ag','lo','bz','be','ht','tt','acw']]
 
@@ -211,11 +210,11 @@ def week_from_frame(year,week_num,frame):
     total['nacw'] = (total['nacw']/total['nbe'])/1440
 
     total.fillna(0, inplace=True)
-    total=total[['o_be','o_ht','o_tt','o_acw','kbe','kht','ktt','kacw','nbe','nht','ntt','nacw']]
+    total=total[['o_be','o_ht','o_tt','o_acw','kbe','kht','ktt','kacw','nbe','nht','ntt','nacw']].sort_values('o_be',ascending=False)
     ### dataframe ist hier komplett ###
-    
+
     ### rueckgabewert moechte ich aber als liste von listen, damit xlwt schreiben kann ###
-   
+
     week_as_list = frame2list(total)
 
     return week_as_list
@@ -240,27 +239,27 @@ def write_weeks(week,vals):
     w_sheet.write(s_row,0,"KW",style_head)
     w_sheet.write(s_row,1,wk,style_head)
     s_row += 1
-    
+
     num_datasets=len(vals)
 
     for dataset in range(0,num_datasets):
         data = vals[dataset]
         data_row = len(data)
         for val in range(0,data_row):
-            if val in (0,1):
+          if val in (0,1):
                 w_sheet.write(s_row,val,data[val],style_string)
-            elif val == 2:
-                w_sheet.write(s_row,val,data[val],style_string)
-            elif val == 6:
-                w_sheet.write(s_row,val+1,data[val],style_string)
-            elif val == 10:
-                w_sheet.write(s_row,val+2,data[val],style_string)
-            elif val in (3,4,5):
-                w_sheet.write(s_row,val,data[val],style_times)
-            elif val in (7,8,9):
-                w_sheet.write(s_row,val+1,data[val],style_times)
-            elif val in (11,12,13):
-                w_sheet.write(s_row,val+2,data[val],style_times)
+          elif val == 2:
+              w_sheet.write(s_row,val,data[val],style_string)
+          elif val == 6:
+              w_sheet.write(s_row,val+1,data[val],style_string)
+          elif val == 10:
+              w_sheet.write(s_row,val+2,data[val],style_string)
+          elif val in (3,4,5):
+              w_sheet.write(s_row,val,data[val],style_times)
+          elif val in (7,8,9):
+              w_sheet.write(s_row,val+1,data[val],style_times)
+          elif val in (11,12,13):
+              w_sheet.write(s_row,val+2,data[val],style_times)
         s_row += 1
     s_row += 1
     target_workbook_w.save(target)
