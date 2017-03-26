@@ -289,7 +289,7 @@ target_sheet = target_workbook.sheet_by_index(0)
 target_workbook_w = xlcopy.copy(target_workbook)                # a copy is needed to write into
 s_row = target_sheet.nrows+1
 
-weeks_in_target = max(target_week_found(target_sheet))
+weeks_in_target = int(max(target_week_found(target_sheet)))
 weeks_to_add = kws_in_dir[weeks_in_target:]
 
 
