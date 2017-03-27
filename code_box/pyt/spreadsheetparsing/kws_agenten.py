@@ -150,10 +150,11 @@ def week_start_end(year, week):
 
 def chk_wk_complete(year='2017',week='1'):
     sta,end=week_start_end(year, week)
-    if dates_in_dir.min() < sta and dates_in_dir.max() > end:
+    if dates_in_dir.min() < sta and dates_in_dir.max() >= end:
         return "complete"
     else:
         return "incomplete"
+
 
 def frame2list(dataframe):
     week_as_list = list()
