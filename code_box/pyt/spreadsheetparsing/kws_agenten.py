@@ -300,6 +300,7 @@ years_in_dir = doe_frame.yy.unique()    # numpy.ndarray of year values
 kws_in_dir = doe_frame.ww.unique()      # numpy.ndarray of week numbers
 monate_in_dir = doe_frame.mm.unique()   # numpy.ndarray of month numbers
 
+print kws_in_dir
 
 target_workbook = xlrd.open_workbook(target, formatting_info=True)  # this is the file
 target_sheet = target_workbook.sheet_by_index(0)
@@ -309,12 +310,14 @@ s_row = target_sheet.nrows+1
 weeks_in_target = int(max(target_week_found(target_sheet)))
 weeks_to_add = kws_in_dir[weeks_in_target:]
 
+print (weeks_to_add)
 
 
 for yy in years_in_dir:
     for wk in weeks_to_add:
         week_as_a_list=week_from_frame(yy,wk,doe_frame) # returns a list of lists, but week_from_frame has a dataframe to plot from
         if week_as_a_list == "incomplete":
+            print ("incomplete")
             continue
         else:
             print ("############## " + str(wk) + " #################")
