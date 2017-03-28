@@ -37,3 +37,4 @@ URxvt*cursorBlink:	    true
 ! URxvt*borderColor:        color
 ! URxvt.perl-ext-common:	    tabbed
 URxvt*fading:  80
+URxvt*letterSpace: -1
