@@ -81,6 +81,16 @@ def generate_single_day(source):
     return datum, calweek, hour_indices
 
 
+def df_for_a_day(dict_of_a_day):
+    h_df = pandas.DataFrame.from_dict(dict_of_a_day).T
+    sr=pandas.Series(index=h_df.columns,name="ganzer Tag")
+    sr['angekommen'] = h_df['angekommen'].sum()
+    sr['verbunden'] = h_df['verbunden'].sum()
+    sr['verloren'] = h_df['verloren'].sum()
+    sr['servicelevel'] = sr['verbunden']/sr['angekommen']
+    h_df=h_df.append(sr).T
+    return h_df
+
 def write_out(in_dict,target_file):
     target_workbook     = xlrd.open_workbook(target_file, formatting_info=True)
     sheet_verbunden     = target_workbook.sheet_by_index(0)
@@ -94,9 +104,9 @@ def write_out(in_dict,target_file):
     sheet_verloren_rw           = target_workbook_writeable.get_sheet(1)
     sheet_sla_rw                = target_workbook_writeable.get_sheet(2)
 
-    style_datum             = xlwt.easyxf('alignment: horiz right; borders: right double, right_color 0x28, left double, left_color 0x28', num_format_str = "ddd, dd.mm.yy")
-    style_zahl           = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid')
-    style_sla               = xlwt.easyxf('alignment: horiz centre;', num_format_str = "0.00")
+    style_datum = xlwt.easyxf('alignment: horiz right; borders: right double, right_color 0x28, left double, left_color 0x28', num_format_str = "ddd, dd.mm.yy")
+    style_zahl  = xlwt.easyxf('alignment: horiz centre')
+    style_sla   = xlwt.easyxf('alignment: horiz centre;', num_format_str = "0.00")
 
     sheet_verbunden_rw.write(row_verbunden, 0, tag, style_datum)   #Datum
     sheet_verloren_rw.write(row_verloren, 0, tag, style_datum)   #Datum
@@ -105,7 +115,7 @@ def write_out(in_dict,target_file):
     sheet_verloren_rw.write(row_verloren, 1, kw)   #Datum
     sheet_sla_rw.write(row_sla, 1, kw)   #Datum
     for index in in_dict:   # der Stunden_index faengt bei 0 an und ist analog zu den Spalten im Sheet
-        print (str(index) + " wird in spalte " + str(index+2) + " geschrieben")
+        #print (str(index) + " wird in spalte " + str(index+2) + " geschrieben")
     
         conn  = in_dict[index]['verbunden']
         sheet_verbunden_rw.write(row_verbunden,index+2, conn, style_zahl)
@@ -122,11 +132,6 @@ def write_out(in_dict,target_file):
 source,target = check_cmdline_params()
 
 tag,kw,stunden = generate_single_day(source)
+tag_frame = df_for_a_day(stunden)
 
 write_out(stunden,target)
-
-h_df = pandas.DataFrame.from_dict(stunden)
-print h_df
-h_df['summe']=h_df.sum(axis=1)
-vlo = h_df.loc("verloren")
-print vlo
