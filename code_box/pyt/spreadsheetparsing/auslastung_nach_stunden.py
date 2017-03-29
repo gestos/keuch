@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import os, csv, math, xlrd, re, sys, xlwt, calendar, textwrap, pandas, numpy
+import os, csv, math, xlrd, re, sys, xlwt, calendar, textwrap, pandas, numpy, itertools
 from natsort import natsorted, ns
 from xlwt import Formula
 from xlutils import copy as xlcopy
@@ -19,17 +19,33 @@ def check_cmdline_params():
         print(textwrap.fill("2. Argument ist die Ziel-Exceldatei, dorthin wird entweder die generierte Zeile unten eingefuegt, oder das gesamte Verzeichnis neu geschrieben",80))
         exit()
     elif not os.path.isfile(sys.argv[1]):
-        print(sys.argv[1] + " is not a regular file")
-        exit()
+        if os.path.isdir(sys.argv[1]):
+            pmode="dir"
+            sourcefile_IB = os.path.abspath(sys.argv[1])
+            targetfile = os.path.abspath(sys.argv[2])
+            print("source inbound:\t" + sourcefile_IB)
+            print("target:\t" + targetfile)
+            return sourcefile_IB, targetfile, pmode
+        else:
+            print(sys.argv[1]+" is not a regular file")
+            exit()
     elif not os.path.isfile(sys.argv[2]):
         print(sys.argv[2] + " is not a regular file")
         exit()
     else:
+        pmode="file"
         sourcefile_IB = os.path.abspath(sys.argv[1])
         targetfile = os.path.abspath(sys.argv[2])
         print("source inbound:\t" + sourcefile_IB)
         print("target:\t" + targetfile)
-        return sourcefile_IB, targetfile
+        return sourcefile_IB, targetfile, pmode
+
+def parsedate_header(daily_sheet_cell): # turn crap date into nice date
+    date_crap = daily_sheet_cell.strip() # comes like this from upstream, date always lives at 1,1
+    day, mon, yea = date_crap[0:2], date_crap[3:5], date_crap[6:10]
+    date_clea=str(day+"."+mon+"."+yea)
+    date_objt = datetime.datetime.strptime(date_clea, "%d.%m.%Y") # this is a python datetime.date object
+    return date_objt
 
 def parsedate_full(daily_sheet_cell): # turn crap date into nice date
     date_crap = daily_sheet_cell.strip() # comes like this from upstream, date always lives at 1,1
@@ -37,6 +53,40 @@ def parsedate_full(daily_sheet_cell): # turn crap date into nice date
     date_clea=str(day+"."+mon+"."+yea+"."+hou+"."+mnt)
     date_objt = datetime.datetime.strptime(date_clea, "%d.%m.%Y.%H.%M") # this is a python datetime.date object
     return date_objt
+
+def get_filelist(folder):
+    print ("scanning " + str(folder) + " "),
+    hotlinefiles = dict()
+    spinner = itertools.cycle(['-', '\\', '|', '/'])
+    for i in (s for s in os.listdir(folder) if (s.startswith("1458_d") and s.endswith(".xls"))):
+        sys.stdout.write(spinner.next())  # write the next character
+        sys.stdout.flush()                # flush stdout buffer (actual character display)
+        sys.stdout.write('\b')
+        datei = os.path.join(folder,i)
+        sheet = xlrd.open_workbook(datei, formatting_info=True).sheet_by_index(0)
+        if sheet.nrows == 0:
+            continue
+        if sheet.cell(0,0) and (sheet.cell(0,0).value == "Hotlinestatistik" or sheet.cell(0,0).value == "Hotlineber1458Gesing taegl"):
+            #if sheet.cell(0,0) and sheet.cell(0,0).value == "CE_alles_taeglich":
+            sheet_date = parsedate_header(sheet.cell(1,1).value).date() # this will be the dictionary key as it is the unique overall key
+            if sheet_date.year >= 2017 and sheet_date.month >= 3:
+                hotlinefiles[sheet_date] = datei
+    return hotlinefiles
+
+def get_target_days_present(target):
+    found_days = []
+    for row in range (0,s_row-1):
+        s = target_workbook.sheet_by_index(0)
+        c = s.cell(row,0)
+        if type(c.value) == float and c.value >= 42000:
+            da=datetime.date.fromordinal(int(c.value)+693594)
+            found_days.append(da)
+    found_days = set(found_days)
+    if not found_days:
+        last_day = datetime.date(2017, 02, 28) # statistiken gelten ab 01.03., vorher keine viertelstuendliche erhebung
+    else:
+        last_day = max(found_days)
+    return last_day
 
 def generate_single_day(source):
     #spalten: 0=timestamp 2=angenommen 3=verbunden 5=TT 12=ACW    // Lost = [2]-[3], HT = [5]+[12]
@@ -129,9 +179,23 @@ def write_out(in_dict,target_file):
 
 ####################end of function definitions#####################
 
-source,target = check_cmdline_params()
+source,target,mode = check_cmdline_params()
+target_workbook = xlrd.open_workbook(target, formatting_info=True)  # this is the file
+target_sheet = target_workbook.sheet_by_index(0)
+target_workbook_w = xlcopy.copy(target_workbook)                # a copy is needed to write into
+s_row = target_sheet.nrows+1
 
-tag,kw,stunden = generate_single_day(source)
-tag_frame = df_for_a_day(stunden)
+if mode == "dir":
+    print ("mode dir")
+    hotlinefiles=get_filelist(source)
+    latest_day_target=get_target_days_present(target)
+    print
+    for tag in sorted(hotlinefiles.keys()):
+        if tag > latest_day_target:
+            print tag,
+            print hotlinefiles[tag]
+            proc_dayfile=hotlinefiles[tag]
+            tag,kw,stunden = generate_single_day(proc_dayfile)
+            write_out(stunden,target)
+#tag_frame = df_for_a_day(stunden)
 
-write_out(stunden,target)
