@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import os, csv, math, xlrd, re, sys, xlwt, calendar, textwrap
+import os, csv, math, xlrd, re, sys, xlwt, calendar, textwrap, itertools, pandas
 from natsort import natsorted, ns
 from xlwt import Formula
 from xlutils import copy as xlcopy
@@ -8,34 +8,35 @@ import datetime
 
 
 def check_cmdline_params():
-    if len(sys.argv) != 4:
+    if len(sys.argv) != 3:
         print(sys.argv[0])
-        print(textwrap.fill("1. Argument muss eine HOTLINEstatistik (nicht Agenten- oder Terminierungsstatistik) sein. Diese muss viertelstuendlich aufgedroeselt sein, um eine Trennung nach Kern- und Nebenzeiten zu ermoeglichen.",80))
-        print(textwrap.fill("2. Argument muss eine Outbound-AGENTENstatistik sein, hieraus wird die Gesamtzahl der Outboundcalls fuer einen Mandanten gefiltert und nach verbunden/abgebrochen gezaehlt, sowie die Zeiten summiert",80))
+        print(textwrap.fill("1. Argument muss ein Verzeichnis oder eine HOTLINEstatistik (nicht Agenten- oder Terminierungsstatistik) sein. Diese muss viertelstuendlich aufgedroeselt sein, um eine Trennung nach Kern- und Nebenzeiten zu ermoeglichen.",80))
         print
-        print(textwrap.fill("Aus den beiden Dateien (welche jeweils nur einen Tag beinhalten duerfen!) wird eine Zeile aus Inbound-Kernzeit(Anrufe, verlorene Anrufe, Zeiten) und Nebenzeit(ebenda) und Outbound(Anwahlversuche, erfolgreich/nicht erfolgreich, Zeiten) gebaut.",80))
+        print(textwrap.fill("2. Argument ist die Ziel-Exceldatei, dorthin wird die generierte Zeile unten eingefuegt",80))
         print
-        print(textwrap.fill("3. Argument ist die Ziel-Exceldatei, dorthin wird die generierte Zeile unten eingefuegt",80))
-        print
-        print(textwrap.fill("Beispiel mit jetzigem Setup: ./programm[0] test_stats/archiv/1458_daily_2017-03-08.xls[1] test_stats/archiv/CE_Outbound_2017-03-08.xls[2] taegliche_hotline_halbstunden.xls[3] ",280))
+        print(textwrap.fill("Beispiel mit jetzigem Setup: ./programm[0] test_stats/archiv/1458_daily_2017-03-08.xls[1] taegliche_hotline_halbstunden.xls[2] ",280))
         exit()
     elif not os.path.isfile(sys.argv[1]):
-        print(sys.argv[1] + " is not a regular file")
-        exit()
+        if os.path.isdir(sys.argv[1]):
+            pmode="dir"
+            sourcefile_IB = os.path.abspath(sys.argv[1])
+            targetfile = os.path.abspath(sys.argv[2])
+            print("source inbound:\t" + sourcefile_IB)
+            print("target:\t" + targetfile)
+            return sourcefile_IB, targetfile, pmode
+        else:
+            print(sys.argv[1]+" is not a regular file")
+            exit()
     elif not os.path.isfile(sys.argv[2]):
         print(sys.argv[2] + " is not a regular file")
         exit()
-    elif not os.path.isfile(sys.argv[3]):
-        print(sys.argv[3] + " is not a regular file")
-        exit()
     else:
+        pmode="file"
         sourcefile_IB = os.path.abspath(sys.argv[1])
-        sourcefile_OB = os.path.abspath(sys.argv[2])
-        targetfile = os.path.abspath(sys.argv[3])
+        targetfile = os.path.abspath(sys.argv[2])
         print("source inbound:\t" + sourcefile_IB)
-        print("source outbound:\t" + sourcefile_OB)
         print("target:\t" + targetfile)
-        return sourcefile_IB, sourcefile_OB, targetfile
+        return sourcefile_IB, targetfile, pmode
 
 def parsedate_full(daily_sheet_cell): # turn crap date into nice date
     date_crap = daily_sheet_cell.strip() # comes like this from upstream, date always lives at 1,1
@@ -50,6 +51,94 @@ def parsedate_header(daily_sheet_cell): # turn crap date into nice date
     date_clea=str(day+"."+mon+"."+yea)
     date_objt = datetime.datetime.strptime(date_clea, "%d.%m.%Y") # this is a python datetime.date object
     return date_objt
+
+def excel_date(date1):
+    temp = datetime.date(1899, 12, 30)    # Note, not 31st Dec but 30th!
+    delta = date1 - temp
+    return float(delta.days) + (float(delta.seconds) / 86400)
+
+def get_filelist(folder):
+    print ("scanning " + str(folder) + " "),
+    agentsfiles = dict()
+    spinner = itertools.cycle(['-', '\\', '|', '/'])
+    for i in (s for s in os.listdir(folder) if s.endswith(".xls")):
+        sys.stdout.write(spinner.next())  # write the next character
+        sys.stdout.flush()                # flush stdout buffer (actual character display)
+        sys.stdout.write('\b')
+        datei = os.path.join(folder,i)
+        sheet = xlrd.open_workbook(datei, formatting_info=True).sheet_by_index(0)
+        if sheet.nrows == 0:
+            continue
+        if sheet.cell(0,0) and (sheet.cell(0,0).value == "Hotlineber1458Gesing taegl"):
+            #if sheet.cell(0,0) and sheet.cell(0,0).value == "CE_alles_taeglich":
+            sheet_date = parsedate_header(sheet.cell(1,1).value).date() # this will be the dictionary key as it is the unique overall key
+            agentsfiles[sheet_date] = datei
+    print
+    return agentsfiles
+
+def read_entries(datei,doe):
+    sheet = xlrd.open_workbook(datei, formatting_info=True).sheet_by_index(0)
+    out_dict = dict()
+    kern_start = datetime.time(11,30)
+    kern_end = datetime.time(19,15)
+    if sheet.nrows < 3:
+        print ("that's a file without entries")
+        return
+
+    rows = sheet.nrows
+    for i in range(4,sheet.nrows-1):
+        stamp = parsedate_full(sheet.cell(i,0).value)
+        year = stamp.year
+        month = stamp.month
+        day = stamp.day
+        week = stamp.isocalendar()[1]
+        weekday = stamp.strftime('%a')
+        hour = stamp.hour
+
+        if weekday in ("Sat", "Sun"):
+            bzeit = "n"
+        elif kern_start <= stamp.time() <= kern_end:
+            bzeit = "k"
+        else:
+            bzeit = "n"
+
+        angeboten = sheet.cell(i,2).value
+        verbunden = sheet.cell(i,3).value
+        verloren = angeboten - verbunden
+        tt = sheet.cell(i,5).value
+        acw = sheet.cell(i,12).value
+        ht = tt + acw
+        
+        xldate=excel_date(stamp.date())
+
+        if angeboten > 0:
+            doe[stamp] = dict()
+            o = doe[stamp]
+            o["dt"] = stamp.date()
+            o["yy"] = year
+            o["mm"] = month
+            o["dd"] = day
+            o["xl"] = xldate
+            o["hh"] = hour
+            o["bz"] = bzeit
+            o["ww"] = week
+            o["wd"] = weekday
+            o["an"] = angeboten
+            o["vb"] = verbunden
+            o["vl"] = verloren
+            o["tt"] = tt
+            o["ht"] = ht
+            o["acw"] = acw
+    return doe
+
+def target_days_found(sheet):
+    found_days = [0]
+    s = target_workbook.sheet_by_index(0)
+    for row in range (2,s_row-1):
+        c = s.cell(row,0)
+        if c.value:
+            found_days.append(c.value)
+    return found_days
 
 def filerows_into_dict(daily_file,filldict):
     sheet = xlrd.open_workbook(daily_file, formatting_info=True).sheet_by_index(0)
@@ -172,27 +261,57 @@ def write_out(row):
     target_workbook_writeable.save(target)
 
 ####################end of function definitions#####################
-
-source_IB,source_OB,target = check_cmdline_params()
-
+source,target,pmode = check_cmdline_params()
 doe = dict()    # dict of everything, from here all selections (by agent, by agent and date, by hours etc) are possible
-doe,datum = filerows_into_dict(source_IB,doe)
-list_kern=calc_day_split("kern")
-list_nebe=calc_day_split("neben")
 
-ob_connected,ob_non_connected,ob_conn_time,ob_non_conn_time,datum2 = filerows_into_dict_OB(source_OB)
+## read everything from directory into a dict and create a dataframe from it
+if pmode == "dir":
+    filelist=get_filelist(source)
+    for k in sorted(filelist.keys()):
+        doe = read_entries(filelist[k],doe)
 
-if not datum == datum2:
-    print ("please feed me files for the same date")
-    exit()
-else:
-    calweek = datum.isocalendar()[1]
+column_order = ['dt','yy','mm','ww','wd','dd','xl','hh','an','vb','vl','ht','tt','acw','bz']
+doe_frame = pandas.DataFrame(doe).T[column_order]
+dates_in_dir = doe_frame.dt.unique()    # numpy.ndarray of datetime.date objects
+xldates_in_dir = doe_frame.xl.unique()    # numpy.ndarray of datetime.date objects
+years_in_dir = doe_frame.yy.unique()    # numpy.ndarray of year values
+kws_in_dir = doe_frame.ww.unique()      # numpy.ndarray of week numbers
+monate_in_dir = doe_frame.mm.unique()   # numpy.ndarray of month numbers
 
-target_workbook = xlrd.open_workbook(target, formatting_info=True)
-targetsheet = target_workbook.sheet_by_index(0)
-startrow = targetsheet.nrows
+target_workbook = xlrd.open_workbook(target, formatting_info=True)  # this is the file
+target_sheet = target_workbook.sheet_by_index(0)
+target_workbook_w = xlcopy.copy(target_workbook)                # a copy is needed to write into
+s_row = target_sheet.nrows+1
 
-target_workbook_writeable = xlcopy.copy(target_workbook)
-sheet_rw = target_workbook_writeable.get_sheet(0)
+last_day_target = max(target_days_found(target_sheet)) # returns the highest date found as an excel date number
+days_to_add = [i for i in xldates_in_dir if i > last_day_target] # list of days in scanned directory that are newer than the last day of the target sheet
 
-write_out(startrow)
+print xldates_in_dir
+print last_day_target
+print days_to_add
+
+
+
+
+
+
+# # doe,datum = filerows_into_dict(source_IB,doe)
+# list_kern=calc_day_split("kern")
+# list_nebe=calc_day_split("neben")
+# 
+# ob_connected,ob_non_connected,ob_conn_time,ob_non_conn_time,datum2 = filerows_into_dict_OB(source_OB)
+# 
+# if not datum == datum2:
+#     print ("please feed me files for the same date")
+#     exit()
+# else:
+#     calweek = datum.isocalendar()[1]
+# 
+# target_workbook = xlrd.open_workbook(target, formatting_info=True)
+# targetsheet = target_workbook.sheet_by_index(0)
+# startrow = targetsheet.nrows
+# 
+# target_workbook_writeable = xlcopy.copy(target_workbook)
+# sheet_rw = target_workbook_writeable.get_sheet(0)
+# 
+# write_out(startrow)
