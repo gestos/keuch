@@ -69,7 +69,7 @@ def get_filelist(folder):
         sheet = xlrd.open_workbook(datei, formatting_info=True).sheet_by_index(0)
         if sheet.nrows == 0:
             continue
-        if sheet.cell(0,0) and (sheet.cell(0,0).value == "Hotlineber1458Gesing taegl"):
+        if sheet.cell(0,0) and (sheet.cell(0,0).value == "Hotlineber1458Gesing taegl" or sheet.cell(0,1).value == "1458 carexpert Kfz-Sachverstae"):
             #if sheet.cell(0,0) and sheet.cell(0,0).value == "CE_alles_taeglich":
             sheet_date = parsedate_header(sheet.cell(1,1).value).date() # this will be the dictionary key as it is the unique overall key
             agentsfiles[sheet_date] = datei
@@ -91,7 +91,7 @@ def read_entries(datei,doe):
         year = stamp.year
         month = stamp.month
         day = stamp.day
-        week = stamp.isocalendar()[1]
+        week = int(stamp.isocalendar()[1])
         weekday = stamp.strftime('%a')
         hour = stamp.hour
 
@@ -121,7 +121,7 @@ def read_entries(datei,doe):
             o["xl"] = xldate
             o["hh"] = hour
             o["bz"] = bzeit
-            o["ww"] = week
+            o["ww"] = int(week)
             o["wd"] = weekday
             o["an"] = angeboten
             o["vb"] = verbunden
@@ -140,125 +140,86 @@ def target_days_found(sheet):
             found_days.append(c.value)
     return found_days
 
-def filerows_into_dict(daily_file,filldict):
-    sheet = xlrd.open_workbook(daily_file, formatting_info=True).sheet_by_index(0)
-    sheet_date = parsedate_header(sheet.cell(1,1).value).date() # this will be the dictionary key as it is the unique overall key
-    rows_start = 4
-    rows_end = sheet.nrows
-    rowsofdict = len(filldict)  # we'll have an index of the overall rows
-    startkern = datetime.time(11,30,00)
-    endkern = datetime.time(19,30,00)
+def create_summary(day):
+    dayframe = doe_frame.loc[doe_frame['xl'] == day].reset_index()
+    print ('appending day '), day,
+    colfunx={'dt':'first' , 'ww':'first', 'an':'sum' , 'vb':'sum' , 'vl':'sum' , 'ht':'sum' , 'tt':'sum' , 'acw':'sum'}
+    dayframe_sum = dayframe.groupby('xl').agg(colfunx)
+    print dayframe_sum.iloc[0]['dt']
+    dayframe_sum['tot_av_tt'] = dayframe_sum['tt'] / dayframe_sum['vb']
+    dayframe_sum['tot_av_ht'] = dayframe_sum['ht'] / dayframe_sum['vb']
+    dayframe_sum['tot_av_acw'] = dayframe_sum['acw'] / dayframe_sum['vb']
 
-    if rows_end < 4:
-        print ("this seems to be an empty sheet. please check")
-        rowsofdict += 1
-        filldict[rowsofdict] = "empty sheet"
-    else:
-        for i in range(rows_start,rows_end-1):
-            if int(sheet.cell(i,2).value) > 0:
-                rowsofdict += 1
-                timestamp = parsedate_full(sheet.cell(i,0).value) # this will be the dictionary key as it is the unique overall key
-                filldict[rowsofdict] = {}
-                filldict[rowsofdict]["timestamp"] = timestamp
-                filldict[rowsofdict]["calweek"] = timestamp.isocalendar()[1]
-                filldict[rowsofdict]["weekday"] = timestamp.strftime("%a")
-                filldict[rowsofdict]["year"] = timestamp.year
-                filldict[rowsofdict]["month"] = timestamp.strftime("%b")
-                filldict[rowsofdict]["day"] = timestamp.day
-                filldict[rowsofdict]["hour"] = timestamp.hour
-                filldict[rowsofdict]["minute"] = timestamp.minute
-                if timestamp.weekday() in [5,6]:
-                    filldict[rowsofdict]["bzeit"] = "neben"
-                elif startkern <= timestamp.time() < endkern:
-                    filldict[rowsofdict]["bzeit"] = "kern"
-                else:
-                    filldict[rowsofdict]["bzeit"] = "neben"
-                filldict[rowsofdict]["angenomme"] = int(sheet.cell(i,2).value)
-                filldict[rowsofdict]["verbunden"] = int(sheet.cell(i,3).value)
-                filldict[rowsofdict]["TT"] = sheet.cell(i,5).value
-                filldict[rowsofdict]["ACW"] = sheet.cell(i,12).value
-                filldict[rowsofdict]["HT"] = sheet.cell(i,5).value + sheet.cell(i,12).value
-    return filldict,sheet_date
+    nzeit = dayframe[dayframe['bz'] == 'n']
+    nzeit_sum = nzeit.groupby('xl').agg(colfunx)
+    nzeit_sum['n_av_tt'] = nzeit_sum['tt'] / nzeit_sum['vb']
+    nzeit_sum['n_av_ht'] = nzeit_sum['ht'] / nzeit_sum['vb']
+    nzeit_sum['n_av_acw'] = nzeit_sum['acw'] / nzeit_sum['vb']
 
-def filerows_into_dict_OB(daily_file):
-    sheet = xlrd.open_workbook(daily_file, formatting_info=True).sheet_by_index(0)
-    sheet_date = parsedate_header(sheet.cell(1,1).value).date() # this will be the dictionary key as it is the unique overall key
-    rows_end = sheet.nrows
-    rows_start = 4
-    connects = []
-    non_connects = []
+    kzeit = dayframe[dayframe['bz'] == 'k']
+    kzeit_sum = kzeit.groupby('xl').agg(colfunx)
+    kzeit_sum['k_av_tt'] = kzeit_sum['tt'] / kzeit_sum['vb']
+    kzeit_sum['k_av_ht'] = kzeit_sum['ht'] / kzeit_sum['vb']
+    kzeit_sum['k_av_acw'] = kzeit_sum['acw'] / kzeit_sum['vb']
 
-    if rows_end < 4:
-        print ("this seems to be an empty sheet; setting values to 0...")
-        connect_ob, non_connect_ob, time_connect, time_non_connect = 0,0,0,0
-    else:
-        for i in range(rows_start,rows_end-1):
-            if str(sheet.cell(i,2).value).startswith("1458") and str(sheet.cell(i,4).value).startswith("CONNECT"):
-                connects.append(sheet.cell(i,6).value)   # Spalte 6 = nur Verbindung (TT). Groessere Abweichungen bei Verbidnungs- zu Anrufzeit, die nicht nur Klingeln sind... Einflussnahme der Agenten nur auf Verbindungszeit moeglich
-            elif str(sheet.cell(i,2).value).startswith("1458") and not str(sheet.cell(i,4).value).startswith("CONNECT"):
-                non_connects.append(sheet.cell(i,5).value) # auch nicht verbundene Anrufe haben Zeitaufwand, aber wie der genau gerechnet wird, geht aus Agntcntrl nicht wirklich hervor
-        connect_ob=len(connects)
-        non_connect_ob=len(non_connects)
-        time_connect=sum(connects)/86400  # Sekunde geteilt durch 86400 ergibt eine float, die dem internen Excelforat entspricht
-        time_non_connect=sum(non_connects)/86400
-    return connect_ob,non_connect_ob,time_connect,time_non_connect,sheet_date
+    dayframe_sum['k_vb'] = kzeit_sum['vb']
+    dayframe_sum['k_vl'] = kzeit_sum['vl']
+    dayframe_sum['k_av_tt'] = kzeit_sum['k_av_tt']
+    dayframe_sum['k_av_ht'] = kzeit_sum['k_av_ht']
+    dayframe_sum['k_av_acw'] = kzeit_sum['k_av_acw']
 
-def calc_day_split(bearbeitungszeit):
-    angenommen  = int()
-    verbundene  = int()
-    handling    = float()
-    talk        = float()
-    acw         = float()
-    for i in sorted(doe):
-        if doe[i]["bzeit"] == bearbeitungszeit:
-            angenommen  += doe[i]["angenomme"]
-            verbundene  += doe[i]["verbunden"]
-            handling    += doe[i]["HT"]
-            talk        += doe[i]["TT"]
-            acw         += doe[i]["ACW"]
-    verlorene = angenommen-verbundene
+    dayframe_sum['n_vb'] = nzeit_sum['vb']
+    dayframe_sum['n_vl'] = nzeit_sum['vl']
+    dayframe_sum['n_av_tt'] = nzeit_sum['n_av_tt']
+    dayframe_sum['n_av_ht'] = nzeit_sum['n_av_ht']
+    dayframe_sum['n_av_acw'] = nzeit_sum['n_av_acw']
 
-    writelist=[handling, talk, acw, angenommen, verbundene, verlorene]
-    return writelist
+    del dayframe_sum['ht']
+    del dayframe_sum['tt']
+    del dayframe_sum['acw']
+    col_order_daysum = ['dt','ww','vl','vb','tot_av_ht', 'tot_av_tt', 'tot_av_acw', 'k_vl', 'k_vb', 'k_av_ht', 'k_av_tt', 'k_av_acw', 'n_vl', 'n_vb', 'n_av_ht', 'n_av_tt', 'n_av_acw']
+    dayframe_sum = dayframe_sum[col_order_daysum].fillna(0)
+    return dayframe_sum
 
-def write_out(row):
-    xlwt.add_palette_colour("kern_farbe", 0x21)
-    target_workbook_writeable.set_colour_RGB(0x21, 152, 209, 255)
-    xlwt.add_palette_colour("neben_farbe", 0x22)
-    target_workbook_writeable.set_colour_RGB(0x22, 176, 255, 218)
-    xlwt.add_palette_colour("ob_farbe", 0x23)
-    target_workbook_writeable.set_colour_RGB(0x23, 255, 255, 178)
+def write_out(df_sum,target_workbook_w):
+
+    global s_row
+    row=s_row
+    sheet_rw = target_workbook_w.get_sheet(0)
     
-    style_datum             = xlwt.easyxf('alignment: horiz right; borders: right double, right_color 0x28, left double, left_color 0x28', num_format_str = "ddd, dd.mm.yy")
-    style_calls_k           = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color kern_farbe')
-    style_calls_n           = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color neben_farbe')
+    style_datum             = xlwt.easyxf('alignment: horiz right', num_format_str = "ddd, dd.mm.yy")
+    style_kw_trenner        = xlwt.easyxf('alignment: horiz right; font: color 0x17; borders: right double, right_color 0x28')
+    style_number            = xlwt.easyxf('alignment: horiz centre')
     style_verlo             = xlwt.easyxf('alignment: horiz centre; font: color gray25')
-    style_minuten_k         = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color kern_farbe', num_format_str = "[M]:SS")
-    style_minuten_n         = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color neben_farbe', num_format_str = "[M]:SS")
-    style_calls_ob          = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color ob_farbe')
-    style_minuten_ob        = xlwt.easyxf('alignment: horiz centre; pattern: pattern solid, fore_color ob_farbe', num_format_str = "[M]:SS")
+    style_minuten           = xlwt.easyxf('alignment: horiz centre', num_format_str = "[M]:SS")
 
-    sheet_rw.write(row, 0, datum, style_datum)   #Datum
-    sheet_rw.write(row, 1, calweek, style_verlo)   #Datum
+    ix=df_sum.index
+    columns=df_sum.columns
 
-    sheet_rw.write(row, 3, list_kern[4], style_calls_k)    # Telefonierte
-    sheet_rw.write(row, 4, list_kern[0], style_minuten_k) # Gesamtzeit am Tag
-    sheet_rw.write(row, 5, list_kern[1], style_minuten_k) # Telefoniezeit
-    sheet_rw.write(row, 6, list_kern[2], style_minuten_k) # Nacharbeitszeit
-    sheet_rw.write(row, 7, list_kern[5], style_verlo) # Verlorene
+
+    sheet_rw.write(row, 0, ix[0], style_datum)   #Datum
+    sheet_rw.write(row, 1, int(df_sum.iloc[0]['ww']), style_kw_trenner)   #Woche
+
+    sheet_rw.write(row, 3, df_sum.iloc[0]['vl'], style_verlo)   # Verlorene Total
+    sheet_rw.write(row, 4, df_sum.iloc[0]['vb'], style_number)   # Verbundene Total
+    sheet_rw.write(row, 5, df_sum.iloc[0]['tot_av_ht'], style_minuten)   # Av. HT Total
+    sheet_rw.write(row, 6, df_sum.iloc[0]['tot_av_tt'], style_minuten)   # Av. TT Total
+    sheet_rw.write(row, 7, df_sum.iloc[0]['tot_av_acw'], style_minuten)   # Av. ACW Total
     
-    sheet_rw.write(row, 9, list_nebe[4], style_calls_n)    # Telefonierte
-    sheet_rw.write(row, 10, list_nebe[0], style_minuten_n) # Gesamtzeit am Tag
-    sheet_rw.write(row, 11, list_nebe[1], style_minuten_n) # Telefoniezeit
-    sheet_rw.write(row, 12, list_nebe[2], style_minuten_n) # Nacharbeitszeit
-    sheet_rw.write(row, 13, list_nebe[5], style_verlo) # Verlorene
+    sheet_rw.write(row, 9, df_sum.iloc[0]['k_vl'], style_verlo)   # Verlorene Total
+    sheet_rw.write(row, 10, df_sum.iloc[0]['k_vb'], style_number)   # Verbundene Total
+    sheet_rw.write(row, 11, df_sum.iloc[0]['k_av_ht'], style_minuten)   # Av. HT Total
+    sheet_rw.write(row, 12, df_sum.iloc[0]['k_av_tt'], style_minuten)   # Av. TT Total
+    sheet_rw.write(row, 13, df_sum.iloc[0]['k_av_acw'], style_minuten)   # Av. ACW Total
 
-    sheet_rw.write(row, 15, ob_connected, style_calls_ob) # Verlorene
-    sheet_rw.write(row, 16, ob_conn_time, style_minuten_ob) # Verlorene
-    sheet_rw.write(row, 17, ob_non_connected, style_calls_ob) # Verlorene
-    sheet_rw.write(row, 18, ob_non_conn_time, style_minuten_ob) # Verlorene
-    
-    target_workbook_writeable.save(target)
+    sheet_rw.write(row, 15, df_sum.iloc[0]['n_vl'], style_verlo)   # Verlorene Total
+    sheet_rw.write(row, 16, df_sum.iloc[0]['n_vb'], style_number)   # Verbundene Total
+    sheet_rw.write(row, 17, df_sum.iloc[0]['n_av_ht'], style_minuten)   # Av. HT Total
+    sheet_rw.write(row, 18, df_sum.iloc[0]['n_av_tt'], style_minuten)   # Av. TT Total
+    sheet_rw.write(row, 19, df_sum.iloc[0]['n_av_acw'], style_minuten)   # Av. ACW Total
+
+    target_workbook_w.save(target)
+    s_row += 1
 
 ####################end of function definitions#####################
 source,target,pmode = check_cmdline_params()
@@ -271,7 +232,7 @@ if pmode == "dir":
         doe = read_entries(filelist[k],doe)
 
 column_order = ['dt','yy','mm','ww','wd','dd','xl','hh','an','vb','vl','ht','tt','acw','bz']
-doe_frame = pandas.DataFrame(doe).T[column_order]
+doe_frame = pandas.DataFrame(doe).T[column_order] # This df contains ALL files that were scanned in the input_dir
 dates_in_dir = doe_frame.dt.unique()    # numpy.ndarray of datetime.date objects
 xldates_in_dir = doe_frame.xl.unique()    # numpy.ndarray of datetime.date objects
 years_in_dir = doe_frame.yy.unique()    # numpy.ndarray of year values
@@ -286,27 +247,19 @@ s_row = target_sheet.nrows+1
 last_day_target = max(target_days_found(target_sheet)) # returns the highest date found as an excel date number
 days_to_add = [i for i in xldates_in_dir if i > last_day_target] # list of days in scanned directory that are newer than the last day of the target sheet
 
-print xldates_in_dir
-print last_day_target
-print days_to_add
+print ('days found in dir: '),xldates_in_dir
+print ('last day of current excelfile: '),last_day_target
+print ('datasets to be appended: '),days_to_add
+
+    
+
+for day in days_to_add:
+    day_summary=create_summary(day)  ## creates a summary of a day from the overall doe_frame
+    write_out(day_summary,target_workbook_w)
 
 
 
 
-
-
-# # doe,datum = filerows_into_dict(source_IB,doe)
-# list_kern=calc_day_split("kern")
-# list_nebe=calc_day_split("neben")
-# 
-# ob_connected,ob_non_connected,ob_conn_time,ob_non_conn_time,datum2 = filerows_into_dict_OB(source_OB)
-# 
-# if not datum == datum2:
-#     print ("please feed me files for the same date")
-#     exit()
-# else:
-#     calweek = datum.isocalendar()[1]
-# 
 # target_workbook = xlrd.open_workbook(target, formatting_info=True)
 # targetsheet = target_workbook.sheet_by_index(0)
 # startrow = targetsheet.nrows
