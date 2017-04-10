@@ -114,6 +114,7 @@ def read_entries(datei,doe):
         if angeboten > 0:
             doe[stamp] = dict()
             o = doe[stamp]
+            o["tm"] = stamp.time()
             o["dt"] = stamp.date()
             o["yy"] = year
             o["mm"] = month
@@ -131,10 +132,10 @@ def read_entries(datei,doe):
             o["acw"] = acw
     return doe
 
-def target_days_found(sheet):
+def target_days_found(sheet,srow):
     found_days = [0]
-    s = target_workbook.sheet_by_index(0)
-    for row in range (2,s_row-1):
+    s = sheet
+    for row in range (2,srow-1):
         c = s.cell(row,0)
         if c.value:
             found_days.append(c.value)
@@ -221,6 +222,53 @@ def write_out(df_sum,target_workbook_w):
     target_workbook_w.save(target)
     s_row += 1
 
+def create_hourly_stats(day):
+    dayframe = doe_frame.loc[doe_frame['xl'] == day].reset_index()
+    startkern = datetime.time(11,30,00)
+    endkern = datetime.time(19,30,00)
+    hours_index = dict()
+    for i in range (0,25):
+        hours_index[i] = dict()
+        hours_index[i]["angekommen"] = 0
+        hours_index[i]["verbunden"] = 0
+        hours_index[i]["verloren"] = 0
+        hours_index[i]["servicelevel"] = 0
+    hour_mod = 1
+    print dayframe
+    hours_frame = pandas.DataFrame(hours_index).T # df for 0:00-0:30, 0:30-1:30 ... 23:30-23:59
+    print hours_frame
+
+    for ix, datarow in dayframe.iterrows():
+        tstamp=datarow['tm']
+        hour_ix = tstamp.hour
+        if tstamp.minute < 30:
+            hour_mod = 0
+        print tstamp
+        print hour_ix+hour_mod  # Shift entry to hour_index: minus 1 if under 30, plus 1 if above
+
+        
+    #    timestamp = parsedate_full(sheet.cell(i,0).value)
+    #    if 0 <= timestamp.minute <=29:
+    #        hour_index = timestamp.hour
+    #        hour_indices[hour_index]["angekommen"] += sheet.cell(i,2).value
+    #        hour_indices[hour_index]["verbunden"] += sheet.cell(i,3).value
+    #        hour_indices[hour_index]["verloren"] += (sheet.cell(i,2).value - sheet.cell(i,3).value)
+    #    elif 30 <= timestamp.minute <=59:
+    #        hour_index = timestamp.hour +1
+    #        hour_indices[hour_index]["angekommen"] += sheet.cell(i,2).value
+    #        hour_indices[hour_index]["verbunden"] += sheet.cell(i,3).value
+    #        hour_indices[hour_index]["verloren"] += (sheet.cell(i,2).value - sheet.cell(i,3).value)
+
+    #for hour in hour_indices.keys():
+    #    if hour_indices[hour]["verbunden"] > 0:
+    #        hour_indices[hour]["servicelevel"] = (hour_indices[hour]["verbunden"] / hour_indices[hour]["angekommen"])
+    #    else:
+    #        if hour_indices[hour]["angekommen"] == 0:
+    #            hour_indices[hour]["servicelevel"] = 1 
+    #        elif hour_indices[hour]["angekommen"] > 0:
+    #            hour_indices[hour]["servicelevel"] = 0 
+
+    #return datum, calweek, hour_indices
 ####################end of function definitions#####################
 source,target,pmode = check_cmdline_params()
 doe = dict()    # dict of everything, from here all selections (by agent, by agent and date, by hours etc) are possible
@@ -231,7 +279,7 @@ if pmode == "dir":
     for k in sorted(filelist.keys()):
         doe = read_entries(filelist[k],doe)
 
-column_order = ['dt','yy','mm','ww','wd','dd','xl','hh','an','vb','vl','ht','tt','acw','bz']
+column_order = ['tm','dt','yy','mm','ww','wd','dd','xl','hh','an','vb','vl','ht','tt','acw','bz']
 doe_frame = pandas.DataFrame(doe).T[column_order] # This df contains ALL files that were scanned in the input_dir
 dates_in_dir = doe_frame.dt.unique()    # numpy.ndarray of datetime.date objects
 xldates_in_dir = doe_frame.xl.unique()    # numpy.ndarray of datetime.date objects
@@ -244,7 +292,7 @@ target_sheet = target_workbook.sheet_by_index(0)
 target_workbook_w = xlcopy.copy(target_workbook)                # a copy is needed to write into
 s_row = target_sheet.nrows+1
 
-last_day_target = max(target_days_found(target_sheet)) # returns the highest date found as an excel date number
+last_day_target = max(target_days_found(target_sheet,s_row)) # returns the highest date found as an excel date number
 days_to_add = [i for i in xldates_in_dir if i > last_day_target] # list of days in scanned directory that are newer than the last day of the target sheet
 
 print ('days found in dir: '),xldates_in_dir
@@ -257,7 +305,22 @@ for day in days_to_add:
     day_summary=create_summary(day)  ## creates a summary of a day from the overall doe_frame
     write_out(day_summary,target_workbook_w)
 
+print ("finished writing sheet 1")
 
+## process second sheet
+
+target_sheet1 = target_workbook.sheet_by_index(1)
+s_row2 = target_sheet1.nrows+1
+last_day_target = max(target_days_found(target_sheet1,s_row2)) # returns the highest date found as an excel date number
+days_to_add = [i for i in xldates_in_dir if i > last_day_target] # list of days in scanned directory that are newer than the last day of the target sheet
+
+print last_day_target
+print days_to_add
+
+for day in days_to_add:
+    print day
+    day_summary1 = create_hourly_stats(day)
+    #write_out(stunden,target)
 
 
 # target_workbook = xlrd.open_workbook(target, formatting_info=True)
