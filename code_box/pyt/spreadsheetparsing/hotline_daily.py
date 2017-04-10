@@ -143,10 +143,9 @@ def target_days_found(sheet,srow):
 
 def create_summary(day):
     dayframe = doe_frame.loc[doe_frame['xl'] == day].reset_index()
-    print ('appending day '), day,
     colfunx={'dt':'first' , 'ww':'first', 'an':'sum' , 'vb':'sum' , 'vl':'sum' , 'ht':'sum' , 'tt':'sum' , 'acw':'sum'}
     dayframe_sum = dayframe.groupby('xl').agg(colfunx)
-    print dayframe_sum.iloc[0]['dt']
+    print dayframe_sum.iloc[0]['dt'],',',
     dayframe_sum['tot_av_tt'] = dayframe_sum['tt'] / dayframe_sum['vb']
     dayframe_sum['tot_av_ht'] = dayframe_sum['ht'] / dayframe_sum['vb']
     dayframe_sum['tot_av_acw'] = dayframe_sum['acw'] / dayframe_sum['vb']
@@ -181,6 +180,50 @@ def create_summary(day):
     col_order_daysum = ['dt','ww','vl','vb','tot_av_ht', 'tot_av_tt', 'tot_av_acw', 'k_vl', 'k_vb', 'k_av_ht', 'k_av_tt', 'k_av_acw', 'n_vl', 'n_vb', 'n_av_ht', 'n_av_tt', 'n_av_acw']
     dayframe_sum = dayframe_sum[col_order_daysum].fillna(0)
     return dayframe_sum
+
+
+def create_hourly_stats(day):
+    print day,
+    dayframe = doe_frame.loc[doe_frame['xl'] == day].reset_index()
+    hours_index = dict()
+    for i in range (0,25):
+        hours_index[i] = dict()
+        hours_index[i]["angekommen"] = 0
+        hours_index[i]["verbunden"] = 0
+        hours_index[i]["verloren"] = 0
+        hours_index[i]["servicelevel"] = 0
+    hours_frame = pandas.DataFrame(hours_index).T # df for 0:00-0:30, 0:30-1:30 ... 23:30-23:59
+    hours_frame['tix'] = ["00:00-00:30",'00:30-01:30','01:30-02:30','02:30-03:30','03:30-04:30','04:30-05:30','05:30-06:30','06:30-07:30','07:30-08:30','08:30-09:30','09:30-10:30','10:30-11:30','11:30-12:30','12:30-13:30','13:30-14:30','14:30-15:30','15:30-16:30','16:30-17:30','17:30-18:30','18:30-19:30','19:30-20:30','20:30-21:30','21:30-22:30','22:30-23:30','23:30-00:00']
+    hours_frame=hours_frame[['tix','angekommen','verbunden','verloren','servicelevel']]
+
+    for ix, datarow in dayframe.iterrows():
+        tstamp=datarow['tm']
+        hour_ix = tstamp.hour
+        if 0 <= tstamp.minute < 30:
+            hour_mod = 0
+        else:
+            hour_mod = 1
+        hour_ix = hour_ix+hour_mod
+        hours_frame.ix[hour_ix,'angekommen'] += datarow['an']
+        hours_frame.ix[hour_ix,'verbunden'] += datarow['vb']
+        hours_frame.ix[hour_ix,'verloren'] += datarow['vl']
+
+    hours_frame['servicelevel'] = hours_frame['verbunden']/hours_frame['angekommen']
+    hours_frame.loc['summa','angekommen'] = hours_frame['angekommen'].sum()
+    hours_frame.loc['summa','verbunden'] = hours_frame['verbunden'].sum()
+    hours_frame.loc['summa','verloren'] = hours_frame['verloren'].sum()
+    hours_frame.loc['summa','servicelevel'] = hours_frame['servicelevel'].mean()
+    hours_frame = hours_frame.T
+    hours_frame['day'] = day
+    hours_frame['week']= dayframe.loc[0,'ww']
+
+    cols=hours_frame.columns.tolist()
+    cols.insert(0, cols.pop())
+    cols.insert(0, cols.pop())
+
+    hours_frame=hours_frame[cols]
+
+    return hours_frame
 
 def write_out(df_sum,target_workbook_w):
 
@@ -222,53 +265,52 @@ def write_out(df_sum,target_workbook_w):
     target_workbook_w.save(target)
     s_row += 1
 
-def create_hourly_stats(day):
-    dayframe = doe_frame.loc[doe_frame['xl'] == day].reset_index()
-    startkern = datetime.time(11,30,00)
-    endkern = datetime.time(19,30,00)
-    hours_index = dict()
-    for i in range (0,25):
-        hours_index[i] = dict()
-        hours_index[i]["angekommen"] = 0
-        hours_index[i]["verbunden"] = 0
-        hours_index[i]["verloren"] = 0
-        hours_index[i]["servicelevel"] = 0
-    hour_mod = 1
-    print dayframe
-    hours_frame = pandas.DataFrame(hours_index).T # df for 0:00-0:30, 0:30-1:30 ... 23:30-23:59
-    print hours_frame
+def write_sla(hours_frame,workbook):
+    style_datum             = xlwt.easyxf('alignment: horiz right', num_format_str = "ddd, dd.mm.yy")
+    style_kw_trenner        = xlwt.easyxf('alignment: horiz right; font: color 0x17; borders: right double, right_color 0x28')
+    style_number            = xlwt.easyxf('alignment: horiz centre')
+    style_verlo             = xlwt.easyxf('alignment: horiz centre; font: color gray25')
+    style_minuten           = xlwt.easyxf('alignment: horiz centre', num_format_str = "[M]:SS")
 
-    for ix, datarow in dayframe.iterrows():
-        tstamp=datarow['tm']
-        hour_ix = tstamp.hour
-        if tstamp.minute < 30:
-            hour_mod = 0
-        print tstamp
-        print hour_ix+hour_mod  # Shift entry to hour_index: minus 1 if under 30, plus 1 if above
+    global s_row2 # we've collected this already from sheet[1]
+    row=s_row2
+    sheet_angenommen = workbook.get_sheet(1)
+    sheet_verloren = workbook.get_sheet(2)
+    sheet_sla = workbook.get_sheet(3)
 
-        
-    #    timestamp = parsedate_full(sheet.cell(i,0).value)
-    #    if 0 <= timestamp.minute <=29:
-    #        hour_index = timestamp.hour
-    #        hour_indices[hour_index]["angekommen"] += sheet.cell(i,2).value
-    #        hour_indices[hour_index]["verbunden"] += sheet.cell(i,3).value
-    #        hour_indices[hour_index]["verloren"] += (sheet.cell(i,2).value - sheet.cell(i,3).value)
-    #    elif 30 <= timestamp.minute <=59:
-    #        hour_index = timestamp.hour +1
-    #        hour_indices[hour_index]["angekommen"] += sheet.cell(i,2).value
-    #        hour_indices[hour_index]["verbunden"] += sheet.cell(i,3).value
-    #        hour_indices[hour_index]["verloren"] += (sheet.cell(i,2).value - sheet.cell(i,3).value)
+    series_an = hours_frame.loc['verbunden'].values
+    series_vl = hours_frame.loc['verloren'].values
+    series_sla = hours_frame.loc['servicelevel'].values
 
-    #for hour in hour_indices.keys():
-    #    if hour_indices[hour]["verbunden"] > 0:
-    #        hour_indices[hour]["servicelevel"] = (hour_indices[hour]["verbunden"] / hour_indices[hour]["angekommen"])
-    #    else:
-    #        if hour_indices[hour]["angekommen"] == 0:
-    #            hour_indices[hour]["servicelevel"] = 1 
-    #        elif hour_indices[hour]["angekommen"] > 0:
-    #            hour_indices[hour]["servicelevel"] = 0 
+    for i in range(0,len(series_an)):
+        if i == 0:
+            style = style_datum
+        elif i == 1:
+            style = style_kw_trenner
+        else:
+            style = style_number
 
-    #return datum, calweek, hour_indices
+        if i in [0,1]:
+            val_an = series_an[i].item()  # numpy.int64 can not be written with xlwt...
+        else:
+            val_an = series_an[i] # everything else is ok with xlwt...
+        sheet_angenommen.write(row, i, val_an, style) 
+
+        if i in [0,1]:
+            val_vl = series_vl[i].item()
+        else:
+            val_vl = series_vl[i]
+        sheet_verloren.write(row, i, val_vl, style) 
+
+        if i in [0,1]:
+            val_sla = series_sla[i].item()
+        else:
+            val_sla = series_sla[i]
+        sheet_sla.write(row, i, val_sla, style) 
+
+    target_workbook_w.save(target)
+    s_row2 += 1
+
 ####################end of function definitions#####################
 source,target,pmode = check_cmdline_params()
 doe = dict()    # dict of everything, from here all selections (by agent, by agent and date, by hours etc) are possible
@@ -295,39 +337,37 @@ s_row = target_sheet.nrows+1
 last_day_target = max(target_days_found(target_sheet,s_row)) # returns the highest date found as an excel date number
 days_to_add = [i for i in xldates_in_dir if i > last_day_target] # list of days in scanned directory that are newer than the last day of the target sheet
 
-print ('days found in dir: '),xldates_in_dir
+print 'days found in dir: ',xldates_in_dir[:2], '...', xldates_in_dir[-2:]
 print ('last day of current excelfile: '),last_day_target
 print ('datasets to be appended: '),days_to_add
 
     
-
+print 'writing to sheet 0 days ',
 for day in days_to_add:
+    print day,
     day_summary=create_summary(day)  ## creates a summary of a day from the overall doe_frame
     write_out(day_summary,target_workbook_w)
+print
+print ("finished writing sheet 0")
+print
 
-print ("finished writing sheet 1")
 
 ## process second sheet
 
 target_sheet1 = target_workbook.sheet_by_index(1)
-s_row2 = target_sheet1.nrows+1
+s_row2 = target_sheet1.nrows+1  # I'll just assume that sheets 1-3 are always the same date
 last_day_target = max(target_days_found(target_sheet1,s_row2)) # returns the highest date found as an excel date number
 days_to_add = [i for i in xldates_in_dir if i > last_day_target] # list of days in scanned directory that are newer than the last day of the target sheet
 
-print last_day_target
-print days_to_add
+print 'last day of sla_statistics sheets: ',last_day_target
+print 'datasets_sla to be appended: ',days_to_add[:2],'...',days_to_add[-2:]
 
+print 'writing to sheets 1-3 days',
 for day in days_to_add:
-    print day
-    day_summary1 = create_hourly_stats(day)
-    #write_out(stunden,target)
+    df_sla = create_hourly_stats(day)
+    df_sla.fillna('.', inplace=True)
+    write_sla(df_sla,target_workbook_w)
 
 
-# target_workbook = xlrd.open_workbook(target, formatting_info=True)
-# targetsheet = target_workbook.sheet_by_index(0)
-# startrow = targetsheet.nrows
-# 
-# target_workbook_writeable = xlcopy.copy(target_workbook)
-# sheet_rw = target_workbook_writeable.get_sheet(0)
-# 
-# write_out(startrow)
+print 'TOTAL SLA IS FAULTY! NEEDS TO BE ADJUSTED TO TOTAL NUMBER OF CALLS INSTEAD OF JUST HOURS'
+print 'HOURLY SLA IS CORRECT!'
