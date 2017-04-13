@@ -372,5 +372,3 @@ for day in days_to_add:
     df_sla[['day','week']]=df_sla[['day','week']].astype(np.int32)  # this is needed because xlwt cannot write np.int64
     write_sla(df_sla,target_workbook_w)
 
-print
-print "MAL GEGENRECHNEN VON HAND!"
