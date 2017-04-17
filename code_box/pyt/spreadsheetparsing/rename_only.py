@@ -68,7 +68,7 @@ def rename_xls(excelfile):
     elif filename_only.startswith("CE_alles_taeglich_83"):
         renamefile("CE_alle_Agenten_taeglich_")
     else:
-        print(".")
+        print("."),
 
 
 if "single" in flag:

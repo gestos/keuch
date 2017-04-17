@@ -13,9 +13,9 @@ def check_cmdline_params():
         print(sys.argv[0])
         print(textwrap.fill("1. Argument muss ein Verzeichnis oder eine HOTLINEstatistik (nicht Agenten- oder Terminierungsstatistik) sein. Diese muss viertelstuendlich aufgedroeselt sein, um eine Trennung nach Kern- und Nebenzeiten zu ermoeglichen.",80))
         print
-        print(textwrap.fill("2. Argument ist die Ziel-Exceldatei, dorthin wird die generierte Zeile unten eingefuegt",80))
+        print(textwrap.fill("2. Argument ist die Ziel-Pickle-Datei",80))
         print
-        print(textwrap.fill("Beispiel mit jetzigem Setup: ./programm[0] test_stats/archiv/1458_daily_2017-03-08.xls[1] taegliche_hotline_halbstunden.xls[2] ",280))
+        print(textwrap.fill("Beispiel mit jetzigem Setup: ./programm[0] test_stats/archiv/ [1] pickle_hotline.pkl [2] ",280))
         exit()
     elif not os.path.isfile(sys.argv[1]):
         if os.path.isdir(sys.argv[1]):
@@ -319,7 +319,7 @@ def datemapper(datelist):
         mapdict[xldate]['date'] = datum
         mapdict[xldate]['year'] = datum.year
         mapdict[xldate]['month'] = datum.month
-        mapdict[xldate]['week'] = int(datum.isocalendar()[1])
+        mapdict[xldate]['week'] = datum.strftime('%W')
         mapdict[xldate]['day'] = datum.day
         mapdict[xldate]['weekday'] = datum.strftime('%a')
     return mapdict
@@ -396,5 +396,5 @@ for day in xldates_in_dir:
     #df_alldays.append(df_sla)
 
 print
-print df_alldays
-df_alldays.to_pickle('pickle_hotline_0904.pkl')
+print df_alldays.info()
+df_alldays.to_pickle(target)
