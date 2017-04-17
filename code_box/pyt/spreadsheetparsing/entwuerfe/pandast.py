@@ -6,6 +6,7 @@ from xlutils import copy as xlcopy
 from colorama import Fore as coly, Style as coln
 from pandas import Series, DataFrame, ExcelWriter
 import datetime
+import matplotlib.pyplot as plt
 
 di= {'a': '1','b': '2','c': '3'}
 
