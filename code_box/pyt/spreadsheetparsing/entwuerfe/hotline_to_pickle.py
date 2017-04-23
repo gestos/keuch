@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import os, csv, math, xlrd, re, sys, xlwt, calendar, textwrap, itertools, pandas
 from natsort import natsorted, ns
 from xlwt import Formula
@@ -63,7 +63,8 @@ def get_filelist(folder):
     agentsfiles = dict()
     spinner = itertools.cycle(['-', '\\', '|', '/'])
     for i in (s for s in os.listdir(folder) if s.endswith(".xls")):
-        sys.stdout.write(spinner.next())  # write the next character
+        #sys.stdout.write(spinner.next())  # write the next character
+        sys.stdout.write(next(spinner))  # write the next character, hopefully py3
         sys.stdout.flush()                # flush stdout buffer (actual character display)
         sys.stdout.write('\b')
         datei = os.path.join(folder,i)
@@ -146,7 +147,7 @@ def create_summary(day):
     dayframe = doe_frame.loc[doe_frame['xl'] == day].reset_index()
     colfunx={'dt':'first' , 'ww':'first', 'an':'sum' , 'vb':'sum' , 'vl':'sum' , 'ht':'sum' , 'tt':'sum' , 'acw':'sum'}
     dayframe_sum = dayframe.groupby('xl').agg(colfunx)
-    print dayframe_sum.iloc[0]['dt'],',',
+    print (dayframe_sum.iloc[0]['dt'],','),
     dayframe_sum['tot_av_tt'] = dayframe_sum['tt'] / dayframe_sum['vb']
     dayframe_sum['tot_av_ht'] = dayframe_sum['ht'] / dayframe_sum['vb']
     dayframe_sum['tot_av_acw'] = dayframe_sum['acw'] / dayframe_sum['vb']
@@ -184,7 +185,7 @@ def create_summary(day):
 
 
 def create_hourly_stats(day):
-    print day,
+    print (day),
     dayframe = doe_frame.loc[doe_frame['xl'] == day].reset_index()
     hours_index = dict()
     for i in range (0,25):
@@ -396,5 +397,5 @@ for day in xldates_in_dir:
     #df_alldays.append(df_sla)
 
 print
-print df_alldays.info()
-df_alldays.to_pickle(target)
+print (df_alldays.info())
+df_alldays.to_pickle(sys.argv[2])
