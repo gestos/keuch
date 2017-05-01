@@ -1,5 +1,6 @@
-#!/usr/bin/python
-import os, csv, math, xlrd, re, sys, xlwt, calendar, textwrap, itertools, pandas
+#!/home/keuch/gits/keuch/code_box/pyt/spreadsheetparsing/entwuerfe/ve/bin/python3
+import os, csv, math, xlrd, re, sys, calendar, textwrap, itertools, pandas
+import xlwt
 from natsort import natsorted, ns
 from xlwt import Formula
 from xlutils import copy as xlcopy
@@ -63,7 +64,7 @@ def get_filelist(folder):
     agentsfiles = dict()
     spinner = itertools.cycle(['-', '\\', '|', '/'])
     for i in (s for s in os.listdir(folder) if s.endswith(".xls")):
-        sys.stdout.write(spinner.next())  # write the next character
+        sys.stdout.write(next(spinner))  # write the next character, hopefully py3
         sys.stdout.flush()                # flush stdout buffer (actual character display)
         sys.stdout.write('\b')
         datei = os.path.join(folder,i)
@@ -146,7 +147,7 @@ def create_summary(day):
     dayframe = doe_frame.loc[doe_frame['xl'] == day].reset_index()
     colfunx={'dt':'first' , 'ww':'first', 'an':'sum' , 'vb':'sum' , 'vl':'sum' , 'ht':'sum' , 'tt':'sum' , 'acw':'sum'}
     dayframe_sum = dayframe.groupby('xl').agg(colfunx)
-    print dayframe_sum.iloc[0]['dt'],',',
+    print(dayframe_sum.iloc[0]['dt'],',')
     dayframe_sum['tot_av_tt'] = dayframe_sum['tt'] / dayframe_sum['vb']
     dayframe_sum['tot_av_ht'] = dayframe_sum['ht'] / dayframe_sum['vb']
     dayframe_sum['tot_av_acw'] = dayframe_sum['acw'] / dayframe_sum['vb']
@@ -184,7 +185,7 @@ def create_summary(day):
 
 
 def create_hourly_stats(day):
-    print day,
+    print(day)
     dayframe = doe_frame.loc[doe_frame['xl'] == day].reset_index()
     hours_index = dict()
     for i in range (0,25):
@@ -229,6 +230,8 @@ def create_hourly_stats(day):
 
 def write_out(df_sum,target_workbook_w):
 
+    df_sum[['vb','k_vb','n_vb','vl','k_vl','n_vl']] = df_sum[['vb','k_vb','n_vb','vl','k_vl','n_vl']].astype(float)
+
     global s_row
     row=s_row-1
     sheet_rw = target_workbook_w.get_sheet(0)
@@ -245,6 +248,7 @@ def write_out(df_sum,target_workbook_w):
     sheet_rw.write(row, 0, ix[0], style_datum)   #Datum
     sheet_rw.write(row, 1, int(df_sum.iloc[0]['ww']), style_kw_trenner)   #Woche
 
+    print(type(df_sum.iloc[0]['vl']))   # Verlorene Total
     sheet_rw.write(row, 3, df_sum.iloc[0]['vl'], style_verlo)   # Verlorene Total
     sheet_rw.write(row, 4, df_sum.iloc[0]['vb'], style_number)   # Verbundene Total
     sheet_rw.write(row, 5, df_sum.iloc[0]['tot_av_ht'], style_minuten)   # Av. HT Total
@@ -284,6 +288,13 @@ def write_sla(hours_frame,workbook):
     series_vl = hours_frame.loc['verloren'].values
     series_sla = hours_frame.loc['servicelevel'].values
 
+    #print(type(series_an))
+    #print(series_an)
+
+    #df_sum[['vb','k_vb','n_vb','vl','k_vl','n_vl']] = df_sum[['vb','k_vb','n_vb','vl','k_vl','n_vl']].astype(float)
+    series_an = series_an.astype(float, copy=False)
+    series_vl = series_vl.astype(float, copy=False)
+    series_sla = series_sla.astype(float, copy=False)
     for i in range(0,len(series_an)):
         if i == 0:
             style = style_datum
@@ -299,8 +310,12 @@ def write_sla(hours_frame,workbook):
         sheet_verloren.write(row, i, val_vl, style) 
 
         val_sla = series_sla[i] # everything else is ok with xlwt...
+        #print(val_sla)
+        #print(type(val_sla))
         if i == 27:
             style = style_2dec
+        if np.isnan(val_sla):
+            val_sla='.'
         sheet_sla.write(row, i, val_sla, style) 
 
     target_workbook_w.save(target)
@@ -329,8 +344,8 @@ monate_in_dir = doe_frame.mm.unique()   # numpy.ndarray of month numbers
 target_workbook = xlrd.open_workbook(target, formatting_info=True)  # this is the file
 
 if target_workbook.nsheets != 4:
-    print "this parser expects an excel file with 4 sheets, but",target,"has only ",target_workbook.nsheets
-    print "please check whether this is the right target file"
+    print("this parser expects an excel file with 4 sheets, but",target,"has only ",target_workbook.nsheets)
+    print("please check whether this is the right target file")
     exit()
 
 target_sheet = target_workbook.sheet_by_index(0)
@@ -340,14 +355,14 @@ s_row = target_sheet.nrows+1
 last_day_target = max(target_days_found(target_sheet,s_row)) # returns the highest date found as an excel date number
 days_to_add = [i for i in xldates_in_dir if i > last_day_target] # list of days in scanned directory that are newer than the last day of the target sheet
 
-print 'days found in dir: ',xldates_in_dir[:2], '...', xldates_in_dir[-2:]
+print ('days found in dir: ',xldates_in_dir[:2], '...', xldates_in_dir[-2:])
 print ('last day of current excelfile: '),last_day_target
 print ('datasets to be appended: '),days_to_add
 
     
-print 'writing to sheet 0 days ',
+print ('writing to sheet 0 days ')
 for day in days_to_add:
-    print day,
+    print(day)
     day_summary=create_summary(day)  ## creates a summary of a day from the overall doe_frame
     day_summary[['vl','n_vl','k_vl','vb','n_vb','k_vb']]=day_summary[['vl','n_vl','k_vl','vb','n_vb','k_vb']].astype(np.int32)
     write_out(day_summary,target_workbook_w)
@@ -362,13 +377,15 @@ s_row2 = target_sheet1.nrows+1  # I'll just assume that sheets 1-3 are always th
 last_day_target = max(target_days_found(target_sheet1,s_row2)) # returns the highest date found as an excel date number
 days_to_add = [i for i in xldates_in_dir if i > last_day_target] # list of days in scanned directory that are newer than the last day of the target sheet
 
-print 'last day of sla_statistics sheets: ',last_day_target
-print 'datasets_sla to be appended: ',days_to_add[:2],'...',days_to_add[-2:]
+print ('last day of sla_statistics sheets: ',last_day_target)
+print ('datasets_sla to be appended: ',days_to_add[:2],'...',days_to_add[-2:])
 
-print 'writing to sheets 1-3 days',
+print ('writing to sheets 1-3 days')
 for day in days_to_add:
     df_sla = create_hourly_stats(day)
-    df_sla.fillna('.', inplace=True)
-    df_sla[['day','week']]=df_sla[['day','week']].astype(np.int32)  # this is needed because xlwt cannot write np.int64
+    #df_sla.fillna('.', inplace=True)
+    df_sla[['day','week']]=df_sla[['day','week']].astype(float)  # this is needed because xlwt cannot write np.int64
     write_sla(df_sla,target_workbook_w)
 
+print
+print("MAL GEGENRECHNEN VON HAND!")

@@ -28,9 +28,6 @@ def check_cmdline_params():
         else:
             print(sys.argv[1]+" is not a regular file")
             exit()
-    elif not os.path.isfile(sys.argv[2]):
-        print(sys.argv[2] + " is not a regular file")
-        exit()
     else:
         pmode="file"
         sourcefile_IB = os.path.abspath(sys.argv[1])
@@ -75,7 +72,6 @@ def get_filelist(folder):
             #if sheet.cell(0,0) and sheet.cell(0,0).value == "CE_alles_taeglich":
             sheet_date = parsedate_header(sheet.cell(1,1).value).date() # this will be the dictionary key as it is the unique overall key
             agentsfiles[sheet_date] = datei
-    print
     return agentsfiles
 
 def read_entries(datei,doe):
@@ -83,8 +79,16 @@ def read_entries(datei,doe):
     out_dict = dict()
     kern_start = datetime.time(11,30)
     kern_end = datetime.time(19,15)
-    if sheet.nrows < 3:
+    teststring=sheet.cell(3,0).value
+
+    if teststring != 'Timestamp':
+        print('terrible flaw')
+        exit()
+
+    if sheet.nrows < 4:
         print ("that's a file without entries")
+        print (datei)
+        exit()
         return
 
     rows = sheet.nrows
@@ -113,25 +117,25 @@ def read_entries(datei,doe):
         
         xldate=excel_date(stamp.date())
 
-        if angeboten > 0:
-            doe[stamp] = dict()
-            o = doe[stamp]
-            o["tm"] = stamp.time()
-            o["dt"] = stamp.date()
-            o["yy"] = year
-            o["mm"] = int(month)
-            o["dd"] = int(day)
-            o["xl"] = xldate
-            o["hh"] = int(hour)
-            o["bz"] = bzeit
-            o["ww"] = int(week)
-            o["wd"] = weekday
-            o["an"] = int(angeboten)
-            o["vb"] = int(verbunden)
-            o["vl"] = int(verloren)
-            o["tt"] = tt
-            o["ht"] = ht
-            o["acw"] = acw
+        doe[stamp] = dict()
+        o = doe[stamp]
+        o["tm"] = stamp.time()
+        o["dt"] = stamp.date()
+        o["yy"] = year
+        o["mm"] = int(month)
+        o["dd"] = int(day)
+        o["xl"] = xldate
+        o["hh"] = int(hour)
+        o["bz"] = bzeit
+        o["ww"] = int(week)
+        o["wd"] = weekday
+        o["an"] = int(angeboten)
+        o["vb"] = int(verbunden)
+        o["vl"] = int(verloren)
+        o["tt"] = tt
+        o["ht"] = ht
+        o["acw"] = acw
+
     return doe
 
 def target_days_found(sheet,srow):
@@ -185,7 +189,7 @@ def create_summary(day):
 
 
 def create_hourly_stats(day):
-    print (day),
+    print (day,', ', end='', flush=True)
     dayframe = doe_frame.loc[doe_frame['xl'] == day].reset_index()
     hours_index = dict()
     for i in range (0,25):
@@ -214,8 +218,13 @@ def create_hourly_stats(day):
     hours_frame.loc['summa','angekommen'] = hours_frame['angekommen'].sum()
     hours_frame.loc['summa','verbunden'] = hours_frame['verbunden'].sum()
     hours_frame.loc['summa','verloren'] = hours_frame['verloren'].sum()
-    #hours_frame.loc['summa','servicelevel'] = hours_frame['servicelevel'].mean()
-    hours_frame.loc['summa','servicelevel'] =  hours_frame.loc['summa','verbunden']/hours_frame.loc['summa','angekommen']
+
+    if hours_frame.loc['summa','angekommen'] == 0:
+        print('fatal exception, set SLA to NaN, no calls for this day?')
+        hours_frame.loc['summa','servicelevel'] = np.NaN
+    else:
+        hours_frame.loc['summa','servicelevel'] =  hours_frame.loc['summa','verbunden']/hours_frame.loc['summa','angekommen']
+
     hours_frame = hours_frame.T
     hours_frame['xlday'] = day
     hours_frame['day'] = datemap[day]['day']
@@ -331,11 +340,14 @@ doe = dict()    # dict of everything, from here all selections (by agent, by age
 ## read everything from directory into a dict and create a dataframe from it
 if pmode == "dir":
     filelist=get_filelist(source)
+    print('dictionary creation...',end='',flush=True)
     for k in sorted(filelist.keys()):
         doe = read_entries(filelist[k],doe)
+    print('ready')
 elif pmode == "file":
     doe = read_entries(source,doe)
 
+print('dictionary to pandas dataframe...')
 column_order = ['tm','dt','yy','mm','ww','wd','dd','xl','hh','an','vb','vl','ht','tt','acw','bz']
 doe_frame = pandas.DataFrame(doe).T[column_order] # This df contains ALL files that were scanned in the input_dir
 dates_in_dir = doe_frame.dt.unique()    # numpy.ndarray of datetime.date objects
@@ -344,58 +356,14 @@ years_in_dir = doe_frame.yy.unique()    # numpy.ndarray of year values
 kws_in_dir = doe_frame.ww.unique()      # numpy.ndarray of week numbers
 monate_in_dir = doe_frame.mm.unique()   # numpy.ndarray of month numbers
 datemap = datemapper(dates_in_dir)
-
-
-#target_workbook = xlrd.open_workbook(target, formatting_info=True)  # this is the file
-
-#if target_workbook.nsheets != 4:
-#    print "this parser expects an excel file with 4 sheets, but",target,"has only ",target_workbook.nsheets
-#    print "please check whether this is the right target file"
-#    exit()
-
-#target_sheet = target_workbook.sheet_by_index(0)
-#target_workbook_w = xlcopy.copy(target_workbook)                # a copy is needed to write into
-#s_row = target_sheet.nrows+1
-#
-#last_day_target = max(target_days_found(target_sheet,s_row)) # returns the highest date found as an excel date number
-#days_to_add = [i for i in xldates_in_dir if i > last_day_target] # list of days in scanned directory that are newer than the last day of the target sheet
-#
-#print 'days found in dir: ',xldates_in_dir[:2], '...', xldates_in_dir[-2:]
-#print ('last day of current excelfile: '),last_day_target
-#print ('datasets to be appended: '),days_to_add
-#
-#    
-#print 'writing to sheet 0 days ',
-#for day in days_to_add:
-#    print day,
-#    day_summary=create_summary(day)  ## creates a summary of a day from the overall doe_frame
-#    day_summary[['vl','n_vl','k_vl','vb','n_vb','k_vb']]=day_summary[['vl','n_vl','k_vl','vb','n_vb','k_vb']].astype(np.int32)
-#    #write_out(day_summary,target_workbook_w)
-#print
-#print ("finished writing sheet 0")
-#print
-
-
-## process second sheet
-#target_sheet1 = target_workbook.sheet_by_index(1)
-#s_row2 = target_sheet1.nrows+1  # I'll just assume that sheets 1-3 are always the same date
-#last_day_target = max(target_days_found(target_sheet1,s_row2)) # returns the highest date found as an excel date number
-#days_to_add = [i for i in xldates_in_dir if i > last_day_target] # list of days in scanned directory that are newer than the last day of the target sheet
-
-#print 'last day of sla_statistics sheets: ',last_day_target
-#print 'datasets_sla to be appended: ',days_to_add[:2],'...',days_to_add[-2:]
-#
-#print 'writing to sheets 1-3 days',
-
 df_alldays = pandas.DataFrame()
+print('ok')
+
+print('create stats for each day...')
 for day in xldates_in_dir:
     df_sla = create_hourly_stats(day)
-    #df_sla.fillna('.', inplace=True)
-    #df_sla[['day','week']]=df_sla[['day','week']].astype(np.int32)  # this is needed because xlwt cannot write np.int64
     df_alldays = pandas.concat([df_alldays, df_sla])
-    #write_sla(df_sla,target_workbook_w)
-    #df_alldays.append(df_sla)
+print('ok')
 
 print
-print (df_alldays.info())
 df_alldays.to_pickle(sys.argv[2])
