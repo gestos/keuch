@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/home/keuch/gits/keuch/code_box/pyt/spreadsheetparsing/entwuerfe/ve/bin/python3
 import os, csv, math, xlrd, re, sys, xlwt, calendar, textwrap, itertools, pandas
 from natsort import natsorted, ns
 from xlwt import Formula
@@ -70,7 +70,8 @@ def get_filelist(folder):
     agentsfiles = dict()
     spinner = itertools.cycle(['-', '\\', '|', '/'])
     for i in (s for s in os.listdir(folder) if s.endswith(".xls")):
-        sys.stdout.write(spinner.next())  # write the next character
+        #sys.stdout.write(spinner.next())  # write the next character
+        sys.stdout.write(next(spinner))  # write the next character, hopefully py3
         sys.stdout.flush()                # flush stdout buffer (actual character display)
         sys.stdout.write('\b')
         datei = os.path.join(folder,i)
@@ -137,6 +138,7 @@ def read_entries(datei,doe):
         #o["att"] = att
         #o["aht"] = aht
         #o["aacw"] = aacw
+        #print(dir(o))
     return doe
 
 def week_start_end(year, week):
@@ -212,7 +214,7 @@ def week_from_frame(year,week_num,frame):
 
     total.fillna(0, inplace=True)
     total=total[['o_be','o_ht','o_tt','o_acw','kbe','kht','ktt','kacw','nbe','nht','ntt','nacw']].sort_values('o_be',ascending=False)
-    
+
     sums=total.sum()
     sums.name = ("N","Summe KW " + str(week_num))
     sums.o_ht=sums.o_ht/len(total.index)
@@ -225,7 +227,7 @@ def week_from_frame(year,week_num,frame):
     sums.ntt=sums.ntt/len(total.index)
     sums.nacw=sums.nacw/len(total.index)
     total = total.append(sums)
-    print total
+    print (total)
     ### dataframe ist hier komplett ###
 
     ### rueckgabewert moechte ich aber als liste von listen, damit xlwt schreiben kann ###
@@ -294,14 +296,24 @@ if pmode == "dir":
     for k in sorted(filelist.keys()):
         dict_o_e = read_entries(filelist[k],dict_o_e)
 
-column_order = ['dt','yy','dd','mm','ww','wd','lo','ag','an','be','vl','ht','tt','acw','bz','hh']
-doe_frame = DataFrame(dict_o_e).T[column_order]
+column_order = ['dt', 'yy', 'tt', 'bz', 'hh', 'dd', 'acw', 'mm', 'ww', 'wd', 'lo', 'ag', 'an', 'be', 'vl', 'ht']
+#column_order = ['dt','yy','dd','mm','ww','wd','lo','ag','an','be','vl','ht','tt','acw','bz','hh']
+#column_order = ['dt','yy','dd','mm','ww','wd','lo','ag','an','be','vl','ht','tt','acw','bz','hh']
+#print(dict_o_e.items())
+#print(dict_o_e.keys())
+do_frame = DataFrame(dict_o_e)
+#do_frame.to_pickle('agentenpickel.pkl')
+#print(do_frame)
+doe_frame=do_frame.T
+print(doe_frame.columns)
+
+doe_frame=doe_frame[column_order]
 dates_in_dir = doe_frame.dt.unique()    # numpy.ndarray of datetime.date objects
 years_in_dir = doe_frame.yy.unique()    # numpy.ndarray of year values
 kws_in_dir = doe_frame.ww.unique()      # numpy.ndarray of week numbers
 monate_in_dir = doe_frame.mm.unique()   # numpy.ndarray of month numbers
 
-print kws_in_dir
+print (kws_in_dir)
 
 target_workbook = xlrd.open_workbook(target, formatting_info=True)  # this is the file
 target_sheet = target_workbook.sheet_by_index(0)
@@ -326,3 +338,5 @@ for yy in years_in_dir:
 
 
 ### TODO add summary line to each week
+#pickelframe=DataFrame(dict_o_e)
+#pickelframe.to_pickle(agentenpickel.pkl)

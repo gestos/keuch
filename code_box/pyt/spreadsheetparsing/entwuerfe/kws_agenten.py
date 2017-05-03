@@ -70,7 +70,8 @@ def get_filelist(folder):
     agentsfiles = dict()
     spinner = itertools.cycle(['-', '\\', '|', '/'])
     for i in (s for s in os.listdir(folder) if s.endswith(".xls")):
-        sys.stdout.write(spinner.next())  # write the next character
+        #sys.stdout.write(spinner.next())  # write the next character
+        sys.stdout.write(next(spinner))  # write the next character, hopefully py3
         sys.stdout.flush()                # flush stdout buffer (actual character display)
         sys.stdout.write('\b')
         datei = os.path.join(folder,i)
@@ -137,6 +138,7 @@ def read_entries(datei,doe):
         #o["att"] = att
         #o["aht"] = aht
         #o["aacw"] = aacw
+        #print(dir(o))
     return doe
 
 def week_start_end(year, week):
@@ -212,7 +214,7 @@ def week_from_frame(year,week_num,frame):
 
     total.fillna(0, inplace=True)
     total=total[['o_be','o_ht','o_tt','o_acw','kbe','kht','ktt','kacw','nbe','nht','ntt','nacw']].sort_values('o_be',ascending=False)
-    
+
     sums=total.sum()
     sums.name = ("N","Summe KW " + str(week_num))
     sums.o_ht=sums.o_ht/len(total.index)
@@ -294,8 +296,9 @@ if pmode == "dir":
     for k in sorted(filelist.keys()):
         dict_o_e = read_entries(filelist[k],dict_o_e)
 
-column_order = list(['dt', 'yy', 'tt', 'bz', 'hh', 'dd', 'acw', 'mm', 'ww', 'wd', 'lo', 'ag', 'an', 'be', 'vl', 'ht'])
-doe_frame = DataFrame(dict_o_e)
+column_order = ['dt', 'yy', 'tt', 'bz', 'hh', 'dd', 'acw', 'mm', 'ww', 'wd', 'lo', 'ag', 'an', 'be', 'vl', 'ht']
+do_frame = DataFrame(dict_o_e)
+doe_frame=do_frame.T
 doe_frame=doe_frame[column_order]
 dates_in_dir = doe_frame.dt.unique()    # numpy.ndarray of datetime.date objects
 years_in_dir = doe_frame.yy.unique()    # numpy.ndarray of year values
@@ -327,5 +330,5 @@ for yy in years_in_dir:
 
 
 ### TODO add summary line to each week
-pickelframe=DataFrame(dict_o_e)
-pickelframe.to_pickle(agentenpickel.pkl)
+pickelframe=DataFrame(doe_frame)
+pickelframe.to_pickle('agentenpickel.pkl')
