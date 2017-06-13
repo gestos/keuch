@@ -14,7 +14,7 @@ def check_cmdline_params():
         print(sys.argv[0])
         print(textwrap.fill("1. Argument muss ein Verzeichnis oder eine HOTLINEstatistik (nicht Agenten- oder Terminierungsstatistik) sein. Diese muss viertelstuendlich aufgedroeselt sein, um eine Trennung nach Kern- und Nebenzeiten zu ermoeglichen.",80))
         print
-        print(textwrap.fill("2. Argument ist die Ziel-Exceldatei, dorthin wird die generierte Zeile unten eingefuegt",80))
+        print(textwrap.fill("2. Argument ist die Ziel-PKL-Datei",80))
         print
         print(textwrap.fill("Beispiel mit jetzigem Setup: ./programm[0] test_stats/archiv/1458_daily_2017-03-08.xls[1] taegliche_hotline_halbstunden.xls[2] ",280))
         exit()
