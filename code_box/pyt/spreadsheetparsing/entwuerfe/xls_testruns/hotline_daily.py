@@ -64,6 +64,7 @@ def get_filelist(folder):
     agentsfiles = dict()
     spinner = itertools.cycle(['-', '\\', '|', '/'])
     for i in (s for s in os.listdir(folder) if s.endswith(".xls")):
+        #print(i)
         sys.stdout.write(next(spinner))  # write the next character, hopefully py3
         sys.stdout.flush()                # flush stdout buffer (actual character display)
         sys.stdout.write('\b')
@@ -78,16 +79,50 @@ def get_filelist(folder):
     print
     return agentsfiles
 
-def determine_kernzeit(datum):
-    print(datum)
-    print(type(datum))
-    if datum.date() >= datetime.date(2017,6,1):
-        kern_start = datetime.time(8,00)
-        kern_end = datetime.time(19,59)
-    else:
-        kern_start = datetime.time(11,30)
-        kern_end = datetime.time(19,15)
-    return kern_start,kern_end
+def determine_kernzeit(datum, weekday):
+    ### Kernzeiten
+    ### ab 01.03.2017: Mo-Fr 11:30-19:30
+    ### ab 05.06.2017: Mo-Fr 8-20
+    ### ab? Samstag 8-13
+    print(datum, weekday)
+
+    if datum.date() < datetime.date(2017,3,1):
+        bzeit = 'k'
+
+    elif datetime.date(2017,3,1) <= datum.date() < datetime.date(2017,6,5):   ## Zeit zwischen 1.Maerz und 1. Juni
+        if weekday in ("Sat", "Sun"): ## WE immer Nebenzeit
+            bzeit = 'n'
+        else:                           ## Werktage von 11:30 bis 19:30
+            if datetime.time(11,30) <= datum.time() < datetime.time(19,30):
+                bzeit = 'k'
+            else:
+                bzeit = 'n'
+
+    elif datum.date() >= datetime.date(2017,6,5): ## Zeit ab 05.Juni
+        if weekday in ("Sat", "Sun"): ## WE immer Nebenzeit
+            bzeit = 'n'
+        else:                           ## Werktage von 8-20
+            if datetime.time(8,00) <= datum.time() < datetime.time(20,00):
+                bzeit = 'k'
+            else:
+                bzeit = 'n'
+    ### hier noch ab wann samstags 8-13 gezaehlt wird
+    # elif datum.date() >= datetime.date(2017,6,5): ## Zeit ab 05.Juni
+    #     if weekday in ("Sun"): ## So. Nebenzeit
+    #         bzeit = 'n'   
+    #     if weekday in ("Sat"): ## Sa. 8-13
+    #         if datetime.time(8,00) <= datum.time < datetime.time(13,00):
+    #             bzeit = 'k'
+    #         else:
+    #             bzeit = 'n'
+    #     else:                           ## Werktage von 8-20
+    #         if datetime.time(8,00) <= datum.time < datetime.time(20,00):
+    #             bzeit = 'k'
+    #         else:
+    #             bzeit = 'n'
+
+    print(bzeit)
+    return bzeit
 
 def read_entries(datei,doe):
     sheet = xlrd.open_workbook(datei, formatting_info=True).sheet_by_index(0)
@@ -105,15 +140,7 @@ def read_entries(datei,doe):
         week = int(stamp.isocalendar()[1])
         weekday = stamp.strftime('%a')
         hour = stamp.hour
-        kern_start,kern_end=determine_kernzeit(stamp)
-
-        if weekday in ("Sat", "Sun"):
-            bzeit = "n"
-        elif kern_start <= stamp.time() <= kern_end:
-            bzeit = "k"
-        else:
-            bzeit = "n"
-
+        bzeit=determine_kernzeit(stamp,weekday)
         angeboten = sheet.cell(i,2).value
         verbunden = sheet.cell(i,3).value
         verloren = angeboten - verbunden
@@ -366,8 +393,10 @@ last_day_target = max(target_days_found(target_sheet,s_row)) # returns the highe
 days_to_add = [i for i in xldates_in_dir if i > last_day_target] # list of days in scanned directory that are newer than the last day of the target sheet
 
 print ('days found in dir: ',xldates_in_dir[:2], '...', xldates_in_dir[-2:])
-print ('last day of current excelfile: '),last_day_target
-print ('datasets to be appended: '),days_to_add
+print ('last day of current excelfile: ')
+print (last_day_target)
+print ('datasets to be appended: ')
+print (days_to_add)
 
     
 print ('writing to sheet 0 days ')
