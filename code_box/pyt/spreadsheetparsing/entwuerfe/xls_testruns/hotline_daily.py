@@ -1,4 +1,8 @@
 #!/home/keuch/gits/keuch/code_box/pyt/spreadsheetparsing/entwuerfe/ve/bin/python3
+
+## these files are parsed:
+## "Hotlineber1458Gesing taegl" "1458 carexpert Kfz-Sachverstae"):
+
 import os, csv, math, xlrd, re, sys, calendar, textwrap, itertools, pandas
 import xlwt
 from natsort import natsorted, ns
@@ -98,7 +102,7 @@ def determine_kernzeit(datum, weekday):
             else:
                 bzeit = 'n'
 
-    elif datum.date() >= datetime.date(2017,6,5): ## Zeit ab 05.Juni
+    elif datetime.date(2017,6,5) <= datum.date() < datetime.date(2017,7,8): ## Zeit ab 05.Juni bis 07. Juli
         if weekday in ("Sat", "Sun"): ## WE immer Nebenzeit
             bzeit = 'n'
         else:                           ## Werktage von 8-20
@@ -107,19 +111,19 @@ def determine_kernzeit(datum, weekday):
             else:
                 bzeit = 'n'
     ### hier noch ab wann samstags 8-13 gezaehlt wird
-    # elif datum.date() >= datetime.date(2017,6,5): ## Zeit ab 05.Juni
-    #     if weekday in ("Sun"): ## So. Nebenzeit
-    #         bzeit = 'n'   
-    #     if weekday in ("Sat"): ## Sa. 8-13
-    #         if datetime.time(8,00) <= datum.time < datetime.time(13,00):
-    #             bzeit = 'k'
-    #         else:
-    #             bzeit = 'n'
-    #     else:                           ## Werktage von 8-20
-    #         if datetime.time(8,00) <= datum.time < datetime.time(20,00):
-    #             bzeit = 'k'
-    #         else:
-    #             bzeit = 'n'
+    elif datum.date() >= datetime.date(2017,7,8): ## Zeit ab Sa, 08. Juli
+        if weekday in ("Sun"): ## So. Nebenzeit
+            bzeit = 'n'   
+        elif weekday in ("Sat"): ## Sa. 8-13
+            if datetime.time(8,00) <= datum.time() < datetime.time(13,00):
+                bzeit = 'k'
+            else:
+                bzeit = 'n'
+        else:                           ## Werktage von 8-20
+            if datetime.time(8,00) <= datum.time() < datetime.time(20,00):
+                bzeit = 'k'
+            else:
+                bzeit = 'n'
 
     print(bzeit)
     return bzeit
