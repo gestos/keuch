@@ -87,7 +87,7 @@ def determine_kernzeit(datum, weekday):
     ### Kernzeiten
     ### ab 01.03.2017: Mo-Fr 11:30-19:30
     ### ab 05.06.2017: Mo-Fr 8-20
-    ### ab? Samstag 8-13
+    ### ab 08.07. plus Samstag 8-13
     print(datum, weekday)
 
     if datum.date() < datetime.date(2017,3,1):
