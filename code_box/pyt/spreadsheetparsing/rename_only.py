@@ -63,6 +63,8 @@ def rename_xls(excelfile):
         renamefile_kw("Agenten_Stats_","_KW")
     elif filename_only.startswith("Hotlineber1458"):
         renamefile("1458_daily_")
+    elif filename_only.startswith("Hotlineber1459"):
+        renamefile("1459_daily_")
     elif filename_only.startswith("CE_Out_taeglich"):
         renamefile("CE_Outbound_")
     elif filename_only.startswith("CE_alles_taeglich_83"):
