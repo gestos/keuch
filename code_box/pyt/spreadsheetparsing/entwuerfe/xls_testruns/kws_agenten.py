@@ -7,6 +7,7 @@ from colorama import Fore as coly, Style as coln
 from pandas import Series, DataFrame, ExcelWriter
 import datetime
 from openpyxl.utils.dataframe import dataframe_to_rows
+from itertools import tee#, izip
 pandas.options.mode.chained_assignment = None
 
 def check_cmdline_params():
@@ -78,7 +79,8 @@ def get_filelist(folder):
         sheet = xlrd.open_workbook(datei, formatting_info=True).sheet_by_index(0)
         if sheet.nrows == 0:
             continue
-        if sheet.cell(0,0) and (sheet.cell(0,0).value == "CE_alles_taeglich" or sheet.cell(0,0).value == "Carexpert_Agent_Gesing"):
+        if sheet.cell(0,0) and (sheet.cell(0,0).value == "CE_alles_taeglich"):
+            #or sheet.cell(0,0).value == "Carexpert_Agent_Gesing"):
             #if sheet.cell(0,0) and sheet.cell(0,0).value == "CE_alles_taeglich":
             sheet_date = parsedate_header(sheet.cell(1,1).value).date() # this will be the dictionary key as it is the unique overall key
             agentsfiles[sheet_date] = datei
@@ -330,37 +332,53 @@ def write_weeks(week,vals):
     s_row += 1
     target_workbook_w.save(target)
 
+def missing_dates(dates):
+    def pairwise(iterable):
+        a, b = tee(iterable)
+        next(b)
+        return zip(a, b)
+
+    for prev, curr in pairwise(sorted(dates)):
+        i = prev
+        while i + datetime.timedelta(1) < curr:
+            i += datetime.timedelta(1)
+            yield i
+
 ############## END OF FUNCTION DEFINITIONS ############
 
 source,target,pmode = check_cmdline_params()
 dict_o_e = dict()
 
-
-## read everything from directory into a dict and create a dataframe from it
+## read everything from source directory into a dict and create a dataframe from it
 if pmode == "dir":
-    filelist=get_filelist(source)
-    for k in sorted(filelist.keys()):
-        dict_o_e = read_entries(filelist[k],dict_o_e)
+    filelist=get_filelist(source) # 'filelist' is a dictionary of only (datetime.)date-keys associated with their corresponding files (full path included)
+
+# check that filelist for gaps between dates
+maybe_continuuous = list(sorted(filelist.keys()))  # this is a sorted list of the dates we've retrieved from the input directory
+for missing in missing_dates(maybe_continuuous):
+    print('missing days:')
+    print (missing)
+    input('keypress')
+
+# start parsing excel-files and put them into a pandas dataframe
+for k in sorted(filelist.keys()):
+    dict_o_e = read_entries(filelist[k],dict_o_e) # first put everything in a dictionary
 
 column_order = ['dt', 'yy', 'tt', 'bz', 'hh', 'dd', 'acw', 'mm', 'ww', 'wd', 'lo', 'ag', 'an', 'be', 'vl', 'ht']
-#column_order = ['dt','yy','dd','mm','ww','wd','lo','ag','an','be','vl','ht','tt','acw','bz','hh']
-#column_order = ['dt','yy','dd','mm','ww','wd','lo','ag','an','be','vl','ht','tt','acw','bz','hh']
-#print(dict_o_e.items())
-#print(dict_o_e.keys())
-do_frame = DataFrame(dict_o_e)
-#do_frame.to_pickle('agentenpickel.pkl')
-#print(do_frame)
+do_frame = DataFrame(dict_o_e) # make a dataframe from the dictionary
 doe_frame=do_frame.T
 print(doe_frame.columns)
-
 doe_frame=doe_frame[column_order]
+doe_frame.to_pickle('./agentenpickel.pkl') # save raw data to a file
+
 dates_in_dir = doe_frame.dt.unique()    # numpy.ndarray of datetime.date objects
 years_in_dir = doe_frame.yy.unique()    # numpy.ndarray of year values
 kws_in_dir = doe_frame.ww.unique()      # numpy.ndarray of week numbers
 monate_in_dir = doe_frame.mm.unique()   # numpy.ndarray of month numbers
-
 print (kws_in_dir)
 
+
+# prepare for writing to the target excel file
 target_workbook = xlrd.open_workbook(target, formatting_info=True)  # this is the file
 target_sheet = target_workbook.sheet_by_index(0)
 target_workbook_w = xlcopy.copy(target_workbook)                # a copy is needed to write into

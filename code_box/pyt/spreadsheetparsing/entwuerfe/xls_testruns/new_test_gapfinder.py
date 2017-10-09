@@ -9,18 +9,8 @@ import numpy as np
 from itertools import tee#, izip
 
 days=pandas.read_pickle('./testpickle.pkl')
-#print(type(days))
-#print(days.ix)
-#print(list(days))
-
-#print(days[['0']])
-#print(days.head(5))
-#print(days.columns.values)
-#print(days[0])
-#print(type(days[0]))
-
+print(type(days))
 datelist=days[0].tolist()
-#print(datelist)
 
 def pairwise(iterable):
     "s -> (s0,s1), (s1,s2), (s2, s3), ..."
@@ -29,6 +19,10 @@ def pairwise(iterable):
     return zip(a, b)
 
 def missing_dates(dates):
+    print(type(dates))
+    input('keypress')
+    print(sorted(dates))
+    input('keypress')
     for prev, curr in pairwise(sorted(dates)):
         i = prev
         while i + timedelta(1) < curr:

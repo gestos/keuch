@@ -176,12 +176,17 @@ def read_entries(datei,doe):
     return doe
 
 def target_days_found(sheet,srow):
+    ### debug
+    print('finding days in sheet')
     found_days = [0]
     s = sheet
-    for row in range (2,srow-1):
+    for row in range (10,srow-1):   # obacht, hier die Zeile angeben, ab der die echten Daten beginnen
         c = s.cell(row,0)
         if c.value:
+            print(c.value)
             found_days.append(c.value)
+    print(found_days)
+    print(type(found_days))
     return found_days
 
 def create_summary(day):
@@ -393,7 +398,17 @@ target_sheet = target_workbook.sheet_by_index(0)
 target_workbook_w = xlcopy.copy(target_workbook)                # a copy is needed to write into
 s_row = target_sheet.nrows+1
 
+
+###debug###
+#print(target_sheet)
+#print(type(target_sheet))
+#print(s_row)
+#print(type(s_row))
+#input('presskey')
+
+
 last_day_target = max(target_days_found(target_sheet,s_row)) # returns the highest date found as an excel date number
+#input('presskey')
 days_to_add = [i for i in xldates_in_dir if i > last_day_target] # list of days in scanned directory that are newer than the last day of the target sheet
 
 print ('days found in dir: ',xldates_in_dir[:2], '...', xldates_in_dir[-2:])
