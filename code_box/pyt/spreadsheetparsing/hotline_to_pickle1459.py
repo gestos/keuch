@@ -68,17 +68,63 @@ def get_filelist(folder):
         sheet = xlrd.open_workbook(datei, formatting_info=True).sheet_by_index(0)
         if sheet.nrows == 0:
             continue
-        if sheet.cell(0,0) and (sheet.cell(0,0).value == "Hotlineber1458Gesing taegl" or sheet.cell(0,1).value == "1458 carexpert Kfz-Sachverstae"):
+        if sheet.cell(0,0) and (sheet.cell(0,0).value.startswith("Hotlineber1459Gesing")):
             #if sheet.cell(0,0) and sheet.cell(0,0).value == "CE_alles_taeglich":
             sheet_date = parsedate_header(sheet.cell(1,1).value).date() # this will be the dictionary key as it is the unique overall key
             agentsfiles[sheet_date] = datei
     return agentsfiles
 
+def determine_kernzeit(datum, weekday):
+    ### Kernzeiten
+    ### ab 01.03.2017: Mo-Fr 11:30-19:30
+    ### ab 05.06.2017: Mo-Fr 8-20
+    ### ab 08.07. plus Samstag 8-13
+    print(datum, weekday)
+
+    if datum.date() < datetime.date(2017,3,1):
+        bzeit = 'k'
+
+    elif datetime.date(2017,3,1) <= datum.date() < datetime.date(2017,6,5):   ## Zeit zwischen 1.Maerz und 1. Juni
+        if weekday in ("Sat", "Sun"): ## WE immer Nebenzeit
+            bzeit = 'n'
+        else:                           ## Werktage von 11:30 bis 19:30
+            if datetime.time(11,30) <= datum.time() < datetime.time(19,30):
+                bzeit = 'k'
+            else:
+                bzeit = 'n'
+
+    elif datetime.date(2017,6,5) <= datum.date() < datetime.date(2017,7,8): ## Zeit ab 05.Juni bis 07. Juli
+        if weekday in ("Sat", "Sun"): ## WE immer Nebenzeit
+            bzeit = 'n'
+        else:                           ## Werktage von 8-20
+            if datetime.time(8,00) <= datum.time() < datetime.time(20,00):
+                bzeit = 'k'
+            else:
+                bzeit = 'n'
+    ### hier noch ab wann samstags 8-13 gezaehlt wird
+    elif datum.date() >= datetime.date(2017,7,8): ## Zeit ab Sa, 08. Juli
+        if weekday in ("Sun"): ## So. Nebenzeit
+            bzeit = 'n'
+        elif weekday in ("Sat"): ## Sa. 8-13
+            if datetime.time(8,00) <= datum.time() < datetime.time(13,00):
+                bzeit = 'k'
+            else:
+                bzeit = 'n'
+        else:                           ## Werktage von 8-20
+            if datetime.time(8,00) <= datum.time() < datetime.time(20,00):
+                bzeit = 'k'
+            else:
+                bzeit = 'n'
+
+    print(bzeit)
+    return bzeit
+
+
 def read_entries(datei,doe):
     sheet = xlrd.open_workbook(datei, formatting_info=True).sheet_by_index(0)
     out_dict = dict()
-    kern_start = datetime.time(11,30)
-    kern_end = datetime.time(19,15)
+    #kern_start = datetime.time(11,30)
+    #kern_end = datetime.time(19,15)
     teststring=sheet.cell(3,0).value
 
     if teststring != 'Timestamp':
@@ -100,13 +146,15 @@ def read_entries(datei,doe):
         week = int(stamp.isocalendar()[1])
         weekday = stamp.strftime('%a')
         hour = stamp.hour
+        bzeit='k'
+        #bzeit=determine_kernzeit(stamp,weekday)   ### for 1459, there's only one kernzeit
 
-        if weekday in ("Sat", "Sun"):
-            bzeit = "n"
-        elif kern_start <= stamp.time() <= kern_end:
-            bzeit = "k"
-        else:
-            bzeit = "n"
+        #if weekday in ("Sat", "Sun"):
+        #    bzeit = "n"
+        #elif kern_start <= stamp.time() <= kern_end:
+        #    bzeit = "k"
+        #else:
+        #    bzeit = "n"
 
         angeboten = sheet.cell(i,2).value
         verbunden = sheet.cell(i,3).value
@@ -114,7 +162,7 @@ def read_entries(datei,doe):
         tt = sheet.cell(i,5).value
         acw = sheet.cell(i,12).value
         ht = tt + acw
-        
+
         xldate=excel_date(stamp.date())
 
         doe[stamp] = dict()
@@ -135,6 +183,9 @@ def read_entries(datei,doe):
         o["tt"] = tt
         o["ht"] = ht
         o["acw"] = acw
+        o["dectt"] = datetime.timedelta(tt)/60
+        o["decht"] = datetime.timedelta(ht)/60
+        o["decacw"] = datetime.timedelta(acw)/60
 
     return doe
 
@@ -247,7 +298,7 @@ def write_out(df_sum,target_workbook_w):
     global s_row
     row=s_row-1
     sheet_rw = target_workbook_w.get_sheet(0)
-    
+
     style_datum             = xlwt.easyxf('alignment: horiz right', num_format_str = "ddd, dd.mm.yy")
     style_kw_trenner        = xlwt.easyxf('alignment: horiz right; font: color 0x17; borders: right double, right_color 0x28')
     style_number            = xlwt.easyxf('alignment: horiz centre')
@@ -265,7 +316,7 @@ def write_out(df_sum,target_workbook_w):
     sheet_rw.write(row, 5, df_sum.iloc[0]['tot_av_ht'], style_minuten)   # Av. HT Total
     sheet_rw.write(row, 6, df_sum.iloc[0]['tot_av_tt'], style_minuten)   # Av. TT Total
     sheet_rw.write(row, 7, df_sum.iloc[0]['tot_av_acw'], style_minuten)   # Av. ACW Total
-    
+
     sheet_rw.write(row, 9, df_sum.iloc[0]['k_vl'], style_verlo)   # Verlorene Total
     sheet_rw.write(row, 10, df_sum.iloc[0]['k_vb'], style_number)   # Verbundene Total
     sheet_rw.write(row, 11, df_sum.iloc[0]['k_av_ht'], style_minuten)   # Av. HT Total
@@ -308,15 +359,15 @@ def write_sla(hours_frame,workbook):
             style = style_number
 
         val_an = series_an[i] # everything else is ok with xlwt...
-        sheet_angenommen.write(row, i, val_an, style) 
+        sheet_angenommen.write(row, i, val_an, style)
 
         val_vl = series_vl[i] # everything else is ok with xlwt...
-        sheet_verloren.write(row, i, val_vl, style) 
+        sheet_verloren.write(row, i, val_vl, style)
 
         val_sla = series_sla[i] # everything else is ok with xlwt...
         if i == 27:
             style = style_2dec
-        sheet_sla.write(row, i, val_sla, style) 
+        sheet_sla.write(row, i, val_sla, style)
 
     target_workbook_w.save(target)
     s_row2 += 1
@@ -340,16 +391,29 @@ doe = dict()    # dict of everything, from here all selections (by agent, by age
 ## read everything from directory into a dict and create a dataframe from it
 if pmode == "dir":
     filelist=get_filelist(source)
+    print(type(filelist))
+    #filelist=sorted(filelist)
+    #print(type(filelist))
+    #input("Press Enter to continue...")
+
+    #FL = pandas.DataFrame.from_dict(filelist,orient='columns')
+    #print(type(FL))
+    #FL.to_pickle('./testpickle.pkl')
+    #input("Press Enter to continue...")
+    #print(filelist)
+
     print('dictionary creation...',end='',flush=True)
     for k in sorted(filelist.keys()):
+    #for k in sorted(filelist):
         doe = read_entries(filelist[k],doe)
     print('ready')
 elif pmode == "file":
     doe = read_entries(source,doe)
 
 print('dictionary to pandas dataframe...')
-column_order = ['tm','dt','yy','mm','ww','wd','dd','xl','hh','an','vb','vl','ht','tt','acw','bz']
+column_order = ['tm','dt','yy','mm','ww','wd','dd','xl','hh','an','vb','vl','ht','tt','acw','bz', 'dectt', 'decht', 'decacw']
 doe_frame = pandas.DataFrame(doe).T[column_order] # This df contains ALL files that were scanned in the input_dir
+doe_frame.to_pickle("./doe_pickle_1459.pkl")
 dates_in_dir = doe_frame.dt.unique()    # numpy.ndarray of datetime.date objects
 xldates_in_dir = doe_frame.xl.unique()    # numpy.ndarray of datetime.date objects
 years_in_dir = doe_frame.yy.unique()    # numpy.ndarray of year values

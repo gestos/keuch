@@ -68,7 +68,7 @@ def get_filelist(folder):
         sheet = xlrd.open_workbook(datei, formatting_info=True).sheet_by_index(0)
         if sheet.nrows == 0:
             continue
-        if sheet.cell(0,0) and (sheet.cell(0,0).value == "Hotlineber1458Gesing taegl" or sheet.cell(0,1).value == "1458 carexpert Kfz-Sachverstae"):
+        if sheet.cell(0,0) and (sheet.cell(0,0).value.startswith("Hotlineber1459Gesing")):
             #if sheet.cell(0,0) and sheet.cell(0,0).value == "CE_alles_taeglich":
             sheet_date = parsedate_header(sheet.cell(1,1).value).date() # this will be the dictionary key as it is the unique overall key
             agentsfiles[sheet_date] = datei
@@ -146,7 +146,8 @@ def read_entries(datei,doe):
         week = int(stamp.isocalendar()[1])
         weekday = stamp.strftime('%a')
         hour = stamp.hour
-        bzeit=determine_kernzeit(stamp,weekday)
+        bzeit='k'
+        #bzeit=determine_kernzeit(stamp,weekday)   ### for 1459, there's only one kernzeit
 
         #if weekday in ("Sat", "Sun"):
         #    bzeit = "n"
@@ -412,7 +413,7 @@ elif pmode == "file":
 print('dictionary to pandas dataframe...')
 column_order = ['tm','dt','yy','mm','ww','wd','dd','xl','hh','an','vb','vl','ht','tt','acw','bz', 'dectt', 'decht', 'decacw']
 doe_frame = pandas.DataFrame(doe).T[column_order] # This df contains ALL files that were scanned in the input_dir
-doe_frame.to_pickle("./doe_pickle_1458.pkl")
+doe_frame.to_pickle("./doe_pickle_1459.pkl")
 dates_in_dir = doe_frame.dt.unique()    # numpy.ndarray of datetime.date objects
 xldates_in_dir = doe_frame.xl.unique()    # numpy.ndarray of datetime.date objects
 years_in_dir = doe_frame.yy.unique()    # numpy.ndarray of year values
