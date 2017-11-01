@@ -4,7 +4,6 @@
 # In[1]:
 import datetime
 import pandas as pd
-from itertools import tee
 
 
 def determine_kernzeit(datum):
@@ -13,8 +12,8 @@ def determine_kernzeit(datum):
     ### ab 05.06.2017: Mo-Fr 8-20
     ### ab 08.07. plus Samstag 8-13
     weekday=datum.strftime('%a')
-    #print(type(datum))
-    #print(datum, weekday)
+    print(type(datum))
+    print(datum, weekday)
 
     if datum.date() < datetime.date(2017,3,1):
         bzeit = 'k'
@@ -52,28 +51,6 @@ def determine_kernzeit(datum):
                 bzeit = 'n'
 
     return bzeit
-
-def continuity_check(daten_liste):
-    
-    ### expects an array or a list of items to check
-    ### returns either an empty list or a list of missing items
-    
-    sortedseries=sorted(daten_liste)
-    
-    datesmissing=list()
-    def pairwise(iterable):
-        "s -> (s0,s1), (s1,s2), (s2, s3), ..."
-        a, b = tee(iterable)
-        next(b)
-        return zip(a, b)
-
-    for prev, curr in pairwise(sortedseries):
-        i = prev
-        #print(prev,curr)
-        while i + datetime.timedelta(1) < curr:
-            i += datetime.timedelta(1)
-            datesmissing.append(i)
-    return datesmissing
 
 
 
