@@ -54,9 +54,10 @@
 #	synclient TapButton1=1 &
 #	idesk &
 	volumeicon &
+	setxkbmap de
+	$(~/.fehbg)
 	exec /usr/bin/fluxbox
-	setxkbmap de	
 
 # or if you want to keep a log:
 # exec /usr/bin/fluxbox -log "/home/biblioteca/.fluxbox/log"
- 
+
