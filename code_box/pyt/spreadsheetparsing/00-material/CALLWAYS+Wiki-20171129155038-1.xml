@@ -1,0 +1,1715 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.10/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.10/ http://www.mediawiki.org/xml/export-0.10.xsd" version="0.10" xml:lang="de">
+  <siteinfo>
+    <sitename>CALLWAYS Wiki</sitename>
+    <dbname>my_wiki</dbname>
+    <base>http://192.168.30.222/mediawiki/index.php/Hauptseite</base>
+    <generator>MediaWiki 1.26.2</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">Medium</namespace>
+      <namespace key="-1" case="first-letter">Spezial</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">Diskussion</namespace>
+      <namespace key="2" case="first-letter">Benutzer</namespace>
+      <namespace key="3" case="first-letter">Benutzer Diskussion</namespace>
+      <namespace key="4" case="first-letter">CALLWAYS Wiki</namespace>
+      <namespace key="5" case="first-letter">CALLWAYS Wiki Diskussion</namespace>
+      <namespace key="6" case="first-letter">Datei</namespace>
+      <namespace key="7" case="first-letter">Datei Diskussion</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki Diskussion</namespace>
+      <namespace key="10" case="first-letter">Vorlage</namespace>
+      <namespace key="11" case="first-letter">Vorlage Diskussion</namespace>
+      <namespace key="12" case="first-letter">Hilfe</namespace>
+      <namespace key="13" case="first-letter">Hilfe Diskussion</namespace>
+      <namespace key="14" case="first-letter">Kategorie</namespace>
+      <namespace key="15" case="first-letter">Kategorie Diskussion</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>Carexpert</title>
+    <ns>0</ns>
+    <id>82</id>
+    <revision>
+      <id>1145</id>
+      <parentid>1144</parentid>
+      <timestamp>2017-11-29T13:53:18Z</timestamp>
+      <contributor>
+        <username>Gesinst</username>
+        <id>2</id>
+      </contributor>
+      <comment>/* Hagelschäden */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="84847">== aktuelle abweichende Anweisungen zur Bearbeitung ==
+&lt;table style=&quot;margin: auto&quot;&gt;
+&lt;tr&gt;&lt;td&gt;
+[[CE_Aktionen]]
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+
+
+==Beschreibung Carexpert==
+
+&lt;div class=&quot;abschnittce&quot;&gt;
+&lt;table class=&quot;unsichtbar&quot;&gt;
+&lt;tr class=&quot;hg_gray&quot;&gt;
+&lt;td&gt;Link zur Callways-Maske: [http://192.168.20.7/carexpert/?1458 Maske 1458]&lt;/td&gt;
+&lt;td&gt;Link zu Cedis: [http://192.168.30.222/startCarexpert ceDis]&lt;/td&gt;
+&lt;td rowspan=&quot;4&quot;&gt;
+[[File:Logo_carexpert.png]]
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td colspan=&quot;2&quot; style=&quot;text-align:center&quot;&gt;&lt;b&gt;allgemeine Firmeninfos:&lt;/b&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;carexpert Kfz-Sachverständigen GmbH&lt;br&gt;Am Klingenweg 4&lt;br&gt;65396 Walluf&lt;/td&gt;
+&lt;td&gt;Telefon: 06123 / 9777 - 777&lt;br&gt;E-Mail : info@carexpert.de&lt;br&gt;Mailadresse für Auftraggeber: auftrag@carexpert.de &lt;br&gt;Website: www.carexpert.de&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td colspan=&quot;2&quot; style=&quot;text-align:center&quot;&gt;Gesellschafter: R+V, Kravag, Nürnberger, Ergo&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;/table&gt;
+
+&lt;b&gt;Leistungen von Carexpert:&lt;/b&gt;
+* Schadengutachten Haftpflicht, Voll- / Teilkasko
+* Reparaturkostenkalkulation
+* Rechnungs- und Dokumentenprüfung
+* Ermittlungen und Gegenüberstellungen
+* Fahrzeugbewertungen
+* etc
+
+Aufträge werden vom Auftraggeber - üblicherweise einer der o.g. Gesellschafterinnen - über eine elektronische Schnittstelle, per Fax, Mail oder Telefon an Carexpert übergeben.&lt;br&gt;
+Die übergebenen Daten beinhalten Angaben zu Auftragsart, Schadenhergang, Besichtigungsobjekten, Kontaktdaten der beteiligten Parteien usw. (welche von Callways ggf. ergänzt oder korrigiert werden).
+
+&lt;b&gt;Aufgaben von Callways:&lt;/b&gt;&lt;br&gt;
+* Terminierung von Aufträgen (derzeit: nur Gutachten/Schadenskalkulationen und Nachbesichtigungen)
+* Erfassung und Korrektur fehlender oder auftragsrelevanter Daten (aktuelle Tel., Terminvorschläge, etc.)
+* wenn keine Terminierung durch CW möglich: Erfassung und Weiterleitung von Anrufinformationen
+&lt;/div&gt;
+
+==Aufgabenstellung==
+&lt;div class=&quot;abschnittce&quot;&gt;
+
+&lt;b&gt;Hintergrund&lt;/b&gt;
+
+Entsteht an einem Fahrzeug ein Schaden (Unfall, Hagel, Wildschaden, usw., usf.) und soll in der Folge die Versicherung zur Regulierung des Schadens in Anspruch genommen werden, so kann es sein, daß die Versicherung zur Beurteilung des Schadens ein Gutachten erstellen lassen möchte, um beispielsweise
+* die Schadenshöhe zu ermitteln
+* den Fahrzeugrestwert zu ermitteln
+* die Plausibilität des Schadenshergangs zu überprüfen
+* Vorschäden festzustellen
+* oder dergleichen mehr
+
+Je nach Schadens- und Auftragsart können hierbei eine oder mehrere Parteien beteiligt sein. Hierbei werden unterschieden:
+&lt;div class=&quot;indent&quot;&gt;
+&lt;b&gt;Haftpflichtschäden&lt;/b&gt; = Schäden mit 2 beteiligten Parteien:
+*Versicherungsnehmer (&lt;i&gt;VN&lt;/i&gt;) = derjenige, der eine Versicherungsleistung in Anspruch nehmen möchte, bzw. dessen Versicherung für einen Schaden aufkommen soll,
+*Anspruchsteller (&lt;i&gt;AS&lt;/i&gt;) = derjenige, dem ein entstandener Schaden durch die Versicherung des &lt;i&gt;VN&lt;/i&gt; bezahlt werden soll
+
+&lt;b&gt;Kaskoschäden&lt;/b&gt; = Schäden am eigenen Fahrzeug eines Versicherten, bei welchen die eigene Versicherung in Anspruch genommen wird. z.B.:
+*Hagelschäden
+*Wildschaden
+*etc., etc.
+&lt;/div&gt;
+
+&lt;span class=&quot;braun&quot;&gt;Dies ist grob vereinfacht. Genauere Infos zu Kasko/Haftpflicht [http://192.168.30.222/mediawiki/images/d/d7/06._Kasko_und_Haftpflicht_Rechte_und_Pflichten_04.2011.pdf hier].&lt;/span&gt;&lt;br&gt;
+Für uns relevant: Bei Kaskoschäden wird es in der Regel nur &lt;i&gt;ein&lt;/i&gt; Besichtigungsobjekt und &lt;i&gt;eine&lt;/i&gt; Partei geben, mit der das Gutachten terminiert wird, nämlich den VN.&lt;br&gt;
+Bei Haftpflichtschäden gibt es meist 2 Parteien (VN und AS), mit denen ggf. auch ein gemeinsamer Termin, zum Beispiel am Schadensort, gefunden werden muß.
+
+Neben Besichtigungen am Objekt vor Ort bietet Carexpert auch die Prüfung von Unterlagen im &lt;b&gt;Innendienst&lt;/b&gt; &quot;am Schreibtisch&quot; an. So lassen Versicherungen beispielsweise häufig in einem ersten Schritt einen Kostenvoranschlag oder Bilder oder beides auf Stimmigkeit im Innendienst prüfen und entscheiden im zweiten Schritt (anhand der Einschätzung des Innendienst-Sachverständigen), ob eine Besichtigung vor Ort notwendig ist oder nicht.&lt;br&gt;
+Für uns relevant: Für den Innendienst kommen bei Callways keine Anrufe an (oder, wenn, dann unbeabsichtigt). Callways bedient ausschliesslich die Hotlines für die Aussendienst-Dispo. Ggf. ist mit dem Anrufer zu klären, ob es um eine &quot;Prüfung&quot; (=Innendienst) oder einen Besichtigungsauftrag (=Aussendienst) geht.
+
+
+&lt;b&gt;Ablauf&lt;/b&gt;
+
+Nachdem vom Auftraggeber (&quot;AG&quot;, üblicherweise eine Versicherung) ein Auftrag an Carexpert übergeben wurde, versucht Carexpert über die vom AG mitgeteilten Kontaktdaten, den betroffenen Versicherungsnehmer oder Anspruchsteller zu kontaktieren, um mit ihm einen Termin zur Begutachtung des Besichtigungsobjektes zu vereinbaren.&lt;br&gt;
+Dies geschieht telefonisch, schriftlich oder per Mail. Teilweise werden VN auch direkt nach der Auftragserteilung von ihren Versicherungen zur Kontaktaufnahme an Carexpert verwiesen, oder - ohne vorherige Kontaktaufnahme - Besichtigungen von Anspruchstellern beauftragt.
+
+Auf diesen Erstkontakt hin rufen die VN/AS dann wiederum bei CE bzw. CW, also uns, zurück. Die Anrufer sind dabei nicht zwangsläufig VN/AS selbst, sondern können auch
+* Werkstätten (bei denen z.B. das Auto auf Reparatur wartet, oder wo beschädigte Teile lagern)
+* Firmen (deren Angestellte ein Firmenfahrzeug benutzen)
+* Verwandte (z.B. Kinder, die ein über die Eltern versichertes Kfz nutzen)
+* von den Parteien hinzugezogene Anwälte
+* Versicherungsmakler
+* etc.
+sein.
+
+Die Termine für die Gutachten werden grundsätzlich für werktags 8-16 vereinbart. Bei der Vereinbarung von Terminen ist Carexpert, da bundesweit tätig, räumlich flexibel. Das heißt, bei Berufstätigen, die tagsüber mit dem Auto unterwegs sind, können und sollen Termine auch am Arbeitsort / unterwegs / in einer Werkstatt, in der das Auto abgegeben wird und dergleichen stattfinden, sofern das vorher abgesprochen wurde und mit der Auftragsart übereinstimmt.
+
+Carexpert unterhält keine eigenen Werkstätten oder &quot;Stützpunkte&quot;. Die Sachverständigen sind regional ansässig und bedienen die Termine auf Touren mit festen Zeitfenstern. Die Touren werden von der Dispo in Walluf zentral verplant und am Ende eines Werktages (-&gt; Öffnungszeiten der Dispo) den Sachverständigen für den nächsten Werktag elektronisch übermittelt. Ein Sachverständiger bekommt seine Tour also mit festem Ablauf abends zugestellt. Touren können daher nicht kurzfristig am Tag eines Termins umgeworfen werden (im Gegensatz zur Wunschvorstellung des gelegentlichen Anrufers), da sonst die weiteren Termine auf der Tour nicht termingerecht bedient werden könnten.
+
+
+&lt;b&gt;Aufgabenstellung Callways und Bearbeitungszeiten&lt;/b&gt;
+
+Aufgabe von Callways ist es, Termine mit den Anrufern zu vereinbaren, oder, wo nicht möglich, die Disponenten von CE bei der Terminierung zu unterstützen, indem von uns vorab schon terminrelevante Informationen abgefragt und an die Disposition weitergereicht werden.
+
+Die Bearbeitung findet, abhängig von den Bearbeitungszeiten, im Dispositionstool von Carexpert (&quot;ceDis&quot;) oder über unsere [http://192.168.20.7/carexpert/?1458 Maske] statt. Die aktuellen Bearbeitungszeiten (Kernzeit-/Nebenzeit) können sich saisonal unterscheiden und finden sich auf der [http://192.168.30.222/startCarexpert/ Startseite], im Sideframe der Maske und werden per Mail kommuniziert.
+
+Innerhalb der Kernzeit werden die Anrufe in [[#ceDis|ceDis]] bearbeitet, in der Nebenzeit wird der Anrufer auf die Bürozeiten hingewiesen und in dringenden Fällen über [http://192.168.20.7/carexpert/?1458 1458] sein Anliegen mit Kontaktdaten erfasst und eine Mail an CE verschickt.&lt;br&gt;
+Sollte sich kein Auftrag in ceDis finden lassen oder kann aus anderen Gründen (Serverausfall oder Anliegen, die sich nicht auf einen ceDis-Auftrag beziehen) keine Bearbeitung in ceDis stattfinden, werden die Anliegen der Anrufer über [http://192.168.20.7/carexpert/?1458 1458] erfasst und an die CE-Dispo weitergeleitet.
+
+&lt;span class=&quot;braun&quot;&gt;Nach aussen hin sind wir Mitarbeiter von Carexpert (nicht &quot;das Servicecenter&quot; o.ä.)&lt;/span&gt;
+&lt;/div&gt;
+
+==ceDis==
+
+&lt;div class=&quot;abschnittce&quot;&gt;
+===Programmaufruf und Client einstellen===
+
+Zunächst wird [http://192.168.30.222/startCarexpert/ die CE-Startseite] aufgerufen.&lt;br&gt;
+Hier können sich Hinweise zur Bearbeitung finden, die von CW oder CE eingestellt werden, z.B. anstehende Serverausfälle oder Besonderheiten für die Terminierung. Falls hier etwas hinterlegt ist, dann bitte auch lesen!
+
+[[File:startseite.png|400px|center]]
+
+Hat man die Hinweise zu den tagesaktuellen News durchgearbeitet, folgt man dem oben auf der Seite hinterlegten Link, und logt sich dort mit den auf Startseite angezeigten Logindaten in das Dispositionstool &quot;ceDis&quot; ein.
+
+Anmeldung im Detail: [[#ceDis_Aufruf.2C_Citrix.2C_Pulse_Client|siehe unten]]
+&lt;br&gt;
+
+===Auftragssuche und -status===
+Suchen mit dem Fernglas [[File:fernglas.png|20px]]
+über die Felder &quot;Auftragsnummer&quot; oder &quot;Amtl. Kennzeichen&quot;.&lt;br&gt;
+[[File:Auftragsuchen.png|150px|center]]&lt;br clear=&quot;all&quot;&gt;
+Falls keine Auftragnummer und kein Kfz-Kennzeichen vorliegen, kann auch mit der Schadennummer der Versicherung ([http://192.168.30.222/mediawiki/images/a/a8/Anleitung_Auftraggeber_Schadennummernformate_und_Besonderheiten_Stand_08....pdf *]) gesucht werden. Da diese Nummern oft ein umständliches Format haben, sollte man hier mithilfe von Wildcards (=Sternchen, &quot;*&quot;) suchen. Sind in der Schadennummer viele Binde- oder Schrägstriche enthalten, empfiehlt es sich, eine möglichst lange Ziffernsequenz, die keine weiteren Sonderzeichen enthält, in Sternchen zu setzen und damit zu suchen. Ein Beispiel:&lt;br&gt;
+&lt;table class=&quot;centered&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;[[File:Schadennummersuche1.png|thumb|left|250px|1) Suche nach exakter Schadennumer: kein Treffer]]&lt;/td&gt;
+&lt;td&gt;[[File:Schadennummersuche2.png|thumb|left|250px|2) trunkierte Suche mit Wildcard: Treffer]]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+
+
+&lt;span class=&quot;braun&quot;&gt;nicht mit leeren Feldern die Suche auslösen -&gt; Systemabsturz&lt;/span&gt;
+
+Haben wir einen Auftrag gefunden, lässt sich schon vor dem Öffnen über den Auftragsstatus erkennen, wie der Bearbeitungsstand momentan aussieht:&lt;br&gt;
+
+&lt;div class=&quot;indent&quot;&gt;
+&lt;table class=&quot;wikitable&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;b&gt;Status:&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;Bedeutung&lt;/b&gt;&lt;/td&gt;&lt;td&gt;Bearbeitung&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;verteilt&lt;/td&gt;&lt;td&gt;Auftrag wurde im System angelegt, aber noch kein Termin vereinbart. &lt;span class=&quot;rot&quot;&gt;Nur dieser Status lässt sich durch uns terminieren&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Über &quot;terminieren&quot; öffnen, dann können Daten ergänzt und Termine eingetragen werden&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;verplant&lt;/td&gt;&lt;td&gt;Termin wurde schon vereinbart, das Zeitfenster ist schon in der Tourenplanung, wurde aber noch nicht fix an einen SV zugeteilt&lt;/td&gt;&lt;td&gt;Über &quot;A.Daten bearb.&quot; können Daten im Auftrag ergänzt und Nachrichten an die Dispo geschickt werden&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zugestellt&lt;/td&gt;&lt;td&gt;Dieser Termin ist schon in einer Tour verplant und wurde einem Sachverständigen übermittelt&lt;/td&gt;&lt;td&gt;über &quot;A.Daten bearb.&quot; können noch Historieneinträge angelegt und es können dringende Anforderungen verschickt werden. Einträge werden von den SV aber *nicht* mehr gelesen, da der Auftrag schon übermittelt ist!&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;abgeschlossen&lt;/td&gt;&lt;td&gt;Gutachten wurde erstellt und an AG übergeben&lt;/td&gt;&lt;td&gt;über &quot;A.Daten bearb.&quot; können noch Historieneinträge angelegt werden. &lt;span class=&quot;rot&quot;&gt;Dringende Anforderungen werden nicht mehr in die Dispo weitergeleitet!&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;storniert&lt;/td&gt;&lt;td&gt;Auftrag wurde storniert. Stornogrund ist in der Historie hinterlegt&lt;/td&gt;&lt;td&gt;über &quot;A.Daten ergänzen.&quot; können noch Historieneinträge angelegt werden. Aufträge können mit den entsprechenden Berechtigungen ggf. reaktiviert werden. &lt;span class=&quot;rot&quot;&gt;Dringende Anforderungen werden nicht mehr in die Dispo weitergeleitet!&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;br&gt;
+
+* Ist der Auftrag im Status &quot;verteilt&quot;, so können wir ihn über den Button &quot;terminieren&quot; öffnen und bearbeiten.
+* Bei den anderen Stati lassen sich über die Buttons &quot;Auftragsdaten bearbeiten&quot; oder &quot;Auftrag ergänzen&quot; Historieneinträge anlegen.
+* [[#Weiterleitung_per_dringende_Anforderung|dringende Anforderungen]] &lt;span class=&quot;rot&quot;&gt;werden in abgeschlossenen und stornierten Aufträgen nicht zugestellt&lt;/span&gt;
+
+&lt;br clear=&quot;all&quot;&gt;
+
+===Struktur der ceDis-Aufträge===
+
+====unklare korrespondierende / passende Aufträge====
+&lt;div class=&quot;indent&quot;&gt;
+Direkt nach dem Öffnen des Auftrags kann es vorkommen, daß man mit einer Hinweismeldung&lt;br&gt;
+* &quot;es liegen passende Aufträge vor, sollen diese geöffnet werden?&quot;, bzw.
+* &quot;es liegen unklare korrespondierende Aufträge vor&quot;
+konfrontiert wird.&lt;br&gt;
+[[File:unklar.png|thumb|center|250px|1) Meldung beim Öffnen]]
+
+Bei jedem Aufruf eines Auftrags gleicht ceDis die Felder &quot;Kfz-Kennzeichen&quot;, &quot;FIN&quot; (Fahrzeugidentnummer) und &quot;Schadennummer&quot; mit allen in ceDis hinterlegten (auch archivierten) Aufträgen ab. Wenn ceDis in einem dieser Felder fündig wird, meldet es sich mit der Warnung, daß &quot;&lt;b&gt;unklare korrespondierende Aufträge&lt;/b&gt; vorliegen&quot; und fordert den Nutzer auf, die gefundenen Aufträge entweder miteinander zu verknüpfen (=korrespondieren) oder voneinander zu lösen.
+
+Ebenso gleicht ceDis beim Aufruf den Einsatzort des aktuellen Auftrags mit allen &lt;i&gt;nicht abgeschlossenen&lt;/i&gt; Aufträgen ab und meldet bei Aufträgen, die auf die selbe Adresse gesetzt sind, daß &quot;&lt;b&gt;passende&lt;/b&gt;&quot; Aufträge vorliegen.
+
+=====unklare korrespondierende=====
+
+Sind unklare Aufträge vorhanden, wird man nach der o.g. Warnung direkt in den Reiter &quot;unklar&quot; geleitet.&lt;br&gt;
+[[File:Unklarreiter.png|center|200px]] &lt;br&gt;
+
+Bei den unklaren Aufträgen geht es darum, daß alle Vorschäden, die zum Besichtigungsobjekt des aktuellen Auftrags vorliegen, dem Sachverständigen zur Verfügung gestellt werden. D.h.: die vorgeschlagenen Aufträge müssen von uns daraufhin überprüft werden, ob sie ein Gutachten zum &lt;i&gt;dem Objekt, das im aktuellen Auftrag besichtigt werden soll&lt;/i&gt; enthalten.&lt;br&gt;
+Dies ist nicht immer der Fall. Es kann z.B. vorkommen, daß im aktuellen Auftrag ein AS-Fahrzeug besichtigt werden soll, das in einem vorherigen Auftrag als VN-Fahrzeug auftaucht, aber damals gar nicht besichtigt wurde. Der alte/unklare Auftrag enthält dann keine Infos zum aktuell zu besichtigenen Fahrzeug und kann gelöst werden.&lt;br&gt;
+&lt;u&gt;Beispiel&lt;/u&gt;:&lt;br&gt;
+Fahrzeug &quot;RO-GM...&quot; soll hier als Anspruchsteller besichtigt werden. Gegnerische Partei, also VN, ist ein Passat mit Kennzeichen &quot;M-BY...&quot;. Im vorgeschlagenen unklaren Auftrag taucht &quot;M-BY...&quot; als VN auf und wurde damals (Kaskoschaden) besichtigt. Zum &lt;i&gt;aktuellen&lt;/i&gt; Besichtigungsobjekt enthält der unklare Auftrag aber keine Informationen. Der Auftrag kann also &quot;gelöst&quot; werden. 
+[[File:Unklar Objekte.png|thumb|center|250px|links aktueller, rechts unklarer Auftrag]]
+Entscheidend ist hierbei immer das Fahrzeug bzw. die FIN. Es kann durchaus sein, daß ein und dasselbe Fahrzeug in einem alten Auftrag unter einem anderen Kennzeichen auftaucht, weil es z.B. zwischenzeitlich verkauft und mit neuem Nummernschild angemeldet wurde. Ebenso können, trotz identischem Kennzeichen, unterschiedliche Fahrzeuge vorliegen.&lt;br&gt;
+Wir überprüfen also:
+
+* liegen im unklaren Auftrag Infos zum &lt;i&gt;aktuellen Besichtigungsobjekt&lt;/i&gt; vor --&gt; &quot;korrespondieren&quot;
+* liegen keine Infos vor und das Fahrzeug taucht lediglich als beteiligt auf, wurde aber nicht besichtigt --&gt; &quot;lösen&quot;
+
+Um einen Auftrag im Reiter &quot;unklar&quot; zu lösen/korrespondieren, wird er markiert und mittels der gleichnamigen Buttons auf der rechten Seite zugeordnet. Korrespodierende Aufträge findet man dann weiterhin, im Reiter &quot;korresponiderend&quot; links daneben. Gelöste Aufträge werden vom aktuellen Auftrag getrennt und bei zukünftigen Aufrufen auch nicht mehr vorgeschlagen.
+
+&lt;span class=&quot;indent&quot;&gt;&lt;b&gt;unklare ICT-Aufträge&lt;/b&gt;&lt;/span&gt;&lt;br&gt;
+Wenn in den unklaren Aufträgen ein Auftrag vom Typ &quot;ICT&quot; auftaucht, dann wurde hier ein Innendienstauftrag mit der selben Schadennummer gefunden. Dies bedeutet in der Regel, daß vom AG zunächst eine Prüfung &quot;am Schreibtisch&quot;, und in der Folge dann eine Besichtigung vor Ort, beauftragt wurde. ICT-Aufträge können nicht direkt eingesehen werden, sondern hier müssen die Unterlagen (Prüfberichte) zunächst händisch vom Innendienst angefordert werden. Genaueres hier: [[#Sonderfall_ICT|ICT]].&lt;br&gt;
+&lt;span class=&quot;braun&quot;&gt;&lt;i&gt;ICT-Aufträge mit identischer Schadensnummer können in der Regel ohne weiteres auf &quot;korrespondierend&quot; gesetzt werden.&lt;/i&gt;&lt;/span&gt;
+
+Erst wenn alle unklaren Aufträge entweder korrespondiert oder gelöst wurden, können Änderungen im Auftrag gespeichert werden!
+Der Reiter &quot;unklar&quot; muß also leer sein, bevor man den Auftrag mit &quot;OK&quot; verlassen kann.
+
+=====passende Aufträge=====
+
+Kommt beim Aufruf eines Auftrags die Meldung &quot;es liegende passende Aufträge vor&quot;, dann weist uns ceDis darauf hin, daß es zu dem &lt;i&gt;derzeit im Auftrag eingestellten Besichtigungs&lt;b&gt;ort&lt;/b&gt;&lt;/i&gt; weitere offene Aufträge gibt, bei denen der selbe Besichtigungsort eingetragen ist. Diese Aufträge sollten geöffnet und dann darauf hin geprüft werden, ob man hier nicht direkt 2 Besichtigungen zusammen verplanen kann. Betreffen die passenden Aufträge das selbe Fahrzeug, dann können sie ohnehin zusammen geplant werden. Siehe [[#Terminierung_von_zwei_Terminen_am_selben_Einsatzort|mehrere Termine an den selben Ort terminieren]]. Typischerweise kommt es zu dieser Meldung, wenn in einem Autohaus gerade zwei Fahrzeuge anwesend sind, die durch CE besichtigt werden sollen.
+&lt;/div&gt;
+
+====Auftragsfenster====
+&lt;div class=&quot;indent&quot;&gt;
+Im Moment sind für Callways nur bestimmte Auftragsarten selbst terminierbar (siehe unten). Zu allen anderen Aufträgen erfassen wir lediglich die Daten und Mitteilungen der Anrufer in der [[#Historieneintr.C3.A4ge|Auftragshistorie]] und übergeben diese an die CE-Dispo. Um möglichst sinnvolle Daten zu erfassen, empfiehlt es sich, sich kurz einen groben Überblick über den Auftrag und die beteiligten Personen zu verschaffen:
+
+Beschreibung der CeDis-Datenfelder: [[#Auftragsbild|Anhang]]
+
+[[File:Auftrag_ann.png|300px|center]]
+
+Der &lt;span class=&quot;braun&quot;&gt;obere&lt;/span&gt; Auftragsteil (siehe Bild im Anhang, A-D) ist für uns nicht zu editieren, sondern wird nur gelesen. Hier können wir grundlegende Informationen zum Auftrag entnehmen und diese ggf. mit dem Anrufer abgleichen oder ihm diese mitteilen (z.B. wer der Auftraggeber ist, an welchen Ort der Einsatz terminiert wurde etc.). &lt;br&gt;
+
+&lt;div class=&quot;indent&quot;&gt;
+&lt;b&gt;A:&lt;/b&gt; Infos zum Auftraggeber&lt;br&gt;
+Hier steht u.a., welche Versicherung den Auftrag ausgelöst hat, das interne Bearbeitungszeichen des Auftragsgebers (Schadennummer), wann der Schaden stattgefunden hat, wann er an CE übergeben wurde.
+
+&lt;b&gt;B:&lt;/b&gt; Infos zur Auftragsart und zum Besichtigungsobjekt&lt;br&gt;
+Hier steht im Feld &quot;&lt;b&gt;Auftragsart&lt;/b&gt;&quot;, unter welcher Kategorie der Auftrag ursprünglich eröffnet wurde. &lt;br&gt;
+Im Feld &quot;Besichtigungsobjekt&quot; steht, welche Partei (wichtig, falls es 2 Parteien gibt!) besichtigt werden soll, in den Feldern darunter Informationen zum Fahrzeug bzw. Objekt (diese werden aus den [[#Reiter_.22Objekte.22|Objektinfos]] bezogen).
+
+&lt;b&gt;C:&lt;/b&gt; Das Feld &quot;Schadenhergang&quot; ist ein Freitextfeld, das vom AG übermittelt wird und in welchem sich relevante Informationen befinden können, die an anderer Stelle des Auftrags ggf. fehlen! So können hier zB Hinweise auf die Notwendigkeit einer Hebebühne, weitere Schäden, Kontaktpersonen oder ähnliches stehen.&lt;br&gt;
+&lt;b&gt;Die Infos im Schadenhergang müssen beachtet werden und haben im Zweifelsfall Vorrang vor der eingestellten Bearbeitungsart!&lt;/b&gt;&lt;br&gt;
+Steht z.B. im Feld Schadenhergang ein Hinweis darauf, daß eine Gegenüberstellung stattfinden soll, ist der Auftrag wie eine Gegenüberstellung zu bearbeiten, auch wenn er mit einer anderen Bearbeitungsart (zB Gutachten) eingestellt wurde.&lt;br&gt;
+[[File:Beispielscreenshot]]
+
+&lt;b&gt;D:&lt;/b&gt; In diesen Feldern wird der aktuell eingestellte Besichtigungsort angezeigt. Dieser wird im [[#Reiter_.22Eins.C3.A4tze.22|&quot;Einsatz&quot;reiter]] eingestellt und kann dort aus den im [[#Reiter_.22Adressen.22|&quot;Adress&quot;reiter]] eingepflegten Adressen ausgewählt werden. Bevor ein Termin verplant wird, sollte hier nochmal ein Blick drauf geworfen werden, damit an den richtigen Ort terminiert wird.
+&lt;/div&gt;
+
+
+Im unteren Teil des Auftragsfensters befinden sich weitere 8 Reiter, die zu beachten und ggf. zu bearbeiten sind:
+
+=====Reiter &quot;Einsätze&quot;=====
+
+Im Reiter &quot;Einsätze&quot; befinden sich auf der linken Seite die geplanten oder schon abgeschlossenen Termine, d.h. Fahrten, zu diesem Auftrag. Je nach Auftragsart und Historie können auch mehrere Fahrten anfallen (Beispiel: getrennte Gegenüberstellung oder Termin konnte nicht stattfinden), in der Regel findet man hier aber eine leere Liste vor. Nach Abschluß der [[#Terminierung_und_Weiterleitung|Terminierung]] steht  der gebuchte Aussentermin in dieser Liste.&lt;br&gt;
+Selektiert man einen Einsatz, werden rechts von der Liste Details zu diesem angezeigt.
+======Bearbeitungsart======
+Das Feld &quot;Bearbeitungsart&quot; neben der Einsatzliste bestimmt darüber, welche Art von Besichtigung hier stattfinden soll. Dies ist sowohl als Information für den SV wie auch für den zeitlichen Aufwand, der zum Einsatz verplant wird, relevant (zB: GG dauert länger als Hagelgutachten).&lt;br&gt;
+Dieses Feld kann im Gegensatz zum Feld &quot;Auftragsart&quot; auch nachträglich noch vom Disponenten geändert werden! Steht z.B. im Schadenhergang ein Hinweis darauf, daß hier eine Gegenüberstellung stattfinden soll, der Auftrag wurde aber mit der Auftrags- und Bearbeitungsart &quot;Gutachten/Schadenkalkulation&quot; eingestellt, so kann der Disponent (ggf. nach Rücksprache mit dem SB) hier noch manuell die Bearbeitungsart anpassen.&lt;br&gt;
+&lt;b&gt;Im Handling richten wir uns nach der Bearbeitungsart&lt;/b&gt;. Diese hat Vorrang vor der Auftragsart.&lt;br&gt;
+
+Den Feldern &quot;Besichtigungsort&quot; und &quot;Termin&quot; können die Uhrzeit und das Tourenziel entnommen werden; im Feld &quot;SV-Quali&quot; steht, welche Qualifikation der gebuchte SV besitzt. Siehe [[#Terminierung_von_Nutzfahrzeugen|Terminierung Nutzfahrzeuge]]
+
+=====Reiter &quot;Adressen&quot;=====
+
+Bei allen Anrufen, &lt;span class=&quot;braun&quot;&gt;egal, ob terminierbar oder nicht,&lt;/span&gt; ist zunächst zu klären, wer der Anrufer ist, und ob die Kontaktdaten schon hinterlegt und vollständig sind.
+
+Dazu den Reiter &quot;Adressen&quot; öffnen. Dort stehen die bisher hinterlegten Daten. Weichen die Daten ab, können sie über den Knopf &quot;bearbeiten&quot; geändert/vervollständigt werden.&lt;br&gt;
+Die vom AG übermittelten Daten sind oft nicht aktuell oder vollständig. So kann es z.B. sein, daß das Auto von einem Verwandten an einer anderen Adresse, von einem Angestellten an einem anderen Standort benutzt wird, oder in einer Werkstatt steht, die dem AG noch nicht bekannt war.
+Dann wird diese Adresse von uns neu erfasst:
+
+&lt;div class=&quot;hinweis&quot;&gt;
+* Reiter &quot;Adressen&quot; -&gt; 
+* irgendeine Zeile markieren -&gt; 
+* rechts &quot;bearbeiten&quot; oder &quot;neu&quot; klicken&quot; -&gt; 
+** bearbeiten: Felder ausfüllen oder korrigieren
+** neu: oben &quot;freie Adresse&quot; (oder &quot;Werkstatt&quot; bzw. andere, wenn eindeutig) wählen. Adresse, Name, Kontaktdaten eintragen 
+* speichern
+&lt;br&gt;
+[[File:Adressliste3.png|center|600px]]&lt;br clear=&quot;all&quot;&gt;
+&lt;/div&gt;
+
+Neu angelegte Adressen müssen im Anschluss noch geo-codiert werden (ohne Geocodierung kann kein Termin an eine Adresse gebucht werden).
+&lt;div class=&quot;hinweis&quot;&gt;
+* neue Adresse markieren -&gt;
+* &quot;geocodieren&quot; klicken -&gt;
+* Geocode-Dialog öffnet sich, dorthin wurde wie getippt übertragen -&gt;
+* &quot;Geocode&quot; klicken. Eine Liste an Vorschlägen erscheint -&gt;
+* die gewünschte Adresse, so vorhanden, markieren -&gt;
+* OK klicken
+[[File:geocode1.png|center|600px]]&lt;br clear=&quot;all&quot;&gt;
+&lt;/div&gt;
+
+&lt;span id=&quot;ws_erfassen&quot;&gt;
+Soll eine Werkstatt in die Adressliste eingepflegt werden, wird, bevor die Werkstatt neu angelegt wird, geprüft, ob sie in der Carexpert-Partnerdatenbank hinterlegt ist.&lt;/span&gt;&lt;br&gt;
+Dazu
+&lt;div class=&quot;hinweis&quot;&gt;
+*Reiter &quot;Adressen&quot; -&gt; 
+*irgendeine Zeile markieren (das ceERP Feld wird erst freigegeben, wenn eine Zeile markiert ist. Es ist egal, welche Zeile) -&gt; 
+* ceERP Partnerdb klicken -&gt; 
+* PLZ eingeben -&gt; 
+* Suchen -&gt; 
+* Werkstatt, so vorhanden, in den Ergebnissen markieren -&gt; 
+* &quot;Übernehmen&quot; klicken. Hier entfällt die Geocodierung, alle Werkstätten in der db sind schon codiert. &lt;br&gt;
+
+[[File:cerdb.png|150px]] - [[File:ad_ws_suche.png|400px]]&lt;br clear=&quot;all&quot;&gt;
+&lt;/div&gt;
+
+Ist die Werkstatt nicht hinterlegt, dann wie eine normale Adresse (Adresstyp dann: Werkstatt) erfassen. &lt;span class=&quot;braun&quot;&gt;Immer vollständig, mit Tel. erfassen und geocodieren!&lt;/span&gt;&lt;br clear=&quot;all&quot;&gt;
+
+&lt;span id=&quot;anwalt&quot;&gt;
+======Einpflegen von Anwaltsadressen======
+&lt;/span&gt;
+&lt;div class=&quot;indent&quot;&gt;
+Soll die Adresse eines Rechtsanwaltes eingepflegt werden (z.B. vom AG mitgeteilt oder in den Dokumenten/Unterlagen hinterlegt) ist folgende Formatvorlage zu beachten:&lt;br&gt;
+ [[File:anwalt.png|thumb|200px|center]]
+&lt;br clear=&quot;all&quot;&gt;
+&lt;/div&gt;
+
+=====Reiter &quot;Historie&quot;=====
+
+In diesem Reiter findet sich die gesamte bisherige Bearbeitungshistorie des Auftrags, standardmäßig in chronologischer Sortierung.&lt;br&gt;
+In der Historie finden sich sowohl manuell angelegte Einträge, in denen ein Disponent einen Hinweis hinterlegt, als auch automatisch generierte Einträge über zB die Änderung des Einsatzortes, Infos über verschickte oder eingegangene Dokumente und dergleichen mehr.&lt;br&gt;
+Aus den Spalten &quot;Historienart&quot; und &quot;Grund&quot; kann entnommen werden, welche Aktion hier stattgefunden hat.
+&lt;span class=&quot;rot&quot;&gt;&lt;b&gt;wichtig:&lt;/b&gt;&lt;/span&gt; Die Infos, die hier hinterlegt sind, müssen gelesen, mit dem Schadenhergang abgeglichen und beachtet werden. Hier können Informationen darüber stehen, was als nächstes bei einem eingehenden Anruf zu tun oder zu erfragen ist. Es können Infos zur Bearbeitungsart etc. entnommen werden. Die Historie muß mindestens überflogen werden, bevor das eigentliche Gespräch mit dem Anrufer geführt wird.&lt;br&gt;
+Nach &lt;b&gt;jedem&lt;/b&gt; Gespräch wird ein Historieneintrag mit einer kurzen Zusammenfassung unserer Tätigkeit erstellt, siehe [[#Historieneintr.C3.A4ge|Historieneinträge]]
+
+=====Reiter &quot;Dokumente&quot;=====
+
+Im Reiter &quot;Dokumente&quot; finden sich zum Auftrag gehörige Anlagen. Dies können z.B. Lichtbilder, Rechnungen, Kostenvoranschläge oder auch Korrespondenz (ein- und ausgehend) mit SB oder Anwälten sein. Angehängte E-Mails können ebenfalls weitere Dokumente enthalten.&lt;br&gt;
+Ergibt es sich aus der Bearbeitungsart (z.B. NB KVA), oder findet sich in den Historieneinträgen oder im Schadenhergang ein Hinweis, daß zur Durchführung des Auftrags Dokumente notwendig sind, muß sichergestellt sein, daß diese Dokumente hier in diesem Reiter angehängt sind.
+
+=====Reiter &quot;Objekte&quot;=====
+
+Hier finden sich Informationen zu den zu besichtigenden Fahrzeugen (bzw. &quot;Objekten&quot;, kann ja auch mal ein Kran oder eine Toreinfahrt sein).&lt;br&gt;
+Bei Kaskoschäden gibt es hier nur einen Reiter (=&quot;Versicherungsnehmerobjekt&quot;), bei Haftpflichtschäden zwei (+&quot;Anspruchstellerobjekt&quot;). Hier gilt es, zumindest das zu besichtigende Objekt ([[#Glossar_und_Abk.C3.BCrzungen|&quot;Besichtigungsobjekt&quot;, Punkt B]]) kurz zu überfliegen.&lt;br&gt;
+&lt;span class=&quot;rot&quot;&gt;&lt;b&gt;wichtig:&lt;/b&gt;&lt;/span&gt;&quot;Objektgruppe&quot; und &quot;Objektart&quot; sollten bei Fahrzeugen nicht auf &quot;sonstiges&quot; stehen, sondern zumindest grob (PKW/LKW) zugeordnet sein. Wenn kein Kennzeichen des Besichtigungsobjektes hinterlegt ist, so ist dieses zu erfragen.
+
+=====Reiter &quot;korrespondierend/unklar&quot;=====
+
+siehe [[#unklare_korrespondierende_.2F_passende_Auftr.C3.A4ge|hier]]
+
+=====Reiter &quot;Regulierung&quot;=====
+
+für uns nicht relevant
+&lt;/div&gt;
+
+==Gesprächsablauf, Handling==
+
+===Handling innerhalb der Kernzeit / Arbeiten in ceDis===
+
+Die Begrüßungsformel ist nicht strikt vorgegeben, es sollten der eigene Name und die Firma deutlich erwähnt werden. Beispiel:&lt;br&gt;
+&lt;i&gt;&quot;Firma Carexpert Kfz-Sachverständigen GmbH, mein Name ist Maria Musterfrau, was kann ich für Sie tun?&quot;&lt;/i&gt;
+
+Nach der Begrüßung versuchen wir, den Anrufer über seine &lt;b&gt;Auftragsnummer&lt;/b&gt; oder das amtliche KfZ-&lt;b&gt;Kennzeichen&lt;/b&gt; einem Auftrag zuzuordnen.([[#Auftragssuche_und_-status|Auftragssuche]])&lt;br&gt;
+Wenn der Anrufer nicht genau weiß, worum es geht:
+
+* wir sind KfZ-Gutachter, üblicherweise von einer Versicherung beauftragt, ein Fahrzeug zu besichtigen. Vielleicht weiß der Anrufer von einem Schaden an seinem Fahrzeug aus der letzten Zeit? Vielleicht war er in einer anderen Rolle an einem Schaden beteiligt (Fuhrparkmanager? Angehörige, die über ihn versichert sind?).
+
+Weiß der Anrufer noch immer nicht, worum es geht, können wir an der Stelle nicht weiterhelfen. Wir verweisen darauf, daß wir uns ggf. selbst wieder melden. Bei hartnäckigen Anrufern kann ggf. über die [http://192.168.20.7/carexpert/?1458 Maske] eine Nachricht an die Dispo geschickt werden.
+
+Haben wir zum Anrufer einen Auftrag gefunden, verschaffen wir uns zunächst einen Überblick über den Auftrag, indem wir alle relevanten Auftragsfelder überfliegen und abgleichen, speziell:
+* Bearbeitungsart (wie soll besichtigt werden? mit mehreren Parteien? Am Schadenort? In einer Werkstatt?)
+* Besichtigungsobjekt (was soll besichtigt werden? Fährt das Fzg. noch? Wurde schon etwas repariert?)
+* Schadenhergang (!)
+* Historie (!)
+* Termininfo (!)
+Sollten im Schadenhergang oder in der Historie sehr viel Text stehen, kann der Anrufer auch kurz -&lt;i&gt; nachdem er darüber informiert wurde, daß wir uns schnell einen Überblick verschaffen müssen und auf jeden Fall sofort wieder für ihn da sind &lt;/i&gt;- auf &quot;Halten&quot; gestellt werden.&lt;br&gt;
+
+Nachdem wir dem Auftrag die nötigen Infos entnommen haben, versuchen wir, je nach Bearbeitungsart, entweder mit dem Anrufer einen Termin zu finden und den Auftrag direkt selbst zu [[#Terminierung_und_Weiterleitung|terminieren]], oder erfassen unter Berücksichtigung der [[#Auftragsarten|Bearbeitungsart]] das Anliegen des Anrufers und leiten dieses weiter.
+
+&lt;b&gt;Für Callways sind nur die Bearbeitungsarten &quot;Gutachten/Schadenkalkulation&quot; und &quot;Nachbesichtigung&quot; zu [[#Terminierung_durch_Callways|terminieren]]&lt;/b&gt;, in allen anderen Bearbeitungsarten wird unsererseits das Anliegen des Anrufers erfasst, dokumentiert und weitergeleitet.&lt;br&gt;
+
+====grundsätzliches Handling für alle Bearbeitungsarten====
+
+Unabhängig davon, ob wir im Anschluß selbst einen Termin vereinbaren oder nur eine Nachricht weiterleiten, sind folgende Punkte &lt;i&gt;immer&lt;/i&gt; standardmäßig zu erfragen und abzugleichen:
+
+* wer ist der Anrufer (VN/AS/RA/Angehöriger/Fuhrparkleiter Firma/SB?)
+* Abgleich der Telefonnummer / sind die Kontaktdatenschon bekannt? -&gt; Wenn nicht, Erfassung in [[#Reiter_.22Adressen.22|Adressen]]
+* Hat der Anrufer eine Handynummer (wenn noch keine vorhanden ist)
+* wer soll ggf. im Anschluß zur Terminvereinbarung kontaktiert werden? -&gt; Erfassung in [[#Reiter_.22Adressen.22|Adressen]]
+* wo befindet sich das Fahrzeug?
+* wo soll, wo kann die Besichtigung stattfinden?
+
+Zusätzlich sollten weitere Infos, wenn der Anrufer sie uns mitteilt, dokumentiert werden:
+
+* ist das Fahrzeug noch in dem im Auftrag beschriebenen Zustand (unrepariert, noch nicht verschrottet, fahrfähig)?
+* wurden zwischenzeitlich abweichende Vereinbarungen getroffen (z.B.: &quot;SB hat Reparaturfreigabe erteilt&quot; oder Anrufer hat einen Anwalt hinzugegzogen)?
+
+Dies sind essentielle Informationen, die wir sowohl für die eigene Terminvergabe, als auch zur Weiterleitung eines Rückrufwunsches zur Hand haben sollten.
+
+
+Nach &lt;b&gt;jedem&lt;/b&gt; Anruf, bei dem wir nicht direkt einen Termin vereinbaren, ist im Anschluß an das Gespräch eine kurze Zusammenfassung des Gesprächsinhaltes in der [[#Historieneintr.C3.A4ge|Historie]] zu hinterlegen und ggf. an die Dispo weiterzuleiten.&lt;br&gt;
+Zur Benutzung der Historie siehe [[#Historieneintr.C3.A4ge|hier]]
+
+
+Bei den einzelnen Auftragsarten gibt es weitere Besonderheiten im Handling:
+
+====Auftragsarten====
+=====Gutachten/Schadenkalkulation (ohne Hagel)=====
+
+
+&lt;span class=&quot;gschult&quot;&gt;Termine können von Callways [[#Terminierung_durch_Callways|vergeben]] werden&lt;/span&gt;
+
+&quot;Standard&quot;-Gutachten. Diese beziehen sich rein auf den Umfang und die Höhe eines entstandenen Schadens, nicht auf den Hergang oder die Plausibilität.&lt;br&gt;
+Diese werden von Versicherung häufig dann beauftragt, wenn eine bestimmte zu erwartende Schadensumme (z.B. über 1000€) erreicht wird.
+
+Kasko: wird im Kaskofall für einen VN ein Gutachten beauftragt, hat die Versicherung die Gutachterwahl. Der VN wird in der Regel darüber informiert und kooperativ sein.&lt;br&gt;
+Haftpflicht: häufig wird nach Unfällen sofort von der Versicherung des VN ein Gutachten zur Besichtigung des AS beauftragt. Die AS wurden vor dem ersten Kontaktversuch seitens CE darüber nicht immer informiert, z.B. weil eine Telefonnummer fehlt. Grundsätzlich hat der AS freie Gutachterwahl und kann die Besichtigung durch CE verweigern! Dies ist dem Anrufer aber nicht aktiv, sondern ggf. bei Nachfrage mitzuteilen.
+
+Wildschaden: Ggf. wird hier eine Hebebühne (HB) benötigt, die Einschätzung obliegt dem VN. Evtl. war dieser schon in einer WS und hat von dort eine Einschätzung, ob etwas unter dem Fzg. beschädigt ist. Wenn eine HB notwendig ist, sollte der Termin in eine WS gelegt werden, siehe [[#Auftr.C3.A4ge_mit_Hebeb.C3.BChne_.2F_Terminierung_in_Werkst.C3.A4tten|Werkstättentermin]]
+
+
+Vorgehen:
+
+* wer ist der Anrufer (VN/AS/RA/Angehöriger/Fuhrparkleiter Firma/SB?)
+* Abgleich der Telefonnummer / sind die Kontaktdatenschon bekannt? -&gt; Wenn nicht, Erfassung in [[#Reiter_.22Adressen.22|Adressen]]
+* Hat der Anrufer eine Handynummer (wenn noch keine vorhanden ist)
+* wer soll ggf. im Anschluß zur Terminvereinbarung kontaktiert werden? -&gt; Erfassung in [[#Reiter_.22Adressen.22|Adressen]]
+* wo befindet sich das Fahrzeug?
+* wo soll, wo kann die Besichtigung stattfinden?
+
+Abschluß:
+
+* Wenn möglich [[#Terminierung_durch_Callways|terminieren]], sonst
+* Wenn der Anrufer noch etwas klären möchte (Rücksprache mit Anwalt, Versicherung) und sich selbst wieder meldet: Historieneintrag mit Hinweis, &lt;i&gt;daß&lt;/i&gt; er sich von alleine wieder meldet.
+* alles andere per dringende Anforderung an die Dispo weiterleiten
+
+=====Nachbesichtigung Gutachten/KVA/Rechnung=====
+
+&lt;span class=&quot;gschult&quot;&gt;Termine können von Callways [[#Terminierung_durch_Callways|vergeben]] werden&lt;/span&gt;
+
+Bei allen Arten von &lt;i&gt;Nach&lt;/i&gt;besichtigungen gibt es schon ein vorhandenes &lt;b&gt;Produkt&lt;/b&gt;, das am Objekt überprüft werden soll, und das der SV vor Ort zum Abgleich benötigt.&lt;br&gt;
+Es gilt also zu überprüfen, ob das entsprechende Produkt im Reiter [[#Reiter_.22Dokumente.22|&quot;Dokumente&quot;]] angehängt ist - nur dann steht es dem SV auch beim Termin zur Verfügung. Liegt das Dokument (noch) &lt;b&gt;nicht bei&lt;/b&gt;, wird der Auftrag &lt;b&gt;nicht terminiert&lt;/b&gt;, sondern mit einem entsprechenden Vermerk (z.B. &quot;KVA nicht vorhanden&quot;) an die Dispo weitergeleitet.&lt;br&gt;
+-&gt; die Dokumente werden dann von CE intern oder von der Versicherung angefordert und erst dann wird die NB terminiert.
+
+Je nach Auftragsart sollte also der entsprechende &lt;span class=&quot;braun&quot;&gt;KVA&lt;/span&gt;, die &lt;span class=&quot;braun&quot;&gt;Rechnung&lt;/span&gt; oder ein &lt;span class=&quot;braun&quot;&gt;Gutachten&lt;/span&gt; vorhanden sein. Die angehängten Dokumente sind nicht immer direkt am Namen zu erkennen, so daß sie ggf. von uns kurz eingesehen werden müssen. 
+
+* &lt;u&gt;Kostenvoranschläge und Rechnungen:&lt;/u&gt;
+** sollten von einer &lt;i&gt;Firma&lt;/i&gt; kommen und erkennbar als KVA/Rechnung ausgewiesen sein, inkl. 
+** Beschreibung zu Art und Umfang der nötigen Arbeiten
+** die dafür nötige Arbeitszeit und die zugehörigen Arbeitskosten
+** das dafür nötige Material und die zugehörigen Materialkosten
+** Bei Rechnungen darauf achten, daß es eine Reparaturrechnung ist (und nicht z.B. Aufwandrechnung eines Anwalts o.ä.)
+
+* &lt;u&gt;Gutachten:&lt;/u&gt;
+** die zu besichtigenden GA sind immer Fremd-GA, d.h. nicht von CE erstellte (der Gutachter sollte aus dem Briefkopf o.ä. hervorgehen)
+** enthalten Lichtbilder (wenn keine vorhanden sind, wird beim AG nachgefragt, d.h für uns -&gt; Wiedervorlage, nicht terminieren)
+** nicht mit KVA verwechseln
+
+&lt;div class=&quot;indent&quot;&gt;
+Häufig ist es so, daß das zu besichtigende Produkt zunächst von einem CE-SV im Innendienst &quot;am Schreibtisch&quot; &lt;span class=&quot;braun&quot;&gt;(ICT)&lt;/span&gt; überprüft wurde. Wird daraufhin eine Besichtigung &lt;i&gt;vor Ort&lt;/i&gt;, dh im Aussendienst, beauftragt, dann muß der &quot;am Schreibtisch&quot; angefertigte sog. &lt;b&gt;Prüfbericht&lt;/b&gt; ebenfalls hinterlegt sein oder, wenn das nicht der Fall ist, angefordert werden.&lt;br&gt;
+Ob eine solche Vorabprüfung im Innendienst stattgefunden hat, erkennt man daran, ob es zu dem Auftrag korrespondierende Aufträge vom Typ &lt;span class=&quot;red&quot;&gt;&lt;b&gt;ICT&lt;/b&gt;&lt;/span&gt; gibt, deren AG-Nr. übereinstimmt (siehe Abbildung 1 unten).&lt;br&gt;
+&lt;span class=&quot;braun&quot;&gt;ICT(Innendienst)-Aufträge sind in ceDis nicht aufrufbar&lt;/span&gt; (deswegen müssen PB/PP intern angefordert werden; ICT und ceDis sind zwei voneinander getrennte Auftragssystem von Carexpert).&lt;br&gt;
+Liegt ein korrespondierender ICT-Auftrag vor, aber in den Dokumenten ist noch kein &quot;PB/PP&quot; (=Prüfbericht) angehängt: -&gt; Weiterleitung an die Dispo mit Vermerk (z.B. &quot;PB fehlt&quot;)&lt;br&gt;
+
+
+Zur Veranschaulichung der Zusammenhänge, folgender Beispielablauf:&lt;br&gt;
+Hier wurde ursprünglich ein Fremdgutachten eines Anspruchstellers an die Versicherung des VN eingereicht. Diese hat im Gutachten &quot;Überprüfenswertes&quot; entdeckt und einen Auftrag an CE übergeben, aber zunächst nur an den &lt;i&gt;Innen&lt;/i&gt;dienst. Der Auftrag landet im &quot;ICT&quot; (Pendant zu ceDis für den Innendienst). Ein Sachbearbeiter hat sich das Fremdgutachten &quot;am Schreibtisch&quot; angesehen und in seinem &lt;i&gt;Prüfbericht&lt;/i&gt; die Empfehlung gegeben, dieses Gutachten vor Ort zu überprüfen. Der Prüfbericht wird erstellt und geht wieder an die Versicherung zurück (ist aber aus ceDis nicht aufrufbar!) . Der Sachbearbeiter entscheidet, daß er der Empfehlung folgt und stellt einen Auftrag für den Aussendienst in ceDis ein (Bild 1, Nachbesichtigung GA).
+
+&lt;table class=&quot;unsichtbar&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;[[File:NB_GA_ICT_korr_ann.png|thumb|left|250px|1) NB GA mit korrespondierendem ICT-Auftrag ]]&lt;/td&gt;
+&lt;td&gt;[[File:NB GA ICT Untfehlenhist ann.png|thumb|left|250px|2) ICT-Prüfbericht nicht vorhanden, wird angefordert]]&lt;/td&gt;
+&lt;td&gt;[[File:NB_GA_ICT_Dok_ann.png|thumb|left|250px|3) Prüfbericht wurde nachgereicht]]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+# Beim Öffnen des Auftrags stellt ceDis fest, daß es in ICT einen Auftrag gibt, der auf das selbe Versicherungs-Aktenzeichen läuft (Bild 1) und weist den Betrachter darauf hin ([[http://192.168.1.7/mediawiki2/index.php/Carexpert#unklare_.2F_korrespondierende_Auftr.C3.A4ge|unklarer korrespondierender Auftrag]]. Dieser guckt sich den unklaren Auftrag an und setzt ihn (selbe AG-Nummer) auf korrespondierend,
+# stellt aber fest, daß in den Dokumenten zwar das zu überprüfende Fremdgutachten vorliegt, der in ICT angefertigte Prüfbericht aber noch nicht. Da von ceDis aus nicht auf ICT zugegriffen werden kann, muß der Prüfbericht vom Innendienst angefordert werden (Bild 2, 12:40).
+# Einige Zeit später wird der Prüfbericht nachgereicht (Bild 2 und 3, 14:59). Der Auftrag ist jetzt vollständig und die Terminierung kann stattfinden.
+&lt;/div&gt;
+
+Vorgehen: 
+
+* wer ist der Anrufer (VN/AS/RA/Angehöriger/Fuhrparkleiter Firma/SB?)
+* Abgleich der Telefonnummer / sind die Kontaktdatenschon bekannt? -&gt; Wenn nicht, Erfassung in [[#Reiter_.22Adressen.22|Adressen]]
+* Hat der Anrufer eine Handynummer (wenn noch keine vorhanden ist)
+* wer soll ggf. im Anschluß zur Terminvereinbarung kontaktiert werden? -&gt; Erfassung in [[#Reiter_.22Adressen.22|Adressen]]
+* wo befindet sich das Fahrzeug?
+* sind alle Dokumente (NB + ggf. ICT-Prüfbericht) vorhanden?
+* wo soll, wo kann die Besichtigung stattfinden?
+
+Abschluß:
+
+* Wenn möglich [[#Terminierung_durch_Callways|terminieren]], sonst
+* Wenn der Anrufer noch etwas klären möchte (Rücksprache mit Anwalt, Versicherung) und sich selbst wieder meldet: Historieneintrag mit Hinweis, &lt;i&gt;daß&lt;/i&gt; er sich von alleine wieder meldet.
+* alles andere per dringende Anforderung an die Dispo weiterleiten
+
+=====Gegenüberstellung=====
+&lt;span class=&quot;nedgschult&quot;&gt;Für Callways nicht terminierbar.&lt;/span&gt;
+
+Gegenüberstellungen (GG) werden beauftragt, um das (meist vom AS) gemeldete Schadenbild an den Fahrzeugen abzugleichen, z.B. Farbe des Lackes, Höhe der Berührungspunkte.&lt;br&gt;
+Üblicherweise werden GG am Schadenort (SO) oder auf einem Parkplatz in der Nähe durchgeführt. Dort, wo das nicht möglich ist (z.B. SO war auf einer Autobahn, VN aus Hamburg, AS aus München), werden solche Aufträge aber auch teilweise als &quot;getrennte Gegenüberstellungen&quot; (gGG) durchgeführt. Dies entscheidet der Sachbearbeiter (SB) der Versicherung.&lt;br&gt;
+Bei einer gGG wird der selbe SV beide Fahrzeug getrennt voneinander besichtigen und mithilfe von Lichtbildern die Schäden abgleichen.
+
+Vorgehen:
+
+* Anrufer bestimmen (AS/VN/RA/WS?), Telefonnummer abgleichen; Handynummer, wenn nicht hinterlegt, erfragen
+* Standort des Autos und evtl. Zustand erfragen (Werkstatt / zu Hause / unterwegs / Schrottplatz?)
+* Schadenort abgleichen oder, wenn noch nicht hinterlegtm erfragen und in den Adressen eintragen
+* Historie einsehen, ob eventuell schon Terminvorschläge (der Gegenseite) eingetragen sind; wenn ja: diese nennen
+** wenn Übereinstimmungen mit Anrufer: in der Historie notieren, Rückmeldung zusagen. Darauf hinweisen, daß fixe Terminierung erst bei Rückruf stattfindet!
+* andernfalls: Terminvorschläge vom Anrufer pauschal abfragen (kurz- bis mittelfristig; Richtwert ca. 5 Werktage Vorlauf)
+** Terminvorschläge immer möglichst in Zeitfenstern erfragen (&quot;geht es nächste Woche vormittags?&quot;), die Termine selbst sind dann aber immer Fixtermine
+* GG finden, wenn nicht anders im Auftrag ersichtlich, am Schadenort (SO) oder in dessen Nähe statt.
+** Terminvorschläge beziehen sich dementsprechend auf den Schadenort.
+* Emailadresse erfassen ist immer hilfreich, falls mit zwei oder mehr Parteien Termine gefunden werden müssen.
+* Wenn die Parteien untereinander in Kontakt stehen, können diese sich auf einen Termin einigen (mit Vorlauf) und sich dann wieder melden.
+
+Abschluß:
+
+* Wenn der Anrufer noch etwas klären möchte (Rücksprache mit Anwalt, Versicherung) und sich selbst wieder meldet: Historieneintrag mit Hinweis, &lt;i&gt;daß&lt;/i&gt; er sich von alleine wieder meldet.
+* alles andere per dringende Anforderung an die Dispo weiterleiten
+
+
+=====Ermittlung=====
+&lt;span class=&quot;nedgschult&quot;&gt;Für Callways nicht terminierbar.&lt;/span&gt;
+
+Ermittlungen beziehen sich auf die Plausibilität eines (gemeldeten) Schadenherganges. Im Gegensatz zur [[#Gutachten.2FSchadenkalkulation_.28ohne_Hagel.29|Schadenkalkulation]] geht es hierbei nicht (nur) um die Schadenhöhe und -umfang, sondern darum, ob der geschilderte Schadenshergang überhaupt so stattgefunden haben kann.&lt;br&gt;
+Hier ist immer besonderes Augenmerk auf das Feld &quot;Schadenhergang&quot; zu legen, da dort häufig zusätzliche Infos enthalten sind. So kann eine Ermittlung durchaus mit einer [[#Gegen.C3.BCberstellung|Gegenüberstellung]] einhergehen.&lt;br&gt;
+
+&lt;span class=&quot;rot&quot;&gt;Obacht!&lt;/span&gt; Sensible Infos aus dem Schadenhergang (z.B. &quot;Betrugsverdacht&quot;) nicht einfach dem Anrufer vorlesen! Wenn der Anrufer wissen möchte, warum hier irgendwas besichtigt werden soll, kann er sich an die beauftragende Versicherung wenden und dort nachfragen. 
+
+Vorgehen:
+
+* Anrufer bestimmen (AS/VN/RA/WS?), Telefonnummer abgleichen; Handynummer, wenn nicht hinterlegt, erfragen
+* Standort des Autos und evtl. Zustand erfragen (Werkstatt / zu Hause / unterwegs / Schrottplatz?)
+* wenn im Schadenhergang ersichtlich ist, daß hier eine GG notwendig ist: Handling wie [[#Gegen.C3.BCberstellung|GG]]
+* Terminvorschläge vom Anrufer pauschal abfragen (kurz- bis mittelfristig; diese/nächste Woche)
+* Emailadresse erfassen ist immer hilfreich, falls mit zwei oder mehr Parteien Termine gefunden werden müssen.
+
+Abschluß:
+
+* Wenn der Anrufer noch etwas klären möchte (Rücksprache mit Anwalt, Versicherung) und sich selbst wieder meldet: Historieneintrag mit Hinweis, &lt;i&gt;daß&lt;/i&gt; er sich von alleine wieder meldet.
+* alles andere per dringende Anforderung an die Dispo weiterleiten
+
+&lt;hr&gt;
+&lt;span class=&quot;hinweis&quot;&gt;Die Abfragevorgaben zu den o.g. Auftragsarten sind eher allgemeine Hinweise. Es müssen nicht jedes Mal alle Details zum Fahrzeugzustand etc. abgefragt, sondern vor allem kurz die Kontaktdaten abgeglichen und, wenn der Anrufer schon Terminvorschläge parat hat, diese erfasst werden. Grundsätzlich reicht auch ein Historieneintrag wie &quot;bittet um Terminabsprache&quot; - um die nötigen Details kümmern sich dann die CE-Disponenten beim Rückruf.&lt;/span&gt;
+
+
+=====Ferngutachten=====
+
+Bei der Bearbeitungsart &quot;Ferngutachten&quot; können Kunden (=Versicherungsnehmer) unter bestimmten Voraussetzungen ihre Gutachten ohne Vor-Ort-Termin selbst anfertigen. 
+Der Ablauf ist hier folgendermassen:
+* Carexpert versendet einen link
+* Kunde loggt sich über sein Kennzeichen ein
+* macht Fotos vom Fahrzeugschein, Zustand des Fahrzeuges, sowie Fotos von der Beschädigung
+* Anschließend übermittelt Kunde uns über eine elektronische Schnittstelle alle Daten zurück
+* SV (Innendienstabteilung) erstellt anhand der Fotos eine Quickkalkulation und übermittelt diese an den Kunden zurück
+* Kunde entscheidet sich für eine Art der Abrechnung (Reparatur oder fiktive Abrechnung)
+* Kalkulation geht an Versicherer und Auftrag ist erledigt
+
+Diese &quot;Mobilexpert&quot;-Aufträge bekommen in ceDis die Bearbeitungsart &quot;Ferngutachten&quot; zugewiesen. 
+Man erkennt diese Aufträge dementsprechend an entweder:
+* Bearbeitungsart &quot;Ferngutachten&quot; (Bild 1)
+* Historieneinträge, die aussagen, daß hier über &quot;app&quot; oder &quot;mobilexpert&quot; gearbeitet werden soll (Bild 2)
+* entsprechenden Hinweisen im Termininfo-Feld (kein Bild)
+
+&lt;table style=&quot;margin:auto&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;[[File:Mobi1.png|thumb|left|250px|1) Bearbeitungsart Ferngutachten]]&lt;/td&gt;
+&lt;td&gt;[[File:Mobi2.png|thumb|left|250px|2) Historieneintrag:&lt;br&gt;Kunde möchte App nutzen -&gt; Bearbeitungsart wurde umgestellt]]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+Diese Ferngutachten werden &lt;b&gt;NICHT&lt;/b&gt; durch uns terminiert, hier sind keine Vor-Ort-Einsätze nötig! &lt;br&gt;
+Die Einsätze bekommt zwar ggf. einer der regionalen SV zugewiesen, aber er bearbeitet diese dann &quot;am Schreibtisch&quot;.&lt;br&gt;
+Auch ist darauf zu achten, daß ggf., wenn bei einem &lt;b&gt;Ferngutachten&lt;/b&gt; ein Termin im Einsatzfenster eingetragen ist, dieser &lt;b&gt;nicht&lt;/b&gt; vor Ort beim Kunden stattfinden wird.&lt;br&gt; 
+
+Vorgehen:
+* Hinweise auf Ferngutachten können in Historie oder Termininfo enthalten sein:
+** wenn Hinweis &quot;Mobilexpert&quot;, &quot;Abwicklung über App&quot; o.ä. vorhanden sind, dann
+
+Abschluß:
+
+*&lt;span class=&quot;rot&quot;&gt;Fragen zu diesen Aufträgen werden allesamt als [[#Weiterleitung_der_Historieneintr.C3.A4ge|dringende Anforderung]] weitergeleitet&lt;/span&gt;.
+*Die Bearbeitungszeit sollte hier kurz gehalten werden. 
+*Name und Telefonnummer abgleichen und die Anfrage mit einem Hinweis auf zeitnahen Rückruf direkt an die Dispo weiterzuschicken.
+
+Beispielbild:
+&lt;table style=&quot;margin:auto&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;[[File:Mobilexpert.png|thumb|left|250px|direkte Weiterleitung an die Dispo]]&lt;/td&gt;
+
+&lt;/tr&gt;
+&lt;/table&gt;
+
+=====technische Aktenbearbeitung=====
+
+Eine &quot;technische Akte&quot; entspricht einem Innendienstauftrag, wird aber einem Aussendienst-SV zugeordnet. Hier werden keine Vor-Ort-Besichtigungen gemacht, sondern der SV bekommt den Auftrag, anhand von Bildern oder Dokumenten einen Schaden zu bearbeiten oder zu einem von ihm schon besichtigten Schaden etwas zu ergänzen. Diese Aufträge haben als Besichtigungsort normalerweise die Adresse des SV eingestellt und sind Ganztagstermine.&lt;br&gt;
+VN/AS werden hierzu in der Regel nicht anrufen, sondern eher mal ein SB oder eine WS. Diesen kann mitgeteilt werden, daß hier eine Bearbeitung - &quot;am Schreibtisch&quot; stattfindet und diese für das im Termin eingetragene Datum vorgesehen ist.&lt;br&gt;
+Möchte der Anrufer hierzu irgendetwas Ergänzendes mitteilen, dann kann das natürlich weitergeleitet werden,
+
+Vorgehen:
+
+*keine Temrinierung
+*kein vor-Ort-Termin!
+*ggf. Info über Tag der voraussichtlichen Erledigung
+
+Abschluß:
+
+*Weiterleitung an Dispo, wenn gewünscht
+
+=====Hagelschäden=====
+
+Vollständige Beschreibung inkl. Gesprächsablauf hier: [[Carexpert_Hagel]]
+
+Bei Hagelschäden werden die Termine etwas abweichend gehandhabt. Da diese Schadenart in den betroffenen Gebieten einen unvorhersehbaren stark erhöhten Bedarf an Terminen erzeugt, der durch Einzelgutachten kaum zeitnah abgedeckt werden kann, versucht CE diese Aufträge nach Möglichkeit in Massenbesichtigungen zu bedienen.&lt;br&gt;
+Dazu werden in Werkstätten oder anderen Räumlichkeiten in der betroffenen Region Termine mit mehreren Versicherungsnehmern und Gutachtern angeboten. Die betroffenen VN bekommen ein [[#docs|Anschreiben]], in welchem ihnen direkt (ohne vorherige Terminabsprache) ein stundengenauer Termin zugestellt wird.&lt;br&gt;
+In den meisten dieser Anschreiben ist ein Link zum Carexpert-Internetportal ([http://www.mein-carexpert.de www.mein-carexpert.de]) enthalten; dort können die Betroffenen sich mit ihrem Kennzeichen oder der Auftragsnummer einloggen, sich weitere Termine in ihrer Gegend anzeigen lassen und versuchen, selbst einen anderen (&quot;Wunsch-&quot;)Termin zu buchen. Dies sollte dem Anrufer auch so gesagt werden. Findet er auch auf diese Weise keinen für ihn geeigneten Termin, so kann er sich natürlich nochmal melden und um einen individuellen Termin nach Rücksprache bitten.&lt;br&gt;&lt;br&gt;
+
+&lt;span class=&quot;braun&quot;&gt;Für die Massentermine gibt es eine eigene Hotline und [http://192.168.20.7/carexpert/?1459 Maske]&lt;/span&gt;.&lt;br&gt;&lt;br&gt;
+
+In der &quot;Hagelzeit&quot; (ca. Mai bis Oktober) wird diese Hotline nach den ersten Hagelereignissen freigeschaltet.&lt;br&gt;
+&lt;b&gt;Ab Beginn der Hagelzeit werden Hageltermine von uns grundsätzlich nicht mehr terminiert&lt;/b&gt;, sondern ausschliesslich über die [http://192.168.20.7/carexpert/?1459 Maske 1459] bearbeitet und an Carexpert weitergeleitet (und dort von einem extra Hagelteam in Aktionen zusammengefasst). &lt;b&gt;Eine Bearbeitung in ceDis entfällt!&lt;/b&gt;. Dies gilt für alle Anrufe, die über 1459 eingehen und alle Aufträge mit der Auftragsart &quot;Hagel&quot;.&lt;br&gt;
+[[File:Hagel1.png|center]]&lt;br&gt;
+
+&lt;b&gt;Ausserhalb der Hagelzeit&lt;/b&gt; werden Hageltermine wie andere Termine auch behandelt, d.h. die VN bekommen dann &quot;normale&quot; Einzeltermine.
+
+Der genaue Beginn der Hagelzeit bzw. der Freischaltung der Hotline wird uns von Carexpert mitgeteilt (ebenso wie das Ende derselben ;)).
+
+===Handling ausserhalb der Kernzeit / Maske 1458===
+
+Ausserhalb der Kernzeiten (aktuelle Bearbeitungszeiten sind [http://192.168.30.222/startCarexpert/ hier] hinterlegt) verweisen wir zunächst auf die Bearbeitungs- und Öffnungszeiten und bitten um einen erneuten Anruf. Wenn der Anrufer es wünscht - oder wenn wir heraushören können, daß es eine für den Betrieb relevante Information ist (z.B. Anruf am Samstag mit Terminabsage für Montag früh), können wir die Daten des Anrufers erfassen, und eine Mitteilung über unsere [[#Mailversand_.C3.BCber_die_Callwaysmaske|Maske]] verschicken.
+
+==Terminierung und Weiterleitung==
+
+===Rahmenbedinungen Terminierung===
+
+Ein Auftrag kann von uns terminiert werden wenn:
+
+* Bearbeitungsart: Gutachten/Schadenkalkulation und Schadenart: NICHT Hagel.
+* Bearbeitungsart: Nachbesichtigung KVA/GA/RG
+
+Ein Gutachten an einem PKW dauert im Schnitt zwischen 25(GA/SK)-45(NB GA) Minuten; dabei müssen
+
+* &lt;b&gt;eine&lt;/b&gt; Person, nicht notwendigerweise der Fahrzeugbesitzer, anwesend 
+* der Fahrzeug&lt;b&gt;schein&lt;/b&gt; und
+* der Fahrzeugschlüssel vorhanden
+
+sein.
+
+Termine finden
+
+&lt;b&gt;ausschliesslich werktags und nur von 8-16 Uhr in einem Zeitfenster von mindestens 2 Stunden&lt;/b&gt;
+
+statt und können von uns auch nur so vereinbart werden.
+
+
+Grundsätzlich versuchen wir, ein &lt;i&gt;möglichst großes Zeitfenster&lt;/i&gt;, an dem vom [[#Terminvergabe_in_ceDis|Tool]] &lt;i&gt;zuoberst&lt;/i&gt; genannten Datum, zu vereinbaren. Das wäre der Idealfall.&lt;br&gt;
+Meist hat der Anrufer ebenfalls ein Interesse daran, daß das Gutachten zeitnah stattfindet und kann über die Inaussichtstellung eines früheren Termins zu Kompromissen hinsichtlich des Zeitfensters motiviert werden ;-).&lt;br&gt;
+Gute Argumente für einen Ganztagstermin sind:
+
+* Termin kann an den Arbeitsort / andere Wunschadresse terminiert werden
+* Termin kann auch durch Bekannte und Verwandte / allgemein Dritte bedient werden
+* Gutachter kann sich &lt;b&gt;am Tag des Termins&lt;/b&gt; telefonisch (30, 45, 60 Minuten) vorab über Handy ankündigen
+* Auto kann z.B. einen Tag lang in einer Werkstatt abgestellt werden, Termin findet dann dort statt
+
+
+Speziell die Möglichkeit der Terminierung am den Arbeitsort bzw. einer freien Adresse sollte dem Anrufer bei zähen Terminierungen deutlich gemacht werden, da Termine grundsätzlich nur von 8-16 stattfinden.
+
+Oft gibt der Anrufer schon zu Beginn selbst irgendwelche Wünsche oder Vorgaben an, manchmal möchte der Anrufer auch erst wissen, was wir ihm an Terminen anbieten können. Haben wir ihm die groben Rahmenbedingungen (8-16, Zeitfenster mindestens 2 Stunden) dargelegt und Adressen / Telefonnummern erfasst, geht es an die endgültige Terminierung.
+
+===Terminvergabe in ceDis===
+
+Dazu markiert man im Reiter &quot;Einsätze&quot; (1) die dort vorhandene Leerzeile (2) und klickt rechts auf &quot;Bearbeiten&quot; (3). Die vorher ausgegrauten Felder im Bereich &quot;Einsatz&quot; werden jetzt editierbar.&lt;br&gt;
+Hier wählt man nun den gewünschten und vorher abgesprochenen Einsatzort (4) aus. Ist der Einsatzort gewählt, befüllen sich automatisch die darüber befindlichen Felder (screenshot Bereich [[#Auftragsbild|&quot;D&quot;]]) mit der Adresse. &lt;span class=&quot;rot&quot;&gt;&lt;br&gt;
+Immer auf Korrektheit prüfen, insbesondere wenn zwischen mehreren &quot;freien Adressen&quot; gewählt wird!&lt;/span&gt;.&lt;br&gt;
+Ist der Einsatzort wie gewünscht übernommen, kann rechts davon der Button &quot;Terminvorschlag&quot; (5) betätigt werden.&lt;br&gt;
+[[File:terminierung1.png|500px|center]]&lt;br clear=&quot;all&quot;&gt;
+
+Es öffnet sich ein Terminvorschlagsfenster.&lt;br&gt;
+* Hier zunächst alles leer lassen und &quot;Suchen&quot; anklicken. Es werden die möglichen Termine in den nächsten 5 Tagen angezeigt.
+* Wenn der Anrufer uns mitteilt, daß Termine erst ab DD.MM.YY möglich sind, kann man den Suchzeitraum nach hinten verlegen. Um Vorschläge zu erhalten, dann den Zeitraum nicht über Wochenenden hinweg wählen, sondern die Werktage &lt;i&gt;einer&lt;/i&gt; Kalenderwoche eintragen (und nicht gleich einen ganzen Monat als Suchzeitraum eintragen)
+* Jetzt klären, ob an einem der genannten Tage (idealerweise dem zuoberst vorgeschlagenen) ein (möglichst großes) Zeitfenster vereinbart werden kann. Ist man sich einig, auf &quot;neue Suche&quot; klicken
+* Nun werden die Datum- und Uhrzeit-Felder mit den entsprechenden Angaben befüllt und nochmal &quot;neue Suche&quot; geklickt
+* Aus den jetzt angegebenen Vorschlägen wählt man den obersten, der einen &quot;grünen Punkt&quot; hat.
+* &lt;b&gt;rote und gelbe Punkte werden nicht gebucht&lt;/b&gt;
+* Bei &quot;Glühbirnen&quot;terminen bitte [[#Terminvorschl.C3.A4ge_mit_Zeit.C3.BCberschreitung|hier]] nachlesen.
+&lt;br&gt;
+[[File:Tvorsch_komplett.png|750px|center]]&lt;br clear=&quot;all&quot;&gt;
+*Im Feld &quot;Auswahl&quot; unterhalb der Terminvorschläge muß der Button &quot;&lt;b&gt;manuelle Zeitangabe übernehmen&lt;/b&gt;&quot;(!) ausgewählt sein, dann wird das Zeitfenster, das von uns angegeben wurde, terminiert, auch wenn im &quot;Vorschlag&quot; noch immer nur die 4 Stunden stehen. D.h. wenn oben 8-16 steht, wird der Termin nach dem Abspeichern 8-16, auch wenn im Vorschlagsfenster noch 8 - 12 stehen sollte.&lt;br&gt;
+* Die Namen der SV werden dem Anrufer nicht genannt! Welcher SV letztendlich den Termin bedient, wird erst am Vorabend des Termins endgültig festgelegt. Wir planen nur ein &lt;i&gt;Zeitfenster&lt;/i&gt;, die endgültige Übergabe an den SV geschieht erst durch die ce-Disposition. &lt;br&gt;
+&lt;div class=&quot;rot&quot;&gt;
+wichtig:
+* ab 15:00 dürfen keine Termine mehr für den Folgetag geplant werden, auch wenn sie von ceDis angeboten werden
+* es dürfen keine Zeitfenster über 16:00 hinaus gebucht werden, auch wenn sie von ceDis angeboten werden
+* Samstagstermine dürfen nur geplant werden, wenn die Samstagsterminierung freigegeben wurde (Infos stehen auf der Startseite) 
+&lt;/div&gt;
+
+====Termininfo und Terminbestätigung====
+&lt;b&gt;Terminbestätigung&lt;/b&gt;&lt;br&gt;
+Direkt im Anschluss an die Terminierung öffnet sich ein Fenster, über das eine Terminbestätigung verschickt werden kann.&lt;br&gt;
+Es kann ausgewählt werden, an wen die Bestätigung gehen soll und über den Button &quot;Bearbeiten&quot; kann, wenn nötig, nochmal die Adresse editiert (d.h. zum Beispiel um Mobilnummer oder Mailadresse, sofern das nicht schon zu Beginn des Anrufs geschehen ist, ergänzt) werden.&lt;br&gt;
+Ist das nicht möglich oder gewünscht, klickt man &quot;Nein&quot; und verzichtet auf den Versand der Terminbestätigung.&lt;br&gt;
+&lt;span class=&quot;braun&quot;&gt;Werkstätten&lt;/span&gt; aus der PartnerDB können nicht editiert werden.&lt;br&gt;
+Die Terminbestätigung kann auch später nochmal von Hand verschickt werden, im Reiter &quot;Einsätze&quot; befindet sich der zugehörige Button.&lt;br&gt;
+
+[[File:terminbest.png|350px|center]]
+&lt;br clear=&quot;all&quot;&gt;
+
+&lt;b&gt;Termininfo&lt;/b&gt;
+
+Ist der Einsatz gebucht, können im Feld &quot;Termininfo&quot; noch zusätzliche Infos für den SV hinterlegt werden, zum Beispiel die Telefonnummer eines Pförtners oder ein genauer Anfahrtsweg, Warnung vor dem Hund. Hier wird auch eingetragen, ob und ggf. wann der SV sich vorab nochmal telefonisch ankündigen soll. Beispiel &quot;BO steht im 3. Hinterhof, bitte 45 Min. vorab bei AS auf mobil anrufen, dieser fährt dann von der Arbeit an und sperrt den Rottweiler weg&quot;.&lt;br&gt;
+Zum Abspeichern dann &quot;OK&quot; oder &quot;Übernehmen&quot; klicken.&lt;br&gt;
+&lt;span class=&quot;rot&quot;&gt;&lt;b&gt;wichtig:&lt;/b&gt;&lt;/span&gt; Dieses Feld dient &lt;span class=&quot;rot&quot;&gt;NICHT(!)&lt;/span&gt; als Ersatz für die Terminbuchung! Es wird bei der Tourenplanung NICHT berücksichtigt! &lt;b&gt;Keinesfalls&lt;/b&gt; kann etwa ein Ganztagstermin eingebucht werden, um dann in der Terminfo einzutragen, daß der Kunde nur ab mittags Zeit hat oder dergleichen.
+
+&lt;table style=&quot;margin: 0 auto&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;[[File:screen_termininfo2.png|thumb|left|250px|2) Auftrag, wie ihn der SV erhält (Termininfo markiert)]]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+====Terminvorschläge mit Zeitüberschreitung====
+
+Bei einigen Terminvorschlägen wird ein kleines Glühbirnchen angezeigt. Dieses bedeutet, daß die Arbeitszeit des SV an diesem Tag bereits überschritten wurde.&lt;br&gt;
+Fährt man hier mit der Maus über das Birnchen (siehe Bild), wird angezeigt, wie weit die Arbeitszeit schon überschritten ist.&lt;br&gt;
+Bei einer Zeitüberschreitung &lt;= 60 Minuten kann der SV gebucht werden, ist der Wert höher, sollte ein anderer SV gebucht werden. &lt;br&gt;
+Gibt es keine alternativen Vorschläge, wird der Termin von uns erstmal nicht gebucht, sondern eine Nachricht an die Dispo geschickt (&quot;Terminvorschlag nur mit Zeitüberschreitung&quot;).&lt;br&gt;
+Der Anrufer wird dann, nachdem ein Disponent geklärt hat, ob der Termin möglich ist, von der Dispo zurückgerufen.
+[[File:Birnchen.png|center|150px]]&lt;br clear=&quot;all&quot;&gt;
+
+====Sonderfälle====
+
+=====keine Terminvorschläge in ceDis vorhanden=====
+
+Es kann aus unterschiedlichen Gründen vorkommen, daß mal für ein Gebiet keine Terminvorschläge angezeigt werden, selbst wenn der Suchzeitraum ausgedehnt wird. Ist das der Fall, dann bitte Terminvorschläge (wenn machbar: mit einigen Tagen Vorlauf, in der Gegend könnte es schwieriger sein, einen Termin zu bekommen) vom Anrufer erfragen, Rückruf zusichern und eine dringende Anforderung an die Dispo schicken.
+
+=====Terminierung von zwei Terminen am selben Einsatzort=====
+
+Wenn wir (z.B. über einen Hinweis auf [[#passende_Auftr.C3.A4ge|passende Aufträge]]) für den selben Einsatzort mehrere offene Termine finden, versuchen wir, diese gleich &quot;in einem Rutsch&quot; zusammen zu terminieren.&lt;br&gt;
+Dazu gehen wir wiefolgt vor:
+# mit dem Anrufer/ASP klären, ob beide Fahrzeuge gleichzeitig besichtigt werden können, d.h. am Einsatzort zum Termin vor Ort sind
+# beide Auftragsnummern irgendwo zwischennotieren
+# einen der beiden Aufträge ganz normal terminieren, dabei aber &lt;i&gt;merken&lt;/i&gt; (oder notieren), auf welchen SV der Termin gebucht wurde
+# den zweiten Termin zur Terminierung öffnen, &lt;i&gt;das selbe Zeitfenster&lt;/i&gt; wie im ersten Termin wählen und im Feld &quot;Sachverständiger&quot;* den zuvor gebuchten auswählen
+# wenn beide Aufträge auf den selben SV und ins selbe Zeitfenster gebucht sind, in beiden Aufträgen einen Vermerk ins &quot;Termininfo&quot;-Feld setzen (&quot;zusammen mit 5002xxxxxx&quot;)
+[[File:termsuch.png|center|150px]]
+
+
+=====Terminierung von Nutzfahrzeugen=====
+* Ob das Besichtigungsobjekt ein Nutzfahrzeug ist, entnimmt man dem Reiter &quot;Versicherungsnehmer-&quot;, bzw. &quot;Anspruchstellerobjekt&quot; (Abb. 1). Dort stehen die von der Versicherung übermittelten Fahrzeugdaten. 
+* Falls dort nichts steht, gibt ggf. das Feld &quot;Besichtigungsobjekt&quot; hier einen Hinweis (Abb.2).
+* Wenn das Besichtigungsobjekt ein Nutzfahrzeug ist, muß, BEVOR der Terminvorschlagsbutton betätigt wird, im Feld &quot;Qualifikation&quot; der Haken bei &quot;Nutzfahrzeug-SV&quot; gesetzt werden
+
+&lt;table style=&quot;margin: auto&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;[[File:SV_Quali2.png|thumb|left|250px|1) Reiter &quot;VN&quot; bzw. &quot;AS&quot;-Objekt]]&lt;/td&gt;
+&lt;td&gt;[[File:SV_Quali1.png|thumb|left|250px|2) Besichtigungsobjekt]]&lt;/td&gt;
+&lt;td&gt;[[File:SV_Quali3.png|thumb|left|250px|3) Häkchen im Feld &quot;Qualifikation&quot; setzen]]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+Hintergrund: Die Sachverständigen bei Carexpert haben verschiedene &quot;Skills&quot;. Zu schwierigeren bzw. speziellen Gutachten versucht CE nach Möglichkeit erfahrenere/geeignete Gutachter anrücken zu lassen. Je nachdem, welches Häkchen im Feld &quot;Qualifikation&quot; gesetzt ist, filtert das Terminvorschlagstool dann einige SV raus, die z.B. einen speziellen Skill nicht haben (wodurch auch weniger Termine zur Auswahl stehen).
+
+=====Termine durch Kooperationspartner=====
+
+Gelegentlich werden Aufträge an externe Kooperationspartner übergeben, d.h. die Gutachten und deren Terminierung erfolgen über eine Drittfirma.&lt;br&gt;
+Diese Aufträge erkennt man daran, daß bei den eingebuchten Einsätzen im Feld &quot;Termin Info&quot; ein entsprechender Vermerk hinterlegt ist.&lt;br&gt;
+[[File:koop2.png|250px|center]] &lt;br clear=&quot;all&quot;&gt;
+Die Terminierung erfolgt in diesem Fall durch den Kooperationspartner selbst, dessen Kontaktdaten in der Termininfo (ggf. auch in der Historie oder in den Adressen...) hinterlegt sein sollten. Zur Terminvereinbarung sollen die Anrufer sich direkt an diesen wenden. (Historieneintrag: &quot;Tel.Nr. Koop genannt&quot;).
+&lt;span class=&quot;rot&quot;&gt;wichtig:&lt;/span&gt;Die hier eingetragenen Termine sind nur &lt;b&gt;Platzhalter&lt;/b&gt; und werden dem Anrufer &lt;b&gt;nicht&lt;/b&gt; genannt! Diese dienen nur dazu, den Auftrag an die externe Firma zu übergeben. Die Termine mit den Kunden vereinbart und weiß ausschliesslich der externe Kooperationspartner&lt;br&gt;
+
+
+&lt;div id=&quot;Checkliste_Terminvereinbarung_ende&quot;&gt;
+
+===Checkliste Terminvereinbarung===
+
+* Terminierung ausschließlich von Bearbeitungsart „Gutachten/Schadenkalkulation“ und &quot;Nachbesichtigung&quot; (bis auf Widerruf)
+* Terminvereinbarungen nur 08:00 - 16:00
+* Ab 15:00 Uhr darf kein Termin mehr für den Folgetag festgelegt werden.
+* keinesfalls dürfen Termin für den aktuellen Tag gebucht werden, auch wenn diese von ceDis angeboten werden!
+* Samstagstermine werden nur terminiert, wenn von der Dispo eine Freigabe hierzu erfolgt ist (hauptsächlich während der Hagelsaison - wird dann intern kommuniziert).
+* Zur Besichtigung immer Schlüssel und Fahrzeugpapiere bereithalten
+* eine Person muss zur Besichtigung anwesend sein
+* alle zusätzlichen Vereinbarungen bitte in der „Termininfo“ hinterlegen
+* Fixtermine nach Möglichkeit vermeiden (hierbei jedoch Konfliktgespräche vermeiden)
+* Schadenbereich am Fahrzeug sollte beim Kunden abgefragt und daraus resultierend der Besichtigungsort ausgewählt werden (Hebebühne, Grube oder ähnliches)
+* Fahrzeuge mit Wildschaden bitte nicht waschen (zerstören von Beweismitteln für den Kunden)
+* Fahrzeuge mit Hagelschäden zur Besichtigung bitte gewaschen (Hagelschaden sonst nicht sichtbar)
+* zur Vermeidung von Spätterminen, bitte alternative Besichtigungsorte beim Kunde erfragen 
+* Werkstattadresse immer mit ceERP Partner Datenbank abgleichen und übernehmen
+* alle Informationen in der Historie vermerken
+* Fehlende Fahrzeugdaten oder Telefonnummern im Auftrag nachtragen
+* Namen des Ansprechpartners erfragen und im Auftrag vermerken
+* Beim Mailversand über [[http://192.168.20.7/carexpert/?1458 1458]] bitte auf korrekte Auftragsnummer und Kennzeichen achten
+* Hagelschäden, welche von carexpert auf Hagelaktionen terminiert sind, erhalten ein Anschreiben „Einsatz für Massenaktion terminiert“. In diesem ist für den Kunden die Möglichkeit aufgeführt über das carexpert Portal den bestehenden Termin zu ändern. (Bitte darauf hinweisen)
+* Kunden mit Hagelschäden auf längere Wartezeit aufgrund von „Massenschaden“ hinweisen und mitteilen, dass carexpert sich zeitnah melden wird
+* Bei Rückfragen vom Kunden an die Versicherung bitte Kontaktdaten „Übermittler“ im Reiter Adressen weitergeben
+* Bei Systemproblemen, je nach individueller Problemeinschätzung bitte Information an Gesing / Keller / Richter oder EDV in Walluf unter 06123/9777-277   
+&lt;/div&gt;
+
+
+&lt;span id=&quot;histeintrag&quot;&gt;
+
+===Historieneinträge===
+&lt;/span&gt;
+Bei allen Anrufen, &lt;span class=&quot;braun&quot;&gt;egal, ob terminierbar oder nicht,&lt;/span&gt; werden alle relevanten Informationen, die sich aus dem Gespräch ergeben, in einem Historieneintrag erfasst.&lt;br&gt;
+
+&lt;span class=&quot;rot&quot;&gt;wichtig&lt;/span&gt;: Ist im Auftrag bereits ein Einsatz eingeplant (Status &quot;verplant&quot; oder &quot;zugestellt&quot;, können von uns &lt;b&gt;keine&lt;/b&gt; Änderungen an Einsatzort, der Einsatzzeit oder Stornierungen vorgenommen werden! Dies kann nur die CE-Dispo. Möchte ein Anrufer etwas an einem existierenden Einsatz ändern, &lt;b&gt;MUSS die Info an die CE-Dispo [[#Weiterleitung_per_dringende_Anforderung|weitergeleitet]]&lt;/b&gt; werden!
+
+====Form von Historieneinträgen====
+
+Ein paar Punkte zu Form und Stil:
+
+* Es werden keine Ausrufezeichen oder Smileys verwendet (!) ;-)
+* Wo immer möglich, werden die gängigen Abkürzungen verwendet, eine Liste der Abkürzungen findet sich [http://192.168.30.222/mediawiki/images/1/12/Glossar_fuer_CallCenter_12_2011.pdf hier]
+* Es ist davon abzusehen, eigene Abkürzungen zu erfinden und zu verwenden
+* keine Zeilenumbrüche in Historieneinträgen
+* keine emotionalen Statements über die Anrufer, aber ggf. dort, wo es für die Nachvollziehbarkeit relevant ist, sachliche Hinweise auf das Verhalten des Anrufers (&quot;hat aufgelegt&quot;, &quot;wurde beleidigend&quot;)
+* auf Nachvollziehbarkeit achten! Die Disponenten waren beim Gespräch nicht anwesend und sollten verstehen können, was besprochen wurde
+* Getroffene oder nicht getroffene Vereinbarungen sollten deutlich gemacht werden
+** Beispiel: Kann ein Anrufer z.B. keine Termin werktags 8-16 wahrnehmen, können wir sein Anliegen weiterreichen, sollten aber klarstellen, daß wir ihn zuvor ausreichend über die Einsatzzeiten informiert haben
+
+Der Text in der Auftragshistorie ist auch für den Auftraggeber, d.h. die Versicherung, einsehbar. Es ist grundsätzlich darauf zu achten, daß eine gewisse Lesbarkeit, Nachvollziehbarkeit und Form gewahrt wird, also keine Smileys, keine privaten Nachrichten oder ähnliches in den Texten enthalten sind.
+
+====Erzeugen von Historieneinträgen====
+
+Um einen Eintrag zu erzeugen begibt man sich in den Reiter &quot;Historie&quot;. Dort wiefolgt:
+
+* Reiter &quot;Historie&quot; -&gt; 
+* Neu -&gt; 
+* Grund: &quot;Anruf angenommen&quot; -&gt; 
+* Eintrag machen -&gt; 
+* Speichern -&gt;
+[[File:Histo.png|center]]&lt;br clear=&quot;all&quot;&gt;
+
+Inhaltlich sollten hier die Infos rein, wie sie oben unter dem Punkt [[#Gespr.C3.A4chsablauf.2C_Handling|&quot;Handling&quot;]] erfragt wurden.
+
+Um die Einträge für spätere Bearbeiter bei cw UND ce nachvollziehbar zu machen, sollten mindestens folgende Punkte dokumentiert sein:
+* wer hat angerufen? Name des Anrufers? VN? AS? Cousin vom VN? Anwalt vom AS? etc. Es muß klar sein, welcher der beteiligten Seiten der Anrufer angehört und in welcher Beziehung er zu dieser steht!
+* Einträge am besten mit einem Text wie &quot;Anruf VN/AS (je nachdem):&quot; oder &quot;Anruf Hr. Meier, Bruder VN/AS:&quot; beginnen
+* was wurde bzgl. &lt;i&gt;Termin&lt;/i&gt; mitgeteilt, z.B.: &quot;fliegt morgen für 6 Monate ins Ausland&quot; oder &quot;hat immer Zeit&quot;, oder &quot;Termin muß storniert werden, weil&quot; etc
+* was wurde bzgl. &lt;i&gt;Fahrzeug&lt;/i&gt; mitgeteilt, z.B.: &quot;ist bereits verkauft&quot;, &quot;ist repariert, kaputte Teile in WS&quot;, &quot;nicht fahrfähig&quot; etc.
+* wenn der Auftrag für den Agenten nicht terminierbar ist: grobe Zeitfenster für zukünftige Terminvorschläge abfragen, aber &lt;b&gt;keine Absprachen&lt;/b&gt; machen.
+* Telefonnummern nicht (nur) in die Historie, sondern auch in die Adresse einpflegen
+
+
+====Weiterleitung per dringende Anforderung====
+
+Für Fälle, die von Callways nicht abschliessend bearbeitet werden können, gibt es in ceDis die Möglichkeit, über den Button &quot;dringende Anforderung&quot; eine unmittelbare Weiterbearbeitung durch einen CE-Disponenten auszulösen.&lt;br&gt;
+Beispiele wären:
+
+Wenn sich aus dem Gespräch ergibt, daß weitere Handlungen der CE-Dispo erforderlich sein werden, also beispielsweise:&lt;br&gt;
+* Kontaktierung einer anderen Partei zur Terminabsprache (zb Gegenüberstellung)
+* Rückruf zur Terminierung, wenn die Auftragsart von Callways nicht terminiert werden kann (ebenfalls GG, oder Ermittlung, etc.)
+* Klärung mit Sachbearbeitern
+* Terminänderungen
+* Terminstorno
+* Änderungen des Einsatzortes
+* Änderungen der Bearbeitungsart (z.B. durch Sachbearbeiter der Versicherung)
+* alle potentiellen Änderungen an der Tourenplanung, die zur Vermeidung einer Fahrt ohne Ergebnis 
+notwendig sind.
+
+Der Button &quot;dringende Anforderung&quot; findet sich unten im ceDis-Hauptfenster. Es öffnet sich ein Freitextfeld, in welches unsere, nachvollziehbaren, Nachrichten eingetragen werden.&lt;br&gt;
+Nach Absenden (&quot;OK&quot;-Button) wird der Text automatisch in die Historie übertragen und die Anforderung geht an den &lt;span class=&quot;braun&quot;&gt;nächsten verfügbaren Disponenten&lt;/span&gt;, der die Bearbeitung übernehmen oder unter Angabe eines Grundes aktiv ablehnen &lt;b&gt;muß&lt;/b&gt;.
+
+&lt;span class=&quot;rot&quot;&gt;&lt;b&gt;wichtig:&lt;/b&gt;&lt;/span&gt; 
+Seit dem 14.06.2017 ist die &quot;dringende Anforderung&quot; der Standard-Kommunikationskanal zwischen Callways und der Dispo in Walluf.&lt;br&gt;
+Alle Infos, die für den Fortgang der Terminierung eines Auftrags relevant sind, müssen auf diesem Weg an die CE-Disponenten geschickt werden.&lt;br&gt;
+Die Bennenung &quot;dringende Anforderung&quot; hat eher historische Gründe und wurde zur Benutzung für das Callcenter &quot;zweckentfremdet&quot;. Hier werden nicht nur besonders dringende Anfragen verschickt, sondern jede Art von Info, die der Dispo in Walluf zukommen soll, wird hierüber versendet. Man sollte sich die Funktion als einfache &quot;Weiterleitung&quot; vorstellen.
+
+
+
+Ausnahmen wären dann: 
+
+* Anrufe, die rein informativen Charakter haben und bei denen zur Terminierung keine weiteren Schritte notwendig sind (z.B. bereits verplante Aufträge, bei denen der Anrufer nur noch mal das Zeitfenster erfragen wollte)
+* Anrufe, bei denen der Anrufer sich selbst wieder melden wird (z.B. ist im Urlaub, meldet sich selbst, wenn er wieder zuhause ist und seine Arbeitszeiten kennt)
+
+Bei diesen Anrufen reicht ein einfacher Historieneintrag (Punkt &quot;Anruf angenommen&quot;) aus, ggf. sollte deutlich gemacht werden, daß man mit dem Anrufer vereinbart hat, daß er derjenige ist, der sich selbst aktiv wieder melden wird.
+
+
+Erklärung zur Benutzung der dringenden Anforderung:
+&lt;table style=&quot;margin: auto&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;[[File:Dringende_anforderung.png|thumb|left|250px|1) Text eintragen und abschicken]]&lt;/td&gt;
+&lt;td&gt;[[File:CE_Anforderung_zugestellt.png|thumb|left|250px|2) Anforderung wurde direkt einem Disponenten zugestellt und angenommen]]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+==Anfragen, Agenturen, Drumrum==
+
+Bei allen Anfragen, die über die eigentliche Terminerung und die Abarbeitung des Gutachtens hinausgehen, also beispielsweise:
+
+* warum bekomme ich das Gutachten nicht?
+* wann kommt mein Gutachten?
+* wie heißt der Gutachter, und wo wohnt er? Ich möchte ihn gerne davon überzeugen, daß sein Gutachten fehlerhaft ist.
+* warum wird keine Reparaturfreigabe erteilt?
+* wer bezahlt mir XY und wer kommt für mein Z auf?
+* was mache ich bei wirtschaftlichem Totalschaden und warum soll das bereits verkaufte Fahrzeug besichtigt werden?
+* und dergleichen mehr, 
+können Anrufer an der AG=Auftraggeber verwiesen werden.&lt;br&gt;
+Der Auftraggeber kann dem gleichnamigen ceDis-Feld entnommen werden und sollte dem Anrufer ein Begriff sein. Ggf. steht in der Adressliste als &quot;Übermittler&quot; ein Makler oder eine Agentur, über die der Auftrag eingestellt wurde. Ist dort eine Telefonnummer hinterlegt, kann diese auch genannt werden.&lt;br&gt;
+Wir sind keine Versicherungsmitarbeiter und die Beantwortung versicherungstechnischer Fragen gehört nicht zu unseren Aufgaben. Bei Beschwerden über die Abwicklung von Versicherungsinhalten kann freundlich und souverän an den Auftraggeber verwiesen werden. Letztlich kann nur der Versicherer verbindliche Auskunft zur Schadenabwicklung geben.
+Wir leiten selbst auch keine Informationen an die Versicherung weiter; &lt;span class=&quot;rot&quot;&gt;sollte ein Anrufer sich uneinsichtig zeigen&lt;/span&gt;, dann können wir sein Anliegen aber natürlich gerne erfassen und es an die CE-Dispo weiterleiten, die es dann ggf. auch an die Versicherung weiterreicht - für Anrufer ist wird es aber meist schneller sein, solche Fragen direkt mit der Versicherung zu klären.
+
+Von CE erstellt Gutachten werden im Anschluß dem Auftraggeber zugestellt, das ist üblicherweise die Versicherung. Möchte der Anrufer eine Ausführung des erstellten Gutachtens -&gt; Versicherung kontaktieren und dort Gutachten anfordern.
+
+&lt;span class=&quot;rot&quot; id=&quot;rolle_cw&quot;&gt;
+wichtig:&lt;/span&gt; wir sind nach aussen Mitarbeiter von Carexpert, nicht &quot;nur das Callcenter&quot;, &quot;das Servicecenter&quot; oder gar &quot;Callways&quot;. Wenn wir einen Auftrag nicht selbst terminieren können, dann wird der Anrufer so bald als möglich von einem Kollegen, der &quot;das kann&quot;, dem &quot;der Auftrag gehört&quot;, &quot;aus der entsprechenden Abteilung&quot; etc. zurückgerufen.&lt;br&gt;
+Dies geschieht üblicherweise auch wirklich recht schnell, das kann auch so gesagt und der Anrufer dahingehend zuversichtlich gestimmt werden.&lt;br&gt;
+Anrufer können nicht telefonisch mit der ce-Dispo verbunden werden (der Anrufer ist bei uns gelandet, weil in der Dispo alle Leitungen voll sind), es sei denn, es wird für Ausnahmefälle ausdrücklich so an uns weitergegeben.
+
+&lt;span id=&quot;auftrag_aet&quot;&gt;&lt;b&gt;Auftragserteilung von AG&lt;/b&gt;&lt;/span&gt;&lt;br&gt;
+Möchten Mitarbeiter einer Versicherung einen Auftrag eröffnen lassen, so kann das bei uns (im Gegensatz zu den CE-eigenen Disponenten) &lt;i&gt;nicht&lt;/i&gt; mündlich entgegengenommen werden, sondern soll per Mail an 
+* &lt;span class=&quot;braun&quot;&gt;auftrag@carexpert.de&lt;/span&gt;
+geschickt werden.&lt;br&gt;
+Störrische Sachbearbeiter können darauf hingewiesen werden, daß es auf diese Weise am schnellsten geht und eine Auftragsbestätigung per Mail erfolgt. Sehr störrische können einen Rückruf von der Auftragsannahme bekommen (über [http://192.168.20.7/carexpert/?1458 1458] weiterleiten).
+&lt;/div&gt;
+
+==Mailversand über die Callwaysmaske==
+&lt;div class=&quot;abschnittce&quot;&gt;
+Über die Maske [http://192.168.20.7/carexpert/?1458 1458] werden in dringenden Fällen Nachrichten (in Form einer aus der Maske generierten E-Mail) an die CE-Dispo geschickt.&lt;br&gt;
+Dabei sollen alle relevanten Informationen, idealerweise schon während des Gesprächs, in der ceDis-Historie erfasst werden. Die Maske für den Mailversand dient lediglich dazu, den CE-Disponenten wie durch eine dringende Wiedervorlage auf einen Auftrag hinzuweisen, den er ansehen und weiterbearbeiten soll. 
+
+Wie dem screenshot schon zu entnehmen ist, ist das Freitextfeld der Maske &lt;i&gt;optional&lt;/i&gt; und kann ggf. auch leergelassen werden - ein Vermerk wie &quot;siehe ceDis&quot; oder auch ein Hinweis darauf, um was für eine Auftragsart (z.B. &quot;GG&quot; oder &quot;NB&quot;) es sich handelt, reichen völlig! Um so wichtiger sind dementsprechend &lt;i&gt;nachvollziehbare&lt;/i&gt; Historieneinträge.&lt;br&gt;
+Bei Nachfragen zu abgeschlossenen Aufträgen, in denen die Historie nicht mehr bearbeitet werden kann, wird natürlich auch das Freitextfeld mal genutzt ;-).&lt;br&gt;
+
+In die Maske müssen auf jeden Fall die &lt;b&gt;Auftrags&lt;/b&gt;- und die &lt;b&gt;Auftraggeber&lt;/b&gt;nummer&lt;br&gt;
+[[File:nummern.png|thumb|250px|center|müssen übertragen werden]]&lt;br clear=&quot;all&quot;&gt;
+übertragen werden (leider von Hand), um den Disponenten eine Zuordnung zu ermöglichen.&lt;span class=&quot;rot&quot;&gt; Wichtig:&lt;/span&gt; Zahlendreher möglichst vermeiden. Wenn unumgänglich, den Zahlendreher auf die letzte Ziffer der Auftragsnummer beschränken :-).&lt;br&gt;
+&lt;br clear=&quot;all&quot;&gt;
+
+Im Infoframe auf der rechten Seite finden sich noch einige allgemeine Daten und die Durchwahlen der Disponenten. Diese können &lt;i&gt;im Notfall&lt;/i&gt; innerhalb der Öffnungszeiten auch kontaktiert werden.
+&lt;/div&gt;
+
+==Outbound==
+&lt;div class=&quot;abschnittce&quot;&gt;
+
+{{:Carexpert_Outbound}}
+
+====Unterlagen anfordern====
+Bei einigen Aufträgen ist es nötig, vor der Terminierung Unterlagen zum Besichtigungsobjekt oder Vorgang anzufordern.&lt;br&gt; 
+Diese können bei den Versicherungen &lt;b&gt;R+V, Kravag und Condor&lt;/b&gt; vom Carexpert-&quot;Unterlagen&quot;-Team direkt aus den Datensystemen der Versicherungen bezogen werden. Bei &lt;b&gt;anderen&lt;/b&gt; Versicherungen müssen Unterlagen per Mail oder tel. von den SB der Versicherungen angefordert werden.
+Wenn Unterlagen über das CE-interne Unterlagenteam angefordert werden, ist das in der Historie an einem entsprechenden Eintrag zu erkennen. [[File:Screeshot.png]]
+
+====Anschreiben an Kunden====
+Bei Anschreiben an Kunden ist die Bearbeitung innerhalb und ausserhalb der Hagel-Eskalationszeit abweichend.
+
+&lt;b&gt;Während der Hagelzeit:&lt;/b&gt;
+
+* Anschreiben nach 1. fehlgeschlagenen Kontaktversuch
+
+&lt;b&gt;Ausserhalb der Hagelzeit:&lt;/b&gt;
+
+* Anschreiben nach 3 Kontaktversuchen an verschiedenen Tagen (VN) bzw zu verschiedenen Uhrzeiten am selben Tag (AS)
+
+* insg. werden 2 Anschreiben verschickt, mit jeweils Reaktionszeit 1 Woche. Wenn dann keine Rückmeldung -&gt; Storno, Grund &quot;keine Rückmeldung von AS/VN&quot;
+* wichtig ist, auf die richtige Art des Schreibens achten, speziell: bei RA immer die RA-Schreiben verwenden
+* freie Anschreiben sind möglich, aber nur zu verwenden, wenn Agent sich sicher ist.
+
+&lt;/div&gt;
+
+==Glossar und Abkürzungen==
+
+&lt;table class=&quot;glossar&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;KF&lt;/td&gt;&lt;td&gt;Kfz-Kasko&lt;/td&gt;&lt;td&gt;KH&lt;/td&gt;&lt;td&gt;Kfz-Haftpflicht&lt;/td&gt;&lt;td&gt;AH&lt;/td&gt;&lt;td&gt;allgemeine Haftpflicht&lt;/td&gt;&lt;td&gt;SV&lt;/td&gt;&lt;td&gt;Sachverständiger&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VN&lt;/td&gt;&lt;td&gt;Versicherungsnehmer&lt;/td&gt;&lt;td&gt;AS&lt;/td&gt;&lt;td&gt;Anspruchsteller&lt;/td&gt;&lt;td&gt;WS&lt;/td&gt;&lt;td&gt;Werkstatt&lt;/td&gt;&lt;td&gt;AG&lt;/td&gt;&lt;td&gt;Auftraggeber&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RA&lt;/td&gt;&lt;td&gt;Rechtsanwalt&lt;/td&gt;&lt;td&gt;GA&lt;/td&gt;&lt;td&gt;Gutachte&lt;b&gt;n&lt;/b&gt;&lt;/td&gt;&lt;td&gt;GG&lt;/td&gt;&lt;td&gt;Gegenüberstellung&lt;/td&gt;&lt;td&gt;NB&lt;/td&gt;&lt;td&gt;Nachbesichtigung&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;WV&lt;/td&gt;&lt;td&gt;Wiedervorlage&lt;/td&gt;&lt;td&gt;ICT&lt;/td&gt;&lt;td&gt;&quot;Innendienst&quot; von CE&lt;/td&gt;&lt;td&gt;BO&lt;/td&gt;&lt;td&gt;Besichtigungsobjekt&lt;/td&gt;&lt;td&gt;PB/PP&lt;/td&gt;&lt;td&gt;Prüfbericht&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td colspan=&quot;8&quot; class=&quot;footer&quot; style=&quot;text-align:center&quot;&gt;vollständige Liste [http://192.168.30.222/mediawiki/images/1/12/Glossar_fuer_CallCenter_12_2011.pdf hier]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br&gt;
+
+&lt;table class=&quot;glossar&quot; id=&quot;Auftragsbild&quot;&gt;
+&lt;tr&gt;
+&lt;td colspan=&quot;8&quot; class=&quot;footer&quot;&gt;[[File:Auftrag_ann.png]]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td colspan=&quot;4&quot;&gt;A&lt;/td&gt;&lt;td colspan=&quot;4&quot;&gt;Auftraggeberdaten. Schadensparte siehe Glossar. Auftragseingang = wann der Auftrag bei CE ankam&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td colspan=&quot;4&quot;&gt;B&lt;/td&gt;&lt;td colspan=&quot;4&quot;&gt;Auftragsdaten, Schadenart, welches Fahrzeug soll besichtigt werden&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td colspan=&quot;4&quot;&gt;C&lt;/td&gt;&lt;td colspan=&quot;4&quot;&gt;Schadenshergang. Evtl. hilfreiche Hintergundinformationen&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td colspan=&quot;4&quot;&gt;D&lt;/td&gt;&lt;td colspan=&quot;4&quot;&gt;Einsatzort. &lt;span class=&quot;rot&quot;&gt;wichtig!&lt;/span&gt; An die Adresse, die wir hier setzen, wird der SV geschickt&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td colspan=&quot;4&quot;&gt;E&lt;/td&gt;&lt;td colspan=&quot;4&quot;&gt;Einsätze: geplante oder vergangene Einsätze (Ort, Datum, Uhrzeit, SV) für diesen Auftrag&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td colspan=&quot;4&quot;&gt;E&lt;/td&gt;&lt;td colspan=&quot;4&quot;&gt;Adressen: Kontaktdaten der Beteiligten und Adressen, zu denen der SV geschickt wird&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td colspan=&quot;4&quot;&gt;E&lt;/td&gt;&lt;td colspan=&quot;4&quot;&gt;Historie: alle relevanten Informationen &lt;span class=&quot;rot&quot;&gt;hier hinein&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td colspan=&quot;4&quot;&gt;E&lt;/td&gt;&lt;td colspan=&quot;4&quot;&gt;Dokumente: Anschreiben, Gutachten, etc.; evtl. hilfreiche Hintergundinfos&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td colspan=&quot;4&quot;&gt;E&lt;/td&gt;&lt;td colspan=&quot;4&quot;&gt;Besichtigungsobjekte (VN/AS). Daten zum Fahrzeug&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br&gt;
+
+&lt;table class=&quot;unsichtbar&quot; style=&quot;margin: 0 auto&quot; id=&quot;docs&quot;&gt;
+&lt;tr&gt;
+&lt;td colspan=&quot;2&quot; style=&quot;text-align:center&quot;&gt;&lt;b&gt;Sammlung aller Originaldokumente&lt;/b&gt; (pdf, doc usw.)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr style=&quot;background: rgba(208, 102, 136, 0.19);&quot;&gt;
+&lt;td&gt;[http://192.168.30.222/mediawiki/images/8/86/Schulungsunterlagen_callways_-_AKB_-_Juni_2016.pdf Definition Kasko/Haftpflicht]&lt;/td&gt;
+&lt;td&gt;[http://192.168.30.222/mediawiki/images/d/d7/06._Kasko_und_Haftpflicht_Rechte_und_Pflichten_04.2011.pdf Kasko/Haftpflicht Rechte+Pflichten]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;[http://192.168.30.222/mediawiki/images/6/65/Schulungsinfos_Cedis_Terminvereinbarung.pdf Schulungsmaterial Lukaschewski 2016]&lt;/td&gt;&lt;td&gt;[http://192.168.30.222/mediawiki/images/0/02/Schulungsunterlagen_callways_-_Nov_2016.pdf Schulungsunterlagen von CE für CW]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;[http://192.168.30.222/mediawiki/images/6/60/Carexpert_KFZ-Sachverstaendigen_GmbH.pdf (Selbst)Beschreibung Carexpert]&lt;/td&gt;
+&lt;td&gt;[http://192.168.30.222/mediawiki/images/e/e9/Gespraechsleitfaden_zur_Auftragsterminierung_Call_Center.pdf Gesprächsleitfaden]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;[http://192.168.30.222/mediawiki/images/1/12/Glossar_fuer_CallCenter_12_2011.pdf Glossar CE]&lt;/td&gt;
+&lt;td&gt;[http://192.168.30.222/mediawiki/images/a/a8/Anleitung_Auftraggeber_Schadennummernformate_und_Besonderheiten_Stand_08....pdf Auftraggeber und Schadennummern]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;[http://192.168.20.7/carexpert/Terminanschreiben_Hagel_mit_online_Terminierung.pdf Brief Hagel mit Onlineterminerung]&lt;/td&gt;
+&lt;td&gt;[http://192.168.20.7/carexpert/Terminanschreiben_Hagel_ohne_online_Terminierung.pdf Brief Hagel ohne Onlineterminerung]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;[http://192.168.30.222/mediawiki/images/5/55/OfflineLeitfaden.pdf Mobilexpert / App]&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br&gt;
+
+
+===Stichworte===
+* fiktive Abrechnung? -&gt; [http://www.bussgeld-info.de/fiktive-abrechnung/ Erklärung]
+
+===ceDis Aufruf, Citrix, Pulse Client===
+
+====Anmeldung ceDis====
+
+&lt;div class=&quot;mw-collapsible&quot;&gt;
+* Auf dem Desktop sollte ein Carexpert-Symbol zu finden sein. Durch Doppelklick öffnet sich ein Browserfenster mit einem Link.&lt;br&gt;
+: Im unteren Teil sind ggf. Nachrichten hinterlegt (beachten!). Oben findet sich ein Link, der auf die nächste Anmeldeseite führt: 
+[[File:Anmeldung1.png|300px|center]]&lt;br clear=&quot;all&quot;&gt;
+
+* Dort Login und Passwort, wie sie auf der Startseite zu sehen sind, eingeben:&lt;br&gt;
+[[File:Anmeldung2.png|300px|center]]&lt;br clear=&quot;all&quot;&gt;
+
+* Jetzt öffnet sich die Citrix-&quot;Landeseite&quot;. Hier auf &quot;ceDis Callways&quot; klicken. Etwas Geduld haben ;). Nach ca. 1 Minute sollte ceDis erscheinen.&lt;br&gt;
+[[File:Anmeldung3.png|300px|center]]&lt;br clear=&quot;all&quot;&gt;
+
+&lt;/div&gt;
+
+====Troubleshooting ceDis====
+
+&lt;u&gt;Grundsätzlich&lt;/u&gt;:&lt;br&gt;
+* bitte Probleme an den nächsten anwesenden Ansprechpartner (in Berlin: Lange,Gesing,Stanz,Heidenreich/Richter, in Hagenow: Henning/Haustein/Paetow/Keller) melden und auf Klärung warten.
+ 
+* während eines Serverausfalls oder ceDis-Problems innerhalb unserer Kernzeit (die Zeit, in der wir mit ceDis arbeiten - ist auf der Startseite http://192.168.30.222/startCarexpert/ angegeben) bitte, so lange es keine weiteren Infos oder Anweisungen gibt, alle Anrufe über die Maske 1458 erfassen und weiterleiten, unter den Text noch &quot;ceDis-Ausfall&quot; schreiben. Wenn abweichendes Handling stattfinden soll (z.B. Vertröstung der Anrufer / Bitte um erneuten Anruf) dann erfolgt hierzu von der Teamleitung eine Info. 
+
+
+&lt;u&gt;Im Einzelnen&lt;/u&gt;:&lt;br&gt;
+Falls man mal in einem Auftrag hängen bleibt oder andere Probleme hat und nicht weiterarbeiten kann, kann man Folgendes versuchen:
+
+Citrix Session sauber abmelden
+&lt;table style=&quot;margin: auto&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;[[File:Abst-2-comm.png|thumb|left|250px|1) schwarzes &quot;Citrix&quot;-Symbol mit Rechtsklick aktivieren]]&lt;/td&gt;
+&lt;td&gt;[[File:Abst-3-comm.png|thumb|left|250px|2) ceDis auswählen und &quot;Beenden&quot; klicken]]&lt;/td&gt;
+&lt;td&gt;[[File:Abst-5-comm.png|thumb|left|250px|3) wenn nicht klappt: &quot;VMX.....&quot; auswählen und &quot;Abmelden&quot; klicken]]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+Danach einfach den kompletten Anmeldevorgang neu durchführen, dann sollte hoffentlich erstmal wieder alles laufen.
+
+====Öffnen von angehängten Emails====
+
+&lt;div class=&quot;mw-collapsible&quot;&gt;
+* Bei angehängten Dateien im Format &quot;.msg&quot; wird in ceDis eine Outlook-Instanz geöffnet:
+[[File:Msg_in_Doku1.png|300px|center]]&lt;br clear=&quot;all&quot;&gt;
+* Outlook fragt, ob es sich verbinden soll, oder ob man offline arbeiten möchte. Hier ist &lt;span class=&quot;rot&quot;&gt;offline&lt;/span&gt; zu wählen, sonst lässt sich Outlook nicht starten:
+[[File:Msg_in_Doku2.png|300px|center]]&lt;br clear=&quot;all&quot;&gt;
+* Wenn die Mail geöffnet ist, lassen sich die darin angehängten Dokumente (z.B. .pdf) ganz normal öffnen:
+[[File:Msg_in_Doku3.png|300px|center]]&lt;br clear=&quot;all&quot;&gt;
+&lt;/div&gt;</text>
+      <sha1>0gxjm6kaspmztf1jfi40qbdiid31qq2</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>CE Aktionen</title>
+    <ns>0</ns>
+    <id>246</id>
+    <revision>
+      <id>1136</id>
+      <parentid>1135</parentid>
+      <timestamp>2017-11-17T18:56:19Z</timestamp>
+      <contributor>
+        <username>Gesinst</username>
+        <id>2</id>
+      </contributor>
+      <comment>/* Aktion seit 12.09.2017 */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="4522">==aktuelle Aktionen==
+
+===Aktion seit 20.10.2017===
+
+Seit dem 20.10. werden bei CE allmählich Aufträge zu Hagelschäden geschlossen, bei denen sich die Versicherungsnehmer auf zwei schriftliche Kontaktversuche hin nicht zurückgemeldet haben.&lt;br&gt;
+Durch das Schliessen der Aufträge wird an den AG, also die Versicherung, automatisch eine Nachricht mit Info über die Stornierung des Auftrags verschickt. D.h. daß die Sachbearbeiter sich in der Folge dazu veranlasst sehen, bei Carepxert rückzufragen, weswegen storniert wurde, oder auch ihre Versicherten kontaktieren, damit diese sich wiederum bei CE melden sollen.
+&lt;br&gt;
+Die Aufträge dieser &quot;Aktion&quot; haben als einen der letzten Historieneinträge den Vermerk &quot;kann bei Rückmeldung reaktiviert werden&quot;. Ruft ein SB oder VN zu einem solchen Auftrag zurück und möchte einen Termin vereinbaren, dann können wir den Auftrag selbst wieder aktivieren und auch einen (Einzel-)Termin vergeben. Diese &quot;Storno-und-wieder-reaktiviert&quot;-Aufträge werden nicht mehr über Massentermine o.ä. abgewickelt, sondern können wie normale Termine mit den VN abgesprochen und gebucht werden.
+
+&lt;span class=&quot;rot&quot;&gt;Obacht:&lt;/span&gt;&lt;br&gt;
+Nach dem ersten Reaktivieren springt ceDis automatisch im Hintergrund in die Auftragsliste (das &quot;A&quot;-Symbol in der Suchansicht). Dadurch wird ceDis extrem langsam und verzögert! Lösung:&lt;br&gt;
+Der reaktivierte Auftrag muß erst wieder verlassen werden, dann geht man in die Auftragsliste, klickt mit rechts irgendwo ins Leere und setzt den Filter auf &quot;kein Erstkontakt (ohne Elementar)&quot;
+
+Hier zur Illustration:
+
+&lt;table style=&quot;margin: auto&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;[[File:Aktion1.jpg|thumb|left|250px|1) stornierter Auftrag mit Vermerk &quot;kann reaktivert werden&quot;]]&lt;/td&gt;
+&lt;td&gt;[[File:Aktion2.jpg|thumb|left|250px|2) in der Suche markieren und Reaktivieren klicken]]&lt;/td&gt;
+&lt;td&gt;[[File:Aktion3.jpg|thumb|left|250px|3) in die Auftragsliste gehen, rechts ins Leere klicken]]&lt;/td&gt;
+&lt;td&gt;[[File:Aktion4.jpg|thumb|left|250px|4) Filter &quot;Kein Erstkontakt (ohne Elementar)&quot; wählen]]&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;table style=&quot;margin: auto&quot;&gt;
+&lt;tr&gt;&lt;td&gt;
+[[File:Hagelaktion Diagramm.png|thumb|left|250px|Ablauf]]
+&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+===Aktion seit 12.09.2017===
+
+Ist nicht mehr aktuell
+
+&lt;div class=&quot;ausgegraut&quot;&gt;
+Im Moment hat Carexpert wegen der hohen Anzahl der Aufträge eine Aktion gestartet, um die Wartezeiten der Versicherten zu verkürzen.&lt;br&gt;
+In Walluf wurden Sachverständige zu Aktionen abgestellt (16 SV), die im Innendienst die Bearbeitung von Aufträgen übernehmen. Grob gesagt wird es hier so eine Art &quot;Telefongutachten&quot; geben (dies nur als Info für uns. Bitte nicht so an die Anrufer weitergeben und keine Diskussion anfangen).
+ 
+Die Aufträge lassen sich daran erkennen, daß sie als Einsatzort auf einen Sachverständigen gesetzt sind. Dort steht dann, wie in dem kleinen Screenshot zu sehen, irgendwas von &quot;Vorname Name (SV)&quot; hinterlegt. 
+ 
+Handling: bei diesen Aktionen werden die Anrufer direkt an den SV verwiesen. Unter der Adresse des SV steht seine Handynummer, die soll dem Anrufer genannt werden. Anschliessend nur einen minimalen Historieneintrag machen in der Art von &quot;Anruf VN, Tel. SV genannt&quot;. So wie ich das sehe, wird es hauptsächlich oder ausschliesslich Kaskoschäden betreffen, dh Anrufer werden vornehmlich VN sein.
+ 
+Vorgeschlagenes Wording: 
+ 
+ 
+&quot;Ich sehe gerade, dieser Auftrag wird *direkt* von einem zugeordneten Sachverständigen bearbeitet! [das ist eine positive Sache]. Hier kann ich zur Bearbeitung auch gar nichts weiter sagen, hier ist unser SV direkt verantwortlich und organisiert auch das Gutachten. Ich geben Ihnen mal die Mobilnummer vom Sachverständigen, dieser ist jetzt auch erreichbar, bitte kontaktieren Sie Herrn [Name des SV] direkt, der erklärt Ihnen dann alles Weiter. Vielen Dank/Schönen Tag/Schönes Wochenende&quot;.
+ 
+ 
+Die genauen Arbeitszeiten und Erreichbarkeit der SV ist mir momentan nicht bekannt, man darf aber davon ausgehen, daß die SV zumindest zwischen 8-17:30 erreichbar sind. Wenn der Anrufer später keinen rankriegt, soll er es am nächsten Vormittag nochmal versuchen.
+Sehr viel mehr Infos habe ich derzeit auch nicht; falls Fragen oder Probleme auftauchen (kommen bestimmt ein paar), dann bitte gleich an mich weiterleiten, dann kann ich es klären lassen.
+ 
+ 
+viele Grüße
+ 
+Stefan Gesing
+
+
+
+&lt;table style=&quot;margin: auto&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;[[File:Aktion1.png|thumb|left|400px|1) Aktion zu erkennen am Einsatzort]]&lt;/td&gt;
+&lt;td&gt;[[File:Aktion2.png|thumb|left|400px|2) Telefonnummer des zuständigen SV]]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;</text>
+      <sha1>gw1rt7ua7xeckwrs3p9xltzjo29zr4x</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Carexpert Checkliste</title>
+    <ns>0</ns>
+    <id>294</id>
+    <revision>
+      <id>1118</id>
+      <parentid>1117</parentid>
+      <timestamp>2017-11-14T13:06:02Z</timestamp>
+      <contributor>
+        <username>Gesinst</username>
+        <id>2</id>
+      </contributor>
+      <minor/>
+      <comment>1 Version importiert</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="2437">===Checkliste Terminvereinbarung===
+&lt;div class=&quot;checkliste_druck&quot;&gt;
+* Terminierung ausschließlich von Bearbeitungsart „Gutachten/Schadenkalkulation“ und &quot;Nachbesichtigung&quot; (bis auf Widerruf)
+
+* Terminvereinbarungen nur 08:00 - 16:00
+
+* Ab 15:00 Uhr darf kein Termin mehr für den Folgetag festgelegt werden.
+
+* keinesfalls dürfen Termin für den aktuellen Tag gebucht werden, auch wenn diese von ceDis angeboten werden!
+
+* Samstagstermine werden nur terminiert, wenn von der Dispo eine Freigabe hierzu erfolgt ist (hauptsächlich während der Hagelsaison - wird dann intern kommuniziert).
+
+* Zur Besichtigung immer Schlüssel und Fahrzeugpapiere bereithalten
+
+* eine Person muss zur Besichtigung anwesend sein
+
+* alle zusätzlichen Vereinbarungen bitte in der „Termininfo“ hinterlegen
+
+* Fixtermine nach Möglichkeit vermeiden (hierbei jedoch Konfliktgespräche vermeiden)
+
+* Schadenbereich am Fahrzeug sollte beim Kunden abgefragt und daraus resultierend der Besichtigungsort ausgewählt werden (Hebebühne, Grube oder ähnliches)
+
+* Fahrzeuge mit Wildschaden bitte nicht waschen (zerstören von Beweismitteln für den Kunden)
+
+* Fahrzeuge mit Hagelschäden zur Besichtigung bitte gewaschen (Hagelschaden sonst nicht sichtbar)
+
+* zur Vermeidung von Spätterminen, bitte alternative Besichtigungsorte beim Kunde erfragen 
+
+* Werkstattadresse immer mit ceERP Partner Datenbank abgleichen und übernehmen
+
+* alle Informationen in der Historie vermerken
+
+* Fehlende Fahrzeugdaten oder Telefonnummern im Auftrag nachtragen
+
+* Namen des Ansprechpartners erfragen und im Auftrag vermerken
+
+* Beim Mailversand über [[http://192.168.20.7/carexpert/?1458 1458]] bitte auf korrekte Auftragsnummer und Kennzeichen achten
+
+* Hagelschäden, welche von carexpert auf Hagelaktionen terminiert sind, erhalten ein Anschreiben „Einsatz für Massenaktion terminiert“. In diesem ist für den Kunden die Möglichkeit aufgeführt über das carexpert Portal den bestehenden Termin zu ändern. (Bitte darauf hinweisen)
+
+* Kunden mit Hagelschäden auf längere Wartezeit aufgrund von „Massenschaden“ hinweisen und mitteilen, dass carexpert sich zeitnah melden wird
+
+* Bei Rückfragen vom Kunden an die Versicherung bitte Kontaktdaten „Übermittler“ im Reiter Adressen weitergeben
+
+* Bei Systemproblemen, je nach individueller Problemeinschätzung bitte Information an Gesing / Keller / Richter oder EDV in Walluf unter 06123/9777-277
+&lt;/div&gt;</text>
+      <sha1>7ywjzrs57rjns72rudwm1rm8rw2rx6k</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Carexpert Outbound</title>
+    <ns>0</ns>
+    <id>298</id>
+    <revision>
+      <id>1143</id>
+      <parentid>1138</parentid>
+      <timestamp>2017-11-28T10:23:51Z</timestamp>
+      <contributor>
+        <username>Gesinst</username>
+        <id>2</id>
+      </contributor>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="2027">&lt;h3 class=&quot;center&quot;&gt;Arbeiten mit der Auftragsliste&lt;/h3&gt;
+
+&lt;table style=&quot;margin: auto&quot;&gt;
+&lt;tr&gt;
+&lt;td width=25%&gt;Auftragsliste aufrufen und Rechtsklick, um einen Filter zu setzen. Vorgaben für den Filter können sich ändern, werden von der Projektleitung kommuniziert&lt;/td&gt;
+&lt;td&gt;[[File:OB_1.png|thumb|left|250px|1) Rechtsklick für Filter]]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Filter wählen, z.B. nach Schadenart&lt;/td&gt;
+&lt;td&gt;[[File:OB_2.png|thumb|left|250px|2) Kategorie wählen]]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;gewünschte Schadenart wählen&lt;/td&gt;
+&lt;td&gt;[[File:OB_3.png|thumb|left|250px|3) Schadenart wählen]]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Sortierung normalerweise nach Wiedervorlagezeit:&lt;/td&gt;
+&lt;td&gt;[[File:OB_4.png|thumb|left|250px|4) Spalte Wiedervorlage klicken]] &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+
+
+&lt;h3 class=&quot;center&quot;&gt;Checkliste Outbound&lt;/h3&gt;
+
+&lt;h4&gt;&lt;u&gt;Vorbereiten / in Form bringen des Auftrags nach dem ersten Öffnen:&lt;/u&gt;&lt;/h4&gt;
+
+# Schadenart ausgefüllt?
+# Bearbeitungsart und Hergang übereinstimmend?
+# Hinweise auf Vor- oder andere Schäden? ggf. anhängen
+
+'''Reiter Adressen:'''
+
+# redundante Adressen unter einem Eintrag zusammenfassen
+# vorauss. Einsatzort geocodieren
+# potentielle Werkstätten aus DB 'ziehen'
+'''Reiter Historie:'''
+# Historie überfliegen und insb. die oberen Einträge beachten
+'''Reiter Dokumente:'''
+# prüfen, ob Dokumente (NB oder laut Historie oder Hergang) vorhanden sind
+
+'''Reiter VN/AS-Objekt:'''
+# Objektgruppe/Objektart korrekt?
+# Kennzeichen vorhanden?
+
+'''Reiter Einsätze:'''
+# Einsatzort auf den vorauss. BO einstellen.
+
+&lt;h4&gt;&lt;u&gt;Kontaktaufnahme und Terminierung:&lt;/u&gt;&lt;/h4&gt;
+
+# Anruf beim wahrscheinlichsten ASP, wenn WS hinterlegt z.B. dort
+# max. Anklingeln: 30 Sekunden
+# bei Nichterreichen immer einen Historieneintrag über 
+# pro Auftrag insgesamt maximal 3 Anwahlversuche, dann Anschreiben
+# bei Handynummern ggf. Rückruf-SMS abschicken
+# nach 3 erfolglosen Anwahlversuchen -&gt; Anschreiben versenden
+
+&lt;h4&gt;&lt;u&gt;Nach der Terminierung:&lt;/u&gt;&lt;/h4&gt;
+
+# wenn ein Termin vereinbart wurde, &lt;b&gt;immer&lt;/b&gt; noch einen Bestätigungs-Historieneintrag erzeugen</text>
+      <sha1>kgm6mi64so52qrgcn88trldlsemioss</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Carexpert Formulierungen</title>
+    <ns>0</ns>
+    <id>297</id>
+    <revision>
+      <id>1120</id>
+      <parentid>1119</parentid>
+      <timestamp>2017-11-14T13:06:02Z</timestamp>
+      <contributor>
+        <username>Gesinst</username>
+        <id>2</id>
+      </contributor>
+      <minor/>
+      <comment>1 Version importiert</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="11745">====Argumentation / Gesprächshilfen====
+&lt;div class=&quot;gesp_hilfe&quot;&gt;
+* &lt;span class=&quot;gesp_frage&quot;&gt;ich wurde angerufen / ich habe ein Schreiben bekommen, ich weiß gar nicht, worum es hier geht&lt;/span&gt;
+** wir sind KfZ-Gutachter, es wird vermutlich um eine Besichtigung in Folge eines gemeldeten Schadens gehen. Vielleicht gab es in der letzten Zeit einen Schaden an ihrem Fahrzeug oder einen Schaden, an dem Sie beteiligt waren?
+
+
+* &lt;span class=&quot;gesp_frage&quot;&gt;ich möchte bitte Herr/Frau XY sprechen&lt;/span&gt;
+** weswegen möchten Sie Herr/Frau XY denn sprechen? Wenn es um eine Terminierung geht, kann ich Ihnen ggf. auch weiterhelfen. &lt;span class=&quot;hg_info&quot;&gt;(Disponenten sprechen auch bei normalen Terminen mit Namen auf Mailbox, Anrufer denken dann, daß das ihr persönlicher Ansprechpartner sei, kann aber auch von uns bearbeitet werden)&lt;/span&gt;
+** ist Herr/Frau XY ein Mitarbeiter von uns, Carexpert? Ich kann Sie nicht direkt verbinden, kümmere mich aber darum, daß XY oder jemand anderes, der bei dieser Sache weiterhelfen kann, Sie in Kürze zurückruft.
+*** wollen Sie mir eine Telefonnummer geben, unter der Sie jetzt/heute erreichbar sind? &lt;span class=&quot;hg_info&quot;&gt;(Frage nach der momentanen Erreichbarkeit des Anrufers impliziert, daß der Anrufer bald zurückgerufen wird)&lt;/span&gt;
+** &lt;span class=&quot;condition&quot;&gt;(wenn Kontaktwunsch zu XY wegen Auszahlung, Abwicklung, Verrechnung WBW, Kostenübernahme Leihwagen etc.):&lt;/span&gt; hier ist in der Regel die Versicherung zuständig und wird normalerweise am schnellsten über ihren Sachbearbeiter geklärt, denn dieser entscheidet über die Übernahme weiterer entstehender Kosten. Hierzu kann ich Ihnen gerne die Telefonnummer des Sachbearbeiters bei der Versicherung geben. Ansonsten leite ich das auch gerne bei uns intern weiter, es kann aber sein, daß wir es ebenfalls über die Versicherung klären müssen &lt;span class=&quot;hg_info&quot;&gt;(impliziert: kann länger dauern)&lt;/span&gt;
+
+
+* &lt;span class=&quot;gesp_frage&quot;&gt;ich möchte ihren Sachverständigen sprechen, die Beträge im Gutachten sind falsch&lt;/span&gt;
+** Ansprechpartner ist in diesem Fall tatsächlich die Versicherung. Bei Reklamationen am Gutachten kann der Sachbearbeiter dort eine erneute Überprüfung / Korrektur durch unseren SV verlangen. Das Gutachten wurde von der Versicherung beauftragt und auch bezahlt. Ich kann Ihnen gerne die Kontaktdaten Ihrer Schadensabteilung nennen. Alternativ empfehle ich den Schriftweg, gerade bei Reklamationen ist dies häufig günstig, um (weiteren) Mißverständnissen vorzubeugen. Dann haben Sie's schwarz auf weiß.
+
+
+* &lt;span class=&quot;gesp_frage&quot;&gt;der Termin ist viel zu weit in der Zukunft, das Auto muß morgen besichtigt werden&lt;/span&gt;
+** tut mir leid, aber der genannte Termin ist in Ihrer Gegend wirklich der nächste, den ich buchen kann. Ist das Fahrzeug denn noch fahrfähig? &lt;span class=&quot;hg_info&quot;&gt;(Frage nach Fahrfähigkeit und deren Beantwortung impliziert schon, daß bei einsatzfähigen Fahrzeugen ggf. nicht höchste Priorität vorliegt)&lt;/span&gt;
+** &lt;span class=&quot;condition&quot;&gt;(wenn der Anrufer darauf hinweist, daß das Fahrzeug gewerblich genutzt wird und deswegen wieder einsatzfähig gemacht werden muß, und der Termin &gt; 2 Tage in der Zukunft liegt):&lt;/span&gt; Ich werde dazu nochmal bei unseren Tourenplanern nachfragen und wir melden uns bei Ihnen. Unter welcher Telefonnummer sind Sie heute zu erreichen?
+** &lt;span class=&quot;condition&quot;&gt;(wenn der Anrufer darauf hinweist, daß wegen baldigem Urlaub / Abwesenheit dringend)&lt;/span&gt;: Ansonsten kann der Termin auch jederzeit von jemand anderem wahrgenommen werden. Nehmen Sie das Fahrzeug mit in den Urlaub / die Abwesenheit? Wir können innerhalb Deutschlands auch an jedem anderen Ort einen Termin vereinbaren, vielleicht ist das ja für Sie sogar günstig?
+** der früheste Termin wäre am mm.dd., ab diesem Datum können Sie sich dann einen Tag, der Ihnen gut passt, aussuchen &lt;span class=&quot;hg_info&quot;&gt;(=Anrufer muß sich gedulden, aber &quot;freie Wahl&quot; ab dann klingt wie ein Entgegenkommen ;))&lt;/span&gt;
+
+
+* &lt;span class=&quot;gesp_frage&quot;&gt;der Termin ist viel zu weit in der Zukunft, am mm.dd. wird das Auto schon repariert&lt;/span&gt;
+** gibt es schon eine Reparaturfreigabe vom Sachbearbeiter der Versicherung? Wenn dem so ist, liegt uns diese Info noch nicht vor. Wenn kein Anlass zur Besichtigung mehr besteht, kann der Sachbearbeiter den Auftrag bei uns stornieren, aber so lange wie darüber keine Info haben, gehen wir davon aus, daß wir besichtigen sollen und daß eine Reparaturfreigabe auch erst nach der Besichtigung erteilt wird.
+** ist das Fahrzeug am mm.dd. den ganzen Tag in der Werkstatt? Dann werde ich nachfragen, ob wir nicht für diesen Tag dort noch kurzfristig jemanden vorbeischicken können. Falls das klappt, kann nach der Besichtigung evtl. auch schon mit der Reparatur begonnen werden &lt;span class=&quot;hg_info&quot;&gt;(Ganztagstermine in WS sind tendenziell auch, wenn kein Termin angeboten wird, noch kurzfristig machbar. Dies muß aber über die Planer bei CE geschehen und darf *nicht* zugesagt werden!)&lt;/span&gt;
+
+
+* &lt;span class=&quot;gesp_frage&quot;&gt;ich kann immer erst ab 16/17/18 Uhr und am Wochenende, denn ich arbeite und bin unverzichtbar&lt;/span&gt;
+** auch unsere Sachverständigen arbeiten zu den üblichen Tages- bzw. Werkzeiten. In der Praxis hat es sich bewährt, dann einen Termin am Arbeitsort zu vereinbaren, das wird von vielen Fahrzeughaltern sogar bevorzugt. Wenn Sie mir sagen, wohin ich unseren Kollegen schicken soll, dann kann er Sie dort noch 30/60 Minuten vorher anrufen und Sie haben 30/60 Minuten Zeit, um sich ein wenig einzurichten. Sie müssen nicht während der gesamten Besichtigung am Fahrzeug bleiben, unser Kollege bringt Ihnen den Schlüssel und Schein nach der Besichtigung auch zurück ins Büro, dann haben Sie nur einen Aufwand von ~5 Minuten. Von wann bis wann sind Sie denn im Büro &lt;span class=&quot;hg_info&quot;&gt;(Anrufer wird hier häufig ein großes Zeitfenster nennen)&lt;/span&gt;
+** Können Sie das Fahrzeug evtl. mal einen (Vor-/Nachmitt-)Tag zu Hause lassen, so daß jemand anderes den Termin bedienen kann?
+** Ist für Sie ein Datum absehbar, an dem Sie mir ein 4-Stunden Zeitfenster nennen können? Freitags haben manche Leute ja teilweise früher Feierabend.
+
+
+* &lt;span class=&quot;gesp_frage&quot;&gt;ich kann unmöglich 3 Stunden warten / Sie können in der Mittagspause zwischen 12:30 und 13:00 kommen&lt;/span&gt;
+** es tut mir leid, aber solche Termine kann ich leider, auch technisch von unserem Termin-Tool her, nicht vergeben. Ich kann Ihnen anbieten, daß wir 30/60 Minuten vorab auf einer von Ihnen gewünschten Nummer anrufen. Ist das für Sie machbar? Alternativ kann ich an anderen Tagen nach Terminen suchen, daß Zeitfenster wird aber immer Minimum 3 Stunden sein. &lt;span class=&quot;hg_info&quot;&gt;(Hinweis auf technische Beschränkung wird häufig akzeptiert, Auf Fragen nach &quot;Machbarkeit&quot; wird positiver reagiert als auf &quot;ist das für Sie ok&quot; oder ähnliche Fragestellungen)&lt;/span&gt;
+** &lt;span class=&quot;condition&quot;&gt;(bei absoluter Verweigerung des Anrufers und wenn es angemessen erscheint, kann auch ein Fixtermin gemacht werden):&lt;/span&gt; OK ich verstehe, daß es für Sie nur um dd.hh. möglich ist. Moment, ich frage mal nach &lt;span class=&quot;hg_info&quot;&gt;(Anrufer kurz in die Warteschleife)&lt;/span&gt;: OK, am mm.dd.hh. kann ich Ihnen hier einen festen Termin machen
+
+
+* &lt;span class=&quot;gesp_frage&quot;&gt;Sie können mich 1 Stunde vorab anrufen und ich sage Ihnen dann, wo ich bin&lt;/span&gt;
+** Unsere Sachverständigen fahren zeitlich fest vorgegebene Routen, von denen nicht abgewichen werden kann, da sich sonst alle folgenden Termine verschieben würden. &lt;span class=&quot;hg_info&quot;&gt;(das würde dem Anrufer sicher auch nicht gefallen, wenn er davon betroffen wäre)&lt;/span&gt;. Daher können wir Termine nur an einen vorab vereinbarten Ort legen. &lt;span class=&quot;hg_info&quot;&gt;(geringe Abweichungen, z.B. 500m im Umkreis, sind ok. Ab 2km kann es aber, z.B. in einer verkehrsreichen Großstadt, schon nicht mehr machbar sein)&lt;/span&gt;
+
+
+* &lt;span class=&quot;gesp_frage&quot;&gt;Ich habe bereits einen Termin, der soll jetzt aber woanders stattfinden&lt;/span&gt;
+** &lt;span class=&quot;condition&quot;&gt;Termin ist am nächsten Tag:&lt;/span&gt;
+** Von unserer Seite aus ist der Termin momentan auf folgende Adresse gebucht [Einsatzort nennen]. Wie weit weicht der Standort des Fahrzeugs von dieser Adresse ab? 
+*** &lt;span class=&quot;condition&quot;&gt;(1 bis 2 km)&lt;/span&gt;: Der Termin kann wahrscheinlich so bestehen bleiben. Sagen Sie mir bitte eine Telefonnummer, unter der man Sie erreichen kann, falls sich Probleme ergeben sollten? 
+*** &lt;span class=&quot;condition&quot;&gt;(5km und mehr)&lt;/span&gt;: Ich weiß nicht, ob dieser Termin sich so halten lässt. Gibt es eine Möglichkeit, ihn doch noch an der bisherigen Adresse durchzuführen? (wenn nein:) Ich werde nachfragen, ob das so noch geht, bitte geben Sie mir eine Tel., über die Sie jetzt erreichbar sind.
+** &lt;span class=&quot;condition&quot;&gt;Termin ist weiter als 1 Werktag in der Zukunft:&lt;/span&gt;
+** Ich kann den Termin selbst nicht abändern, da muß ein Kollege aus der Tourenplanung drüber schauen. Bitte geben Sie mir eine Telefonnummer, über die man Sie erreichen kann.
+
+
+* &lt;span class=&quot;gesp_frage&quot;&gt;Ich verstehe nicht, weswegen ich an diesem Termin teilnehmen soll? / An meinem Auto ist doch gar nichts kaputt&lt;/span&gt;
+** Die grundsätzliche Sinnhaftigkeit einer Besichtigung müßten Sie mit der Versicherung besprechen, die Details erschliessen sich auch uns nicht immer. Vielleicht können Sie sich auch mit ihrem SB einigen, und der Auftrag wird storniert. So lange wir darüber aber keine Info von der Versicherung bekommen, versuchen wir, die Besichtigung, so, wie sie beauftragt wurde, durchzuführen.
+** &lt;span class=&quot;condition&quot;&gt;(bei GG)&lt;/span&gt;: Es wurde beauftragt, die Schadensbilder der Fahrzeuge miteinander zu vergleichen. Selbst wenn an ihrem Fahrzeug keine Beschädigungen sind, kann es wichtig sein, genau dies nochmal zu dokumentieren.
+
+
+* &lt;span class=&quot;gesp_frage&quot;&gt;Das Fahrzeug ist doch schon längst repariert&lt;/span&gt;
+** Ist die Versicherung darüber bereits informiert? Wir werden die veränderte Sachlage mit der Versicherung besprechen und wir oder die Versicherung werden sich dann wieder bei Ihnen melden. Wann (ca.) wurde das Fahrzeug repariert? Sind die beschädigten Teile noch vorhanden und wo? Sagen Sie mir bitte nochmal eine aktuelle Telefonnummer. Es wird sich, wenn nötig, jemand mit Ihnen in Verbindung setzen.
+
+
+* &lt;span class=&quot;gesp_frage&quot;&gt;Ich fahre das Fahrzeug gar nicht, sondern XY, mit *dem* müssen Sie den Termin machen.&lt;/span&gt;
+** In diesem Fall würde ich Sie bitten, mir sowohl die Kontaktdaten der Anprechperson zu geben, als auch diese selbst zu informieren, daß sie sich bei uns melden soll. Es komt vor, daß wir die Personen nicht erreichen können, und da sie offenbar in Kontakt miteinander stehen, ist es für eine zeitnahe Abwicklung hilfreich, wenn Sie ihren Ansprechpartner ebenfalls informieren. &lt;span class=&quot;hg_info&quot;&gt;(=Anrufer und Fahrer stehen in irgendeiner Verbindung miteinander, die Möglichkeit, daß der Anrufer den Fahrer informiert, ist in der Regel gegeben)&lt;/span&gt;
+
+====Gesprächsausstieg====
+
+Dem Anrufer immer ein kurze, grundsätzliche Zusammenfassung des Gespräches geben und, wenn z.B. der Termin nicht abschliessend vereinbart wurde, nochmal deutlich machen, *wer* sich als nächstes wieder aktiv melden wird (Carexpert / Versicherung / Anrufer / Kontaktperson des Anrufers)
+
+* &lt;span class=&quot;gesp_ende&quot;&gt;&quot;Ich wiederhole es zur Sicherheit nochmal: Der Termin ist jetzt für den 32.04. in die Goethestraße X in 44332 Goetheburg gebucht, und zwar zwischen 8 und 16 Uhr, Sie werden dann 30 Minuten vorab auf der von Ihnen angegebenen Telefonnummer kontaktiert. Fahrzeugschlüssel und -schein müssen vor Ort und eine Person anwesend sein. Passt das so? Dann vielen Dank und Ihnen noch einen schönen Tag/Feierabend/Wochenende.&quot;&lt;/span&gt;
+
+
+&lt;/div&gt;</text>
+      <sha1>6ruqqmeg32cx3oydv6gz4gu6jwdm54j</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>CE Statistik</title>
+    <ns>0</ns>
+    <id>145</id>
+    <revision>
+      <id>1128</id>
+      <parentid>1127</parentid>
+      <timestamp>2017-11-14T13:06:04Z</timestamp>
+      <contributor>
+        <username>Gesinst</username>
+        <id>2</id>
+      </contributor>
+      <minor/>
+      <comment>1 Version importiert</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="7904">''Statistiken hier''
+
+
+
+
+
+&lt;div id=&quot;stats&quot;&gt;
+
+=====Verteilung Hagenow und Berlin=====
+&lt;div id=&quot;Verteilung_HGW&quot; class=&quot;mw-collapsible mw-collapsed&quot;&gt;
+&lt;gallery widths=800px heights=600px mode=packed caption=&quot;Durchschnitt nach Stunden&quot;&gt;
+File:Verteilung_hgw_ber.png|Callverteilung Hagenow - Berlin
+&lt;/gallery&gt;
+&lt;/div&gt;
+
+=====durchschnittliche Stunde über den Tag verteilt=====
+&lt;div id=&quot;durchschnittl_stunde&quot; class=&quot;mw-collapsible mw-collapsed&quot;&gt;
+&lt;gallery widths=120px heights=75px perrow=4 mode=packed caption=&quot;Durchschnitt nach Stunden&quot;&gt;
+File:Durchschnittl_Stunde_von_01_01_17_bis_31_01_17.png|01.01. - 31.01.2017
+File:Durchschnittl_Stunde_von_01_02_17_bis_28_02_17.png|01.02. - 28.02.2017
+File:Durchschnittl_Stunde_von_01_03_17_bis_31_03_17.png|01.03. - 31.03.2017
+File:Durchschnittl_Stunde_von_01_04_17_bis_30_04_17.png|01.04. - 30.04.2017
+File:Durchschnittl_Stunde_von_01_05_17_bis_31_05_17.png|01.05. - 31.05.2017
+File:Durchschnittl_Stunde_von_01_06_17_bis_30_06_17.png|01.06. - 30.06.2017
+File:Durchschnittl_Stunde_von_01_07_17_bis_31_07_17.png|01.07. - 31.07.2017
+File:Durchschnittl_Stunde_von_01_08_17_bis_31_08_17.png|01.08. - 31.08.2017
+&lt;/gallery&gt;
+&lt;/div&gt;
+
+=====durchschnittlicher Wochentag für einen gegebenen Zeitraum=====
+&lt;div id=&quot;durchschnittl_wochentag&quot; class=&quot;mw-collapsible mw-collapsed&quot;&gt;
+&lt;gallery widths=120px heights=75px perrow=4 mode=packed caption=&quot;Durchschnitt nach Wochentagen&quot;&gt;
+File:Durschnittl_wochentage01_01_2017-31_01_2017.png|01.01. - 31.15.2017
+File:Durschnittl_wochentage01_02_2017-28_02_2017.png|01.02. - 28.02.2017
+File:Durschnittl_wochentage01_03_2017-31_03_2017.png|01.03. - 31.03.2017
+File:Durschnittl_wochentage01_04_2017-30_04_2017.png|01.04. - 30.04.2017
+File:Durschnittl_wochentage01_05_2017-31_05_2017.png|01.05. - 31.05.2017
+File:Durschnittl_wochentage01_06_2017-30_06_2017.png|01.06. - 30.06.2017
+File:Durschnittl_wochentage01_07_2017-31_07_2017.png|01.07. - 31.07.2017
+File:Durschnittl_wochentage01_08_2017-31_08_2017.png|01.08. - 31.08.2017
+&lt;/gallery&gt;
+&lt;/div&gt;
+
+=====ganze Jahre (Calls absolut)=====
+&lt;div id=&quot;Jahre&quot; class=&quot;mw-collapsible mw-collapsed&quot;&gt;
+&lt;gallery widths=120px heights=75px perrow=4 mode=packed caption=&quot;2017 in absoluten Zahlen&quot;&gt;
+File:AnzahlCalls2017.png|2017
+&lt;/gallery&gt;
+&lt;/div&gt;
+
+=====Monate (Calls absolut)=====
+&lt;div id=&quot;Monate&quot; class=&quot;mw-collapsible mw-collapsed&quot;&gt;
+&lt;gallery widths=120px heights=75px perrow=4 mode=packed caption=&quot;Monate 2017 in absoluten Zahlen&quot;&gt;
+File:AnzahlCalls01January2017.png|Januar
+File:AnzahlCalls02February2017.png|Februar
+File:AnzahlCalls03March2017.png|März
+File:AnzahlCalls04April2017.png|April
+File:AnzahlCalls05May2017.png|Mai
+File:AnzahlCalls06June2017.png|Juni
+File:AnzahlCalls07July2017.png|Juli
+File:AnzahlCalls08August2017.png|August
+File:AnzahlCalls09September2017.png|September
+&lt;/gallery&gt;
+&lt;/div&gt;
+
+=====Kalenderwochen (Calls absolut)=====
+
+&lt;div id=&quot;Kalenderwochen&quot; class=&quot;mw-collapsible mw-collapsed&quot;&gt;
+&lt;gallery widths=80px heights=60px perrow=8 caption=&quot;Kalenderwochen 2017 in absoluten Zahlen&quot;&gt;
+File:AnzahlCallsKW01_2017.png|KW01
+File:AnzahlCallsKW02_2017.png|KW02
+File:AnzahlCallsKW03_2017.png|KW03
+File:AnzahlCallsKW04_2017.png|KW04
+File:AnzahlCallsKW05_2017.png|KW05
+File:AnzahlCallsKW06_2017.png|KW06
+File:AnzahlCallsKW07_2017.png|KW07
+File:AnzahlCallsKW08_2017.png|KW08
+File:AnzahlCallsKW09_2017.png|KW09
+File:AnzahlCallsKW10_2017.png|KW10
+File:AnzahlCallsKW11_2017.png|KW11
+File:AnzahlCallsKW12_2017.png|KW12
+File:AnzahlCallsKW13_2017.png|KW13
+File:AnzahlCallsKW14_2017.png|KW14
+File:AnzahlCallsKW15_2017.png|KW15
+File:AnzahlCallsKW16_2017.png|KW16
+File:AnzahlCallsKW17_2017.png|KW17
+File:AnzahlCallsKW18_2017.png|KW18
+File:AnzahlCallsKW19_2017.png|KW19
+File:AnzahlCallsKW20_2017.png|KW20
+File:AnzahlCallsKW21_2017.png|KW21
+File:AnzahlCallsKW22_2017.png|KW22
+File:AnzahlCallsKW23_2017.png|KW23
+File:AnzahlCallsKW24_2017.png|KW24
+File:AnzahlCallsKW25_2017.png|KW25
+File:AnzahlCallsKW26_2017.png|KW26
+File:AnzahlCallsKW27_2017.png|KW27
+File:AnzahlCallsKW28_2017.png|KW28
+File:AnzahlCallsKW29_2017.png|KW29
+File:AnzahlCallsKW30_2017.png|KW30
+File:AnzahlCallsKW31_2017.png|KW31
+File:AnzahlCallsKW32_2017.png|KW32
+File:AnzahlCallsKW33_2017.png|KW33
+File:AnzahlCallsKW34_2017.png|KW34
+File:AnzahlCallsKW35_2017.png|KW35
+File:AnzahlCallsKW36_2017.png|KW36
+File:AnzahlCallsKW37_2017.png|KW37
+File:AnzahlCallsKW38_2017.png|KW38
+File:AnzahlCallsKW39_2017.png|KW39
+File:AnzahlCallsKW40_2017.png|KW40
+File:AnzahlCallsKW41_2017.png|KW41
+File:AnzahlCallsKW42_2017.png|KW42
+&lt;/gallery&gt;
+&lt;/div&gt;
+
+=====Statistiken seit Hagelkonzept (ab 05.06./KW23)=====
+&lt;div class=&quot;mw-collapsible mw-collapsed&quot;&gt;
+* Anzahl Anrufe seit Beginn Hagelkonzept bis Umstellung seitens Carexpert (13.08.)
+&lt;gallery widths=200px heights=140px mode=packed caption=&quot;mit Outbound / Übergang / ohne Outbound&quot;&gt;
+Datei:KW23-32 HagelkonzeptMitOutbound.png
+Datei:KW29-37 RueckgangOhneOutbound.png
+Datei:KW33-41 keinOutbound.png
+&lt;/gallery&gt;
+
+* Abdeckung Wochentage / Tagesstunden 05.06.-13.08.
+&lt;gallery widths=200px heights=150px mode=packed caption=&quot;Durchschnitt nach Tagen / Stunden vor 13.08.&quot;&gt;
+File:Woche Hagel mitOutKW23-32.png
+File:Tag Hagel mitOutKW23-32.png
+&lt;/gallery&gt;
+
+* Abdeckung Wochentage / Tagesstunden 14.08.-04.10.
+&lt;gallery widths=200px heights=150px mode=packed caption=&quot;Durchschnitt nach Tagen / Stunden seit 13.08.&quot;&gt;
+File:Woche Hagel ohneOutKW33-41.png
+File:Tag Hagel ohneOutKW33-41.png
+&lt;/gallery&gt;
+&lt;/div&gt;
+
+=====Durchschnitte (HT,TT,ACW) getrennt nach Kern und Nebenzeit=====
+&lt;div class=&quot;mw-collapsible&quot;&gt;
+&lt;gallery widths=650px heights=400px mode=packed caption=&quot;Ziel- und Durchschnittszeiten 2017&quot;&gt;
+Datei:Durchschn Zeiten getrennt.png
+&lt;/gallery&gt;
+&lt;gallery widths=330px heights=400px mode=packed caption=&quot;Hagelhotline1459 2017&quot;&gt;
+Datei:Durchschn Zeiten 1459.png
+&lt;/gallery&gt;
+&lt;/div&gt;
+
+=====Durchschnitte (HT,TT,ACW) getrennt nach Standort und Agent=====
+&lt;div class=&quot;mw-collapsible&quot;&gt;
+&lt;gallery widths=300px heights=150px mode=packed caption=&quot;Ziel- und Durchschnittszeiten nach Standort und Agent 2017&quot;&gt;
+
+Datei:2017 11 01 Alle Woche 9-43.png|Bearbeitungszeiten Neben/Kern Alle Standorte zusammengefasst
+Datei:2017 11 01 Berlin Woche 9-43.png|Bearbeitungszeiten Neben/Kern Berlin
+Datei:2017 11 01 Hagenow Woche 9-43.png|Bearbeitungszeiten Neben/Kern Hagenow
+&lt;/gallery&gt;
+
+
+
+&lt;div style=&quot;font-weight:bold; margin:auto; text-align:center&quot;&gt;Agenten einzeln&lt;/div&gt;
+&lt;gallery widths=150px heights=125px mode=packed caption=&quot;Agenten einzeln&quot; class=&quot;mw-collapsible mw-collapsed&quot;&gt;
+
+
+Datei:2017_11_01_beckeca_Woche_11-42.png|beckeca
+Datei:2017_11_01_beckesi_Woche_10-39.png|beckesi
+Datei:2017_11_01_beckfra_Woche_9-43.png|beckfra
+Datei:2017_11_01_bretsal_Woche_11-42.png|bretsal
+Datei:2017_11_01_dehnsil_Woche_9-41.png|dehnsil
+Datei:2017_11_01_diessro_Woche_10-43.png|diessro
+Datei:2017_11_01_gesinst_Woche_9-43.png|gesinst
+Datei:2017_11_01_geyerme_Woche_11-41.png|geyerme
+Datei:2017_11_01_gorushe_Woche_10-43.png|gorushe
+Datei:2017_11_01_haenthe_Woche_10-12.png|haenthe
+Datei:2017_11_01_haustst_Woche_25-25.png|haustst
+Datei:2017_11_01_henniju_Woche_10-43.png|henniju
+Datei:2017_11_01_jakobir_Woche_12-12.png|jakobir
+Datei:2017_11_01_meyergu_Woche_10-12.png|meyergu
+Datei:2017_11_01_neumath_Woche_10-43.png|neumath
+Datei:2017_11_01_papkeda_Woche_10-43.png|papkeda
+Datei:2017_11_01_pfeifpe_Woche_10-40.png|pfeifpe
+Datei:2017_11_01_pinnkat_Woche_10-22.png|pinnkat
+Datei:2017_11_01_pletaan_Woche_10-40.png|pletaan
+Datei:2017_11_01_plichba_Woche_13-33.png|plichba
+Datei:2017_11_01_rabechr_Woche_9-43.png|rabechr
+Datei:2017_11_01_radtkke_Woche_10-43.png|radtkke
+Datei:2017_11_01_reismat_Woche_38-38.png|reismat
+Datei:2017_11_01_ruschfi_Woche_26-43.png|ruschfi
+Datei:2017_11_01_scholan_Woche_9-43.png|scholan
+Datei:2017_11_01_stanzju_Woche_10-42.png|stanzju
+Datei:2017_11_01_steffci_Woche_32-43.png|steffci
+Datei:2017_11_01_strausi_Woche_10-43.png|strausi
+Datei:2017_11_01_tetzlva_Woche_9-35.png|tetzlva
+Datei:2017_11_01_tonnroy_Woche_27-32.png|tonnroy
+
+&lt;/gallery&gt;
+&lt;/div&gt;
+
+
+
+&lt;/div&gt;</text>
+      <sha1>0o4z8q3v1p85r1zfvpxsmp5mt4hvncd</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Carexpert GespraechA4</title>
+    <ns>0</ns>
+    <id>295</id>
+    <revision>
+      <id>1122</id>
+      <parentid>1121</parentid>
+      <timestamp>2017-11-14T13:06:02Z</timestamp>
+      <contributor>
+        <username>Gesinst</username>
+        <id>2</id>
+      </contributor>
+      <minor/>
+      <comment>1 Version importiert</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="2338">&lt;h4 class=&quot;zentriert&quot; style=&quot;font-size:1.05em&quot;&gt;„Mein Name ist $Vorname $Nachname von der Firma Carexpert Sachverständigen GmbH, was kann ich für Sie tun?“&lt;/h4&gt;
+
+&lt;div class=&quot;gesp_hilfe&quot;&gt;
+
+* Auftragssuche mit Auftragsnummer oder Kfz-Kennzeichen
+* Anrufer identifizieren (‚wer‘? Rolle?)  und mit Adressen abgleichen. Klären, mit wem der Termin vereinbart werden kann.
+** wenn Termin über jmd. Anderen als dem Anrufer: Telefonnummer geben lassen UND darum bitten, daß derjenige sich auch selbst meldet
+* Besichtigungsobjekt, Bearbeitungsart, Schadenhergang (wer soll besichtigt werden? AS? VN?) und Historie überfliegen (Anrufer ggf. auf &quot;Halten&quot; setzen)
+** wenn Bearbeitungsart nicht GA/SK oder NB KVA/GA/RG: Nur Telefonnummer und Anliegen erfassen und dann weiterschicken (dringende Anforderung, wenn weitere Bearbeitung nötig)
+* aktuellen Fahrzeugstandort erfragen, fragen, ob Fahrzeug noch fahrfähig ist? Klären, wo das Fzg. besichtigt werden kann bzw. wo es günstig ist.
+** wenn Fzg. nicht mehr fahrbar: Termin am aktuellen Standort möglich? Kommt Fzg. in WS? Wenn Fzg. auf HB muß: Kosten f. Abschleppung müssen ggf. über Versicherung geklärt werden
+* evtl. Änderungen des Standorts (WS? Abschlepper?) erfragen
+** wenn Fzg. in WS: möglichst Ganztagstermin vereinbaren. Fzgbesitzer kann ggf. am Tag des Termins angerufen werden und das Fzg. dann in die WS bringen
+
+
+WENN MAN SICH AUF EINEN BESICHTIGUNGSORT GEEINIGT HAT:
+
+
+* Terminvorschläge: immer zwischen 8 und 16, möglichst große Zeitfenster
+** Kunde kann eine halbe oder ganze Stunde vorher angerufen werden, Besichtigungsort kann frei gewählt werden, aber Zeitfenster, das wir benötigen, sollte minimum 3 Stunden sein.
+* Wenn nicht möglich: anderer Besichtigungsort oder anderer Ansprechpartner vor Ort (Ehepartner, Verwandte?)
+** Termin kann durch eine beliebige Person bedient werden, wenn diese Fzg.Schein und -Schlüssel hat. Keine Termine ohne anwesende Person möglich!
+* Reiter „Einsätze“ → Bearbeiten → richtigen Besichtigungsort (!) einstellen
+* wenn BO korrekt, Terminierungstool starten, leere Terminsuche → Datum klären, Uhrzeit klären
+** Nach Terminierung alle Details nochmal wiederholen (Termin am XX.YY zwischen XX und YY in der XX-Straße YY)
+* ggf. Termininfo für Vorab-Anrufe oder Zusatzinfos an den SV nutzen.
+
+&lt;/div&gt;</text>
+      <sha1>37tssvz4umcoabf6s6vurz7sr5ng9s5</sha1>
+    </revision>
+  </page>
+</mediawiki>
