@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import os, csv, math, shutil, xlrd, re, sys, xlwt
 from natsort import natsorted, ns
 from xlwt import Formula
