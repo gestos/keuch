@@ -6,4 +6,3 @@ hardstatus off
 caption always "%{= wk} %-w%{= KW} [%n %t ] %{-}%+w %= %{= wg} %C%a" 
 bindkey "^[Od" prev  # ctrl-left
 bindkey "^[Oc" next  # ctrl-right
-
