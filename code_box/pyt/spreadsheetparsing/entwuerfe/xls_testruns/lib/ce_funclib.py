@@ -14,15 +14,6 @@ from datetime import timedelta
 import matplotlib.patches as mpatches
 from itertools import tee
 
-#sys.path.append(os.path.abspath('/home/keuch/gits/keuch/code_box/pyt/spreadsheetparsing/entwuerfe/xls_testruns/'))
-#from ce_funclib import determine_kernzeit as dtkz
-#from ce_funclib import continuity_check
-
-#%matplotlib inline
-#get_ipython().magic('matplotlib tk')
-## Import data frome pickle generated from muß ein file mit agentenstats sein
-#arcpth='/home/keuch/gits/keuch/code_box/pyt/spreadsheetparsing/test_stats/archiv/'
-
 def testfunc():
     print('hi')
 
@@ -128,7 +119,7 @@ def plotit(zeiten, agent,ww_or_dd):
 
     f, (ax1, ax2) = plt.subplots(1, 2, sharey=False, figsize=(17,7))
     
-    ### preliminary deduction from parameters
+    ### entscheidung, ob die nach woche oder kalendertag sortierten spalten benutzt werden
     if ww_or_dd.lower() == 'woche':
         kzeit=zeiten[agent]['k_week'].copy()
         nzeit=zeiten[agent]['n_week'].copy()
@@ -136,7 +127,7 @@ def plotit(zeiten, agent,ww_or_dd):
         kzeit=zeiten[agent]['k_day'].copy()
         nzeit=zeiten[agent]['n_day'].copy()
         
-    ### check empty frames
+    ### check empty frames, leere frames werden mit Nullen gefuellt
     if (kzeit.empty and nzeit.empty):
         print('ueberhaupt keine Calls, Panik!')
     elif kzeit.empty:
@@ -240,13 +231,15 @@ def plotit(zeiten, agent,ww_or_dd):
 
     ax1.set_xlabel(ww_or_dd, size=7)
     ax2.set_xlabel(ww_or_dd, size=7)
-    ax1.tick_params('x', labelsize=8)
-    ax2.tick_params('x', labelsize=8)
+    ax1.tick_params('x', labelsize=6)
+    ax2.tick_params('x', labelsize=6)
 
     ax1.set_ylabel('Minuten', rotation=90)
     ax4.set_ylabel('Calls',rotation=90,color=bars)
 
-    f.suptitle('Bearbeitungszeiten '+agent+' nach '+ww_or_dd+' ab März 2017 bis '+ww_or_dd+' '+EndeStr)
+    
+    ## hier sollte ein titel generiert werden, der dem Zeitraum entspricht
+    f.suptitle('Bearbeitungszeiten '+agent+' nach '+ww_or_dd+' ab '+StartStr+' bis '+ww_or_dd+' '+EndeStr)
     f.legend((kaht,katt,kacw,kziel,kreal,kalle,kcalls),('handling','talk','afterwork','zielzeit','Øzeit agent','Øzeit alle','calls'),fontsize=7,ncol=2,loc='upper right',borderaxespad=2)
 
     
