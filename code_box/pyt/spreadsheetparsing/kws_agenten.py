@@ -196,7 +196,7 @@ def week_start_end(year, week):
     dlt = datetime.timedelta(days = (week-1)*7)
     return d + dlt,  d + dlt + datetime.timedelta(days=6)
 
-def chk_wk_complete(year='2017',week='1'):
+def chk_wk_complete(year='2018',week='1'):      ## hier Anpassung fuer Jahre?
     sta,end=week_start_end(year, week)
     if dates_in_dir.min() < sta and dates_in_dir.max() >= end:
         return "complete"
@@ -372,7 +372,8 @@ weeks_to_add = kws_in_dir[weeks_in_target:]
 print (weeks_to_add)
 
 
-for yy in years_in_dir:
+#for yy in years_in_dir:
+for yy in (2018,2018):
     for wk in weeks_to_add:
         week_as_a_list=week_from_frame(yy,wk,doe_frame) # returns a list of lists, but week_from_frame has a dataframe to plot from
         if week_as_a_list == "incomplete":
