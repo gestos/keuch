@@ -7,7 +7,10 @@ from colorama import Fore as coly, Style as coln
 from pandas import Series, DataFrame, ExcelWriter
 import datetime
 from openpyxl.utils.dataframe import dataframe_to_rows
-pandas.options.mode.chained_assignment = None
+
+sys.path.append(os.path.abspath('/home/keuch/gits/keuch/code_box/pyt/spreadsheetparsing/entwuerfe/xls_testruns/lib/'))
+from ce_funclib import determine_kernzeit as dtkz, continuity_check
+######################################################################################################################
 
 def check_cmdline_params():
     if len(sys.argv) != 3:
@@ -39,6 +42,12 @@ def check_cmdline_params():
         print("target:\t" + targetfile)
         return sourcefile_IB, targetfile, pmode
 
+spinner = itertools.cycle(['-', '\\', '|', '/'])
+def spinn():
+    sys.stdout.write(next(spinner))  # write the next character, hopefully py3
+    sys.stdout.flush()                # flush stdout buffer (actual character display)
+    sys.stdout.write('\b')
+
 def parsedate_header(daily_sheet_cell): # turn crap date into nice date
     date_crap = daily_sheet_cell.strip() # comes like this from upstream, date always lives at 1,1
     day, mon, yea = date_crap[0:2], date_crap[3:5], date_crap[6:10]
@@ -68,12 +77,8 @@ def get_cw_ma(agent_cell):
 def get_filelist(folder):
     print ("scanning " + str(folder) + " "),
     agentsfiles = dict()
-    spinner = itertools.cycle(['-', '\\', '|', '/'])
     for i in (s for s in os.listdir(folder) if s.endswith(".xls")):
-        #sys.stdout.write(spinner.next())  # write the next character
-        sys.stdout.write(next(spinner))  # write the next character, hopefully py3
-        sys.stdout.flush()                # flush stdout buffer (actual character display)
-        sys.stdout.write('\b')
+        spinn()
         datei = os.path.join(folder,i)
         sheet = xlrd.open_workbook(datei, formatting_info=True).sheet_by_index(0)
         if sheet.nrows == 0:
@@ -84,51 +89,6 @@ def get_filelist(folder):
             agentsfiles[sheet_date] = datei
     print
     return agentsfiles
-
-def determine_kernzeit(datum, weekday):
-    ### Kernzeiten
-    ### ab 01.03.2017: Mo-Fr 11:30-19:30
-    ### ab 05.06.2017: Mo-Fr 8-20
-    ### ab 08.07. plus Samstag 8-13
-    print(datum, weekday)
-
-    if datum.date() < datetime.date(2017,3,1):
-        bzeit = 'k'
-
-    elif datetime.date(2017,3,1) <= datum.date() < datetime.date(2017,6,5):   ## Zeit zwischen 1.Maerz und 1. Juni
-        if weekday in ("Sat", "Sun"): ## WE immer Nebenzeit
-            bzeit = 'n'
-        else:                           ## Werktage von 11:30 bis 19:30
-            if datetime.time(11,30) <= datum.time() < datetime.time(19,30):
-                bzeit = 'k'
-            else:
-                bzeit = 'n'
-
-    elif datetime.date(2017,6,5) <= datum.date() < datetime.date(2017,7,8): ## Zeit ab 05.Juni bis 07. Juli
-        if weekday in ("Sat", "Sun"): ## WE immer Nebenzeit
-            bzeit = 'n'
-        else:                           ## Werktage von 8-20
-            if datetime.time(8,00) <= datum.time() < datetime.time(20,00):
-                bzeit = 'k'
-            else:
-                bzeit = 'n'
-    ### hier noch ab wann samstags 8-13 gezaehlt wird
-    elif datum.date() >= datetime.date(2017,7,8): ## Zeit ab Sa, 08. Juli
-        if weekday in ("Sun"): ## So. Nebenzeit
-            bzeit = 'n'   
-        elif weekday in ("Sat"): ## Sa. 8-13
-            if datetime.time(8,00) <= datum.time() < datetime.time(13,00):
-                bzeit = 'k'
-            else:
-                bzeit = 'n'
-        else:                           ## Werktage von 8-20
-            if datetime.time(8,00) <= datum.time() < datetime.time(20,00):
-                bzeit = 'k'
-            else:
-                bzeit = 'n'
-
-    print(bzeit)
-    return bzeit
 
 def read_entries(datei,doe):
     sheet = xlrd.open_workbook(datei, formatting_info=True).sheet_by_index(0)
@@ -146,16 +106,9 @@ def read_entries(datei,doe):
         day = stamp.day
         weekday = stamp.strftime('%a')
         hour = stamp.hour
-
-        bzeit=determine_kernzeit(stamp,weekday)
-        #if weekday in ("Sat", "Sun"):
-        #    bzeit = "n"
-        #elif 11 < hour < 20:
-        #    bzeit = "k"
-        #else:
-        #    bzeit = "n"
-
+        bzeit=dtkz(stamp)
         week = stamp.isocalendar()[1]
+        yearweek = stamp.strftime('%Y-%V') # gibt einen string 'jahr-woche' zb 2017-10
         angeboten = sheet.cell(i,3).value
         bearbeitet = sheet.cell(i,4).value
         verloren = angeboten - bearbeitet
@@ -174,6 +127,7 @@ def read_entries(datei,doe):
         o["hh"] = hour
         o["bz"] = bzeit
         o["ww"] = week
+        o["yw"] = yearweek
         o["wd"] = weekday
         o["an"] = angeboten
         o["be"] = bearbeitet
@@ -187,22 +141,6 @@ def read_entries(datei,doe):
         #print(dir(o))
     return doe
 
-def week_start_end(year, week):
-    d = datetime.date(year,1,1)
-    if(d.weekday()>3):
-        d = d+datetime.timedelta(7-d.weekday())
-    else:
-        d = d - datetime.timedelta(d.weekday())
-    dlt = datetime.timedelta(days = (week-1)*7)
-    return d + dlt,  d + dlt + datetime.timedelta(days=6)
-
-def chk_wk_complete(year='2018',week='1'):      ## hier Anpassung fuer Jahre?
-    sta,end=week_start_end(year, week)
-    if dates_in_dir.min() < sta and dates_in_dir.max() >= end:
-        return "complete"
-    else:
-        return "incomplete"
-
 
 def frame2list(dataframe):
     week_as_list = list()
@@ -213,12 +151,18 @@ def frame2list(dataframe):
         week_as_list.append(values)
     return week_as_list
 
-def week_from_frame(year,week_num,frame):
-    if chk_wk_complete(year,week_num) == "incomplete":
+def week_from_frame(week_num,frame):
+    print()
+    print('dataframe ziehen fuer '+str(week_num))
+    wk_MON=datetime.datetime.strptime(week_num + '-1', "%Y-%W-%w").date() # erster tag (Montag) der zu bearbeitenden Woche
+    wk_SUN=datetime.datetime.strptime(week_num + '-0', "%Y-%W-%w").date() # letzter Tag (Sonntag) der Woche
+
+    if not ((dates_in_dir.min() < wk_MON) and (dates_in_dir.max() >= wk_SUN)):
+        print('incomplete...')
         return "incomplete"
 
-    kw = (frame[frame.ww == week_num])
-    kw_filt = kw[['ag','lo','bz','be','ht','tt','acw']]
+    kw = (frame[frame.yw == week_num]).copy()
+    kw_filt = kw[['ag','lo','bz','be','ht','tt','acw']].copy()
 
     if kw_filt.loc[kw_filt['bz'] == 'k'].empty:
         kw_filt['kbe'] = 0
@@ -273,23 +217,23 @@ def week_from_frame(year,week_num,frame):
     sums.ntt=sums.ntt/len(total.index)
     sums.nacw=sums.nacw/len(total.index)
     total = total.append(sums)
-    print (total)
+    #print (total)
     ### dataframe ist hier komplett ###
-
     ### rueckgabewert moechte ich aber als liste von listen, damit xlwt schreiben kann ###
-
     week_as_list = frame2list(total)
-
     return week_as_list
 
-def target_week_found(sheet):
-    found_weeks = [0]
+def check_latest_yweek(sheet):
+    maxweek_date={datetime.date(2016,1,1):'2016-1'} # leeres dict mit einem defaultwert, falls das sheet noch leer sein sollte
     for row in range (0,s_row-1):
         s = target_workbook.sheet_by_index(0)
         c = s.cell(row,0)
         if c.value == "KW":
-            found_weeks.append(s.cell(row,1).value)
-    return found_weeks
+            ywk = s.cell(row,1).value            # die benachbarte Zelle hat einen String im Format '2017-10' (Jahr-Woche)
+            Y_W = datetime.datetime.strptime(ywk + '-1', "%Y-%W-%w").date()  # datetime.date aus dem gefundenen string machen
+            maxweek_date[Y_W] = ywk   # Dictionary wird befuellt mit dem dt.date als key und dem string als value
+    maxdate=maxweek_date[max(maxweek_date.keys())] # aus den dt.dates laesst sich das maximum finden, der dazugehoerige value wird der Rueckgabewert
+    return maxdate
 
 def write_weeks(week,vals):
     global s_row
@@ -330,60 +274,68 @@ def write_weeks(week,vals):
     s_row += 1
     target_workbook_w.save(target)
 
+#######################################################
 ############## END OF FUNCTION DEFINITIONS ############
 
 source,target,pmode = check_cmdline_params()
 dict_o_e = dict()
 
-
 ## read everything from directory into a dict and create a dataframe from it
 if pmode == "dir":
-    filelist=get_filelist(source)
+    filelist = get_filelist(source)   # alle files, die Agentendaten beinhalten
+    fehltage = continuity_check(filelist)   # liste der gefundenen files auf luecken pruefen
+    print('merging file data into one dictionary')
     for k in sorted(filelist.keys()):
-        dict_o_e = read_entries(filelist[k],dict_o_e)
+        dict_o_e = read_entries(filelist[k],dict_o_e)  # jedes file aus der Liste wird geparst und ins dict_o_e eingefügt
+        spinn()
 
-column_order = ['dt', 'yy', 'tt', 'bz', 'hh', 'dd', 'acw', 'mm', 'ww', 'wd', 'lo', 'ag', 'an', 'be', 'vl', 'ht']
-#column_order = ['dt','yy','dd','mm','ww','wd','lo','ag','an','be','vl','ht','tt','acw','bz','hh']
-#column_order = ['dt','yy','dd','mm','ww','wd','lo','ag','an','be','vl','ht','tt','acw','bz','hh']
-#print(dict_o_e.items())
-#print(dict_o_e.keys())
+## transform dictionary and create dataframe from it, rearrange dataframe
+column_order = ['dt', 'yy', 'tt', 'bz', 'hh', 'dd', 'acw', 'mm', 'ww', 'yw', 'wd', 'lo', 'ag', 'an', 'be', 'vl', 'ht']
 do_frame = DataFrame(dict_o_e)
-#do_frame.to_pickle('agentenpickel.pkl')
-#print(do_frame)
 doe_frame=do_frame.T
-print(doe_frame.columns)
-
 doe_frame=doe_frame[column_order]
-dates_in_dir = doe_frame.dt.unique()    # numpy.ndarray of datetime.date objects
+
+## get some variables from the frame like: available days, years, and a year-week string
 years_in_dir = doe_frame.yy.unique()    # numpy.ndarray of year values
-kws_in_dir = doe_frame.ww.unique()      # numpy.ndarray of week numbers
 monate_in_dir = doe_frame.mm.unique()   # numpy.ndarray of month numbers
+dates_in_dir = doe_frame.dt.unique()    # numpy.ndarray of datetime.date objects
+yws_in_dir = sorted(doe_frame.yw.unique())      # numpy.ndarray of week numbers
 
-print (kws_in_dir)
-
+## open the target excel file and workbook sheets for reading and writing
 target_workbook = xlrd.open_workbook(target, formatting_info=True)  # this is the file
 target_sheet = target_workbook.sheet_by_index(0)
 target_workbook_w = xlcopy.copy(target_workbook)                # a copy is needed to write into
 s_row = target_sheet.nrows+1
 
-weeks_in_target = int(max(target_week_found(target_sheet)))
-weeks_to_add = kws_in_dir[weeks_in_target:]
+## im Excelfile lesen, welche Daten dort schon vorhanden sind
+max_yweek_intarget = check_latest_yweek(target_sheet) # gibt die hoechste gefundene Woche als '2017-10' string zurueck
+print("letzte Kalenderwoche in der Excel-Datei: "+max_yweek_intarget)
 
-print (weeks_to_add)
+## liste der anzufuegenden Wochen generieren
+if not max_yweek_intarget in yws_in_dir:
+    weeks_to_add = yws_in_dir
+else:
+    ywk_sheet_pos=yws_in_dir.index(max_yweek_intarget)
+    weeks_to_add = yws_in_dir[ywk_sheet_pos+1:]
+print ('neuere daten aus diesen Wochen gefunden: '+str(weeks_to_add))
 
+## die beizufuegenden wochen parsen und ins workbook schreiben, dann abspeichern
+for wk in weeks_to_add:
+    week_as_a_list=week_from_frame(wk,doe_frame) # returns a list of lists, but week_from_frame has a dataframe to plot from
+    if week_as_a_list == "incomplete":
+        print ("incomplete indeed")
+        continue
+    else:
+        print ("# " + str(wk) + " # wird geschrieben")
+        write_weeks(wk,week_as_a_list)
 
-#for yy in years_in_dir:
-for yy in (2018,2018):
-    for wk in weeks_to_add:
-        week_as_a_list=week_from_frame(yy,wk,doe_frame) # returns a list of lists, but week_from_frame has a dataframe to plot from
-        if week_as_a_list == "incomplete":
-            print ("incomplete")
-            continue
-        else:
-            print ("############## " + str(wk) + " #################")
-            write_weeks(wk,week_as_a_list)
+## auf luecken hinweisen
+print('folgende Tage waren nicht als excel-datei vorhanden '+str(fehltage))
+
 
 
 ### TODO add summary line to each week
+print()
+print('Skript anpassen, damit nicht immer alle Rohdaten neu eingelesen werden, sondern nur die noch nicht vorhandenen...')
 #pickelframe=DataFrame(dict_o_e)
 #pickelframe.to_pickle(agentenpickel.pkl)
