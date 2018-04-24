@@ -4,6 +4,7 @@
 # In[2]:
 
 ## Import necessary modules
+
 import os,sys
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -47,14 +48,6 @@ def maptix2labels(ticks):
         sstr=decminutes_to_mmss(tic)
         ylabelz.append(sstr)
     return ylabelz
-
-
-# In[4]:
-
-# colors
-
-
-# In[5]:
 
 def plotit(agent,ww_or_dd):
     bgkern='#FFF7F2'
@@ -205,3 +198,56 @@ def plotit(agent,ww_or_dd):
     #plt.close()
     return ax1,ax2
 
+def labelspucker(x_index):
+    xx=x_index
+    von_monat=xx.month.unique()[0]
+    bis_monat=xx.month.unique()[-1]
+    von_jahr=xx.year.unique()[0]
+    bis_jahr=xx.year.unique()[-1]
+    
+    if (von_monat == bis_monat):
+        labeltext=str(calendar.month_abbr[von_monat])+' '+str(von_jahr)
+        
+    return labeltext
+def abs_plot(frame):
+    
+    
+    gcol="#777777"
+    lostcol="#AC003A"
+    verbcol="#008EC4"
+    ncol="#000000"
+    kcol="#4F7DFF"
+    
+    fig,ax=plt.subplots()
+
+    sonn = WeekdayLocator(6)
+    weekFormatter = DateFormatter('%a %b %d')
+
+    ax.xaxis.set_major_locator(sonn)
+    ax.xaxis.set_major_formatter(weekFormatter)
+
+    ax.grid(which='major', axis='y', linestyle=':', zorder=0)
+    ax.set_axisbelow(True)
+
+    d_ix=frame.index.get_level_values(0).unique()
+    g_val=frame.xs('g', level='bz')['clls']
+    k_val=frame.xs('k', level='bz')['clls']
+    n_val=frame.xs('n', level='bz')['clls']
+    verb=frame.xs('g', level='bz')['verb']
+    lost=frame.xs('g', level='bz')['lost']
+
+    bar_g=ax.bar(d_ix,g_val,color=gcol,width=0.8, label='calls')
+    bar_n=ax.bar(d_ix,n_val, color=ncol, width=0.4, align='edge',label='davon nebenzeit')
+    bar_verb=ax.bar(d_ix,verb,color=verbcol,width=-0.3, label='verbunden')
+    bar_lost=ax.bar(d_ix,lost,color=lostcol,width=-0.3, bottom=verb,label='verloren')
+    #bar_k=ax.bar(d_ix,k_val, color=kcol, width=0.2, align='center')
+
+    ax.set_xlabel(labelspucker(d_ix))
+    ax.set_ylabel('calls',rotation=90)
+    
+    handles, labels = ax.get_legend_handles_labels()
+    ax.legend(handles, labels)
+
+    fig.show()
+    
+    ax.text(0.85, -0.1, 'abs_plot()', horizontalalignment='left', verticalalignment='bottom', transform=ax.transAxes, color='#A3ABBD', fontsize='6')
