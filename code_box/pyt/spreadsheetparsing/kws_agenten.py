@@ -8,7 +8,7 @@ from pandas import Series, DataFrame, ExcelWriter
 import datetime
 from openpyxl.utils.dataframe import dataframe_to_rows
 
-sys.path.append(os.path.abspath('/home/keuch/gits/keuch/code_box/pyt/spreadsheetparsing/entwuerfe/xls_testruns/lib/'))
+sys.path.append(os.path.abspath('/home/keuch/gits/keuch/code_box/pyt/spreadsheetparsing/entwuerfe/pyplots/lib/'))
 from ce_funclib import determine_kernzeit as dtkz, continuity_check
 ######################################################################################################################
 
