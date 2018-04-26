@@ -89,7 +89,7 @@ def continuity_check(daten_liste):
 ###### PRINT FUNCTIONS ########
 ###############################
 
-def decminutes_to_mmss(decimal):
+def decminutes_to_mmss(decimal,*args, **kwargs):
     #print(decimal)
     tdelta=timedelta(minutes=decimal)
     sekunden=tdelta.seconds
