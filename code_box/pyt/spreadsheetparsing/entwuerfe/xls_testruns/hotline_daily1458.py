@@ -1,5 +1,10 @@
-#!/usr/bin/python3
-import os, csv, math, xlrd, re, sys, xlwt, calendar, textwrap, itertools, pandas
+#!/home/keuch/gits/keuch/code_box/pyt/spreadsheetparsing/entwuerfe/ve/bin/python3
+
+## these files are parsed:
+## "Hotlineber1458Gesing taegl" "1458 carexpert Kfz-Sachverstae"):
+
+import os, csv, math, xlrd, re, sys, calendar, textwrap, itertools, pandas
+import xlwt
 from natsort import natsorted, ns
 from xlwt import Formula
 from xlutils import copy as xlcopy
@@ -7,33 +12,44 @@ from colorama import Fore as coly, Style as coln
 import datetime
 import numpy as np
 
+spinner = itertools.cycle(['-', '\\', '|', '/'])
+def spin():
+    sys.stdout.write(next(spinner))  # write the next character, hopefully py3
+    sys.stdout.flush()                # flush stdout buffer (actual character display)
+    sys.stdout.write('\b')
+ 
 
 def check_cmdline_params():
     if len(sys.argv) != 3:
         print(sys.argv[0])
         print(textwrap.fill("1. Argument muss ein Verzeichnis oder eine HOTLINEstatistik (nicht Agenten- oder Terminierungsstatistik) sein. Diese muss viertelstuendlich aufgedroeselt sein, um eine Trennung nach Kern- und Nebenzeiten zu ermoeglichen.",80))
         print
-        print(textwrap.fill("2. Argument ist die Ziel-Pickle-Datei",80))
+        print(textwrap.fill("2. Argument ist die Ziel-Exceldatei, dorthin wird die generierte Zeile unten eingefuegt",80))
         print
-        print(textwrap.fill("Beispiel mit jetzigem Setup: ./programm[0] test_stats/archiv/ [1] pickle_hotline.pkl [2] ",280))
+        print(textwrap.fill("Beispiel mit jetzigem Setup: ./programm[0] test_stats/archiv/1458_daily_2017-03-08.xls[1] taegliche_hotline_halbstunden.xls[2] ",280))
         exit()
     elif not os.path.isfile(sys.argv[1]):
         if os.path.isdir(sys.argv[1]):
             pmode="dir"
             sourcefile_IB = os.path.abspath(sys.argv[1])
             targetfile = os.path.abspath(sys.argv[2])
-            print("source inbound:\t" + sourcefile_IB)
-            print("target:\t" + targetfile)
+            print("data directory:\t" + sourcefile_IB)
+            print("target file:\t" + targetfile)
+            print()
             return sourcefile_IB, targetfile, pmode
         else:
             print(sys.argv[1]+" is not a regular file")
             exit()
+    elif not os.path.isfile(sys.argv[2]):
+        print(sys.argv[2] + " is not a regular file")
+        exit()
     else:
         pmode="file"
         sourcefile_IB = os.path.abspath(sys.argv[1])
         targetfile = os.path.abspath(sys.argv[2])
         print("source inbound:\t" + sourcefile_IB)
         print("target:\t" + targetfile)
+        print()
         return sourcefile_IB, targetfile, pmode
 
 def parsedate_full(daily_sheet_cell): # turn crap date into nice date
@@ -56,22 +72,19 @@ def excel_date(date1):
     return float(delta.days) + (float(delta.seconds) / 86400)
 
 def get_filelist(folder):
-    print ("scanning " + str(folder) + " "),
+    print ("scanning " + str(folder), end=' ')
     agentsfiles = dict()
-    spinner = itertools.cycle(['-', '\\', '|', '/'])
     for i in (s for s in os.listdir(folder) if s.endswith(".xls")):
-        #sys.stdout.write(spinner.next())  # write the next character
-        sys.stdout.write(next(spinner))  # write the next character, hopefully py3
-        sys.stdout.flush()                # flush stdout buffer (actual character display)
-        sys.stdout.write('\b')
+        spin()
         datei = os.path.join(folder,i)
         sheet = xlrd.open_workbook(datei, formatting_info=True).sheet_by_index(0)
         if sheet.nrows == 0:
             continue
-        if sheet.cell(0,0) and (sheet.cell(0,0).value.startswith("Hotlineber1459Gesing")):
+        if sheet.cell(0,0) and (sheet.cell(0,0).value == "Hotlineber1458Gesing taegl" or sheet.cell(0,1).value == "1458 carexpert Kfz-Sachverstae"):
             #if sheet.cell(0,0) and sheet.cell(0,0).value == "CE_alles_taeglich":
             sheet_date = parsedate_header(sheet.cell(1,1).value).date() # this will be the dictionary key as it is the unique overall key
             agentsfiles[sheet_date] = datei
+    print('done')
     return agentsfiles
 
 def determine_kernzeit(datum, weekday):
@@ -79,7 +92,7 @@ def determine_kernzeit(datum, weekday):
     ### ab 01.03.2017: Mo-Fr 11:30-19:30
     ### ab 05.06.2017: Mo-Fr 8-20
     ### ab 08.07. plus Samstag 8-13
-    print(datum, weekday)
+    #print(datum, weekday)
 
     if datum.date() < datetime.date(2017,3,1):
         bzeit = 'k'
@@ -104,7 +117,7 @@ def determine_kernzeit(datum, weekday):
     ### hier noch ab wann samstags 8-13 gezaehlt wird
     elif datum.date() >= datetime.date(2017,7,8): ## Zeit ab Sa, 08. Juli
         if weekday in ("Sun"): ## So. Nebenzeit
-            bzeit = 'n'
+            bzeit = 'n'   
         elif weekday in ("Sat"): ## Sa. 8-13
             if datetime.time(8,00) <= datum.time() < datetime.time(13,00):
                 bzeit = 'k'
@@ -115,30 +128,19 @@ def determine_kernzeit(datum, weekday):
                 bzeit = 'k'
             else:
                 bzeit = 'n'
-
-    print(bzeit)
+    spin()
     return bzeit
-
 
 def read_entries(datei,doe):
     sheet = xlrd.open_workbook(datei, formatting_info=True).sheet_by_index(0)
     out_dict = dict()
-    #kern_start = datetime.time(11,30)
-    #kern_end = datetime.time(19,15)
-    teststring=sheet.cell(3,0).value
-
-    if teststring != 'Timestamp':
-        print('terrible flaw')
-        exit()
-
-    if sheet.nrows < 4:
+    if sheet.nrows < 3:
         print ("that's a file without entries")
-        print (datei)
-        exit()
         return
 
     rows = sheet.nrows
     for i in range(4,sheet.nrows-1):
+        spin()
         stamp = parsedate_full(sheet.cell(i,0).value)
         year = stamp.year
         month = stamp.month
@@ -146,25 +148,17 @@ def read_entries(datei,doe):
         week = int(stamp.isocalendar()[1])
         weekday = stamp.strftime('%a')
         hour = stamp.hour
-        bzeit='k'
-        #bzeit=determine_kernzeit(stamp,weekday)   ### for 1459, there's only one kernzeit
-
-        #if weekday in ("Sat", "Sun"):
-        #    bzeit = "n"
-        #elif kern_start <= stamp.time() <= kern_end:
-        #    bzeit = "k"
-        #else:
-        #    bzeit = "n"
-
+        bzeit=determine_kernzeit(stamp,weekday)
         angeboten = sheet.cell(i,2).value
         verbunden = sheet.cell(i,3).value
         verloren = angeboten - verbunden
         tt = sheet.cell(i,5).value
         acw = sheet.cell(i,12).value
         ht = tt + acw
-
+        
         xldate=excel_date(stamp.date())
 
+        #if angeboten > 0:                 # war als zusätzlicher Check gedacht, die files haben aber keine leerzeichen mehr.
         doe[stamp] = dict()
         o = doe[stamp]
         o["tm"] = stamp.time()
@@ -183,26 +177,31 @@ def read_entries(datei,doe):
         o["tt"] = tt
         o["ht"] = ht
         o["acw"] = acw
-        o["dectt"] = datetime.timedelta(tt)/60
-        o["decht"] = datetime.timedelta(ht)/60
-        o["decacw"] = datetime.timedelta(acw)/60
-
+    spin()
     return doe
 
 def target_days_found(sheet,srow):
+    print('find latest date in targetfile...',end=' ') ; sys.stdout.flush()                # flush stdout buffer (actual character display)
+    ### debug
     found_days = [0]
     s = sheet
-    for row in range (2,srow-1):
+    for row in range (10,srow-1):   # obacht, hier die Zeile angeben, ab der die echten Daten beginnen
         c = s.cell(row,0)
         if c.value:
+            #print(c.value)
             found_days.append(c.value)
+        spin()
+
+    #print(found_days)
+    #print(type(found_days))
+    print('done')
     return found_days
 
 def create_summary(day):
     dayframe = doe_frame.loc[doe_frame['xl'] == day].reset_index()
     colfunx={'dt':'first' , 'ww':'first', 'an':'sum' , 'vb':'sum' , 'vl':'sum' , 'ht':'sum' , 'tt':'sum' , 'acw':'sum'}
     dayframe_sum = dayframe.groupby('xl').agg(colfunx)
-    print (dayframe_sum.iloc[0]['dt'],','),
+    print(dayframe_sum.iloc[0]['dt'],end=',')
     dayframe_sum['tot_av_tt'] = dayframe_sum['tt'] / dayframe_sum['vb']
     dayframe_sum['tot_av_ht'] = dayframe_sum['ht'] / dayframe_sum['vb']
     dayframe_sum['tot_av_acw'] = dayframe_sum['acw'] / dayframe_sum['vb']
@@ -236,11 +235,13 @@ def create_summary(day):
     del dayframe_sum['acw']
     col_order_daysum = ['dt','ww','vl','vb','tot_av_ht', 'tot_av_tt', 'tot_av_acw', 'k_vl', 'k_vb', 'k_av_ht', 'k_av_tt', 'k_av_acw', 'n_vl', 'n_vb', 'n_av_ht', 'n_av_tt', 'n_av_acw']
     dayframe_sum = dayframe_sum[col_order_daysum].fillna(0)
+
+    spin()
     return dayframe_sum
 
 
 def create_hourly_stats(day):
-    print (day,', ', end='', flush=True)
+    print(day)
     dayframe = doe_frame.loc[doe_frame['xl'] == day].reset_index()
     hours_index = dict()
     for i in range (0,25):
@@ -269,21 +270,11 @@ def create_hourly_stats(day):
     hours_frame.loc['summa','angekommen'] = hours_frame['angekommen'].sum()
     hours_frame.loc['summa','verbunden'] = hours_frame['verbunden'].sum()
     hours_frame.loc['summa','verloren'] = hours_frame['verloren'].sum()
-
-    if hours_frame.loc['summa','angekommen'] == 0:
-        print('fatal exception, set SLA to NaN, no calls for this day?')
-        hours_frame.loc['summa','servicelevel'] = np.NaN
-    else:
-        hours_frame.loc['summa','servicelevel'] =  hours_frame.loc['summa','verbunden']/hours_frame.loc['summa','angekommen']
-
+    #hours_frame.loc['summa','servicelevel'] = hours_frame['servicelevel'].mean()
+    hours_frame.loc['summa','servicelevel'] =  hours_frame.loc['summa','verbunden']/hours_frame.loc['summa','angekommen']
     hours_frame = hours_frame.T
-    hours_frame['xlday'] = day
-    hours_frame['day'] = datemap[day]['day']
-    hours_frame['date'] = datemap[day]['date']
+    hours_frame['day'] = day
     hours_frame['week']= dayframe.loc[0,'ww']
-    hours_frame['weekday']= datemap[day]['weekday']
-    hours_frame['month']= datemap[day]['month']
-    hours_frame['year']= datemap[day]['year']
 
     cols=hours_frame.columns.tolist()
     cols.insert(0, cols.pop())
@@ -294,11 +285,14 @@ def create_hourly_stats(day):
     return hours_frame
 
 def write_out(df_sum,target_workbook_w):
+    spin()
+
+    df_sum[['vb','k_vb','n_vb','vl','k_vl','n_vl']] = df_sum[['vb','k_vb','n_vb','vl','k_vl','n_vl']].astype(float)
 
     global s_row
     row=s_row-1
     sheet_rw = target_workbook_w.get_sheet(0)
-
+    
     style_datum             = xlwt.easyxf('alignment: horiz right', num_format_str = "ddd, dd.mm.yy")
     style_kw_trenner        = xlwt.easyxf('alignment: horiz right; font: color 0x17; borders: right double, right_color 0x28')
     style_number            = xlwt.easyxf('alignment: horiz centre')
@@ -311,12 +305,13 @@ def write_out(df_sum,target_workbook_w):
     sheet_rw.write(row, 0, ix[0], style_datum)   #Datum
     sheet_rw.write(row, 1, int(df_sum.iloc[0]['ww']), style_kw_trenner)   #Woche
 
+    #print(type(df_sum.iloc[0]['vl']))   # Verlorene Total, sollte np.int64 sein
     sheet_rw.write(row, 3, df_sum.iloc[0]['vl'], style_verlo)   # Verlorene Total
     sheet_rw.write(row, 4, df_sum.iloc[0]['vb'], style_number)   # Verbundene Total
     sheet_rw.write(row, 5, df_sum.iloc[0]['tot_av_ht'], style_minuten)   # Av. HT Total
     sheet_rw.write(row, 6, df_sum.iloc[0]['tot_av_tt'], style_minuten)   # Av. TT Total
     sheet_rw.write(row, 7, df_sum.iloc[0]['tot_av_acw'], style_minuten)   # Av. ACW Total
-
+    
     sheet_rw.write(row, 9, df_sum.iloc[0]['k_vl'], style_verlo)   # Verlorene Total
     sheet_rw.write(row, 10, df_sum.iloc[0]['k_vb'], style_number)   # Verbundene Total
     sheet_rw.write(row, 11, df_sum.iloc[0]['k_av_ht'], style_minuten)   # Av. HT Total
@@ -331,6 +326,7 @@ def write_out(df_sum,target_workbook_w):
 
     target_workbook_w.save(target)
     s_row += 1
+    spin()
 
 def write_sla(hours_frame,workbook):
     style_datum             = xlwt.easyxf('alignment: horiz right', num_format_str = "ddd, dd.mm.yy")
@@ -350,6 +346,13 @@ def write_sla(hours_frame,workbook):
     series_vl = hours_frame.loc['verloren'].values
     series_sla = hours_frame.loc['servicelevel'].values
 
+    #print(type(series_an))
+    #print(series_an)
+
+    #df_sum[['vb','k_vb','n_vb','vl','k_vl','n_vl']] = df_sum[['vb','k_vb','n_vb','vl','k_vl','n_vl']].astype(float)
+    series_an = series_an.astype(float, copy=False)
+    series_vl = series_vl.astype(float, copy=False)
+    series_sla = series_sla.astype(float, copy=False)
     for i in range(0,len(series_an)):
         if i == 0:
             style = style_datum
@@ -359,31 +362,23 @@ def write_sla(hours_frame,workbook):
             style = style_number
 
         val_an = series_an[i] # everything else is ok with xlwt...
-        sheet_angenommen.write(row, i, val_an, style)
+        sheet_angenommen.write(row, i, val_an, style) 
 
         val_vl = series_vl[i] # everything else is ok with xlwt...
-        sheet_verloren.write(row, i, val_vl, style)
+        sheet_verloren.write(row, i, val_vl, style) 
 
         val_sla = series_sla[i] # everything else is ok with xlwt...
+        #print(val_sla)
+        #print(type(val_sla))
         if i == 27:
             style = style_2dec
-        sheet_sla.write(row, i, val_sla, style)
+        if np.isnan(val_sla):
+            val_sla='.'
+        sheet_sla.write(row, i, val_sla, style) 
 
     target_workbook_w.save(target)
     s_row2 += 1
 
-def datemapper(datelist):
-    mapdict = dict()
-    for datum in sorted(dates_in_dir):
-        xldate=excel_date(datum)
-        mapdict[xldate] = dict()
-        mapdict[xldate]['date'] = datum
-        mapdict[xldate]['year'] = datum.year
-        mapdict[xldate]['month'] = datum.month
-        mapdict[xldate]['week'] = datum.strftime('%W')
-        mapdict[xldate]['day'] = datum.day
-        mapdict[xldate]['weekday'] = datum.strftime('%a')
-    return mapdict
 ####################end of function definitions#####################
 source,target,pmode = check_cmdline_params()
 doe = dict()    # dict of everything, from here all selections (by agent, by agent and date, by hours etc) are possible
@@ -391,43 +386,67 @@ doe = dict()    # dict of everything, from here all selections (by agent, by age
 ## read everything from directory into a dict and create a dataframe from it
 if pmode == "dir":
     filelist=get_filelist(source)
-    print(type(filelist))
-    #filelist=sorted(filelist)
-    #print(type(filelist))
-    #input("Press Enter to continue...")
-
-    #FL = pandas.DataFrame.from_dict(filelist,orient='columns')
-    #print(type(FL))
-    #FL.to_pickle('./testpickle.pkl')
-    #input("Press Enter to continue...")
-    #print(filelist)
-
-    print('dictionary creation...',end='',flush=True)
+    print('creating data dictionary...',end=' ')
     for k in sorted(filelist.keys()):
-    #for k in sorted(filelist):
         doe = read_entries(filelist[k],doe)
-    print('ready')
+        spin()
+    print('done')
 elif pmode == "file":
     doe = read_entries(source,doe)
 
-print('dictionary to pandas dataframe...')
-column_order = ['tm','dt','yy','mm','ww','wd','dd','xl','hh','an','vb','vl','ht','tt','acw','bz', 'dectt', 'decht', 'decacw']
+print('dataframe conjuring...',end=' ') ; sys.stdout.flush()                # flush stdout buffer (actual character display)
+column_order = ['tm','dt','yy','mm','ww','wd','dd','xl','hh','an','vb','vl','ht','tt','acw','bz']
 doe_frame = pandas.DataFrame(doe).T[column_order] # This df contains ALL files that were scanned in the input_dir
-doe_frame.to_pickle("./doe_pickle_1459.pkl")
 dates_in_dir = doe_frame.dt.unique()    # numpy.ndarray of datetime.date objects
 xldates_in_dir = doe_frame.xl.unique()    # numpy.ndarray of datetime.date objects
 years_in_dir = doe_frame.yy.unique()    # numpy.ndarray of year values
 kws_in_dir = doe_frame.ww.unique()      # numpy.ndarray of week numbers
 monate_in_dir = doe_frame.mm.unique()   # numpy.ndarray of month numbers
-datemap = datemapper(dates_in_dir)
-df_alldays = pandas.DataFrame()
-print('ok')
+print('done') ; sys.stdout.flush()                # flush stdout buffer (actual character display)
 
-print('create stats for each day...')
-for day in xldates_in_dir:
-    df_sla = create_hourly_stats(day)
-    df_alldays = pandas.concat([df_alldays, df_sla])
-print('ok')
 
-print
-df_alldays.to_pickle(sys.argv[2])
+
+target_workbook = xlrd.open_workbook(target, formatting_info=True)  # this is the file
+
+if target_workbook.nsheets != 4:
+    print("this parser expects an excel file with 4 sheets, but",target,"has only ",target_workbook.nsheets)
+    print("please check whether this is the right target file")
+    exit()
+
+target_sheet = target_workbook.sheet_by_index(0)
+target_workbook_w = xlcopy.copy(target_workbook)                # a copy is needed to write into
+s_row = target_sheet.nrows+1
+
+#print('finding days in sheet') ; sys.stdout.flush()                # flush stdout buffer (actual character display)
+last_day_target = max(target_days_found(target_sheet,s_row)) # returns the highest date found as an excel date number
+days_to_add = [i for i in xldates_in_dir if i > last_day_target] # list of days in scanned directory that are newer than the last day of the target sheet
+
+print ('days found in dir: ',xldates_in_dir[:2], '...', xldates_in_dir[-2:]); print ('last day of current excelfile: '+str(last_day_target)); print ('datasets to be appended: '+str(days_to_add[0])+' - '+str(days_to_add[-1]))
+
+print ('writing to sheet 0 days ') ; sys.stdout.flush()                # flush stdout buffer (actual character display)
+for day in days_to_add:
+    #print(day,end=', ')
+    day_summary=create_summary(day)  ## creates a summary of a day from the overall doe_frame
+    day_summary[['vl','n_vl','k_vl','vb','n_vb','k_vb']]=day_summary[['vl','n_vl','k_vl','vb','n_vb','k_vb']].astype(np.int32)
+    write_out(day_summary,target_workbook_w)
+
+print();print(str(target)+" updated");print()
+
+
+## process second sheet
+#target_sheet1 = target_workbook.sheet_by_index(1)
+#s_row2 = target_sheet1.nrows+1  # I'll just assume that sheets 1-3 are always the same date
+#last_day_target = max(target_days_found(target_sheet1,s_row2)) # returns the highest date found as an excel date number
+#days_to_add = [i for i in xldates_in_dir if i > last_day_target] # list of days in scanned directory that are newer than the last day of the target sheet
+
+#print ('last day of sla_statistics sheets: ',last_day_target)
+#print ('datasets_sla to be appended: ',days_to_add[:2],'...',days_to_add[-2:])
+
+#print ('writing to sheets 1-3 days')
+#for day in days_to_add:
+#    df_sla = create_hourly_stats(day)
+#    #df_sla.fillna('.', inplace=True)
+#    df_sla[['day','week']]=df_sla[['day','week']].astype(float)  # this is needed because xlwt cannot write np.int64
+#    write_sla(df_sla,target_workbook_w)
+
+print("todo: vorhandene Tage schon zu Beginn checken ;) und Durchschnittzeiten aus dem Script schreiben, nicht als Formel im excel-sheet")

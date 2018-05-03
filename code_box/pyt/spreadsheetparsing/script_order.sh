@@ -1,11 +1,15 @@
 #!/bin/bash
-bpp='/home/keuch/gits/keuch/code_box/pyt/spreadsheetparsing'
-echo ${base_parse_path}
+bp='/home/keuch/gits/keuch/code_box/pyt/spreadsheetparsing/'
+bpp='/home/keuch/gits/keuch/code_box/pyt/spreadsheetparsing/datenhalde/'
+echo ${bpp}
 
-${bpp}/rename_only.py ${bpp}/test_stats/
-cp ${bpp}/test_stats/*xls ${bpp}/test_stats/archiv/
-${bpp}/hotline_daily1458.py ${bpp}/test_stats/archiv/ ${bpp}/hotline_daily1458.xls
-${bpp}/hotline_daily1459.py ${bpp}/test_stats/archiv/ ${bpp}/hotline_daily1459.xls
-${bpp}/kws_agenten.py ${bpp}/test_stats/archiv/ ${bpp}/kws_agenten.xls
-${bpp}/hotline_to_pickle1458.py ${bpp}/test_stats/archiv/ ${bpp}/pkl_plots_calls_1458.pkl
-${bpp}/hotline_to_pickle1459.py ${bpp}/test_stats/archiv/ ${bpp}/pkl_plots_calls_1459.pkl
+${bp}/rename_only.py ${bpp}
+mv ${bpp}/1458_daily* ${bpp}/1458/
+mv ${bpp}/1459_daily* ${bpp}/1459/
+mv ${bpp}/CE_alle* ${bpp}/alle_agents_taeglich/
+
+${bp}/hotline_daily1458.py ${bpp}/1458/ ${bp}/hotline_daily1458.xls
+${bp}/hotline_daily1459.py ${bpp}/1459/ ${bp}/hotline_daily1459.xls
+${bp}/kws_agenten.py ${bpp}/alle_agents_taeglich/ ${bp}/kws_agenten.xls
+
+${bp}/Datensammler.py
