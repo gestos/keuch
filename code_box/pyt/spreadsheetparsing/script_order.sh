@@ -14,4 +14,4 @@ ${bp}/daily_1458.py ${bpp}/1458/ ${bp}/hotline_daily1458.xls &&
 ${bp}/daily_1459.py ${bpp}/1459/ ${bp}/hotline_daily1459.xls &&
 ${bp}/kws_agenten.py ${bpp}/alle_agents_taeglich/ ${bp}/kws_agenten.xls &&
 
-${bp}/Datensammler.py
+#${bp}/Datensammler.py
