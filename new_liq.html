@@ -1,36 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<!--
-   new_liq.html
-   
-   Copyright 2018 Unknown <keuch@localhost>
-   
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
-   
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-   
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-   MA 02110-1301, USA.
-   
-   
--->
+<p id="basis1">
+<table id="basen" style="font-size: 12px">
+<tr id="base1">
+<td ><input type="checkbox" id="lock1" size="2">fix</input></td>
+<td>Base1 | </td>
+<td><input id="pgb1" size="2" onblur="chkvalid()">pg</input></td>
+<td><input id="vgb1" size="2" onblur="chkvalid()">vg</input></td>
+<td><input id="alk1" size="2" onblur="chkvalid()">alk</input></td>
+<td><input id="nic1" size="2">mg nic</input></td>
+<td><input id="ml1" size="2">ml</input></td>
+</tr>
+<tr id="base2">
+<td><input type="checkbox" id="lock2"/><label for="lock2">fix</label></td>
+<td>Basegg=G2 | </td>
+<td><input id="pgb2" size="2" onblur="chkvalid()">pg</input></td>
+<td><input id="vgb2" size="2" onblur="chkvalid()">vg</input></td>
+<td><input id="alk2" size="2" onblur="chkvalid()">alk</input></td>
+<td><input id="nic2" size="2">mg nic</input></td>
+<td><input id="ml2" size="2">ml</input></td>
+</tr>
+<tr id="zielbase">
+<td><input type="checkbox" id="lock3"/><label for="lock3">fix</label></td>
+<td>Ziel | </td>
+<td><input id="pgbz" size="2" onblur="chkvalid()">pg</input></td>
+<td><input id="vgbz" size="2" onblur="chkvalid()">vg</input></td>
+<td><input id="alkz" size="2" onblur="chkvalid()">alk</input></td>
+<td><input id="nicz" size="2">mg nic</input></td>
+<td><input id="mlz" size="2">ml</input></td>
+</tr>
 
-<head>
-<meta charset="utf-8" />
-<title>untitled</title>
-<meta name="generator" content="Geany 1.30.1" />
-</head>
+</table>
+</p>
+<input type="button" id="go" value="go" onclick="gochk()" disabled="true" />
+<p id="ergebnis"></p>
 
-<body>
 
-</body>
 
-</html>
+
+<script>
+var dgby=function( id ) { return document.getElementById( id ); };
+
+function chk100(val1,val2,val3) {
+	var1 = Number(dgby(val1).value);
+	var2 = Number(dgby(val2).value);
+	var3 = Number(dgby(val3).value);
+	summe=var1+var2+var3;
+	if (summe !== 100) {
+		dgby(val1).style.background = "salmon";
+		dgby(val2).style.background = "salmon";
+		dgby(val3).style.background = "salmon";
+	} else {
+	dgby(val1).style.background = "lightgreen";
+	dgby(val2).style.background = "lightgreen";
+	dgby(val3).style.background = "lightgreen";
+}
+return summe;
+															}
+															function gochk(summ1,summ2) {
+																if (summ1 == 100 &&  summ2 == 100) {
+																	dgby('go').disabled=false;
+																}
+															}
+															function chkvalid() {
+																summ1=chk100('pgb1','vgb1','alk1');
+																summ2=chk100('pgb2','vgb2','alk2');
+																gochk(summ1,summ2);
+															}
+															</script>
