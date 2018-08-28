@@ -150,9 +150,10 @@ function calculate_nic(liq_menge,liq_nic,bb_nic) {
 }
 
 function get_pct(nullerbase,bunkerbase,ml_nb,ml_bb) {
+	let liqmenge				=	Number(dgby('mlliq').value);
 	let pct_nb = Number(dgby(nullerbase).value);
 	let pct_bb = Number(dgby(bunkerbase).value);
-	let pct_liq = (ml_nb*(pct_nb/100))+(ml_bb*(pct_bb/100));
+	let pct_liq = (ml_nb*pct_nb)/liqmenge+(ml_bb*pct_bb)/liqmenge;
 	return pct_liq;
 }
 
@@ -162,11 +163,9 @@ function calculate_liq () {
 	let mls=calculate_nic('mlliq','nicz','nic2'), ml_nb=mls[0], ml_bb=mls[1];
 	//console.log(mls, ml_bb, ml_nb);
 	let percent_pg_liq = get_pct('pgb1','pgb2',ml_nb,ml_bb);
-	console.log('prozent pg: ',percent_pg_liq);
 	let percent_vg_liq = get_pct('vgb1','vgb2',ml_nb,ml_bb);
-	console.log('prozent vg: ',percent_vg_liq);
 	let percent_alk_liq = get_pct('alk1','alk2',ml_nb,ml_bb);
-	console.log('prozent alk: ',percent_alk_liq);
+	console.log('prozent pg: ',percent_pg_liq,' prozent vg: ',percent_vg_liq,' prozent alk: ',percent_alk_liq);
 	dgby('ml1').value=ml_nb;
 	dgby('ml2').value=ml_bb;
 	dgby('pgbz').value=percent_pg_liq;
