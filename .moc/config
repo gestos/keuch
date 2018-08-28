@@ -1,0 +1,87 @@
+OnSongChange = "/usr/lib/lastfmsubmitd/lastfmsubmit --artist %a --title %t --length %d --album %b"
+theme = transparent-background
+ShowHiddenFiles = no
+Musicdir = /media/
+Fastdir1 = /home/keuch/musi/
+FastDir2 = /mnt/data/mucke/00_playlists/
+FastDir3 = /home/keuch/
+FastDir4 = /schrott/mucke/__proberaum/
+ASCIILines		= yes
+keymap = mocmap
+ExecCommand1		= "/usr/local/bin/eingabe-skript %f"
+ExecCommand2		= /usr/local/bin/ext_mount 
+ExecCommand3		= "/usr/local/bin/kick %f" 
+Softmixer_SaveState 	= yes
+SavePlaylist		= yes
+SyncPlaylist		= yes
+ResampleMethod 		= SincMediumQuality
+
+ALSAStutterDefeat = no
+
+
+
+
+
+# Executing external commands (1 - 10) invoked with key commands (F1 - F10 by
+# default).
+# Some arguments are substituted before executing:
+# %f - file path
+# %i - title made from tags
+# %S - start block mark (in seconds)
+# %E - end block mark (in seconds)
+#
+# Data from tags:
+# %t - title
+# %a - album
+# %r - artist
+# %n - track
+# %m - time of the file (in seconds)
+#
+# Parameters above apply to the currently selected file. If you change them to
+# capital letters, they are taken from the file currently playing.
+#
+# Programs are run using execv(), not a shell, so you can't do things like
+# redirecting the output to a file. The command string is split using blank
+# characters as separators, the first element is the command to be executed
+# and the rest are parameters, so if you use "echo Playing: %I" we run program
+# echo (from $PATH) with 2 parameters: 'Playing:' string and the title. Even
+# if the title contains spaces it's still one parameter and it's safe if it
+# contains `rm -rf /`.
+#
+# Examples:
+# ExecCommand1		= "cp %f /mnt/usb_drive"
+# ExecCommand2		= "/home/joe/now_playing %I"
+
+
+# Sound driver - OSS, ALSA, JACK, or null (only for debugging).
+# You can enter more than one driver separated by a comma. The first working
+# driver will be used.
+SoundDriver        = ALSA:OSS:JACK
+
+# Jack output settings.
+JackOutLeft        = "alsa_pcm:playback_1"
+JackOutRight        = "alsa_pcm:playback_2"
+
+# OSS output device.
+OSSDevice        = /dev/dsp
+
+# OSS Mixer device.
+OSSMixerDevice        = /dev/mixer
+
+# OSS Mixer channel: pcm or master.
+OSSMixerChannel1       = pcm
+
+# Second OSS Mixer channel: pcm or master.
+OSSMixerChannel2    = master
+
+# ALSA mixer device.
+AlsaMixer1         = Master
+
+# Second ALSA mixer device.
+AlsaMixer2        = Headphone
+
+# Third ALSA mixer device.
+# AlsaMixer3        = Speaker
+
+# ALSA output device.
+AlsaDevice        = default
