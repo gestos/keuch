@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en"> </html>
+<body>
+	<head>
+		<meta charset="UTF-8">
+		<script type='text/javascript' src='new_liq.js'></script>
+		<link rel="stylesheet" href="style.css">
+	</head>
+
+	<div id="grundstoffe" class="floater">
+
+		<h4>Grundstoffe ohne Nikotin</h4>
+		<table class="grund" style="font-size: 12px">
+			<tr>
+				<td>Grundstoff</td> <td>%PG</td> <td>%VG</td> <td>%Alk</td> <td>Menge</td>
+			</tr>
+			<tr id="pg">
+				<td>PG</td>
+				<td>100%</td>
+				<td></td>
+				<td></td>
+				<td><input id="pg_rein" size="2" readonly>ml</input></td>
+			</tr>
+			<tr id="vg">
+				<td>VG</td>
+				<td></td>
+				<td>100%</td>
+				<td></td>
+				<td><input id="vg_rein" size="2" readonly>ml</input></td>
+			</tr>
+			<tr id="alk">
+				<td>Alk</td>
+				<td></td>
+				<td></td>
+				<td>100%</td>
+				<td><input id="alkrein" size="2" readonly>ml</input></td>
+			</tr>
+			<tr id="zielbase">
+				<td>Ziel</td>
+				<td><input id="pgz" size="2" onchange="chkgrund()">% pg</input></td>
+				<td><input id="vgz" size="2" onchange="chkgrund()">% vg</input></td>
+				<td><input id="alkz" size="2" onchange="chkgrund()">% alk</input></td>
+				<td><input id="mlz" size="2" onchange="chkgrund()">ml</input></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="2"><input id="switcher1" type="checkbox" onchange="switchgrund()">Richtung ändern</input></td>
+				<td colspan="2"><input id="go1" type="button" value="berechnen" disabled onclick="calc_grund()"></input></td>
+		</table>
+	</div>
+
+	<div id="zwischenschritt" class="floater_small">
+		<h4>Werte übernehmen</h4>
+		<input id="to_nic" class="slidesmall" type="range" min="0" max="2" step="1" value="1" oninput="slideopt1()" />
+		<label id="slide1" for="to_nic">keine Werte übernehmen</label>
+		<input id="ubertrag" type="button" value="übernehmen" onclick="ubernehm()" />
+	</div>
+
+
+	<div id="nikotinmische" class="floater">
+		<h4>Nullerbasis mit Nikotinbasis mischen</h4>
+		<table id="basen" class="grund" style="font-size: 12px;" >
+			<tr>
+				<td>Base</td><td>PG %</td><td>VG %</td><td>Alk %</td><td>Nic. mg/ml</td><td>Menge ml</td>
+				</tr>
+			<tr id="base1">
+				<td>Nullerbase</td>
+				<td><input id="pgb1" size="2" onblur="chkvalid()">%</input></td>
+				<td><input id="vgb1" size="2" onblur="chkvalid()">%</input></td>
+				<td><input id="alk1" size="2" onblur="chkvalid()">%</input></td>
+				<td><input id="nic1" size="2" value="0" readonly>mg</input></td>
+				<td><input id="ml1" size="2" readonly>ml</input></td>
+			</tr>
+			<tr id="base2">
+				<td>Bunkerbase</td>
+				<td><input id="pgb2" size="2" onblur="chkvalid()">%</input></td>
+				<td><input id="vgb2" size="2" onblur="chkvalid()">%</input></td>
+				<td><input id="alk2" size="2" onblur="chkvalid()">%</input></td>
+				<td><input id="nic2" size="2" onblur="chkvalid()">mg</input></td>
+				<td><input id="ml2" size="2" readonly>ml</input></td>
+			</tr>
+			<tr id="zielbase">
+				<td>Ergebnis</td>
+				<td><input id="pgbz" size="2" onblur="chkvalid()" readonly>%</input></td>
+				<td><input id="vgbz" size="2" onblur="chkvalid()" readonly>%</input></td>
+				<td><input id="alkz1" size="2" onblur="chkvalid()" readonly>%</input></td>
+				<td><input id="nicz" class="zielfeld" size="2" onblur="chkvalid()">mg</input></td>
+				<td><input id="mlliq" class="zielfeld" size="2"onblur="chkvalid()">ml</input></td>
+			</tr>
+			<tr>
+				<td><input type="range" id="null_standardz" min="0" max="1" step="1" class="slidesmall" oninput="switch1(this.value)">ziel?</input></td>
+				<td id="richtung1"></td>
+				<td><input type="button" id="go" value="go" onclick="calculate_liq()" disabled="true" /></td>
+			</tr>
+		</table>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>

@@ -1,0 +1,39 @@
+body {
+	background-color: aliceblue;
+}
+
+table {
+	table-layout: fixed;
+}
+
+.grund td {
+	width: 100px;
+	text-align: center;
+}
+.grund input {
+	text-align: center;
+}
+
+.zielfeld {
+	border: 2px solid mediumpurple;
+	padding: 7px;
+}
+
+.slidesmall {
+	width: 40px;
+	display: block;
+	margin: 0px auto;
+}
+
+.floater {
+	display: inline-block;
+	float:left;
+	margin: 10px 50px;
+}
+.floater_small {
+	display: inline-block;
+	float:left;
+	margin: 10px 30px;
+	width: 150px;
+	text-align: center;
+}
