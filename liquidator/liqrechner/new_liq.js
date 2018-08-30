@@ -35,13 +35,13 @@ function chkgrund() {
 	}
 }
 // richtung lesen
-function to_percent() {
-	to_pct=dgby('switcher1').checked;
-	return to_pct;
+function flick(switcher) {
+	swchk=dgby(switcher).checked;
+	return swchk;
 }
 // richtung aendern
 function switchgrund() {
-	if (to_percent() == true) {
+	if (flick('switcher1') == true) {
 		dgby('pg_rein').readOnly=false;
 		dgby('vg_rein').readOnly=false;
 		dgby('alkrein').readOnly=false;
@@ -63,13 +63,13 @@ function switchgrund() {
 }
 // ausrechnen (grundstoffe)
 function calc_grund() {
-	if (to_percent() == false) {
+	if (flick('switcher1') == false) {
 		let pgpct=dgby('pgz').value, vgpct=dgby('vgz').value, alkpct=dgby('alkz').value, ml=dgby('mlz').value;
 		let pgml=(ml/100)*pgpct, vgml=(ml/100)*vgpct, alkml=(ml/100)*alkpct;
 		dgby('pg_rein').value=pgml;
 		dgby('vg_rein').value=vgml;
 		dgby('alkrein').value=alkml;
-	} else if (to_percent() == true) {
+	} else if (flick('switcher1') == true) {
 		let pgml=Number(dgby('pg_rein').value);
 		let vgml=Number(dgby('vg_rein').value);
 		let alkml=Number(dgby('alkrein').value);
@@ -173,6 +173,24 @@ function calculate_liq () {
 	dgby('alkz1').value=percent_alk_liq;
 }
 
+// richtung aendern2
+function switch2() {
+	if (flick('switcher2') == true) {
+		dgby('pgbz').readOnly=false;
+		dgby('vgbz').readOnly=false;
+		dgby('alkz1').readOnly=false;
+		dgby('pgb1').readOnly=true;
+		dgby('vgb1').readOnly=true;
+		dgby('alk1').readOnly=true;
+	} else  if (flick('switcher2') == false) {
+		dgby('pgbz').readOnly=true;
+		dgby('vgbz').readOnly=true;
+		dgby('alkz1').readOnly=true;
+		dgby('pgb1').readOnly=false;
+		dgby('vgb1').readOnly=false;
+		dgby('alk1').readOnly=false;
+	}
+}
 
 
 

@@ -46,6 +46,7 @@
 				<td></td>
 				<td colspan="2"><input id="switcher1" type="checkbox" onchange="switchgrund()">Richtung ändern</input></td>
 				<td colspan="2"><input id="go1" type="button" value="berechnen" disabled onclick="calc_grund()"></input></td>
+			</tr>
 		</table>
 	</div>
 
@@ -62,7 +63,7 @@
 		<table id="basen" class="grund" style="font-size: 12px;" >
 			<tr>
 				<td>Base</td><td>PG %</td><td>VG %</td><td>Alk %</td><td>Nic. mg/ml</td><td>Menge ml</td>
-				</tr>
+			</tr>
 			<tr id="base1">
 				<td>Nullerbase</td>
 				<td><input id="pgb1" size="2" onblur="chkvalid()">%</input></td>
@@ -88,8 +89,8 @@
 				<td><input id="mlliq" class="zielfeld" size="2"onblur="chkvalid()">ml</input></td>
 			</tr>
 			<tr>
-				<td><input type="range" id="null_standardz" min="0" max="1" step="1" class="slidesmall" oninput="switch1(this.value)">ziel?</input></td>
-				<td id="richtung1"></td>
+				<td></td>
+				<td colspan="2"><input id="switcher2" type="checkbox" onchange="switch2()">Richtung ändern</input></td>
 				<td><input type="button" id="go" value="go" onclick="calculate_liq()" disabled="true" /></td>
 			</tr>
 		</table>
