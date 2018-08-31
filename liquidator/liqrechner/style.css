@@ -1,19 +1,70 @@
 body {
-	background-color: aliceblue;
+	background-color: #333;
+	color: #3eb4ff;
+	font-family:sans;
+}
+
+h4 {
+	text-align: center;
+	color: #596f89;
+	text-shadow: 1px 2px #412317;
 }
 
 table {
 	table-layout: fixed;
 }
-
+.slidesmall input[type=range] {
+	background-color: salmon;
+}
 .grund td {
 	width: 100px;
 	text-align: center;
 }
+.grund th {
+	border-bottom: 1px dashed #0095f3;
+	text-align: center;
+	padding-bottom: 5px;
+}
+.grund td:first-child {
+	width: 100px;
+	text-align: right;
+	border-right: 1px dashed #0095f3;
+	padding-right: 5px;
+}
 .grund input {
 	text-align: center;
+	background-color: #323f47;
+	border: solid 1px #43666c;
+	margin: 2px 2px;
+	padding: 3px 3px;
+	color: #6ceaff;
 }
-
+.grund input[readonly] {
+	color: #7b7b7b;
+	background-color: #333;
+	border-color: #252e38;
+}
+.grund input[type=button][disabled] {
+	color: #4e4e4e;
+	background-color: #333;
+	border-color: #333;
+	box-shadow: none;
+	float:right;
+}
+.grund input[type=button] {
+	color: green;
+	background-color: #333;
+	border-color: #333;
+	box-shadow: -2px 2px #0a7d40;
+	float:right;
+}
+.grund input[type=checkbox] {
+	color: green;
+	background-color: #333;
+	border-color: #333;
+	box-shadow: -2px 2px #0a7d40;
+	float:right;
+}
 .zielfeld {
 	border: 2px solid mediumpurple;
 	padding: 7px;
@@ -36,4 +87,140 @@ table {
 	margin: 10px 30px;
 	width: 150px;
 	text-align: center;
+}
+.schiebelabel {
+	font-size: 10px;
+	display: block;
+	height: 5.5em;
+	font-family:sans;
+}
+
+.von {
+	color: #00aa4a;
+}
+.nach {
+	color: #d5ad00;
+}
+
+
+
+
+/* Customize the label (the container) */
+.container {
+	display: block;
+	position: relative;
+	padding-left: 55px;
+	margin-bottom: 0;
+	cursor: pointer;
+	font-size: 12px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+	position: absolute;
+	top: 0px;
+	left: 55px;
+	height: 10px;
+	width: 10px;
+	background-color: #0065b0;
+	border: 1px dotted #5105ff;
+
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+	background-color: #52efb2;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+	background-color: #005FEF;
+	border: 1px solid #6f876b;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+	display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+	left: 3px;
+	top: -5px;
+	width: 5px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	color: blueviolet;
+	border-color: #6bffcb;
+}
+
+
+.pushbutton {
+	color: #5fd842;
+	width: 90px;
+	text-align: center;
+	font-size: 10px;
+	padding: 0;
+	background-color: #333;
+	border: solid 1px #448c33;
+	border-radius: 20px;
+}
+.pushbutton[disabled] {
+	color: #484848;
+	width: 90px;
+	text-align: center;
+	font-size: 10px;
+	padding: 1px 2px 3px 2px;
+	background-color: #333;
+	border: solid 1px #27531d;
+	border-radius: 20px;
+}
+.pushbutton:hover:disabled {
+	color: #484848;
+	width: 90px;
+	text-align: center;
+	font-size: 10px;
+	padding: 1px 2px 3px 2px;
+	background-color: #333;
+	border: solid 1px #356c29;
+	border-radius: 20px;
+}
+
+.pushbutton:hover:enabled {
+	color: #5fd842;
+	width: 90px;
+	text-align: center;
+	font-size: 10px;
+	padding: 1px 2px 3px 2px;
+	background-color: #333;
+	border: solid 1px #356c29;
+	border-radius: 20px;
+	box-shadow: -1px 1px 22px -5px #0098f9;
+}
+
+
+.hiliterow {
+	box-shadow: 0px 0px 30px 1px #48412e;
 }
