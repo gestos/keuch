@@ -1,11 +1,11 @@
 body {
 	background-color: #333;
 	color: #3eb4ff;
+	height:100%;
 	font-family:sans;
 }
 
 h4 {
-	text-align: center;
 	color: #596f89;
 	text-shadow: 1px 2px #412317;
 }
@@ -79,14 +79,16 @@ table {
 .floater {
 	display: inline-block;
 	float:left;
-	margin: 10px 50px;
+	margin: 10px 5px;
+	padding-left: 15px;
 }
 .floater_small {
 	display: inline-block;
 	float:left;
-	margin: 10px 30px;
-	width: 150px;
+	margin: 10px 5px;
+	padding-left: 15px;
 	text-align: center;
+	width: 200px;
 }
 .schiebelabel {
 	font-size: 10px;
@@ -223,4 +225,23 @@ table {
 
 .hiliterow {
 	box-shadow: 0px 0px 30px 1px #48412e;
+}
+
+
+#links {
+	display: block;
+	width: 160px;
+	background-color: #333333;
+	float: left;
+	height: 100%;
+	position: fixed;
+	border-right: solid 1px #3eb4ff;
+	margin: 75px 0 auto;
+}
+
+#rechts {
+	margin-left: 160px;
+}
+.borderlein {
+	box-shadow: 5px -1px 15px -2px #334e57;
 }
