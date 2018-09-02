@@ -1,5 +1,5 @@
 body {
-	background-color: #333;
+	background-color: #666;
 	color: #3eb4ff;
 	height:100%;
 	font-family:sans;
@@ -149,7 +149,6 @@ table {
 #links {
 	display: block;
 	width: 160px;
-	background-color: #333333;
 	float: left;
 	height: 100%;
 	position: fixed;
