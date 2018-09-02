@@ -115,34 +115,38 @@ function calc_grund() {
 function slidestate() {
 	return dgby('to_nic').value
 }
-function slideopt1() {
-	state=dgby('to_nic').value;
+
+function hilite(felder) {
+	var col={from:'#00aa4a',to:'#d5ad00',nocol:''};
+	for (var i in felder.from) {
+		dgby(felder.from[i]).style.borderColor=col.from;
+	}
+	for (var i in felder.to) {
+		dgby(felder.to[i]).style.borderColor=col.to;
+	}
+	for (var i in felder.neutral) {
+		dgby(felder.neutral[i]).style.borderColor=col.nocol;
+
+	}
+}
+
+function slideopt1(arg) {
+	state=dgby(arg.id).value;
+
 	if (slidestate() == 0) {
+		var felder = {from:['pgz','vgz','alkz'],to:['pgb1','vgb1','alk1'],exe:'ubertrag'}
+		hilite(felder);
 		dgby('slide1').innerHTML='von<span class="von"> \"Grundstoffe\" </span> nach <span class="nach">\"Nikotinmischung\"</span> übernehmen &#8595';
-		dgby('pgz').style.borderColor='#00aa4a';
-		dgby('vgz').style.borderColor='#00aa4a';
-		dgby('alkz').style.borderColor='#00aa4a';
-		dgby('pgb1').style.borderColor='#d5ad00';
-		dgby('vgb1').style.borderColor='#d5ad00';
-		dgby('alk1').style.borderColor='#d5ad00';
 		dgby('ubertrag').disabled=false;
 	} else if (slidestate() == 1) {
+		var felder = {neutral:['pgz','vgz','alkz','pgb1','vgb1','alk1'],exe:'ubertrag'}
+		hilite(felder);
 		dgby('slide1').innerHTML='keine Werte übernehmen';
-		dgby('pgz').style.borderColor='';
-		dgby('vgz').style.borderColor='';
-		dgby('alkz').style.borderColor='';
-		dgby('pgb1').style.borderColor='';
-		dgby('vgb1').style.borderColor='';
-		dgby('alk1').style.borderColor='';
 		dgby('ubertrag').disabled=true;
 	} else if (slidestate() == 2) {
+		var felder = {from:['pgb1','vgb1','alk1'],to:['pgz','vgz','alkz'],exe:'ubertrag'}
+		hilite(felder);
 		dgby('slide1').innerHTML='von<span class="von"> \"Nikotinmischung\"</span> nach <span class="nach">\"Grundstoffe\"</span> übernehmen &#8593';
-		dgby('pgb1').style.borderColor='#00aa4a';
-		dgby('vgb1').style.borderColor='#00aa4a';
-		dgby('alk1').style.borderColor='#00aa4a';
-		dgby('pgz').style.borderColor='#d5ad00';
-		dgby('vgz').style.borderColor='#d5ad00';
-		dgby('alkz').style.borderColor='#d5ad00';
 		dgby('ubertrag').disabled=false;
 	}
 }
@@ -633,11 +637,11 @@ function chk100_2() {
 
 function ausblenden(tabelle,ausblender) {
 	if (dgby(tabelle).style.display !== 'none') {
-	dgby(tabelle).style.display='none';
-	dgby(ausblender).style.display='none';
+		dgby(tabelle).style.display='none';
+		dgby(ausblender).style.display='none';
 	} else {
-	dgby(tabelle).style.display='';
-	dgby(ausblender).style.display='';
+		dgby(tabelle).style.display='';
+		dgby(ausblender).style.display='';
 
 	}
 }
