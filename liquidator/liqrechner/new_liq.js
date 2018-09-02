@@ -1,6 +1,5 @@
 var dgby=function( id ) { return document.getElementById( id ); };
 
-
 // ALLGEMEINE FUNKTIONEN
 // check several values for 100
 function chk100(pg,vg,alk,nic) {
@@ -116,11 +115,10 @@ function calc_grund() {
 function slidestate() {
 	return dgby('to_nic').value
 }
-// slider-labels
 function slideopt1() {
 	state=dgby('to_nic').value;
 	if (slidestate() == 0) {
-		dgby('slide1').innerHTML='von<span class="von"> \"Grundstoffe\" </span> nach <span class="nach">\"Nikotinmischung\"</span> übernehmen<br>-------->';
+		dgby('slide1').innerHTML='von<span class="von"> \"Grundstoffe\" </span> nach <span class="nach">\"Nikotinmischung\"</span> übernehmen &#8595';
 		dgby('pgz').style.borderColor='#00aa4a';
 		dgby('vgz').style.borderColor='#00aa4a';
 		dgby('alkz').style.borderColor='#00aa4a';
@@ -138,7 +136,7 @@ function slideopt1() {
 		dgby('alk1').style.borderColor='';
 		dgby('ubertrag').disabled=true;
 	} else if (slidestate() == 2) {
-		dgby('slide1').innerHTML='von<span class="von"> \"Nikotinmischung\"</span> nach <span class="nach">\"Grundstoffe\"</span> übernehmen<br><--------';
+		dgby('slide1').innerHTML='von<span class="von"> \"Nikotinmischung\"</span> nach <span class="nach">\"Grundstoffe\"</span> übernehmen &#8593';
 		dgby('pgb1').style.borderColor='#00aa4a';
 		dgby('vgb1').style.borderColor='#00aa4a';
 		dgby('alk1').style.borderColor='#00aa4a';
@@ -148,7 +146,6 @@ function slideopt1() {
 		dgby('ubertrag').disabled=false;
 	}
 }
-// werte in andere Tabelle schreiben
 function ubernehm() {
 	if (slidestate() == 0) {
 		switch2();
