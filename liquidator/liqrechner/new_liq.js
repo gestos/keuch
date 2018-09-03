@@ -1,5 +1,12 @@
 var dgby=function( id ) { return document.getElementById( id ); };
 
+
+
+function collapse(block) {
+	klapp=dgby(block);
+	console.log(klapp);
+	dgby(block).style.display = dgby(block).style.display == "block" ? "none" : "block";
+}
 // ALLGEMEINE FUNKTIONEN
 // check several values for 100
 function chk100(pg,vg,alk,nic) {

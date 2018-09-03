@@ -9,11 +9,51 @@
 	<div id="outercontainer">
 		<div class="header">
 			<h1>Liquidrechner</h1>
-			</div>
+		</div>
 		<div id="links">
 			<hr class="vline">
 		</div>
 		<div id="rechts">
+			<div id="einleitung" class="floater borderlein">
+				<h2>Hinweise zur Benutzung</h2>
+				<p><a id="klapper" class="klapper" onclick="collapse('erklaerbaer')">klick zum Ein/Ausblenden</a></p>
+
+				<div id="erklaerbaer" >
+					<p>Der Liquidrechner hat 3 Abschnitte, die "aufeinander aufbauen" ;-). Der erste Rechner soll beim Zusammenmischen von Ausgangsstoffen helfen, wenn man also eine 
+					Basis ohne Nikotin aus reinem VG und PG zusammenkippen möchte. Hier kann man entweder die gewünschten Prozentanteile und die gewünschte Ergebnismenge in ml angeben,
+					oder mit dem "switch" Knöpfchen umstellen und Mengenangaben der Ausgangsstoffe eingeben und sich dann die %-Mischung anzeigen lassen.</p>
+					<p>Der zweite Rechner berechnet einem, wieviel Nikotinbasis man mit (s)einer Ausgangsbasis (z.B. der im ersten Schritt angemischten...) zusammenkippen muß, um auf eine
+					gewünschte Nikotinmenge zu mischen. Hier kann man auch wieder mit dem "switch" Knöpfchen umschalten und entweder einfach das Mischverhältnis anzeigen lassen, oder unten
+					ein gewünschtes Verhältnis angeben und sich anzeigen lassen, welches Verhältnis die Nullerbase haben müßte, um beim gewünschten Nikotingehalt auf das gewünschte Mischverhältnis
+					zu kommen. Ich gehe davon aus, daß die Bunkerbase in ihrer Zusammensetzung fix ist.</p>
+					<p>Im dritten Rechner gibt man an, welches Grundliquid (z.B. das im vorangegangenen Rechner zusammengkippte...) man hat und wie viel Aroma man beigeben will und bekommt dann
+					die jeweils benötigten ml angezeigt. Auch hier kann man den Rechenweg umkehren und unten das gewünschte Mischverhältnis vorgeben, um sich oben anzeigen zu lassen, welche
+					Grundwerte man bräuchte, um am Ende z.B. ein Liquid, das, nach Beigabe des Aromas, genau ein Verhältnis 70/30 bei X mg Nikotin hat, zu bekommen.</p>
+					<p>Im letzten Rechner kann man dann noch seine Aromakomposition zusammenrechnen und z.B. als Menge ein Fläschchen a 50ml vorgeben.</p>
+					<p>Die Werte der einzelnen Rechner können jeweils in beide Richtungen übertragen werden; der Hintergedanke war, daß ich ein aromatisiertes Liquid mit einem genauen
+					Mischverhältnis PG/VG/Zusatz bekommen wollte, und mich von dort aus rückwärts zu den reinen Ausgangsstoffen zurückrechnen kann ;), da die Aromen und Bunkerbasen ja immer
+					die % für PG vorgeben.</p>
+					<p>Das Feld "Alk" kann genutzt werden, wenn man in der Art der "Tradizionale"-Basis Wasser oder Alkohol beigeben möchte, oder zB für Menthol, das ja auch in Alkohol
+					gelöst sein kann</p>
+					<table class="grund klein">
+						<tr>
+							<td>Legende</td>
+							<td><input readonly /></td><td>ist ein reines Ausgabefeld, in dem Ergebnisse angezeigt werden</td>
+							<td><input /></td><td>ist ein normales Eingabefeld</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input style="background-color:#c65353" /></td><td>Feld muß noch geändert oder befüllt werden, um rechnen zu können</td>
+							<td><input style="background-color:#254519" /></td><td>In diesen Feldern sind die Werte o.k.</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input class="grund ausgangswert"></td><td>Wert aus diesen Feldern werden in...</td>
+							<td><input class="grund zielwert"></td><td>...diese Felder übertragen, wenn man aufs Übertragen-knöpfchen drückt</td>
+						</tr>
+					</table>
+				</div>
+			</div>
 			<div id="grundstoffe" class="floater borderlein">
 				<h2>Nullerbasis aus Grundstoffen mischen</h2>
 				<table class="grund" style="font-size: 12px">

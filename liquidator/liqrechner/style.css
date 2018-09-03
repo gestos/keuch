@@ -220,3 +220,16 @@ h1 {
 	text-shadow: 2px 3px violet;
 	padding-left: 100px;
 }
+.klein input {
+	inline-size: 20px;
+}
+#einleitung {
+	font-size: 0.75em;
+	color: white;
+}
+#erklaerbaer {
+	display: none;
+}
+a#klapper:hover {
+	color:#e7ff00;
+}
