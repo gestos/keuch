@@ -95,16 +95,25 @@ function switchgrund() {
 // ausrechnen (grundstoffe)
 function calc_grund() {
 	if (flick('switcher1') == false) {
-		let pgpct=dgby('pgz').value, vgpct=dgby('vgz').value, alkpct=dgby('alkz').value, ml=dgby('mlz').value;
-		let pgml=(ml/100)*pgpct, vgml=(ml/100)*vgpct, alkml=(ml/100)*alkpct;
+		var pgpct=Number(dgby('pgz').value).toFixed(2),
+			vgpct=Number(dgby('vgz').value).toFixed(2),
+			alkpct=Number(dgby('alkz').value).toFixed(2),
+			ml=Number(dgby('mlz').value).toFixed(2),
+			pgml=((ml/100)*pgpct).toFixed(2),
+			vgml=((ml/100)*vgpct).toFixed(2),
+			alkml=((ml/100)*alkpct).toFixed(2);
 		dgby('pg_rein').value=pgml;
 		dgby('vg_rein').value=vgml;
 		dgby('alkrein').value=alkml;
 	} else if (flick('switcher1') == true) {
-		let pgml=Number(dgby('pg_rein').value);
-		let vgml=Number(dgby('vg_rein').value);
-		let alkml=Number(dgby('alkrein').value);
-		let ml=Number((pgml+vgml+alkml)),pgpct=(pgml/ml)*100,vgpct=(vgml/ml)*100,alkpct=(alkml/ml)*100;
+		var pgml=Number((dgby('pg_rein').value) || 0).toFixed(2),
+			vgml=Number((dgby('vg_rein').value) || 0).toFixed(2),
+			alkml=Number((dgby('alkrein').value) || 0).toFixed(2),
+			ml=  (parseFloat(pgml) + parseFloat(vgml) + parseFloat(alkml)).toFixed(2),
+			pgpct=(((pgml/ml)*100) || 0).toFixed(2),
+			vgpct=(((vgml/ml)*100) || 0).toFixed(2),
+			alkpct=(((alkml/ml)*100) || 0).toFixed(2);
+		console.log(pgml,vgml,alkml,ml,pgpct,vgpct,alkpct);
 		dgby('mlz').value=ml;
 		dgby('pgz').value=pgpct;
 		dgby('vgz').value=vgpct;
@@ -112,59 +121,97 @@ function calc_grund() {
 	}
 }
 // WERTE VON GRUNDMISCHUNG ZU NIKMISCHUNG UEBERNEHMEN
-function slidestate() {
-	return dgby('to_nic').value
-}
+//function slidestate(slider) {
+//	return dgby(slider.id).value
+//}
 
 function hilite(felder) {
-	var col={from:'#00aa4a',to:'#d5ad00',nocol:''};
-	for (var i in felder.from) {
-		dgby(felder.from[i]).style.borderColor=col.from;
+//	console.log(felder);
+	for (var i in felder.basis) {
+		dgby(felder.basis[i]).className='ausgangswert';
 	}
-	for (var i in felder.to) {
-		dgby(felder.to[i]).style.borderColor=col.to;
+	for (var i in felder.ziel) {
+		dgby(felder.ziel[i]).className='zielwert';
 	}
 	for (var i in felder.neutral) {
-		dgby(felder.neutral[i]).style.borderColor=col.nocol;
-
+		dgby(felder.neutral[i]).className='';
+	}
+}
+var labeltexte={
+	slider1:{
+		label:'slider1_label',
+		vonoben:'von<span class="von"> \"A\" </span> nach <span class="nach">\"B\"</span> übernehmen &#8595',
+		keine:'keine Werte übernehmen',
+		vonunten:'von<span class="von"> \"B\"</span> nach <span class="nach">\"A\"</span> übernehmen &#8593',
+		felder:{oben:['pgz','vgz','alkz'],unten:['pgb1','vgb1','alk1'],exe:'ubertrag1'}
+	},
+	slider2:{
+		label:'slider2_label',
+		vonoben:'von<span class="von"> \"A\" </span> nach <span class="nach">\"B\"</span> übernehmen &#8595',
+		keine:'keine Werte übernehmen',
+		vonunten:'von<span class="von"> \"B\"</span> nach <span class="nach">\"A\"</span> übernehmen &#8593',
+		felder:{oben:['pgbz','vgbz','alkz1','nicz'],unten:['pg_3','vg_3','alk3','nic3'],exe:'ubertrag2'}
+	},
+	slider3:{
+		label:'slider3_label',
+		vonoben:'von<span class="von"> \"A\" </span> nach <span class="nach">\"B\"</span> übernehmen &#8595',
+		keine:'keine Werte übernehmen',
+		vonunten:'von<span class="von"> \"B\"</span> nach <span class="nach">\"A\"</span> übernehmen &#8593',
+		felder:{oben:['arpct_5','ml_5'],unten:['aromagesamt','einzelmenge'],exe:'ubertrag3'}
 	}
 }
 
-function slideopt1(arg) {
-	state=dgby(arg.id).value;
 
-	if (slidestate() == 0) {
-		var felder = {from:['pgz','vgz','alkz'],to:['pgb1','vgb1','alk1'],exe:'ubertrag'}
-		hilite(felder);
-		dgby('slide1').innerHTML='von<span class="von"> \"Grundstoffe\" </span> nach <span class="nach">\"Nikotinmischung\"</span> übernehmen &#8595';
-		dgby('ubertrag').disabled=false;
-	} else if (slidestate() == 1) {
-		var felder = {neutral:['pgz','vgz','alkz','pgb1','vgb1','alk1'],exe:'ubertrag'}
-		hilite(felder);
-		dgby('slide1').innerHTML='keine Werte übernehmen';
-		dgby('ubertrag').disabled=true;
-	} else if (slidestate() == 2) {
-		var felder = {from:['pgb1','vgb1','alk1'],to:['pgz','vgz','alkz'],exe:'ubertrag'}
-		hilite(felder);
-		dgby('slide1').innerHTML='von<span class="von"> \"Nikotinmischung\"</span> nach <span class="nach">\"Grundstoffe\"</span> übernehmen &#8593';
-		dgby('ubertrag').disabled=false;
+
+function slideopt(slider) {
+	state=dgby(slider.id).value;
+	sliderID=slider.id;
+	felder=labeltexte[sliderID].felder;
+
+	if (state == 0) {
+		felder.basis=felder.oben, felder.ziel=felder.unten, felder.neutral = [];
+		hilite(labeltexte[sliderID].felder);
+		dgby(labeltexte[sliderID].label).innerHTML=labeltexte[sliderID].vonoben;
+		dgby(felder.exe).disabled=false;
+	} else if (state == 1) {
+		felder.neutral = felder.oben.concat(felder.unten);
+		hilite(labeltexte[sliderID].felder);
+		dgby(labeltexte[sliderID].label).innerHTML=labeltexte[sliderID].keine;
+		dgby(felder.exe).disabled=true;
+	} else if (state == 2) {
+		felder.basis=felder.unten, felder.ziel=felder.oben, felder.neutral = [];
+		hilite(labeltexte[sliderID].felder);
+		dgby(labeltexte[sliderID].label).innerHTML=labeltexte[sliderID].vonunten;
+		dgby(felder.exe).disabled=false;
 	}
+
 }
-function ubernehm() {
-	if (slidestate() == 0) {
-		switch2();
-		dgby('pgb1').value = dgby('pgz').value;
-		dgby('vgb1').value = dgby('vgz').value;
-		dgby('alk1').value = dgby('alkz').value;
-		chk100('pgb1','vgb1','alk1');
+function ubernehm(button) {
+	var abschnitte={ubertrag1:'slider1',ubertrag2:'slider2',ubertrag3:'slider3'};
+	buttonID=button.id;
+	slider=abschnitte[buttonID];
+	state=dgby(slider).value;
+	felder=labeltexte[slider].felder;
+	if (state == 0) {
+		felder.basis=felder.oben, felder.ziel=felder.unten, felder.neutral = [];
+		console.log(felder.basis,felder.ziel);
+		for (var i in felder.ziel) {
+			console.log(dgby(felder.ziel[i]).value);
+			console.log(dgby(felder.basis[i]).value);
+			dgby(felder.ziel[i]).value=dgby(felder.basis[i]).value;
+		}
 	}
-	else if (slidestate() == 2) {
-		switchgrund();
-		dgby('pgz').value = dgby('pgb1').value;
-		dgby('vgz').value = dgby('vgb1').value;
-		dgby('alkz').value = dgby('alk1').value;
-		chk100('pgz','vgz','alkz');
+	else if (state == 2) {
+		felder.basis=felder.unten, felder.ziel=felder.oben, felder.neutral = [];
+		console.log(felder.basis,felder.ziel);
+		for (var i in felder.ziel) {
+			console.log(dgby(felder.ziel[i]).value);
+			console.log(dgby(felder.basis[i]).value);
+			dgby(felder.ziel[i]).value=dgby(felder.basis[i]).value;
+		};
 	};
+	dgby(slider).value=1;
+	slideopt(dgby(slider));
 }
 // NIKOTINMISCHUNG
 // check fuer Nikotinmische
@@ -184,9 +231,9 @@ function chkvalid() {
 }
 
 function chknic(nicbb,nicliq,mlliq) {
-	let nic_bb = Number(dgby(nicbb).value);
-	let nic_liq = Number(dgby(nicliq).value);
-	let ml = Number(dgby(mlliq).value);
+	let nic_bb = Number(dgby(nicbb).value).toFixed(2);
+	let nic_liq = Number(dgby(nicliq).value).toFixed(2);
+	let ml = Number(dgby(mlliq).value).toFixed(2);
 
 	if ((nic_bb < 1 || nic_bb > 250)) {
 		dgby('nic2').style.backgroundColor='#c65353';
@@ -211,31 +258,29 @@ function chknic(nicbb,nicliq,mlliq) {
 }
 // mischung ausrechnen
 function calculate_nic(liq_menge,liq_nic,bb_nic) {
-	let liqmenge				=	Number(dgby(liq_menge).value);
-	let bb_nic_gehalt		=	Number(dgby(bb_nic).value);
-	let liq_nic_gehalt	=	Number(dgby(liq_nic).value);
+	let liqmenge				=	Number(dgby(liq_menge).value).toFixed(2);
+	let bb_nic_gehalt		=	Number(dgby(bb_nic).value).toFixed(2);
+	let liq_nic_gehalt	=	Number(dgby(liq_nic).value).toFixed(2);
 
-	let ml_menge_bb = liqmenge/(bb_nic_gehalt/liq_nic_gehalt);
-	//console.log(ml_menge_bb);
-	let ml_menge_nb = liqmenge-ml_menge_bb;
-	//console.log(ml_menge_nb);
+	let ml_menge_bb = (liqmenge/(bb_nic_gehalt/liq_nic_gehalt)).toFixed(2);
+	let ml_menge_nb = (liqmenge-ml_menge_bb).toFixed(2);
 	return [ml_menge_nb,ml_menge_bb];
 }
 
 function get_pct(nullerbase,bunkerbase,ml_nb,ml_bb) {
-	let liqmenge				=	Number(dgby('mlliq').value);
-	let pct_nb = Number(dgby(nullerbase).value);
-	let pct_bb = Number(dgby(bunkerbase).value);
-	let pct_liq = (ml_nb*pct_nb)/liqmenge+(ml_bb*pct_bb)/liqmenge;
+	let liqmenge				=	Number(dgby('mlliq').value).toFixed(2);
+	let pct_nb = Number(dgby(nullerbase).value).toFixed(2);
+	let pct_bb = Number(dgby(bunkerbase).value).toFixed(2);
+	let pct_liq = ((ml_nb*pct_nb)/liqmenge+(ml_bb*pct_bb)/liqmenge).toFixed(2);
 	return pct_liq;
 }
 function calculate_liq () {
 	if (flick('switcher2') == false) {
 		let mls=calculate_nic('mlliq','nicz','nic2'), ml_nb=mls[0], ml_bb=mls[1];
 		//console.log(mls, ml_bb, ml_nb);
-		let percent_pg_liq = get_pct('pgb1','pgb2',ml_nb,ml_bb).toFixed(2);
-		let percent_vg_liq = get_pct('vgb1','vgb2',ml_nb,ml_bb).toFixed(2);
-		let percent_alk_liq = get_pct('alk1','alk2',ml_nb,ml_bb).toFixed(2);
+		let percent_pg_liq = Number(get_pct('pgb1','pgb2',ml_nb,ml_bb)).toFixed(2);
+		let percent_vg_liq = Number(get_pct('vgb1','vgb2',ml_nb,ml_bb)).toFixed(2);
+		let percent_alk_liq = Number(get_pct('alk1','alk2',ml_nb,ml_bb)).toFixed(2);
 		console.log('prozent pg: ',percent_pg_liq,' prozent vg: ',percent_vg_liq,' prozent alk: ',percent_alk_liq);
 		dgby('ml1').value=ml_nb;
 		dgby('ml2').value=ml_bb;
@@ -286,9 +331,6 @@ function calc2pct(pct_pg_bb,pct_vg_bb,pct_alk_bb,mg_bb,mg_lq,menge_lq,pct_pg_lq,
 	if ((ml_pg_liq-ml_pg_bb < 0) || (ml_vg_liq-ml_vg_bb <0) || (ml_alk_liq-ml_alk_bb <0)) {
 		window.alert('nicht moeglich');
 	}
-
-
-
 	dgby('ml2').value=ml_bb;
 	dgby('ml1').value=ml_nb;
 	dgby('pgb1').value=pct_pg_nb;
@@ -607,9 +649,9 @@ function calculate_liq2() {
 }
 
 function chk100_2() {
-	var overall=Number(dgby('einzelmenge').value);
-	var ar_ml=Number(dgby('aromagesamt').value);
-	var overall_ml=Number(overall*(ar_ml/100));
+	var overall=Number(dgby('einzelmenge').value).toFixed(2);
+	var ar_ml=Number(dgby('aromagesamt').value).toFixed(2);
+	var overall_ml=Number(overall*(ar_ml/100)).toFixed(2);
 
 	dgby('aromagesamtml').value=overall_ml;
 
@@ -624,7 +666,7 @@ function chk100_2() {
 		var curpct=ins[i];
 		var curml=outs[i];
 		suma += Number(curpct.value) || 0;
-		curml.value=(curpct.value*(overall_ml/100));
+		curml.value=(curpct.value*(overall_ml/100)).toFixed(2);
 	}
 	su=dgby('sum').value=suma;
 	if (su !== 100) {
