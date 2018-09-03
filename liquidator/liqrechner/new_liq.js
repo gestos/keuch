@@ -16,10 +16,14 @@ function chk100(pg,vg,alk,nic) {
 	summe=var1+var2+var3;
 	console.log(var1,var2,var3,summe);
 	if (summe >= 99.99 && summe <= 100) {
-		col100(pg,vg,alk,'#254519')
+		dgby(pg).className="okfeld";
+		dgby(vg).className="okfeld";
+		dgby(alk).className="okfeld";
 		return true;
 	} else {
-		col100(pg,vg,alk,'#c65353')
+		dgby(pg).className="failfeld";
+		dgby(vg).className="failfeld";
+		dgby(alk).className="failfeld";
 		return false;
 	}
 }
@@ -36,10 +40,10 @@ function chkgrund() {
 	let ml = Number(dgby('mlz').value);
 	grundsumme=chk100('pgz','vgz','alkz');
 	if (grundsumme == true && ml >= 10) {
-		dgby('mlz').style.background='#254519';
+		dgby('mlz').className="okfeld";
 		dgby('go1').disabled=false;
 	} else {
-		dgby('mlz').style.background='#c65353';
+		dgby('mlz').className="failfeld";
 		dgby('go1').disabled=true;
 	}
 }
@@ -50,46 +54,23 @@ function flick(switcher) {
 }
 // richtung aendern
 function switchgrund() {
+	var list=['pg_rein','vg_rein','alkrein','pgz','vgz','alkz','mlz'];
+	for (var i=0; i<list.length; i++) {
+		console.log(i);
+		dgby(list[i]).removeAttribute('style');
+		dgby(list[i]).className="";
+		dgby(list[i]).value=null;
+	}
 	if (flick('switcher1') == true) {
-		dgby('pg_rein').removeAttribute("style");
-		dgby('vg_rein').removeAttribute("style");
-		dgby('alkrein').removeAttribute("style");
-		dgby('pgz').removeAttribute("style");
-		dgby('vgz').removeAttribute("style");
-		dgby('alkz').removeAttribute("style");
-		dgby('mlz').removeAttribute("style");
-		dgby('pgz').value=null;
-		dgby('vgz').value=null;
-		dgby('alkz').value=null;
-		dgby('mlz').value=null;
-		dgby('pg_rein').value=null;
-		dgby('vg_rein').value=null;
-		dgby('alkrein').value=null;
-
 		dgby('pg_rein').readOnly=false;
 		dgby('vg_rein').readOnly=false;
 		dgby('alkrein').readOnly=false;
-		dgby('mlz').readOnly=false;
+		dgby('mlz').readOnly=true;
 		dgby('pgz').readOnly=true;
 		dgby('vgz').readOnly=true;
 		dgby('alkz').readOnly=true;
 		dgby('go1').disabled=false;
 	} else {
-		dgby('pg_rein').removeAttribute("style");
-		dgby('vg_rein').removeAttribute("style");
-		dgby('alkrein').removeAttribute("style");
-		dgby('pgz').removeAttribute("style");
-		dgby('vgz').removeAttribute("style");
-		dgby('alkz').removeAttribute("style");
-		dgby('mlz').removeAttribute("style");
-		dgby('pgz').value=null;
-		dgby('vgz').value=null;
-		dgby('alkz').value=null;
-		dgby('mlz').value=null;
-		dgby('pg_rein').value=null;
-		dgby('vg_rein').value=null;
-		dgby('alkrein').value=null;
-
 		dgby('pgz').readOnly=false;
 		dgby('vgz').readOnly=false;
 		dgby('alkz').readOnly=false;
@@ -244,19 +225,19 @@ function chknic(nicbb,nicliq,mlliq) {
 	let ml = Number(dgby(mlliq).value).toFixed(2);
 
 	if ((nic_bb < 1 || nic_bb > 250)) {
-		dgby('nic2').style.backgroundColor='#c65353';
+		dgby('nic2').className="failfeld";
 	} else {
-		dgby('nic2').style.backgroundColor='#254519';
+		dgby('nic2').className="okfeld";
 	};
 	if ((nic_liq < 0.5 || nic_liq > 32)) {
-		dgby('nicz').style.backgroundColor='#c65353';
+		dgby('nicz').className="failfeld";
 	} else {
-		dgby('nicz').style.backgroundColor='#254519';
+		dgby('nicz').className="okfeld";
 	};
 	if (ml < 10) {
-		dgby('mlliq').style.backgroundColor='#c65353';
+		dgby('mlliq').className="failfeld";
 	} else {
-		dgby('mlliq').style.backgroundColor='#254519';
+		dgby('mlliq').className="okfeld";
 	};
 	if ((nic_bb < 1 || nic_bb > 250) || (nic_liq < 0.5 || nic_liq > 32) || (ml < 10)) {
 		return false;
@@ -485,24 +466,24 @@ function chkvalid2() {
 		let row1=chk100('pg_3','vg_3','alk3');
 		let row2=chk100('pg_4','vg_4','alk4');
 		if (0 < nicsrc && nicsrc < 49) {
-			dgby('nic3').style.background='#254519';
+			dgby('nic3').className="okfeld";
 			var nicok=true;
 		} else {
-			dgby('nic3').style.background='#c65353';
+			dgby('nic3').className="failfeld";
 			var nicok=false;
 		}
 		if (0 < arpct && arpct < 51) {
-			dgby('arpct_5').style.background='#254519';
+			dgby('arpct_5').className="okfeld";
 			var arok=true;
 		} else {
-			dgby('arpct_5').style.background='#c65353';
+			dgby('arpct_5').className="failfeld";
 			var arok=false;
 		}
 		if (dgby('ml_5').value > 9) {
-			dgby('ml_5').style.background='#254519';
+			dgby('ml_5').className="okfeld";
 			var mengok=true;
 		} else {
-			dgby('ml_5').style.background='#c65353';
+			dgby('ml_5').className="failfeld";
 			var mengok=false;
 		}
 		if (row1 && row2 && nicok && arok && mengok) {
