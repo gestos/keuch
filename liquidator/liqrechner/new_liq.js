@@ -69,10 +69,10 @@ function switchgrund() {
 		dgby('pg_rein').readOnly=false;
 		dgby('vg_rein').readOnly=false;
 		dgby('alkrein').readOnly=false;
+		dgby('mlz').readOnly=false;
 		dgby('pgz').readOnly=true;
 		dgby('vgz').readOnly=true;
 		dgby('alkz').readOnly=true;
-		dgby('mlz').readOnly=true;
 		dgby('go1').disabled=false;
 	} else {
 		dgby('pg_rein').removeAttribute("style");
