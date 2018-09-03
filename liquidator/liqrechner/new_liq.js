@@ -4,7 +4,7 @@ var dgby=function( id ) { return document.getElementById( id ); };
 
 function collapse(block) {
 	klapp=dgby(block);
-	console.log(klapp);
+	//console.log(klapp);
 	dgby(block).style.display = dgby(block).style.display == "block" ? "none" : "block";
 }
 // ALLGEMEINE FUNKTIONEN
@@ -14,12 +14,13 @@ function chk100(pg,vg,alk,nic) {
 	var2 = Number(dgby(vg).value);
 	var3 = Number(dgby(alk).value);
 	summe=var1+var2+var3;
-	if (summe !== 100) {
-		col100(pg,vg,alk,'#c65353')
-		return false;
-	} else {
+	console.log(var1,var2,var3,summe);
+	if (summe >= 99.99 && summe <= 100) {
 		col100(pg,vg,alk,'#254519')
 		return true;
+	} else {
+		col100(pg,vg,alk,'#c65353')
+		return false;
 	}
 }
 // color fields according to checked sum
@@ -120,7 +121,7 @@ function calc_grund() {
 			pgpct=(((pgml/ml)*100) || 0).toFixed(2),
 			vgpct=(((vgml/ml)*100) || 0).toFixed(2),
 			alkpct=(((alkml/ml)*100) || 0).toFixed(2);
-		console.log(pgml,vgml,alkml,ml,pgpct,vgpct,alkpct);
+		//console.log(pgml,vgml,alkml,ml,pgpct,vgpct,alkpct);
 		dgby('mlz').value=ml;
 		dgby('pgz').value=pgpct;
 		dgby('vgz').value=vgpct;
@@ -201,19 +202,19 @@ function ubernehm(button) {
 	felder=labeltexte[slider].felder;
 	if (state == 0) {
 		felder.basis=felder.oben, felder.ziel=felder.unten, felder.neutral = [];
-		console.log(felder.basis,felder.ziel);
+		//console.log(felder.basis,felder.ziel);
 		for (var i in felder.ziel) {
-			console.log(dgby(felder.ziel[i]).value);
-			console.log(dgby(felder.basis[i]).value);
+			//console.log(dgby(felder.ziel[i]).value);
+			//console.log(dgby(felder.basis[i]).value);
 			dgby(felder.ziel[i]).value=dgby(felder.basis[i]).value;
 		}
 	}
 	else if (state == 2) {
 		felder.basis=felder.unten, felder.ziel=felder.oben, felder.neutral = [];
-		console.log(felder.basis,felder.ziel);
+		//console.log(felder.basis,felder.ziel);
 		for (var i in felder.ziel) {
-			console.log(dgby(felder.ziel[i]).value);
-			console.log(dgby(felder.basis[i]).value);
+			//console.log(dgby(felder.ziel[i]).value);
+			//console.log(dgby(felder.basis[i]).value);
 			dgby(felder.ziel[i]).value=dgby(felder.basis[i]).value;
 		};
 	};
@@ -288,7 +289,7 @@ function calculate_liq () {
 		let percent_pg_liq = Number(get_pct('pgb1','pgb2',ml_nb,ml_bb)).toFixed(2);
 		let percent_vg_liq = Number(get_pct('vgb1','vgb2',ml_nb,ml_bb)).toFixed(2);
 		let percent_alk_liq = Number(get_pct('alk1','alk2',ml_nb,ml_bb)).toFixed(2);
-		console.log('prozent pg: ',percent_pg_liq,' prozent vg: ',percent_vg_liq,' prozent alk: ',percent_alk_liq);
+		//console.log('prozent pg: ',percent_pg_liq,' prozent vg: ',percent_vg_liq,' prozent alk: ',percent_alk_liq);
 		dgby('ml1').value=ml_nb;
 		dgby('ml2').value=ml_bb;
 		dgby('pgbz').value=percent_pg_liq;
@@ -299,7 +300,7 @@ function calculate_liq () {
 	}
 }
 function calc2pct(pct_pg_bb,pct_vg_bb,pct_alk_bb,mg_bb,mg_lq,menge_lq,pct_pg_lq,pct_vg_lq,pct_alk_lq) {
-	console.log('calc2pct');
+	//console.log('calc2pct');
 	for (i=0; i<arguments.length;i++) {
 		// console.log(arguments[i]);
 		arguments[i]=dgby(arguments[i]).value;
@@ -312,21 +313,21 @@ function calc2pct(pct_pg_bb,pct_vg_bb,pct_alk_bb,mg_bb,mg_lq,menge_lq,pct_pg_lq,
 	let ml_vg_bb=(ml_bb*(pct_vg_bb/100)).toFixed(2);
 	let ml_alk_bb=(ml_bb*(pct_alk_bb/100)).toFixed(2);
 
-	console.log('BB ml_PG:',ml_pg_bb,' ml_VG:',ml_vg_bb,' ml_Alk:',ml_alk_bb);
+	//console.log('BB ml_PG:',ml_pg_bb,' ml_VG:',ml_vg_bb,' ml_Alk:',ml_alk_bb);
 
 	// diese Werte in ml soll das Ziel-Liquid haben:
 	let ml_pg_liq=(menge_lq*(pct_pg_lq/100)).toFixed(2);
 	let ml_vg_liq=(menge_lq*(pct_vg_lq/100)).toFixed(2);
 	let ml_alk_liq=(menge_lq*(pct_alk_lq/100)).toFixed(2);
 
-	console.log('Liq ml_PG:',ml_pg_liq,' ml_VG:',ml_vg_liq,' ml_Alk:',ml_alk_liq);
+	//console.log('Liq ml_PG:',ml_pg_liq,' ml_VG:',ml_vg_liq,' ml_Alk:',ml_alk_liq);
 
 	// diese Werte in ml werden von der NB benoetigt, um auf die Zielwerte zu kommen
 	let ml_pg_nb=(ml_pg_liq-ml_pg_bb).toFixed(2);
 	let ml_vg_nb=(ml_vg_liq-ml_vg_bb).toFixed(2);
 	let ml_alk_nb=(ml_alk_liq-ml_alk_bb).toFixed(2);
 
-	console.log('NB ml_PG:',ml_pg_nb,' ml_VG:',ml_vg_nb,' ml_Alk:',ml_alk_nb);
+	//console.log('NB ml_PG:',ml_pg_nb,' ml_VG:',ml_vg_nb,' ml_Alk:',ml_alk_nb);
 
 	// diese in Prozent von der berechneten NB-Menge
 	let pct_pg_nb=((ml_pg_nb/ml_nb)*100).toFixed(2);
@@ -480,7 +481,7 @@ function chkvalid2() {
 
 
 	if (richtung == 'norm') {
-		console.log(richtung);
+		//console.log(richtung);
 		let row1=chk100('pg_3','vg_3','alk3');
 		let row2=chk100('pg_4','vg_4','alk4');
 		if (0 < nicsrc && nicsrc < 49) {
@@ -510,7 +511,7 @@ function chkvalid2() {
 			dgby('go2').disabled=true;
 		}
 	} else {
-		console.log(richtung);
+		//console.log(richtung);
 		let row2=chk100('pg_4','vg_4','alk4');
 		let row1=chk100('pg_5','vg_5','alk_5');
 		if (0 < nicdst && nicdst < 49) {
