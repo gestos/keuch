@@ -370,8 +370,8 @@ function switch3() {
 		dgby('Ergebnis3').className=""
 	} else  if (flick(swi) == false) {
 		for (var i=0;i<Fu.length;i++) {
-			dgby(Fu[i]).readOnly=false;
-			dgby(Fo[i]).readOnly=true;
+			dgby(Fo[i]).readOnly=false;
+			dgby(Fu[i]).readOnly=true;
 		}
 
 		dgby('Liq3').className=""
