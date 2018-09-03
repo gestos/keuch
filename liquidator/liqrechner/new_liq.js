@@ -329,122 +329,54 @@ function calc2pct(pct_pg_bb,pct_vg_bb,pct_alk_bb,mg_bb,mg_lq,menge_lq,pct_pg_lq,
 
 // richtung aendern2
 function switch2() {
+	var Fo=['pgb1','vgb1','alk1','ml1'],Fu=['pgbz','vgbz','alkz1'],nc='nicz',Fa=Fo.concat(Fu);
+	for (var i=0;i<Fa.length;i++) {
+		dgby(Fa[i]).value=null;
+		dgby(Fa[i]).removeAttribute('style');
+		dgby(Fa[i]).className="";
+	}
 	if (flick('switcher2') == true) {
-		dgby('pgb1').value=null;
-		dgby('vgb1').value=null;
-		dgby('alk1').value=null;
-		dgby('pgbz').value=null;
-		dgby('vgbz').value=null;
-		dgby('alkz1').value=null;
-		dgby('pgb1').removeAttribute("style");
-		dgby('vgb1').removeAttribute("style");
-		dgby('alk1').removeAttribute("style");
-		dgby('pgbz').removeAttribute("style");
-		dgby('vgbz').removeAttribute("style");
-		dgby('alkz1').removeAttribute("style");
-
-		dgby('pgbz').readOnly=false;
-		dgby('vgbz').readOnly=false;
-		dgby('alkz1').readOnly=false;
-		dgby('pgb1').readOnly=true;
-		dgby('vgb1').readOnly=true;
-		dgby('alk1').readOnly=true;
-
+		for (var i=0;i<Fu.length;i++) {
+			dgby(Fu[i]).readOnly=false;
+			dgby(Fo[i]).readOnly=true;
+		}
 		dgby('misch_nuller').className="hiliterow";
 		dgby('misch_ziel').className="";
 	} else  if (flick('switcher2') == false) {
-		dgby('pgb1').value=null;
-		dgby('vgb1').value=null;
-		dgby('alk1').value=null;
-		dgby('pgbz').value=null;
-		dgby('vgbz').value=null;
-		dgby('alkz1').value=null;
-		dgby('pgb1').removeAttribute("style");
-		dgby('vgb1').removeAttribute("style");
-		dgby('alk1').removeAttribute("style");
-		dgby('pgbz').removeAttribute("style");
-		dgby('vgbz').removeAttribute("style");
-		dgby('alkz1').removeAttribute("style");
-
-		dgby('pgbz').readOnly=true;
-		dgby('vgbz').readOnly=true;
-		dgby('alkz1').readOnly=true;
-		dgby('pgb1').readOnly=false;
-		dgby('vgb1').readOnly=false;
-		dgby('alk1').readOnly=false;
-
+		for (var i=0;i<Fu.length;i++) {
+			dgby(Fu[i]).readOnly=true;
+			dgby(Fo[i]).readOnly=false;
+		}
 		dgby('misch_ziel').className="hiliterow";
 		dgby('misch_nuller').className="";
 	}
-	//let chk=chkvalid();
 }
 
 function switch3() {
+	var Fo=['pg_3','vg_3','alk3','nic3'],Fu=['pg_5','vg_5','alk_5','nic_5'],Fm=['ml3','ml4'],Fa=Fo.concat(Fu).concat(Fm);
+	for (var i=0;i<Fa.length;i++) {
+		dgby(Fa[i]).value=null;
+		dgby(Fa[i]).removeAttribute('style');
+		dgby(Fa[i]).className="";
+	}
+
 	var swi='switcher3';
 	if (flick(swi) == true) {
-		dgby('pg_3').removeAttribute("style");
-		dgby('vg_3').removeAttribute("style");
-		dgby('alk3').removeAttribute("style");
-		dgby('nic3').removeAttribute("style");
-		dgby('pg_5').removeAttribute("style");
-		dgby('vg_5').removeAttribute("style");
-		dgby('alk_5').removeAttribute("style");
-		dgby('nic_5').removeAttribute("style");
-		dgby('pg_3').value=null;
-		dgby('vg_3').value=null;
-		dgby('alk3').value=null;
-		dgby('nic3').value=null;
-		dgby('pg_5').value=null;
-		dgby('vg_5').value=null;
-		dgby('alk_5').value=null;
-		dgby('nic_5').value=null;
-		dgby('ml3').value=null;
-		dgby('ml4').value=null;
-
-		dgby('pg_5').readOnly=false;
-		dgby('vg_5').readOnly=false;
-		dgby('alk_5').readOnly=false;
-		dgby('nic_5').readOnly=false;
-		dgby('pg_3').readOnly=true;
-		dgby('vg_3').readOnly=true;
-		dgby('alk3').readOnly=true;
-		dgby('nic3').readOnly=true;
-
-
+		for (var i=0;i<Fu.length;i++) {
+			dgby(Fu[i]).readOnly=false;
+			dgby(Fo[i]).readOnly=true;
+		}
 		dgby('Liq3').className="hiliterow"
 		dgby('Ergebnis3').className=""
 	} else  if (flick(swi) == false) {
-		dgby('pg_3').removeAttribute("style");
-		dgby('vg_3').removeAttribute("style");
-		dgby('alk3').removeAttribute("style");
-		dgby('nic3').removeAttribute("style");
-		dgby('pg_5').removeAttribute("style");
-		dgby('vg_5').removeAttribute("style");
-		dgby('alk_5').removeAttribute("style");
-		dgby('nic_5').removeAttribute("style");
-		dgby('pg_3').value=null;
-		dgby('vg_3').value=null;
-		dgby('alk3').value=null;
-		dgby('nic3').value=null;
-		dgby('pg_5').value=null;
-		dgby('vg_5').value=null;
-		dgby('alk_5').value=null;
-		dgby('nic_5').value=null;
-		dgby('ml3').value=null;
-		dgby('ml4').value=null;
+		for (var i=0;i<Fu.length;i++) {
+			dgby(Fu[i]).readOnly=false;
+			dgby(Fo[i]).readOnly=true;
+		}
 
-		dgby('pg_5').readOnly=true;
-		dgby('vg_5').readOnly=true;
-		dgby('alk_5').readOnly=true;
-		dgby('nic_5').readOnly=true;
-		dgby('pg_3').readOnly=false;
-		dgby('vg_3').readOnly=false;
-		dgby('alk3').readOnly=false;
-		dgby('nic3').readOnly=false;
 		dgby('Liq3').className=""
 		dgby('Ergebnis3').className="hiliterow"
 	}
-	//let chk=chkvalid2();
 }
 
 function chkvalid2() {
@@ -459,7 +391,6 @@ function chkvalid2() {
 	var nicsrc=dgby('nic3').value;
 	var nicdst=dgby('nic_5').value;
 	var arpct=dgby('arpct_5').value;
-
 
 	if (richtung == 'norm') {
 		//console.log(richtung);
@@ -496,24 +427,24 @@ function chkvalid2() {
 		let row2=chk100('pg_4','vg_4','alk4');
 		let row1=chk100('pg_5','vg_5','alk_5');
 		if (0 < nicdst && nicdst < 49) {
-			dgby('nic_5').style.background='#254519';
+			dgby('nic_5').className="okfeld";
 			var nicok=true;
 		} else {
-			dgby('nic_5').style.background='#c65353';
+			dgby('nic_5').className="failfeld";
 			var nicok=false;
 		}
 		if (0 < arpct && arpct < 51) {
-			dgby('arpct_5').style.background='#254519';
+			dgby('arpct_5').className="okfeld";
 			var arok=true;
 		} else {
-			dgby('arpct_5').style.background='#c65353';
+			dgby('arpct_5').className="failfeld";
 			var arok=false;
 		}
 		if (dgby('ml_5').value > 9) {
-			dgby('ml_5').style.background='#254519';
+			dgby('ml_5').className="okfeld";
 			var mengok=true;
 		} else {
-			dgby('ml_5').style.background='#c65353';
+			dgby('ml_5').className="failfeld";
 			var mengok=false;
 		}
 		if (row1 && row2 && nicok && arok && mengok) {

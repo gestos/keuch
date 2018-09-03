@@ -14,6 +14,7 @@ h2 {
 }
 table {
 	table-layout: fixed;
+	border-collapse: collapse;
 }
 .slidesmall input[type=range] {
 	background-color: salmon;
@@ -21,6 +22,8 @@ table {
 .grund td {
 	width: 100px;
 	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 .grund th {
 	border-bottom: 1px dashed #81502F;
@@ -42,7 +45,7 @@ table {
 	padding: 3px 3px;
 	color: #000;
 	inline-size: 55px;
-	box-shadow: -2px 2px 1px -1px #81502F;
+	box-shadow: -1px -1px 0px 0px #81502F;
 }
 .grund input[readonly] {
 	color: #000;
@@ -61,13 +64,13 @@ table {
 	width: 10em;
 	margin: 3px 15px;
 	/*! text-align: center; */
-	box-shadow: -2px 2px #7d3b0a;
+	box-shadow: -1px -1px #7d3b0a;
 }
 .grund input[type=button] {
 	color: #01590b;
 	background-color: #c4fa9d;
 	border-color: #333;
-	box-shadow: -2px 2px #0a7d40;
+	box-shadow: -1px -1px #0a7d40;
 	/*! float:right; */
 	display: block;
 	width: 10em;
@@ -93,18 +96,30 @@ table {
 	width: 750px;
 }
 .schiebelabel {
-	font-size: 10px;
+	font-size: 12px;
 	display: inline-block;
-	height: 2.5em;
+	/*! height: 2.5em; */
 	font-family:sans;
-	width: 30em;
+	width: 20em;
 	text-align: center;
+	border: 1px solid #ebc997;
+	vertical-align: middle;
+	margin: 3px 20px 3px 5px;
+	padding: 4px;
+	line-height: 2.5em;
+	border-radius: 10px;
+	box-shadow: -1px -1px 0px 0px #9c6649;
+	background-color: #f8ecd4;
 }
 .von {
 	color: #00aa4a;
+	font-weight: bold;
+	font-size: 13px;
 }
 .nach {
 	color: #d5ad00;
+	font-weight: bold;
+	font-size: 13px;
 }
 .pushbutton {
 	color: #186d1c;
@@ -135,7 +150,7 @@ table {
 	background-color: #fe000000;
 	border: solid 1px #9900004d;
 	border-radius: 20px;
-	box-shadow: 1px 1px 1px -1px #ff000080;
+	box-shadow: -1px -1px 0px 0px #ff000080;
 }
 
 .pushbutton:hover:enabled {
@@ -147,18 +162,27 @@ table {
 	background-color: #baff70;
 	border: solid 1px #2eff00;
 	border-radius: 20px;
-	box-shadow: -1px 1px 22px 3px #20c200;
+	box-shadow: -1px -1px 22px 3px #20c200;
+	/*! margin: 0px 15px; */
+	/*! display: inline-block; */
 }
 .hiliterow {
-	box-shadow: 0px 0px 30px 1px #48412e;
+	border: dotted 2px #c4fa9d4d;
+	border-collapse: collapse;
+	background-color: #f9efd8;
+	font-weight: bold;
+	border-radius: 50px;
+	/*! border-color: blue; */
+	/*! display: table-row; */
+	/*! text-align: center; */
 }
 input.ausgangswert, input[readonly].ausgangswert {
 	border-color: #00e363;
-	box-shadow: 1px 1px 20px -5px #00e363;
+	box-shadow: -1px -1px 20px -5px #00e363;
 }
 input.zielwert, input[readonly].zielwert {
 	border-color: #d5ad00;
-	box-shadow: 1px 1px 20px -5px #d5ad00;
+	box-shadow: -1px -1px 20px -5px #d5ad00;
 }
 .borderlein {
 	box-shadow: -3px -3px 5px -1px #cc32114d;
@@ -191,7 +215,7 @@ input.cbinput {
 	display: block;
 	color: #006790;
 	border-left: 1px solid #004196;
-	box-shadow: 1px 2px 30px 1px #03c1ff9;
+	box-shadow: -1px -1px 30px 1px #03c1ff9;
 	margin-top: 0px;
 	margin-left: 130px;
 }
