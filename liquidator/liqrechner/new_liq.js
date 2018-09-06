@@ -129,23 +129,23 @@ function hilite(felder) {
 var labeltexte={
 	slider1:{
 		label:'slider1_label',
-		vonoben:'von<span class="von"> \"A\" </span> nach <span class="nach">\"B\"</span> übernehmen &#8595',
-		keine:'keine Werte übernehmen',
-		vonunten:'von<span class="von"> \"B\"</span> nach <span class="nach">\"A\"</span> übernehmen &#8593',
+		vonoben:'<span class="von">&#8595</span>',
+		keine:'-',
+		vonunten:'<span class="nach">&#8593</span>',
 		felder:{oben:['pgz','vgz','alkz'],unten:['pgb1','vgb1','alk1'],exe:'ubertrag1'}
 	},
 	slider2:{
 		label:'slider2_label',
-		vonoben:'von<span class="von"> \"A\" </span> nach <span class="nach">\"B\"</span> übernehmen &#8595',
-		keine:'keine Werte übernehmen',
-		vonunten:'von<span class="von"> \"B\"</span> nach <span class="nach">\"A\"</span> übernehmen &#8593',
+		vonoben:'<span class="von">&#8595</span>',
+		keine:'-',
+		vonunten:'<span class="nach">&#8593</span>',
 		felder:{oben:['pgbz','vgbz','alkz1','nicz'],unten:['pg_3','vg_3','alk3','nic3'],exe:'ubertrag2'}
 	},
 	slider3:{
 		label:'slider3_label',
-		vonoben:'von<span class="von"> \"A\" </span> nach <span class="nach">\"B\"</span> übernehmen &#8595',
-		keine:'keine Werte übernehmen',
-		vonunten:'von<span class="von"> \"B\"</span> nach <span class="nach">\"A\"</span> übernehmen &#8593',
+		vonoben:'<span class="von">&#8595</span>',
+		keine:'-',
+		vonunten:'<span class="nach">&#8593</span>',
 		felder:{oben:['arpct_5','ml_5'],unten:['aromagesamt','einzelmenge'],exe:'ubertrag3'}
 	}
 }

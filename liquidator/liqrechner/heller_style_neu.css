@@ -101,16 +101,16 @@ table {
 	display: inline-block;
 	/*! height: 2.5em; */
 	font-family:sans;
-	width: 15em;
+	width: 5em;
 	text-align: center;
-	border: 1px solid #ebc997;
+	/*! border: 1px solid #ebc997; */
 	vertical-align: middle;
-	margin: 3px 20px 3px 5px;
-	padding: 4px;
-	line-height: 2.5em;
-	border-radius: 10px;
-	box-shadow: -1px -1px 0px 0px #9c6649;
-	background-color: #f8ecd4;
+	/*! margin: 3px 20px 3px 5px; */
+	/*! padding: 4px; */
+	line-height: 1.5em;
+	/*! border-radius: 10px; */
+	/*! box-shadow: -1px -1px 0px 0px #9c6649; */
+	/*! background-color: #f8ecd4; */
 }
 .von {
 	color: #00aa4a;
