@@ -1,5 +1,5 @@
 body {
-	background-color: #fff7e6;
+	background-color: #FFFAFA;
 	color: #7b3b12;
 	height:100%;
 	font-family:sans;
@@ -45,12 +45,12 @@ table {
 	padding: 3px 3px;
 	color: #000;
 	inline-size: 55px;
-	box-shadow: -1px -1px 0px 0px #81502F;
+	box-shadow: -2px -2px 0px 0px #81502F;
 }
 .grund input[readonly] {
 	color: #000;
-	background-color: #fff7e6;
-	border-color: #81502F;
+	background-color: #f2f2f2;
+	border-color: #D5D5D5;
 	box-shadow: none;
 	font-weight: bold;
 }
@@ -89,19 +89,19 @@ table {
 	vertical-align: middle;
 }
 .floater {
-	display: inline-block;
+	display: block;
 	clear: both;
-	float:left;
-	margin: 10px 5px;
-	padding-left: 15px;
-	width: 750px;
+	/*! float:left; */
+	margin: 10px auto;
+	padding: 5px 15px;
+	width: 90%;
 }
 .schiebelabel {
 	font-size: 12px;
 	display: inline-block;
 	/*! height: 2.5em; */
 	font-family:sans;
-	width: 20em;
+	width: 15em;
 	text-align: center;
 	border: 1px solid #ebc997;
 	vertical-align: middle;
@@ -189,17 +189,10 @@ input.zielwert, input[readonly].zielwert {
 	box-shadow: -3px -3px 5px -1px #cc32114d;
 	border: solid 1px #cb9d00;
 }
-#links {
+#main_column {
 	display: block;
-	width: 160px;
-	float: left;
-	height: 100%;
-	position: fixed;
-	/*! border-right: solid 1px #3eb4ff; */
-	margin: 0;
-}
-#rechts {
-	margin-left: 160px;
+	width: 800px;
+	margin: 0 auto;
 }
 /* ###################################################################################### */
 
@@ -210,38 +203,34 @@ input.cbinput {
 .aromaname input{
 	inline-size: 10em
 }
-
-.vline {
-	width: 2px;
-	display: block;
-	color: #006790;
-	border-left: 1px solid #004196;
-	box-shadow: -1px -1px 30px 1px #03c1ff9;
-	margin-top: 0px;
-	margin-left: 130px;
-}
-
 .footer {
 	clear: both;
 	display: block;
-	background-image: linear-gradient(#fff7e6,#ffedc6,#faffc6);
-	height: 200px;
+	background-image: linear-gradient(#FFFAFA,#c6efff);
+	height: 120px;
 }
 .header {
 	display: block;
 	height: 120px;
 	width: 100%;
-	background-image: linear-gradient(#fffbd4, #fff7e6);
+	background-image: linear-gradient(#d4ebff, #FFFAFA);
+	margin: 0 auto;
 }
 h1 {
 	line-height: 120px;
 	vertical-align: middle;
 	text-align:center;
-	font-style:italic;
-	text-shadow: 2px 3px #ded2bd;
-	padding-left: 420px;
-	color: #65553d;
-	display: inline;
+	/*! text-decoration:underline; */
+	text-shadow: -2px -2px #b7c7ea;
+	/*! padding-left: 420px; */
+	color: #d6e6f3;
+	display: block;
+	margin: 0 auto;
+	font-stretch: ultra-condensed;
+	font-size: 3em;
+	/*! text-decoration-style: solid; */
+	/*! text-decoration-color: #ecf6ff; */
+	/*! text-decoration-line: black; */
 }
 .klein input {
 	inline-size: 20px;

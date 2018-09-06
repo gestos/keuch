@@ -4,21 +4,17 @@
 		<title>Liquid- und Aromenrechner</title>
 		<meta charset="UTF-8">
 		<script src='new_liq.js' defer></script>
-		<link rel="stylesheet" href="heller_style.css">
+		<link rel="stylesheet" href="heller_style_neu.css">
 	</head>
 	<body>
 		<div id="outercontainer">
 			<div class="header">
 				<h1>Liquidrechner</h1>
 			</div>
-			<div id="links">
-				<hr class="vline">
-			</div>
-			<div id="rechts">
+			<div id="main_column">
 				<div id="einleitung" class="floater borderlein">
 					<h2>Hinweise zur Benutzung</h2>
 					<p><a id="klapper" class="klapper" onclick="collapse('erklaerbaer')">klick zum Ein/Ausblenden</a></p>
-
 					<div id="erklaerbaer" >
 						<p>Der Liquidrechner hat 3 Abschnitte, die "aufeinander aufbauen" ;-). Der erste Rechner soll beim Zusammenmischen von Ausgangsstoffen helfen, wenn man also eine 
 						Basis ohne Nikotin aus reinem VG und PG zusammenkippen möchte. Hier kann man entweder die gewünschten Prozentanteile und die gewünschte Ergebnismenge in ml angeben,
@@ -55,7 +51,6 @@
 						</table>
 					</div>
 				</div>
-				<br class="clear">
 				<div id="grundstoffe" class="floater borderlein">
 					<h2>Nullerbasis aus Grundstoffen mischen</h2>
 					<table class="grund" style="font-size: 12px">
@@ -96,14 +91,12 @@
 						</tr>
 					</table>
 				</div>
-				<br class="clear">
 				<div id="zwischenschritt" class="floater">
 					<h2>Werte übernehmen</h2>
 					<input id="slider1" class="slidesmall" type="range" min="0" max="2" step="1" value="1" oninput="slideopt(this)" />
 					<label id="slider1_label" class="schiebelabel" for="slider1">keine Werte übernehmen</label>
 					<input id="ubertrag1" class="pushbutton" type="button" value="übernehmen" disabled  onclick="ubernehm(this)" />
 				</div>
-				<br class="clear">
 				<div id="nikotinmische" class="floater borderlein">
 					<h2>Nullerbasis mit Nikotinbasis mischen</h2>
 					<table id="basen" class="grund" style="font-size: 12px;" >
@@ -140,7 +133,6 @@
 						</tr>
 					</table>
 				</div>
-				<br class="clear">
 				<!-- ##### Werte von Nikotinmischung nach Aromaliquid und vice versa ##### -->
 				<div id="zwischenschritt2" class="floater">
 					<h2>Werte übernehmen</h2>
@@ -148,7 +140,6 @@
 					<label id="slider2_label" class="schiebelabel" for="slider2">keine Werte übernehmen</label>
 					<input id="ubertrag2" class="pushbutton" type="button" value="übernehmen" disabled  onclick="ubernehm(this)" />
 				</div>
-				<br class="clear">
 				<!-- ##### Aromaliquid ##### -->
 				<div id="Aromatisierung" class="floater borderlein">
 					<h2>Nikotinliquid aromatisieren</h2>
@@ -189,7 +180,6 @@
 						</tr>
 					</table>
 				</div>
-				<br class="clear">  
 				<!-- ##### Werte von Aromaliquid nach Komposition übernehmen ##### -->
 				<div id="zwischenschritt3" class="floater">
 					<h2>Werte übernehmen</h2>
@@ -197,7 +187,6 @@
 					<label id="slider3_label" class="schiebelabel" for="slider3">keine Werte übernehmen</label>
 					<input id="ubertrag3" class="pushbutton" type="button" value="übernehmen" disabled  onclick="ubernehm(this)" />
 				</div>
-				<br class="clear">
 				<!-- ##### Aromenkomposition ##### -->
 				<div id="Aromenkomposition" class="floater borderlein">
 					<h2>Aromen komponieren</h2>
@@ -255,8 +244,7 @@
 					</table>
 				</div>
 			</div>
-			<br class="clear">
-			<div class="footer"></div>
-		</div>
+			<div class="footer">
+			</div>
 	</body> 
 </html>
