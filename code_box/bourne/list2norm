@@ -42,12 +42,12 @@ printf "creating a destination directory at ${colr}${destin}${off}... "
 mkdir -p $destin && printf "ok\n"
 
 printf "copying files to ${colr}${destin}${off}..."
-for mp3_file in "$(grep -v ^# $1 | sed 's/\r$//')"; do cp $mp3_file $destin; done && printf "ok\n"
+for mp3_file in $(grep -v ^# $1 | sed 's/\r$//'); do cp $mp3_file $destin; done && printf "ok\n"
 
 printf "${colr}applying uniform gain${off}\n"
 mp3gain -r -c -k ${destin}/*mp3
 
-printf "rewriting playlist for normalized directory to${colr}${destin}/playlist_${tstamp}.m3u${off}..."
-for i in "$(grep -v ^# $1)"; do echo $destin/${i##/*/} >> $destin/playlist_${tstamp}.m3u; done && printf "ok \n"
+printf "rewriting playlist for normalized directory to${colr}${destin}/playlist_${tstamp}.m3u${off}...\n"
+for i in $(grep -v ^# $1); do echo ${i##/*/} >> $destin/playlist_${tstamp}.m3u; done && printf "ok \n"
 
 IFS=$OLDIFS
