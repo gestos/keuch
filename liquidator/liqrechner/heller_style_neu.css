@@ -167,6 +167,25 @@ table {
 	/*! margin: 0px 15px; */
 	/*! display: inline-block; */
 }
+.pushbuttonr {
+	color: #200642;
+	width: 90px;
+	text-align: center;
+	font-size: 10px;
+	padding: 0;
+	background-color: #b99cfa;
+	border: solid 1px #0039ff;
+	border-radius: 20px;
+}
+.pushbuttonr:hover {
+	color: #011775;
+	width: 90px;
+	text-align: center;
+	font-size: 10px;
+	background-color: #b1d4d2;
+	border: solid 1px #9199c8;
+	border-radius: 20px;
+}
 .hiliterow {
 	border: dotted 2px #c4fa9d4d;
 	border-collapse: collapse;
@@ -254,4 +273,20 @@ input.okfeld {
 }
 input.failfeld {
 	background-color: #ff000080;
+}
+.labeltable {
+	color: black;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	border: solid black 1px;
+}
+.labeltable td {
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 12px;
+}
+.trenner {
+	width: 5px;
+	border-left: 1px solid darkcyan;
+	border-right: 1px solid darkcyan;
 }

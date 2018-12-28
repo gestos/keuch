@@ -4,6 +4,7 @@
 		<title>Liquid- und Aromenrechner</title>
 		<meta charset="UTF-8">
 		<script src='new_liq.js' defer></script>
+		<script src='etiketten.js' defer></script>
 		<link rel="stylesheet" href="heller_style_neu.css">
 	</head>
 	<body>
@@ -201,35 +202,35 @@
 						<tr>
 							<td>davon:</td>
 							<td>Aroma 1:</td>
-							<td class="aromaname"><input placeholder="Erdbeere FA" /></td>
+							<td class="aromaname"><input id="ar1" placeholder="Erdbeere FA" /></td>
 							<td><input id="aroma1pct" class="arpct" size="3" onblur="chk100_2()" />%</td>
 							<td><input id="aroma1ml" class="arml" size="3" readonly />ml</td>
 						</tr>
 						<tr>
 							<td></td>
 							<td>Aroma 2:</td>
-							<td class="aromaname"><input placeholder="Vanille Cap"/></td>
+							<td class="aromaname"><input id="ar2" placeholder="Vanille Cap"/></td>
 							<td><input id="aroma2pct" class="arpct"  size="3" onblur="chk100_2()" />%</td>
 							<td><input id="aroma2ml" class="arml" size="3" readonly />ml</td>
 						</tr>
 						<tr>
 							<td></td>
 							<td>Aroma 3:</td>
-							<td class="aromaname"><input placeholder="Haselnuss FA"/></td>
+							<td class="aromaname"><input id="ar3" placeholder="Haselnuss FA"/></td>
 							<td><input id="aroma3pct" class="arpct"  size="3" onblur="chk100_2()" />%</td>
 							<td><input id="aroma3ml" class="arml" size="3" readonly />ml</td>
 						</tr>
 						<tr>
 							<td></td>
 							<td>Aroma 4:</td>
-							<td class="aromaname"><input placeholder="Kirsche Ina"/></td>
+							<td class="aromaname"><input id="ar4" placeholder="Kirsche Ina"/></td>
 							<td><input id="aroma4pct" class="arpct"  size="3" onblur="chk100_2()" />%</td>
 							<td><input id="aroma4ml" class="arml" size="3" readonly />ml</td>
 						</tr>
 						<tr>
 							<td></td>
 							<td>Aroma 5:</td>
-							<td class="aromaname"><input /></td>
+							<td class="aromaname"><input id="ar5" placeholder="Gurke FA" /></td>
 							<td><input id="aroma5pct" class="arpct"  size="3" onblur="chk100_2()" />%</td>
 							<td><input id="aroma5ml" class="arml" size="3" readonly />ml</td>
 						</tr>
@@ -238,12 +239,26 @@
 							<td></td>
 							<td>Summe:</td>
 							<td><input id="sum" size="3" readonly />%</td>
-							<td></td>
+							<td><input id="shooter" class="pushbuttonr" type="button" value="Etikett erstellen" onclick="shoot()" /></td>
 						</tr>
 
 					</table>
 				</div>
+				<div id="etikettenliste" class="floater borderlein">
+					<h2>Labels</h2>
+				</div>
 			</div>
+
+
+
+
+
+
+
+
+
+
+
 			<div class="footer">
 			</div>
 	</body> 

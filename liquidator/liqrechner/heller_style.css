@@ -266,3 +266,12 @@ input.okfeld {
 input.failfeld {
 	background-color: #ff000080;
 }
+
+
+
+.labeltable {
+	color: blue;
+}
+.labeltable trenner {
+	background-color: green;
+}
