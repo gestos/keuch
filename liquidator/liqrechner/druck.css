@@ -1,0 +1,36 @@
+@media print, screen {
+	.labeltable {
+		font-family: sans;
+		border: solid black 1px;
+		float: left;
+		margin: 1px;
+	}
+	.labeltable td {
+		font-size: 12px;
+		padding: 0 1px;
+	}
+	.trenner {
+		width: 5px;
+		border-left: 1px solid darkcyan;
+		border-right: 1px solid darkcyan;
+	}
+	.pushbuttonr {
+		visibility: hidden;
+		display: none;
+	}
+}
+@media print {
+	html, body {
+		color: black;
+		width: 197mm;
+		height: 286mm;
+		margin: 0;
+		padding: 0;
+		position: absolute 0 0;
+	}
+}
+@media screen {
+	body {
+		color: #362048;
+	}
+}
