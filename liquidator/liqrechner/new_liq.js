@@ -14,7 +14,7 @@ function chk100(pg,vg,alk,nic) {
 	var2 = Number(dgby(vg).value);
 	var3 = Number(dgby(alk).value);
 	summe=var1+var2+var3;
-	console.log(var1,var2,var3,summe);
+	// console.log(var1,var2,var3,summe);
 	if (summe >= 99.99 && summe <= 100) {
 		dgby(pg).className="okfeld";
 		dgby(vg).className="okfeld";
@@ -56,7 +56,7 @@ function flick(switcher) {
 function switchgrund() {
 	var list=['pg_rein','vg_rein','alkrein','pgz','vgz','alkz','mlz'];
 	for (var i=0; i<list.length; i++) {
-		console.log(i);
+		// console.log(i);
 		dgby(list[i]).removeAttribute('style');
 		dgby(list[i]).className="";
 		dgby(list[i]).value=null;
@@ -199,6 +199,10 @@ function ubernehm(button) {
 			dgby(felder.ziel[i]).value=dgby(felder.basis[i]).value;
 		};
 	};
+	/* console.log(buttonID); */
+	if (buttonID == 'ubertrag3') {
+		chk100_2();
+	}
 	dgby(slider).value=1;
 	slideopt(dgby(slider));
 }
@@ -578,11 +582,12 @@ function chk100_2() {
 
 
 	var ins=document.getElementsByClassName('arpct');
+	// console.log(ins);
 	var outs=document.getElementsByClassName('arml');
+	// console.log(outs);
 	var suma=0;
 
 	for (var i=0; i < ins.length; i++) {
-		//console.log(i);
 		var curpct=ins[i];
 		var curml=outs[i];
 		suma += Number(curpct.value) || 0;
