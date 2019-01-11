@@ -12,7 +12,8 @@ set nowrap			" no linewrapping as starting default mode
 
 au BufNewFile,BufRead * if &ft == '' | set ft=sh | endif  " unknown filetypes will be recognized and highlighted as "sh" files
 let mapleader=" "
-nmap <leader><space> :bnext<CR>
+nmap <space><space> :bnext<CR>
+nmap <S-space><S-space> :bnext<CR>
 nmap <leader>t :NERDTreeToggle<CR>
 nmap <leader>e :Explore<CR>
 set hidden
@@ -23,9 +24,37 @@ command Trailclean %s:\s\+$::
 command! -nargs=* -complete=shellcmd Pexec execute "below new | 0read ! python # <args>"
 command! -nargs=* -complete=shellcmd Rsplit execute "new | setlocal buftype=nofile bufhidden=hide noswapfile | r! <args>"
 
+" air-line
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-set laststatus=2		" always show the statusline ; not needed cause of airline
+if !exists('g:airline_symbols')
+	    let g:airline_symbols = {}
+endif
+
+"unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+"let g:airline_symbols.linenr = '␊'
+"let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+"let g:airline_symbols.whitespace = 'Ξ'
+
+" airline symbols
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
+"let g:airline_symbols.branch = ''
+"let g:airline_symbols.readonly = ''
+"let g:airline_symbols.linenr = '
+"set laststatus=2		" always show the statusline ; not needed cause of airline
 set foldcolumn=3
 set foldmethod=manual
 colo gesterich
