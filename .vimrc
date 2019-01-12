@@ -12,8 +12,8 @@ set nowrap			" no linewrapping as starting default mode
 
 au BufNewFile,BufRead * if &ft == '' | set ft=sh | endif  " unknown filetypes will be recognized and highlighted as "sh" files
 let mapleader=" "
-nmap <space><space> :bnext<CR>
-nmap <S-space><S-space> :bprevious<CR>
+nmap <leader><Right> :bnext<CR>
+nmap <leader><Left> :bprevious<CR>
 nmap <leader>t :NERDTreeToggle<CR>
 nmap <leader>e :Explore<CR>
 set hidden
