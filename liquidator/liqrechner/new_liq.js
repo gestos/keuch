@@ -579,12 +579,8 @@ function chk100_2() {
 
 	dgby('aromagesamtml').value=overall_ml;
 
-
-
 	var ins=document.getElementsByClassName('arpct');
-	// console.log(ins);
 	var outs=document.getElementsByClassName('arml');
-	// console.log(outs);
 	var suma=0;
 
 	for (var i=0; i < ins.length; i++) {
@@ -595,11 +591,12 @@ function chk100_2() {
 	}
 	su=dgby('sum').value=suma;
 	if (su !== 100) {
-		dgby('sum').style.background="#c65353"
+		dgby('sum').style.background="#c65353";
+		dgby('shooter').disabled=true;
 	} else {
-		dgby('sum').style.background="#254519"
+		dgby('sum').style.background="#254519";
+		dgby('shooter').disabled=false;
 	}
-
 }
 
 function ausblenden(tabelle,ausblender) {
@@ -612,5 +609,3 @@ function ausblenden(tabelle,ausblender) {
 
 	}
 }
-
-//window.onload=switch2();

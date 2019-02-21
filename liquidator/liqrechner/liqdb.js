@@ -1,5 +1,5 @@
 var dgby=function( id ) { return document.getElementById( id ); };
-var manuf_tab = dgby('herstellertabelle');
+/* var manuf_tab = dgby('herstellertabelle');
 
 // create an array of available manufacturers, sorted by frequency
 function aromen_bycount(aroma_array) {
@@ -153,4 +153,5 @@ function liq_generate() {
 }
 liq_generate();
 
+*/
 

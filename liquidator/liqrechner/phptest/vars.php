@@ -29,7 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			echo "Error: " . $del_sql . "<br>" . $conn->error;
 		}
 
-	} elseif ($_POST['new_manu']) {
+	} 
+	elseif ($_POST['new_manu']) {
 		$tag = $_POST['tag'];
 		$firma = $_POST['firma'];
 
@@ -51,7 +52,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			}
 		}
 
-	} else {
+	}
+	elseif ($_POST['new_liq']) {
+		echo "new liquid to add";
+	}
+ 	else {
 		echo "no idea what this is <br>";
 	}
 }
@@ -67,7 +72,7 @@ $ds_marken = $obj_marken->fetch_all(MYSQLI_ASSOC);
 $obj_aromen = $conn->query("select hersteller, geschmack from Aromen inner join ( select hersteller, count(1) as freq from Aromen group by 1 ) derived using (hersteller) order by derived.freq desc") or die("Fehler: " . $conn->error);
 $ds_aromen = $obj_aromen->fetch_all(MYSQLI_ASSOC);
 
-$obj_liquids = $conn->query("select * from Liquids") or die("Fehler: " . $conn->error);
+$obj_liquids = $conn->query("select * from Liquids order by Datum desc") or die("Fehler: " . $conn->error);
 $ds_liquids = $obj_liquids->fetch_all(MYSQLI_ASSOC);
 
 ?>

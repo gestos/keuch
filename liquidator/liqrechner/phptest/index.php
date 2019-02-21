@@ -51,6 +51,15 @@ var liquids = <?php echo json_encode($ds_liquids); ?>;
 </table>
 </div>
 
+<div id="liquids">
+<table id="liquidliste">
+
+</table>
+
+
+
+
+</div>
 
 </body>
 </html>

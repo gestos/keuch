@@ -19,23 +19,27 @@ table {
 .slidesmall input[type=range] {
 	background-color: salmon;
 }
+.grund {
+	width: 100%;
+}
+.grund tr:first-child {
+	border-top: 1px dashed #81502F;
+}
+.grund th {
+	text-align: center;
+	padding-bottom: 10px;
+	padding-top: 5px;
+	color: #81502f;
+}
 .grund td {
 	width: 100px;
 	text-align: center;
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
-.grund th {
-	border-bottom: 1px dashed #81502F;
-	text-align: center;
-	padding-bottom: 10px;
-	color: #81502f;
-}
 .grund td:first-child {
-	width: 100px;
-	text-align: right;
-	border-right: 1px dashed #81502F;
-	padding-right: 5px;
+	width: 60px;
+	background-color: #ffedd9;
 }
 .grund input {
 	text-align: center;
@@ -54,6 +58,16 @@ table {
 	box-shadow: none;
 	font-weight: bold;
 }
+.grund input[type=button] {
+	color: #01590b;
+	background-color: #c4fa9d;
+	border-color: #333;
+	box-shadow: -1px -1px #0a7d40;
+	/*! float:right; */
+	display: block;
+	width: 10em;
+	margin: 3px 15px;
+}
 .grund input[type=button][disabled] {
 	color: #543939;
 	background-color: #3330;
@@ -66,17 +80,10 @@ table {
 	/*! text-align: center; */
 	box-shadow: -1px -1px #7d3b0a;
 }
-.grund input[type=button] {
-	color: #01590b;
-	background-color: #c4fa9d;
-	border-color: #333;
-	box-shadow: -1px -1px #0a7d40;
-	/*! float:right; */
-	display: block;
-	width: 10em;
-	margin: 3px 15px;
-}
 .grund input[type=checkbox] {
+}
+.kopf {
+	color: darkslateblue;
 }
 .zielfeld {
 	border: 2px solid mediumpurple;
@@ -207,6 +214,7 @@ input.zielwert, input[readonly].zielwert {
 .borderlein {
 	box-shadow: -3px -3px 5px -1px #cc32114d;
 	border: solid 1px #cb9d00;
+	border-radius: 10px;
 }
 #main_column {
 	display: block;
@@ -289,4 +297,16 @@ input.failfeld {
 	width: 5px;
 	border-left: 1px solid darkcyan;
 	border-right: 1px solid darkcyan;
+}
+.etiketten_input {
+	border: none;
+	background-color:#CC822266;
+}
+#liqname {
+	border: none;
+	background-color: #9bcdff;
+}
+#liqname::placeholder {
+	color: #62639e;
+	opacity: 1;
 }
