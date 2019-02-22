@@ -310,3 +310,7 @@ input.failfeld {
 	color: #62639e;
 	opacity: 1;
 }
+.errorlog {
+	height: 60px;
+	background-color:#ececec;
+}

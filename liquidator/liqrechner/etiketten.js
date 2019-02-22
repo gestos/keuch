@@ -152,6 +152,7 @@ function shoot() {
 }
 
 var liquidobjekte = [];
+dgby('jsonvalues').value='';
 function create_json(clckparams) {
 	checkbox_status=clckparams["target"]["checked"];
 	if(checkbox_status === true) {
@@ -178,6 +179,36 @@ function create_json(clckparams) {
 	console.log(liquidobjekte);
 	var jsonvalue=dgby('jsonvalues');
 	jsonvalue.value=JSON.stringify(liquidobjekte);
+}
+
+function validate_form() {
+	var objs=liquidobjekte;
+	if (!objs || !objs.length) {
+		alert('no liquids to submit');
+		return false;
+	}
+	else {
+		aromen_namen=[];
+		aromen_prozente=[];
+		for(elem of ['aro1_name', 'aro2_name', 'aro3_name', 'aro4_name', 'aro5_name']) {
+			wert=objs[0][elem];
+			if (wert) { aromen_namen.push(objs[0][elem]); }
+		}
+		for(elem of ['aro1_proz', 'aro2_proz', 'aro3_proz', 'aro4_proz', 'aro5_proz']) {
+			wert=objs[0][elem];
+			if (wert) { aromen_prozente.push(objs[0][elem]); }
+		}
+		console.log(aromen_namen);
+		console.log(aromen_prozente);
+		if ( (!aromen_namen || !aromen_namen.length) || (!aromen_prozente || !aromen_prozente.length) ) {
+			alert('please provide at least one flavour');
+			return false;
+		}
+		else {
+			return true;
+		}
+		return true;
+	}
 }
 
 function print(tabelle) {

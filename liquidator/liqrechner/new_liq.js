@@ -115,7 +115,7 @@ function calc_grund() {
 //}
 
 function hilite(felder) {
-//	console.log(felder);
+	//	console.log(felder);
 	for (var i in felder.basis) {
 		dgby(felder.basis[i]).className='ausgangswert';
 	}
@@ -583,21 +583,64 @@ function chk100_2() {
 	var outs=document.getElementsByClassName('arml');
 	var suma=0;
 
+	// rectify strings of input fields
+	for (let feld of ['ar1','ar2','ar3','ar4','ar5']) {
+		oldvalue = dgby(feld).value;
+		bereinigt =	oldvalue.replace(/[^a-z0-9ßäöüi ]/gi, '');
+		dgby(feld).value = bereinigt;
+	}
+
+	var einzelwerte_pztfelder = [];
 	for (var i=0; i < ins.length; i++) {
 		var curpct=ins[i];
 		var curml=outs[i];
 		suma += Number(curpct.value) || 0;
 		curml.value=(curpct.value*(overall_ml/100)).toFixed(2);
+		einzelwerte_pztfelder.push(curpct.value);
 	}
 	su=dgby('sum').value=suma;
-	if (su !== 100) {
-		dgby('sum').style.background="#c65353";
-		dgby('shooter').disabled=true;
-	} else {
-		dgby('sum').style.background="#254519";
+	function pct_chk() {
+		if (su !== 100) {
+			dgby('sum').style.background="#c65353";
+			return false;
+		}
+		else {
+			dgby('sum').style.background="#254519";
+			return true;
+		}
+	}
+
+	var ar1 = dgby('ar1').value, ar2 = dgby('ar2').value, ar3 = dgby('ar3').value, ar4 = dgby('ar4').value, ar5 = dgby('ar5').value;
+	var catstr=ar1+ar2+ar3+ar4+ar5;
+	function strng_check(catstr) {
+		if(!catstr){
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	function test_neg(pztarray) {
+		for (let num of pztarray) {
+			if (num < 0) {
+				return false;
+			} else {
+			}
+		}
+		return true;
+	}
+
+	var pc = pct_chk();
+	var str = strng_check(catstr);
+	var neg = test_neg(einzelwerte_pztfelder);
+	if( pc && str && neg ) {
 		dgby('shooter').disabled=false;
+	} else {
+		dgby('shooter').disabled=true;
 	}
 }
+chk100_2();
 
 function ausblenden(tabelle,ausblender) {
 	if (dgby(tabelle).style.display !== 'none') {

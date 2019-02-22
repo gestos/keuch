@@ -218,31 +218,31 @@ var liquids = <?php echo json_encode($ds_liquids); ?>;
 					<table id="komponieren" class="grund" style="font-size: 12px;" >
 						<tr>
 							<td>Aroma 1:</td>
-							<td class="aromaname"><input id="ar1" placeholder="Erdbeere FA" /></td>
+							<td class="aromaname"><input id="ar1" onblur="chk100_2()" placeholder="Erdbeere FA" /></td>
 							<td><input id="aroma1pct" class="arpct" size="3" onblur="chk100_2()" />%</td>
 							<td><input id="aroma1ml" class="arml" size="3" readonly />ml</td>
 						</tr>
 						<tr>
 							<td>Aroma 2:</td>
-							<td class="aromaname"><input id="ar2" placeholder="Vanille Cap"/></td>
+							<td class="aromaname"><input id="ar2" onblur="chk100_2()" placeholder="Vanille Cap"/></td>
 							<td><input id="aroma2pct" class="arpct"  size="3" onblur="chk100_2()" />%</td>
 							<td><input id="aroma2ml" class="arml" size="3" readonly />ml</td>
 						</tr>
 						<tr>
 							<td>Aroma 3:</td>
-							<td class="aromaname"><input id="ar3" placeholder="Haselnuss FA"/></td>
+							<td class="aromaname"><input id="ar3" onblur="chk100_2()" placeholder="Haselnuss FA"/></td>
 							<td><input id="aroma3pct" class="arpct"  size="3" onblur="chk100_2()" />%</td>
 							<td><input id="aroma3ml" class="arml" size="3" readonly />ml</td>
 						</tr>
 						<tr>
 							<td>Aroma 4:</td>
-							<td class="aromaname"><input id="ar4" placeholder="Kirsche Ina"/></td>
+							<td class="aromaname"><input id="ar4" onblur="chk100_2()" placeholder="Kirsche Ina"/></td>
 							<td><input id="aroma4pct" class="arpct"  size="3" onblur="chk100_2()" />%</td>
 							<td><input id="aroma4ml" class="arml" size="3" readonly />ml</td>
 						</tr>
 						<tr>
 							<td>Aroma 5:</td>
-							<td class="aromaname"><input id="ar5" placeholder="Gurke FA" /></td>
+							<td class="aromaname"><input id="ar5" onblur="chk100_2()" placeholder="Gurke FA" /></td>
 							<td><input id="aroma5pct" class="arpct"  size="3" onblur="chk100_2()" />%</td>
 							<td><input id="aroma5ml" class="arml" size="3" readonly />ml</td>
 						</tr>
@@ -256,6 +256,7 @@ var liquids = <?php echo json_encode($ds_liquids); ?>;
 							<td><input id="shooter" class="pushbuttonr" type="button" value="Etikett erstellen" onclick="shoot()" /></td>
 						</tr>
 					</table>
+<p>Druckansicht anpassen / Felder streichen ; Verwaltungsseite gestalten + liquid-delete</p>
 				</div>
 				<div id="etiketten" class="floater borderlein">
 					<h2>Labels</h2>
@@ -264,13 +265,14 @@ var liquids = <?php echo json_encode($ds_liquids); ?>;
 					</div>
 					<input class="pushbuttonr" type="button" value="Liste drucken" onclick="print(etikettenliste)" />
 
-					<form method="post" name="db_save" target="_blank" action="vars.php">
+					<form method="post" name="db_save" action="vars.php" target="php_messages">
 				<div id="jsondiv" style="display:none">
 					<input class="json_input" id="jsonvalues" name="jsonified" size="150" type="text" />
 				</div>
-					<input class="pushbuttonr" type="submit" name="save_to_db" value="markierte Liquids in DB speichern" />
+					<input class="pushbuttonr" type="submit" name="save_to_db" onclick="return validate_form()" value="markierte Liquids in DB speichern" />
 					</form>
 				</div>
+<iframe id="php_messages" name="php_messages" class="floater borderlein errorlog"></iframe>
 			</div>
 
 
