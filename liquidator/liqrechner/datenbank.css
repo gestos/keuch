@@ -1,0 +1,40 @@
+.small_table_div {
+	color: #894f2b;
+	width: 400px;
+	text-align: center;
+}
+.smalltable {
+	font-size: 12px;
+	padding: 10px;
+	display: inline-block;
+	max-height: 250px;
+	margin: 10px;
+	overflow-y: scroll;
+}
+.smalltable th {
+	text-align: left;
+}
+.smalltable input,select {
+	font-size: 12px;
+	/*! border: none; */
+	border-radius: 5px;
+	background-color: blanchedalmond;
+}
+.smalltable input[type=submit] {
+	border: none;
+	border-radius: 5px;
+	background-color: #d1ebff;
+}
+.hidden {
+	display:none;
+}
+form {
+	margin: 0
+}
+#phpm {
+	height: 5em;
+width: 50%;
+margin: 0 auto;
+display: block;
+overflow-y: auto;
+}

@@ -9,12 +9,15 @@
 		font-size: 12px;
 		padding: 0 1px;
 	}
+	.etiketten_input {
+		border:none;
+	}
 	.trenner {
 		width: 5px;
 		border-left: 1px solid darkcyan;
 		border-right: 1px solid darkcyan;
 	}
-	.pushbuttonr {
+	.pushbuttonr, .markirbox, .trenner2 {
 		visibility: hidden;
 		display: none;
 	}

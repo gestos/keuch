@@ -43,7 +43,7 @@ function shitHead($param) {
 	else {
 		printf('<div class="floater borderlein">');
 		printf("Liquids zu DB hinzugefügt <br>");
-		printf('<a href="http://liq.keuch/phptest/" target="_blank">Datenbank mit Liquids + Herstellern bearbeiten</a>');
+		printf('<a href="datenverwaltung.php" target="_blank">Datenbank mit Liquids + Herstellern bearbeiten</a>');
 		printf("</div>");
 	}
 	$stmt->close();
@@ -62,6 +62,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		}
 
 	} 
+	elseif (array_key_exists('del_flav', $_POST)) {
+		$delete_id =  $_POST['aroma_id'];
+		$del_sql = "DELETE FROM Aromen WHERE id = '$delete_id'";
+
+		if ($conn->query($del_sql) === TRUE) {
+			echo "'$delete_id' was removed from Aromen <br>";
+		} else {
+			echo "Error: " . $del_sql . "<br>" . $conn->error;
+		}
+	} 
 	elseif (array_key_exists('jsonified',$_POST)) {
 		$json_content = json_decode($_POST['jsonified'], true);
 		foreach ($json_content as &$liq_array) {
@@ -70,6 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	}
 	elseif (array_key_exists('new_manu',$_POST)) {
+
 		$tag = $_POST['tag'];
 		$firma = $_POST['firma'];
 
@@ -86,6 +97,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$sql = "INSERT INTO Hersteller (firma, tag) VALUES ('$firma', '$tag')";
 			if ($conn->query($sql) === TRUE) {
 				echo "New record for '$firma' created successfully";
+			} else {
+				echo "Error: " . $sql . "<br>" . $conn->error;
+			}
+		}
+
+	}
+	elseif (array_key_exists('new_flav',$_POST)) {
+		$manmap = json_decode($_POST['hidden_map'], true);
+		$flavor = $_POST['Geschmack'];
+		$brand = $_POST['brand'];
+		$brandname = $manmap[$brand];
+
+		if ($flavor == '' || $brand == '') {
+			echo "strings must not be empty";
+		} 
+		elseif (strlen($flavor) > 50 || strlen($brandname) > 50) {
+			echo "input must not be longer than 50 characters";
+		}
+		else {
+			$sql = "INSERT INTO Aromen (hersteller, geschmack) VALUES ('$brandname', '$flavor')";
+			if ($conn->query($sql) === TRUE) {
+				echo "New record for '$brand' '$flavor' created successfully";
 			} else {
 				echo "Error: " . $sql . "<br>" . $conn->error;
 			}
@@ -110,7 +143,7 @@ $ds_marken = $obj_marken->fetch_all(MYSQLI_ASSOC);
 
 
 // nach Häufigkeit sortiert wie hier: https://stackoverflow.com/questions/8467997/order-sql-query-records-by-frequency
-$obj_aromen = $conn->query("select hersteller, geschmack from Aromen inner join ( select hersteller, count(1) as freq from Aromen group by 1 ) derived using (hersteller) order by derived.freq desc") or die("Fehler: " . $conn->error);
+$obj_aromen = $conn->query("select hersteller, geschmack, id from Aromen inner join ( select hersteller, count(1) as freq from Aromen group by 1 ) derived using (hersteller) order by derived.freq desc") or die("Fehler: " . $conn->error);
 $ds_aromen = $obj_aromen->fetch_all(MYSQLI_ASSOC);
 
 $obj_liquids = $conn->query("select * from Liquids order by Datum desc") or die("Fehler: " . $conn->error);

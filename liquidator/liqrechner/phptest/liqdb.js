@@ -121,6 +121,7 @@ function liq_generate() {
 	var arP = /^Aro.*pct$/
 
 
+	// table header
 	var headrow=liq_tab.insertRow();
 	for (var zutat in liquids[0]){
 		if (zutat === 'id'){
@@ -137,17 +138,38 @@ function liq_generate() {
 			zut_head.innerHTML=zutat;
 		}
 	}
+	var modhead=headrow.insertCell();
+	modhead.innerHTML="edit";
 
+
+	// rows with liquids
 	for (i=0;i<liquids.length;i++){
 		let liquid=liquids[i];
 		var zeile=liq_tab.insertRow();
 		for (var bestandteil in liquid){
+			console.log(bestandteil);
 			if(bestandteil === 'id') {
 				continue;
 			}
 			var zelle=zeile.insertCell();
-			zelle.innerHTML=liquid[bestandteil];
+			if (bestandteil === 'rating' || bestandteil === 'comment') {
+				console.log("create input field");
+				var editable=document.createElement('input');
+				editable.size='2';
+				editable.value=liquid[bestandteil];
+				zelle.appendChild(editable);
+
+			}
+			else {
+				zelle.innerHTML=liquid[bestandteil];
+			}
 		}
+
+		editcolumn=zeile.insertCell();
+		editbutton=document.createElement('input');
+		editbutton.type='button';
+		editbutton.value='edit';
+		editcolumn.appendChild(editbutton);
 	}
 	var dtum=date_transform(liquids[0].Datum);
 }

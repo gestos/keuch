@@ -573,6 +573,14 @@ function calculate_liq2() {
 }
 
 function chk100_2() {
+	console.log('chk100_2');
+	// rectify strings of input fields not needed anymore because values come from DB
+	/* for (let feld of ['ar1','ar2','ar3','ar4','ar5']) {
+		oldvalue = dgby(feld).value;
+		bereinigt =	oldvalue.replace(/[^a-z0-9ßäöüi ]/gi, '');
+		dgby(feld).value = bereinigt;
+	} */
+
 	var overall=Number(dgby('einzelmenge').value).toFixed(2);
 	var ar_ml=Number(dgby('aromagesamt').value).toFixed(2);
 	var overall_ml=Number(overall*(ar_ml/100)).toFixed(2);
@@ -582,13 +590,6 @@ function chk100_2() {
 	var ins=document.getElementsByClassName('arpct');
 	var outs=document.getElementsByClassName('arml');
 	var suma=0;
-
-	// rectify strings of input fields
-	for (let feld of ['ar1','ar2','ar3','ar4','ar5']) {
-		oldvalue = dgby(feld).value;
-		bereinigt =	oldvalue.replace(/[^a-z0-9ßäöüi ]/gi, '');
-		dgby(feld).value = bereinigt;
-	}
 
 	var einzelwerte_pztfelder = [];
 	for (var i=0; i < ins.length; i++) {
@@ -605,13 +606,18 @@ function chk100_2() {
 			return false;
 		}
 		else {
-			dgby('sum').style.background="#254519";
+			//dgby('sum').style.background="#c4fa9d";
+			dgby('sum').style.background="#c4fa9d";
 			return true;
 		}
 	}
 
-	var ar1 = dgby('ar1').value, ar2 = dgby('ar2').value, ar3 = dgby('ar3').value, ar4 = dgby('ar4').value, ar5 = dgby('ar5').value;
-	var catstr=ar1+ar2+ar3+ar4+ar5;
+	// test if at least one flavour is set
+	var catstr='';
+	for (feld of Object.keys(mapping_objekt)) {
+		feldstring=dgby(feld).value;
+		catstr += feldstring;
+	}
 	function strng_check(catstr) {
 		if(!catstr){
 			return false;
@@ -621,20 +627,32 @@ function chk100_2() {
 		}
 	}
 
+	// test for negative perceantages
 	function test_neg(pztarray) {
 		for (let num of pztarray) {
 			if (num < 0) {
 				return false;
-			} else {
-			}
+			} 
 		}
 		return true;
 	}
 
+	function volumencheck() {
+		menge=dgby('einzelmenge').value;
+		aromaanteil=dgby('aromagesamt').value;
+		if( (menge > 0) && (aromaanteil>0) ){
+			return true; 
+		}
+		else {
+			return false;
+		}
+	}
+
 	var pc = pct_chk();
+	var vol = volumencheck();
 	var str = strng_check(catstr);
 	var neg = test_neg(einzelwerte_pztfelder);
-	if( pc && str && neg ) {
+	if( pc && vol && str && neg ) {
 		dgby('shooter').disabled=false;
 	} else {
 		dgby('shooter').disabled=true;

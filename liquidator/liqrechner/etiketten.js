@@ -1,15 +1,38 @@
 var dgby=function( id ) { return document.getElementById( id ); };
 
+var marken_mapped = marken.reduce(function(obj,item){
+	obj[item.firma] = item.tag; 
+	return obj;
+}, {});
+herstellerfelder=Object.keys(mapping_objekt);
 function send_to_database() {
 	console.log("send this to db");
 }
 
 function shoot() {
-	var a1 = dgby('ar1').value || '';
-	var a2 = dgby('ar2').value || '';
-	var a3 = dgby('ar3').value || '';
-	var a4 = dgby('ar4').value || '';
-	var a5 = dgby('ar5').value || '';
+
+	function get_composite_names() {
+		var componames=[];
+		for(feld of herstellerfelder){
+			let her = dgby(feld).value; 
+			let ges = dgby(mapping_objekt[feld]).value;
+			if(her !== '' && ges !== ''){
+				var componame=ges+" ("+marken_mapped[her]+")";
+			}
+			else {
+				var componame='';
+			}
+			componames.push(componame);
+		}
+		return componames;
+	}
+	aromen_entries=get_composite_names();
+
+	var a1 = aromen_entries[0] || '';
+	var a2 = aromen_entries[1] || '';
+	var a3 = aromen_entries[2] || '';
+	var a4 = aromen_entries[3] || '';
+	var a5 = aromen_entries[4] || '';
 	var a1p = dgby('aroma1pct').value || '';
 	var a2p = dgby('aroma2pct').value || '';
 	var a3p = dgby('aroma3pct').value || '';
@@ -32,6 +55,7 @@ function shoot() {
 		new_chkbox.type="checkbox";
 		new_chkbox.name="markir_box";
 		new_chkbox.className="markirbox";
+		new_cell.className="markirbox";
 		new_chkbox.id=milseconds;
 
 		var label = document.createElement('label')
@@ -94,7 +118,7 @@ function shoot() {
 	tr1.insertCell().className="trenner";
 	aroG_name = tr1.insertCell().innerHTML="aroma";
 	aroG_proz = new_in(tr1,"aroG_proz",flv_liq);
-	tr1.insertCell().className="trenner";
+	tr1.insertCell().className="trenner2";
 	removal = tr1.insertCell();
 	rembutton = document.createElement("input");
 	rembutton.className="pushbuttonr";
@@ -113,7 +137,7 @@ function shoot() {
 	tr2.insertCell().className="trenner";
 	pvg_name = tr2.insertCell().innerHTML="pvg";
 	pvg_proz = new_in(tr2,"pvg_proz",pg_liq);
-	tr2.insertCell().className="trenner";
+	tr2.insertCell().className="trenner2";
 
 	tr3 = newtab.insertRow();
 	aro3_name=new_in(tr3,"aro3_name",a3);
@@ -121,7 +145,7 @@ function shoot() {
 	tr3.insertCell().className="trenner";
 	nic_name = tr3.insertCell().innerHTML="nic";
 	nic_mg = new_in(tr3,"nic",nic_liq);
-	tr3.insertCell().className="trenner";
+	tr3.insertCell().className="trenner2";
 
 	tr4 = newtab.insertRow();
 	aro4_name=new_in(tr4,"aro4_name",a4);
@@ -129,7 +153,7 @@ function shoot() {
 	tr4.insertCell().className="trenner";
 	date_name = tr4.insertCell().innerHTML="date";
 	date_date = new_in(tr4,"datum",todate);
-	tr4.insertCell().className="trenner";
+	tr4.insertCell().className="trenner2";
 
 	tr5 = newtab.insertRow();
 	aro5_name=new_in(tr5,"aro5_name",a5);
@@ -145,7 +169,7 @@ function shoot() {
 	namefiel.placeholder="optional";
 	namefiel.className="etiketten_input";
 	name_in.appendChild(namefiel);
-	tr5.insertCell().className="trenner";
+	tr5.insertCell().className="trenner2";
 	markirDB = makemarker(tr5);
 
 	labeldiv.appendChild(newtab);
@@ -211,12 +235,13 @@ function validate_form() {
 	}
 }
 
-function print(tabelle) {
+function print(div_mit_liquids) {
+	var oldhtml=dgby(div_mit_liquids).cloneNode(true);
 	var printwin = window.open('');
 	printwin.document.write('<html><head><title>Etikettendruck</title>');
 	printwin.document.write('<link rel="stylesheet" href="druck.css">');
 	printwin.document.write('</head><body>');
-	printwin.document.write(tabelle.outerHTML);
+	printwin.document.body.appendChild(oldhtml);
 	printwin.document.write('</body></html>');
 	printwin.document.close();
 	return true;

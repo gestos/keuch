@@ -38,7 +38,7 @@ table {
 	padding-bottom: 5px;
 }
 .grund td:first-child {
-	width: 60px;
+	width: 90px;
 	background-color: #ffedd9;
 }
 .grund input {
@@ -80,7 +80,15 @@ table {
 	/*! text-align: center; */
 	box-shadow: -1px -1px #7d3b0a;
 }
-.grund input[type=checkbox] {
+.grund select {
+	text-align: center;
+	background-color: #CC822266;
+	border: solid 1px #43666c;
+	margin: 2px 2px;
+	padding: 3px 3px;
+	color: #000;
+	inline-size: 115px;
+	box-shadow: -2px -2px 0px 0px #81502F;
 }
 .kopf {
 	color: darkslateblue;
@@ -216,7 +224,7 @@ input.zielwert, input[readonly].zielwert {
 	border: solid 1px #cb9d00;
 	border-radius: 10px;
 }
-#main_column {
+.main_column {
 	display: block;
 	width: 800px;
 	margin: 0 auto;
@@ -293,7 +301,7 @@ input.failfeld {
 	padding-right: 5px;
 	font-size: 12px;
 }
-.trenner {
+.trenner, .trenner2 {
 	width: 5px;
 	border-left: 1px solid darkcyan;
 	border-right: 1px solid darkcyan;
