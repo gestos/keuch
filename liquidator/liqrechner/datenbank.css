@@ -1,6 +1,22 @@
+body input {
+	background-color: #defedb;
+}
+body input[readonly] {
+	background-color: blanchedalmond;
+}
 .small_table_div {
 	color: #894f2b;
-	width: 400px;
+	width: 50%;
+	text-align: center;
+}
+.large_table_div {
+	color: #894f2b;
+	width: 100%;
+	text-align: center;
+}
+.small_table_div h1,h2,h3,h4,h5,h6 {
+	color: #894f2b;
+	width: 50%;
 	text-align: center;
 }
 .smalltable {
@@ -10,20 +26,34 @@
 	max-height: 250px;
 	margin: 10px;
 	overflow-y: scroll;
+	width: 90%;
 }
 .smalltable th {
 	text-align: left;
+}
+.smalltable td {
+	text-align: left;
+	padding: 0 5px;
+	border-left: 1px #d8a7ff dashed;
 }
 .smalltable input,select {
 	font-size: 12px;
 	/*! border: none; */
 	border-radius: 5px;
+	background-color: #defedb;
+}
+.smalltable input[readonly] {
 	background-color: blanchedalmond;
 }
 .smalltable input[type=submit] {
 	border: none;
 	border-radius: 5px;
 	background-color: #d1ebff;
+}
+.smalltable input[type=submit][disabled] {
+	border: none;
+	border-radius: 5px;
+	background-color: #ffffff;
 }
 .hidden {
 	display:none;
@@ -32,9 +62,16 @@ form {
 	margin: 0
 }
 #phpm {
-	height: 5em;
+	min-height: 3.5em;
 width: 50%;
 margin: 0 auto;
 display: block;
 overflow-y: auto;
+	border: none;
+	background-color: #edf5ff;
+}
+.headline {
+	border: solid 1px #bed8ff;
+	border-bottom: none;
+	box-shadow: #ffd9a1 -2px -2px;
 }

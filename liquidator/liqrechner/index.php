@@ -311,6 +311,9 @@ var liquids = <?php echo json_encode($ds_liquids); ?>;
 				</div>
 <iframe id="php_messages" name="php_messages" class="floater borderlein errorlog"></iframe>
 			</div>
+<div id="zurDB" class="db_link">
+<a href="datenverwaltung.php" target="_blank">zur DB</a>
+</div>
 
 			<div class="footer">
 			</div>

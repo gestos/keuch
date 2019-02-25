@@ -322,3 +322,9 @@ input.failfeld {
 	height: 60px;
 	background-color:#ececec;
 }
+.db_link {
+	color: olive;
+	position: fixed;
+	right: 40px;
+	top: 50px;
+}

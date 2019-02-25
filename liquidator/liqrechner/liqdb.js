@@ -56,10 +56,10 @@ function make_manuf_selection(targetElement,virt_real,all_or_available) {
 	// create a selection of manufacturers that are available
 	console.log(targetElement, virt_real);
 	if(virt_real === 'cell'){
-	var aro_sel = document.createElement('select');
+		var aro_sel = document.createElement('select');
 	}
 	else {
-	var aro_sel = dgby(targetElement);
+		var aro_sel = dgby(targetElement);
 	}
 
 	if(all_or_available === 'alle'){
@@ -194,7 +194,7 @@ function create_manufacturer_list(table) {
 }
 
 /*
-// create selection of flavours for chosen brand
+	// create selection of flavours for chosen brand
 var taste_sel = dgby('geschmack');
 function load_aro(manufacturer) {
 	var chosenbrand=manufacturer.value;
@@ -217,38 +217,38 @@ function load_aro(manufacturer) {
 	}
 }
 */
-	// create a table containing all flvaours
-	var liste_kpl = dgby('aromenliste');
-	for (i=0;i<aromen.length;i++) {
-		tr1 = liste_kpl.insertRow(); 
-		td1 = tr1.insertCell();
-		td2 = tr1.insertCell();
-		td3 = tr1.insertCell();
-		td4 = tr1.insertCell();
-		td1.innerHTML = aromen[i].hersteller;
-		td2.innerHTML = aromen[i].geschmack;
+// create a table containing all flvaours
+var liste_kpl = dgby('aromenliste');
+for (i=0;i<aromen.length;i++) {
+	tr1 = liste_kpl.insertRow(); 
+	td1 = tr1.insertCell();
+	td2 = tr1.insertCell();
+	td3 = tr1.insertCell();
+	td4 = tr1.insertCell();
+	td1.innerHTML = aromen[i].hersteller;
+	td2.innerHTML = aromen[i].geschmack;
 
-		var idfeld = document.createElement('input');
-		idfeld.name="aroma_id";
-		idfeld.id="aroma_id";
-		idfeld.className="hidden";
-		idfeld.value=aromen[i].id;
-		//td3.appendChild(idfeld);
+	var idfeld = document.createElement('input');
+	idfeld.name="aroma_id";
+	idfeld.id="aroma_id";
+	idfeld.className="hidden";
+	idfeld.value=aromen[i].id;
+	//td3.appendChild(idfeld);
 
-		var delform2 = document.createElement("form");
-		delform2.method="POST";
-		delform2.name="delform2";
-		delform2.action="vars.php";
-		delform2.target="phpm";
-		var delbut = document.createElement("input");
-		delbut.type="submit";
-		delbut.name="del_flav";
-		delbut.value="del";
-		delform2.appendChild(delbut);
-		delform2.appendChild(idfeld);
-		td4.appendChild(delform2);
+	var delform2 = document.createElement("form");
+	delform2.method="POST";
+	delform2.name="delform2";
+	delform2.action="vars.php";
+	delform2.target="phpm";
+	var delbut = document.createElement("input");
+	delbut.type="submit";
+	delbut.name="del_flav";
+	delbut.value="del";
+	delform2.appendChild(delbut);
+	delform2.appendChild(idfeld);
+	td4.appendChild(delform2);
 
-	}
+}
 
 function date_transform(dat) {
 	//console.log(typeof dat + " " + dat);
@@ -263,7 +263,7 @@ function liq_generate() {
 	// table header
 	var headrow=liq_tab.insertRow();
 	for (var zutat in liquids[0]){
-		if (zutat === 'id'){
+		if (zutat === 'id' || zutat === 'hash'){
 			continue;
 		}
 		var zut_head=headrow.insertCell();
@@ -278,16 +278,22 @@ function liq_generate() {
 		}
 	}
 	var modhead=headrow.insertCell();
-	modhead.innerHTML="edit";
+	modhead.innerHTML="";
+	var updatehead=headrow.insertCell();
+	updatehead.innerHTML="";
 
 
 	// rows with liquids
 	for (i=0;i<liquids.length;i++){
 		let liquid=liquids[i];
-		var zeile=liq_tab.insertRow();
+		updateform = document.createElement('form');
+		updateform.method = 'post';
+		updateform.action = 'vars.php';
+		updateform.target = 'phpm';
+		zeile=liq_tab.insertRow();
 		for (var bestandteil in liquid){
 			//console.log(bestandteil);
-			if(bestandteil === 'id') {
+			if(bestandteil === 'id' || bestandteil === 'hash') {
 				continue;
 			}
 			var zelle=zeile.insertCell();
@@ -296,6 +302,7 @@ function liq_generate() {
 				var editable=document.createElement('input');
 				editable.size='2';
 				editable.value=liquid[bestandteil];
+				editable.readOnly=true;
 				zelle.appendChild(editable);
 
 			}
@@ -303,15 +310,79 @@ function liq_generate() {
 				zelle.innerHTML=liquid[bestandteil];
 			}
 		}
-
 		editcolumn=zeile.insertCell();
 		editbutton=document.createElement('input');
 		editbutton.type='button';
 		editbutton.value='edit';
+		editbutton.onclick=make_edit;
 		editcolumn.appendChild(editbutton);
+
+		updatecolumn = zeile.insertCell();
+		updateform = document.createElement('form');
+		updateform.name = 'update_comment';
+		updateform.method = 'post';
+		updateform.action = 'vars.php';
+		updateform.target = 'phpm';
+		updatecolumn.appendChild(updateform);
+
+		hashfield = document.createElement('input');
+		hashfield.type = "hidden";
+		hashfield.value = liquid['hash'];
+		hashfield.name = 'hash';
+		ratingfield = document.createElement('input');
+		ratingfield.type = "hidden";
+		ratingfield.value = liquid['rating'];
+		ratingfield.name = 'rate';
+		ratingfield.id = 'rating';
+		commentfield = document.createElement('input');
+		commentfield.type = "hidden";
+		commentfield.value = liquid['comment'];
+		commentfield.name = 'comm';
+		commentfield.id = 'comment';
+		updatebutton = document.createElement('input');
+		updatebutton.type = 'submit';
+		updatebutton.name = 'comment_update';
+		updatebutton.value = 'save';
+		updateform.appendChild(hashfield);
+		updateform.appendChild(ratingfield);
+		updateform.appendChild(commentfield);
+		updateform.appendChild(updatebutton);
+
+		console.log(liquid['hash']);
+		console.log(zeile);
+		//updateform.appendChild(zeile);
+		//liq_tab.appendChild(updateform);
+
 	}
-	var dtum=date_transform(liquids[0].Datum);
+}
+function make_edit() {
+  //console.log('make edit');
+	console.log(this);
+	//console.log(this.parentNode.previousSibling.childNodes[0]);
+	in_left1=this.parentNode.previousSibling.childNodes[0];
+	in_left2=this.parentNode.previousSibling.previousSibling.childNodes[0];
+	subbutt=this.parentNode.nextSibling.childNodes[0].childNodes[3];
+	if(in_left1.readOnly) {
+		in_left1.readOnly = false;
+		in_left2.readOnly = false;
+		subbutt.disabled=true;
+	}
+	else {
+		in_left1.readOnly = true;
+		in_left2.readOnly = true;
+		dgby('rating').value=in_left2.value;
+		dgby('comment').value=in_left1.value;
+		subbutt.disabled=false;
+	}
+
 }
 liq_generate();
-
-
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+async function manual_reload(){
+	console.log('Taking a break...');
+	await sleep(2000);
+	console.log('Two seconds later');
+	location.reload();
+}

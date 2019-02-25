@@ -574,13 +574,6 @@ function calculate_liq2() {
 
 function chk100_2() {
 	console.log('chk100_2');
-	// rectify strings of input fields not needed anymore because values come from DB
-	/* for (let feld of ['ar1','ar2','ar3','ar4','ar5']) {
-		oldvalue = dgby(feld).value;
-		bereinigt =	oldvalue.replace(/[^a-z0-9ßäöüi ]/gi, '');
-		dgby(feld).value = bereinigt;
-	} */
-
 	var overall=Number(dgby('einzelmenge').value).toFixed(2);
 	var ar_ml=Number(dgby('aromagesamt').value).toFixed(2);
 	var overall_ml=Number(overall*(ar_ml/100)).toFixed(2);
@@ -606,7 +599,6 @@ function chk100_2() {
 			return false;
 		}
 		else {
-			//dgby('sum').style.background="#c4fa9d";
 			dgby('sum').style.background="#c4fa9d";
 			return true;
 		}

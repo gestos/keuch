@@ -17,9 +17,12 @@ var liquids = <?php echo json_encode($ds_liquids); ?>;
 				<h1>Liquid-Datenbank</h1>
 			</div>
 
+<div class="main_column">
 <div class="small_table_div" style="float:left">
-				<h2 class="small_table_div">Hersteller</h2>
+				<h2 class="headline">Hersteller</h2>
+
 <form method="post" name="manufacturers" action="vars.php" target="phpm">
+<!-- onSubmit="manual_reload()" -->  
 <table id="herstellertabelle" class="smalltable borderlein">
 <tr>
 <th>Kürzel</th>
@@ -29,17 +32,8 @@ var liquids = <?php echo json_encode($ds_liquids); ?>;
 </form>
 </div>
 
-<!--
-<div class="small_table_div" id="aromen" style="float:left">
-<select id="aromaselect" onChange="load_aro(this)">
-</select>
-<select id="geschmack">
-</select>
-</div>
--->
-
-<div class="small_table_div" style="float:left">
-				<h2 class="small_table_div">Aromen</h2>
+<div class="small_table_div" style="float:left; clear:right">
+				<h2 class="headline">Aromen</h2>
 <table id="aromenliste" class="smalltable borderlein">
 <tr></tr>
 <tr>
@@ -52,8 +46,8 @@ var liquids = <?php echo json_encode($ds_liquids); ?>;
 </table>
 </div>
 
-<div id="liquids" class="small_table_div">
-				<h2 class="small_table_div">Liquids</h2>
+<div id="liquids" class="large_table_div">
+				<h2 class="headline">Liquids</h2>
 <table id="liquidliste" class="smalltable borderlein">
 
 </table>
@@ -61,5 +55,9 @@ var liquids = <?php echo json_encode($ds_liquids); ?>;
 <iframe id="phpm" name="phpm">
 </iframe>
 
+<div id="zumCalc" class="db_link">
+<a href="index.php">zum Rechner</a>
+</div>
+</div>
 </body>
 </html>
