@@ -1,6 +1,11 @@
-var dgby=function( id ) { return document.getElementById( id ); };
-var manuf_tab = dgby('herstellertabelle');
-var manu_table = create_manufacturer_list(manuf_tab);
+const dgby=function( id ) { return document.getElementById( id ); };
+const manuf_tab = dgby('herstellertabelle');
+const liste_kpl = dgby('aromenliste');
+const hersteller_objekt=get_herstellernamen();
+const flavors_grouped = sort_flavors_bymanuf();
+const manufacturers_table = create_manufacturer_list(manuf_tab);
+const flavors_table = generate_flavorlist2(flavors_grouped);
+const liquids_table = liq_generate();
 function get_herstellernamen(){
 	let hersteller={};
 	for(marke in marken){
@@ -10,10 +15,8 @@ function get_herstellernamen(){
 	}
 	return hersteller;
 }
-var hersteller_objekt=get_herstellernamen();
-
-// create an array of available manufacturers, sorted by frequency
 function aromen_bycount(aroma_array) {
+	console.log('aromen_bycount');
 	var counter = {};
 	for (i=0;i<aromen.length;i++) {
 		counter[aromen[i].hersteller] = 0;
@@ -21,7 +24,6 @@ function aromen_bycount(aroma_array) {
 	for (i=0;i<aromen.length;i++) {
 		counter[aromen[i].hersteller] += 1;
 	}
-	// console.log(counter);
 	var sortable = [];
 	for (var hersteller in counter) {
 		sortable.push([hersteller, counter[hersteller]]);
@@ -54,7 +56,7 @@ function toggle(el) {
 }
 function make_manuf_selection(targetElement,virt_real,all_or_available) {
 	// create a selection of manufacturers that are available
-	console.log(targetElement, virt_real);
+	// console.log(targetElement, virt_real);
 	if(virt_real === 'cell'){
 		var aro_sel = document.createElement('select');
 	}
@@ -83,7 +85,6 @@ function make_manuf_selection(targetElement,virt_real,all_or_available) {
 	}
 	return aro_sel;
 }
-// create a table of all known manufacturers
 function create_manufacturer_list(table) {
 	for (i = 0; i < marken.length; i++) {
 
@@ -190,75 +191,68 @@ function create_manufacturer_list(table) {
 	flv_sub.name='new_flav';
 	flv_sub.value='add';
 	flv_sub_cell.appendChild(flv_sub);
-
 }
+function sort_flavors_bymanuf() {
+	const reduced = aromen.reduce((acc, currval) => {
+		if(currval['hersteller'] in acc){
+			const idtaste ={};
+			idtaste[currval['id']] = currval['geschmack'];
+			acc[currval['hersteller']].push(idtaste);
+		}
+		else {
+			acc[currval['hersteller']] = [];
+			const idtaste ={};
+			idtaste[currval['id']] = currval['geschmack'];
+			acc[currval['hersteller']].push(idtaste);
+		}
+		return acc;
+	},{});
+	return reduced;
+}
+function generate_flavorlist2(obj){
+	for (let brand in obj) {
+		let brandlist = obj[brand];
+		for(let i=0;i<brandlist.length;i++){
+			let flava_id = brandlist[i];
+			for(let id of Object.keys(flava_id)){
+				let taste = flava_id[id];
 
-/*
-	// create selection of flavours for chosen brand
-var taste_sel = dgby('geschmack');
-function load_aro(manufacturer) {
-	var chosenbrand=manufacturer.value;
-	taste_sel.innerHTML = '';
+				tr1 = liste_kpl.insertRow(); 
+				td1 = tr1.insertCell();
+				td2 = tr1.insertCell();
+				td3 = tr1.insertCell();
+				td4 = tr1.insertCell();
+				td1.innerHTML = brand;
+				td2.innerHTML = taste;
+				//console.log(aromen[i].hersteller+' '+aromen[i].geschmack);
 
-	var label = marken.filter(obj => {
-		return obj.firma === chosenbrand
-	})
+				var idfeld = document.createElement('input');
+				idfeld.name="aroma_id";
+				idfeld.id="aroma_id";
+				idfeld.className="hidden";
+				idfeld.value=id;
+				//td3.appendChild(idfeld);
 
-	var label_name = label[0].firma;
-	var result = aromen.filter(obj => {
-		return obj.hersteller === label_name
-	})
-
-	for (i=0;i<result.length;i++) {
-		sel = document.createElement("option");
-		sel.value = result[i].geschmack;
-		sel.innerHTML = result[i].geschmack;
-		taste_sel.appendChild(sel);
+				var delform2 = document.createElement("form");
+				delform2.method="POST";
+				delform2.name="delform2";
+				delform2.action="vars.php";
+				delform2.target="phpm";
+				var delbut = document.createElement("input");
+				delbut.type="submit";
+				delbut.name="del_flav";
+				delbut.value="del";
+				delform2.appendChild(delbut);
+				delform2.appendChild(idfeld);
+				td4.appendChild(delform2);
+			}
+		}
 	}
 }
-*/
-// create a table containing all flvaours
-var liste_kpl = dgby('aromenliste');
-for (i=0;i<aromen.length;i++) {
-	tr1 = liste_kpl.insertRow(); 
-	td1 = tr1.insertCell();
-	td2 = tr1.insertCell();
-	td3 = tr1.insertCell();
-	td4 = tr1.insertCell();
-	td1.innerHTML = aromen[i].hersteller;
-	td2.innerHTML = aromen[i].geschmack;
-
-	var idfeld = document.createElement('input');
-	idfeld.name="aroma_id";
-	idfeld.id="aroma_id";
-	idfeld.className="hidden";
-	idfeld.value=aromen[i].id;
-	//td3.appendChild(idfeld);
-
-	var delform2 = document.createElement("form");
-	delform2.method="POST";
-	delform2.name="delform2";
-	delform2.action="vars.php";
-	delform2.target="phpm";
-	var delbut = document.createElement("input");
-	delbut.type="submit";
-	delbut.name="del_flav";
-	delbut.value="del";
-	delform2.appendChild(delbut);
-	delform2.appendChild(idfeld);
-	td4.appendChild(delform2);
-
-}
-
-function date_transform(dat) {
-	//console.log(typeof dat + " " + dat);
-}
-
 function liq_generate() {
 	var liq_tab=dgby('liquidliste');
 	var arN = /^Aro.*\d$/
 	var arP = /^Aro.*pct$/
-
 
 	// table header
 	var headrow=liq_tab.insertRow();
@@ -282,7 +276,6 @@ function liq_generate() {
 	var updatehead=headrow.insertCell();
 	updatehead.innerHTML="";
 
-
 	// rows with liquids
 	for (i=0;i<liquids.length;i++){
 		let liquid=liquids[i];
@@ -304,7 +297,6 @@ function liq_generate() {
 				editable.value=liquid[bestandteil];
 				editable.readOnly=true;
 				zelle.appendChild(editable);
-
 			}
 			else {
 				zelle.innerHTML=liquid[bestandteil];
@@ -347,18 +339,9 @@ function liq_generate() {
 		updateform.appendChild(ratingfield);
 		updateform.appendChild(commentfield);
 		updateform.appendChild(updatebutton);
-
-		console.log(liquid['hash']);
-		console.log(zeile);
-		//updateform.appendChild(zeile);
-		//liq_tab.appendChild(updateform);
-
 	}
 }
 function make_edit() {
-  //console.log('make edit');
-	console.log(this);
-	//console.log(this.parentNode.previousSibling.childNodes[0]);
 	in_left1=this.parentNode.previousSibling.childNodes[0];
 	in_left2=this.parentNode.previousSibling.previousSibling.childNodes[0];
 	subbutt=this.parentNode.nextSibling.childNodes[0].childNodes[3];
@@ -374,15 +357,4 @@ function make_edit() {
 		dgby('comment').value=in_left1.value;
 		subbutt.disabled=false;
 	}
-
-}
-liq_generate();
-function sleep(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms));
-}
-async function manual_reload(){
-	console.log('Taking a break...');
-	await sleep(2000);
-	console.log('Two seconds later');
-	location.reload();
 }

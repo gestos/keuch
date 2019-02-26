@@ -3,7 +3,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-$server = "localhost";$user = "keuch";$pass = "fearless";$dbase = "liquids_base";
+$server = "kueche";$user = "keuch";$pass = "fearless";$dbase = "liquids_base";
 $conn = new mysqli($server, $user, $pass, $dbase);
 if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
 
@@ -72,10 +72,6 @@ function add_flavour($conn, $postarray) {
 	$brand = mb_strtolower(rtrim($postarray['brand']), 'UTF-8');
 	$brandname = rtrim($manmap[$brand]);
 
-	echo "flavor ".$flavor;
-	echo "brand ".$brand;
-	echo "brandname ".$brandname;
-
 	if ($flavor == '' || $brand == '') {
 		echo "strings must not be empty";
 	} 
@@ -86,7 +82,7 @@ function add_flavour($conn, $postarray) {
 		$aro_hash = sha1(preg_replace('!\s+!', ' ',mb_strtolower($flavor.$brandname, 'UTF-8'))); // lowercasing and so on is mostly for the hash
 		$sql = "INSERT INTO Aromen (hersteller, geschmack, hash) VALUES ('$brandname', '$flavor', '$aro_hash')";
 		if ($conn->query($sql) === TRUE) {
-			echo "<script>console.log(this[0]);</script>";
+			// echo "<script>console.log(this[0]);</script>";
 			echo "New record for '$brand' '$flavor' created successfully";
 		} else {
 			echo "Error: " . $sql . "<br>" . $conn->error;

@@ -94,7 +94,7 @@ function shoot() {
 		else {
 			var new_input=document.createElement("input");
 			new_input.placeholder="leer";
-			new_input.size="6";
+			new_input.size="11";
 			new_input.name=name;
 			new_input.value=value;
 			new_input.className="etiketten_input";
@@ -165,7 +165,7 @@ function shoot() {
 	namefiel.type="text";
 	namefiel.name="liquidname";
 	namefiel.id="liqname";
-	namefiel.size="6";
+	namefiel.size="11";
 	namefiel.placeholder="optional";
 	namefiel.className="etiketten_input";
 	name_in.appendChild(namefiel);

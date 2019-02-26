@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="de">
 	<head>
+		<title>Liquid- und Aromenrechner, sessionbasiert</title>
+		<meta charset="UTF-8">
+
 <?php
 require ('vars.php');
 ?> 
-		<title>Liquid- und Aromenrechner</title>
-		<meta charset="UTF-8">
-
 <script type="text/javascript">
 var marken = <?php echo json_encode($ds_marken); ?>;
 var aromen = <?php echo json_encode($ds_aromen); ?>;
@@ -312,7 +312,7 @@ var liquids = <?php echo json_encode($ds_liquids); ?>;
 <iframe id="php_messages" name="php_messages" class="floater borderlein errorlog"></iframe>
 			</div>
 <div id="zurDB" class="db_link">
-<a href="datenverwaltung.php" target="_blank">zur DB</a>
+<a href="datenverwaltung.php">zur DB</a>
 </div>
 
 			<div class="footer">
