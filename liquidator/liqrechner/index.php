@@ -4,14 +4,14 @@
 		<title>Liquid- und Aromenrechner, sessionbasiert</title>
 		<meta charset="UTF-8">
 
-<?php
-require ('vars.php');
-?> 
-<script type="text/javascript">
-var marken = <?php echo json_encode($ds_marken); ?>;
-var aromen = <?php echo json_encode($ds_aromen); ?>;
-var liquids = <?php echo json_encode($ds_liquids); ?>;
-</script>
+		<?php
+				require ('vars.php');
+				?> 
+				<script type="text/javascript">
+					var marken = <?php echo json_encode($ds_marken); ?>;
+					var aromen = <?php echo json_encode($ds_aromen); ?>;
+					var liquids = <?php echo json_encode($ds_liquids); ?>;
+				</script>
 				<script src='db_for_main_page.js' defer></script>
 				<script src='new_liq.js' defer></script>
 				<script src='etiketten.js' defer></script>
@@ -303,17 +303,17 @@ var liquids = <?php echo json_encode($ds_liquids); ?>;
 					<input class="pushbuttonr" type="button" value="Liste drucken" onclick="print('etikettenliste')" />
 
 					<form method="post" name="db_save" action="vars.php" target="php_messages">
-				<div id="jsondiv" style="display:none">
-					<input class="json_input" id="jsonvalues" name="jsonified" size="150" type="text" />
-				</div>
-					<input class="pushbuttonr" type="submit" name="save_to_db" onclick="return validate_form()" value="markierte Liquids in DB speichern" />
+						<div id="jsondiv" style="display:none">
+							<input class="json_input" id="jsonvalues" name="jsonified" size="150" type="text" />
+						</div>
+						<input class="pushbuttonr" type="submit" name="save_to_db" onclick="return validate_form()" value="markierte Liquids in DB speichern" />
 					</form>
 				</div>
-<iframe id="php_messages" name="php_messages" class="floater borderlein errorlog"></iframe>
+				<iframe id="php_messages" name="php_messages" class="floater borderlein errorlog"></iframe>
 			</div>
-<div id="zurDB" class="db_link">
-<a href="datenverwaltung.php">zur DB</a>
-</div>
+			<div id="zurDB" class="db_link">
+				<a href="datenverwaltung.php">zur DB</a>
+			</div>
 
 			<div class="footer">
 			</div>
