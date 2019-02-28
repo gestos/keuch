@@ -1,9 +1,10 @@
-var dgby=function( id ) { return document.getElementById( id ); };
-
-var marken_mapped = marken.reduce(function(obj,item){
+if(!marken){console.log("no db [marken]");}
+else{
+const marken_mapped = marken.reduce(function(obj,item){
 	obj[item.firma] = item.tag; 
 	return obj;
 }, {});
+}
 herstellerfelder=Object.keys(mapping_objekt);
 function send_to_database() {
 	console.log("send this to db");
@@ -14,15 +15,20 @@ function shoot() {
 	function get_composite_names() {
 		var componames=[];
 		for(feld of herstellerfelder){
-			let her = dgby(feld).value; 
-			let ges = dgby(mapping_objekt[feld]).value;
-			if(her !== '' && ges !== ''){
-				var componame=ges+" ("+marken_mapped[her]+")";
+			let her = dgby(feld).value;
+			if(dgby('db_freehand_switch').value === 'set freehand mode'){   // in database mode
+				let ges = dgby(mapping_objekt[feld]).value || '';
+				if(her !== '' && ges !== ''){
+					var componame=ges+" ("+marken_mapped[her]+")";
+				}
+				else {
+					var componame='';
+				}
 			}
-			else {
-				var componame='';
+			else {																													// in freehand mode
+				var componame = her;
 			}
-			componames.push(componame);
+		componames.push(componame);
 		}
 		return componames;
 	}
@@ -65,6 +71,10 @@ function shoot() {
 
 		new_cell.appendChild(new_chkbox);
 		new_cell.appendChild(label);
+
+		if (dgby('db_freehand_switch').value === 'set database mode'){
+			new_cell.hidden = true;
+		}
 		return new_cell;
 	}
 

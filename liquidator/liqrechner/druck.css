@@ -7,11 +7,12 @@
 		background-color: white;
 	}
 	.labeltable td {
-		font-size: 12px;
+		font-size: 10px;
 		padding: 0 1px;
 	}
 	.etiketten_input {
 		border:none;
+		font-size: 10px;
 	}
 	.etiketten_input::placeholder {
 		color: white;

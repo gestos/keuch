@@ -1,8 +1,8 @@
-var dgby=function( id ) { return document.getElementById( id ); };
-var manuf_tab = dgby('herstellertabelle');
-
+const manlist_by_freq=aromen_bycount(aromen);
+var herstellerfelder=Object.keys(mapping_objekt);
 // create an array of available manufacturers, sorted by frequency
 function aromen_bycount(aroma_array) {
+	if(!aromen){console.log("no db [aromen]"); return false;}
 	var counter = {};
 	for (i=0;i<aromen.length;i++) {
 		counter[aromen[i].hersteller] = 0;
@@ -31,7 +31,7 @@ function toggle(el) {
 		mnt.style.visibility="collapse";
 	}
 }
-function generate_manuf_selections(selection) {
+function build_selection_manufacturers(selection) {
 	// set an initial empty value
 	sel = document.createElement("option");
 	selection.appendChild(sel);
@@ -70,11 +70,46 @@ function load_aro(selection_element) {
 	}
 	chk100_2();
 } 
-var manlist_by_freq=aromen_bycount(aromen);
-var mapping_objekt={'aromaselect1':'geschmack1', 'aromaselect2':'geschmack2', 'aromaselect3':'geschmack3', 'aromaselect4':'geschmack4', 'aromaselect5':'geschmack5'};
 // create a selection of manufacturers that are available
-var herstellerfelder=Object.keys(mapping_objekt);
 for (feld of herstellerfelder){
 	var aro_sel = dgby(feld);
-	generate_manuf_selections(aro_sel);
+	build_selection_manufacturers(aro_sel);
 }
+const table_clone = dgby('klondiv').innerHTML;
+function db_free_switch(button) {
+	let einzelm = dgby('einzelmenge');
+	let aromage = dgby('aromagesamt');
+	if(button.value === 'set freehand mode'){
+		let row3=document.getElementsByClassName('row3');
+		for(let [feld1,feld2] of Object.entries(mapping_objekt)){
+			let f1 = dgby(feld1); let f2 = dgby(feld2);
+			var f1_clone = f1.cloneNode(true);
+			let contain1 = f1.parentNode;
+			let contain2 = f2.parentNode;
+			f1.remove(); f2.remove();
+			let in1 = document.createElement('input');
+			in1.id = feld1;
+			in1.inlineSize = "100px";
+			in1.onblur = chk100_2; 
+			contain1.className += " freehand_input";
+			contain1.appendChild(in1);
+		}
+		while(row3[0]){
+			row3[0].remove();
+		}
+		let db_buttons = document.getElementsByClassName('markirbox');
+		for(let dbel of db_buttons){
+			dbel.hidden = true;
+		}
+		button.value = 'set database mode';
+	}
+	else{ 
+		dgby('klondiv').innerHTML = table_clone;
+		let db_buttons = document.getElementsByClassName('markirbox');
+		for(let dbel of db_buttons){
+			dbel.hidden = false;
+		}
+		button.value = 'set freehand mode';
+	}
+}
+db_free_switch(dgby('db_freehand_switch'));	// initale ausfuehrung, um auf db-freien modus zu schalten

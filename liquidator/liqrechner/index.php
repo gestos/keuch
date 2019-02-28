@@ -3,17 +3,16 @@
 	<head>
 		<title>Liquid- und Aromenrechner, sessionbasiert</title>
 		<meta charset="UTF-8">
-
 		<?php
-				require ('vars.php');
+				include ('vars.php');
 				?> 
 				<script type="text/javascript">
 					var marken = <?php echo json_encode($ds_marken); ?>;
 					var aromen = <?php echo json_encode($ds_aromen); ?>;
 					var liquids = <?php echo json_encode($ds_liquids); ?>;
 				</script>
-				<script src='db_for_main_page.js' defer></script>
 				<script src='new_liq.js' defer></script>
+				<script src='db_for_main_page.js' defer></script>
 				<script src='etiketten.js' defer></script>
 				<link rel="stylesheet" href="heller_style_neu.css">
 	</head>
@@ -201,99 +200,101 @@
 				<!-- ##### Aromenkomposition ##### -->
 				<div id="Aromenkomposition" class="floater borderlein">
 					<h2>Aromen komponieren</h2>
-					<table class="kopf grund" style="font-size: 12px;" >
+					<div id="klondiv">
+					<table class="kopf grund" style="font-size: 12px;" >  <!-- obere zwei Felder, nur Menge und Aroma % gesamt -->
 						<tr>
 							<td>Menge:</td>
-							<td><input id="einzelmenge" size="3" onblur="chk100_2()" />ml</td>
-							<td></td>
-							<td></td>
+							<td class="row2"><input id="einzelmenge" size="3" onblur="chk100_2()" />ml</td>
+							<td class="row3"></td>
+							<td class="row4"></td>
 							<td></td>
 						</tr>
 						<tr>
 							<td>Anteil Aroma:</td>
-							<td><input id="aromagesamt" size="3" onblur="chk100_2()" />%</td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td class="row2"><input id="aromagesamt" size="3" onblur="chk100_2()" />%</td>
+							<td class="row3"></td>
+							<td class="row4"></td>
+							<td><input id="db_freehand_switch" class="pushbutton" type="button" value="set freehand mode" onclick="db_free_switch(this)" /></td>
 						</tr>
 					</table>
 					<table id="komponieren" class="grund" style="font-size: 12px;" >
 						<tr>
 							<td>Aroma 1:</td>
-							<td>
-								<select id="aromaselect1" class="grund" onChange="load_aro(this)">
+							<td class="row2">
+								<select id="aromaselect1" onChange="load_aro(this)">
 								</select>
 							</td>
-							<td>
+							<td class="row3">
 								<select id="geschmack1">
 								</select>
 							</td>
-							<td><input id="aroma1pct" class="arpct" size="3" onblur="chk100_2()"/>%</td>
+							<td class="row4"><input id="aroma1pct" class="arpct" size="3" onblur="chk100_2()"/>%</td>
 							<td><input id="aroma1ml" class="arml" size="3" readonly />ml</td>
 						</tr>
 						<tr>
 							<td>Aroma 2:</td>
-							<td>
+							<td class="row2">
 								<select id="aromaselect2" onChange="load_aro(this)">
 								</select>
 							</td>
-							<td>
+							<td class="row3">
 								<select id="geschmack2">
 								</select>
 							</td>
-							<td><input id="aroma2pct" class="arpct" size="3" onblur="chk100_2()"/>%</td>
+							<td class="row4"><input id="aroma2pct" class="arpct" size="3" onblur="chk100_2()"/>%</td>
 							<td><input id="aroma2ml" class="arml" size="3" readonly />ml</td>
 						</tr>
 						<tr>
 							<td>Aroma 3:</td>
-							<td>
+							<td class="row2">
 								<select id="aromaselect3" onChange="load_aro(this)">
 								</select>
 							</td>
-							<td>
+							<td class="row3">
 								<select id="geschmack3">
 								</select>
 							</td>
-							<td><input id="aroma3pct" class="arpct" size="3" onblur="chk100_2()"/>%</td>
+							<td class="row4"><input id="aroma3pct" class="arpct" size="3" onblur="chk100_2()"/>%</td>
 							<td><input id="aroma3ml" class="arml" size="3" readonly />ml</td>
 						</tr>
 						<tr>
 							<td>Aroma 4:</td>
-							<td>
+							<td class="row2">
 								<select id="aromaselect4" onChange="load_aro(this)">
 								</select>
 							</td>
-							<td>
+							<td class="row3">
 								<select id="geschmack4">
 								</select>
 							</td>
-							<td><input id="aroma4pct" class="arpct" size="3" onblur="chk100_2()"/>%</td>
+							<td class="row4"><input id="aroma4pct" class="arpct" size="3" onblur="chk100_2()"/>%</td>
 							<td><input id="aroma4ml" class="arml" size="3" readonly />ml</td>
 						</tr>
 						<tr>
 							<td>Aroma 5:</td>
-							<td>
+							<td class="row2">
 								<select id="aromaselect5" onChange="load_aro(this)">
 								</select>
 							</td>
-							<td>
+							<td class="row3">
 								<select id="geschmack5">
 								</select>
 							</td>
-							<td><input id="aroma5pct" class="arpct" size="3" onblur="chk100_2()"/>%</td>
+							<td class="row4"><input id="aroma5pct" class="arpct" size="3" onblur="chk100_2()"/>%</td>
 							<td><input id="aroma5ml" class="arml" size="3" readonly />ml</td>
 						</tr>
 						<tr>
-							<td></td>
-							<td></td>
 							<td>Summe:</td>
-							<td><input id="sum" size="3" readonly />%</td>
+							<td class="row2"></td>
+							<td class="row3"></td>
+							<td class="row4"><input id="sum" size="3" readonly />%</td>
 							<td><input id="aromagesamtml" size="3" readonly />ml</td>
 						</tr>
 						<tr>
 							<td><input id="shooter" class="pushbuttonr" type="button" value="Etikett erstellen" onclick="shoot()" /></td>
 						</tr>
 					</table>
+					</div>
 				</div>
 				<div id="etiketten" class="floater borderlein">
 					<h2>Labels</h2>
@@ -306,10 +307,11 @@
 						<div id="jsondiv" style="display:none">
 							<input class="json_input" id="jsonvalues" name="jsonified" size="150" type="text" />
 						</div>
-						<input class="pushbuttonr" type="submit" name="save_to_db" onclick="return validate_form()" value="markierte Liquids in DB speichern" />
+						<input class="pushbuttonr markirbox" type="submit" name="save_to_db" onclick="return validate_form()" value="markierte Liquids in DB speichern" />
 					</form>
 				</div>
-				<iframe id="php_messages" name="php_messages" class="floater borderlein errorlog"></iframe>
+				<iframe id="php_messages" name="php_messages" class="floater borderlein errorlog">
+				</iframe>
 			</div>
 			<div id="zurDB" class="db_link">
 				<a href="datenverwaltung.php">zur DB</a>

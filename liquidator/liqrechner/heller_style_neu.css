@@ -64,7 +64,7 @@ table {
 	border-color: #333;
 	box-shadow: -1px -1px #0a7d40;
 	/*! float:right; */
-	display: block;
+	/* display: block; */
 	width: 10em;
 	margin: 3px 15px;
 }
@@ -327,4 +327,14 @@ input.failfeld {
 	position: fixed;
 	right: 40px;
 	top: 50px;
+}
+.freehand_input input {
+	inline-size: 130px;
+}
+.dbmessage {
+	font-size: 10px;
+	color: lightblue;
+	position: fixed;
+	right: 40px;
+	top: 20px;
 }

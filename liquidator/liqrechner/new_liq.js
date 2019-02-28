@@ -1,7 +1,5 @@
-var dgby=function( id ) { return document.getElementById( id ); };
-
-
-
+const dgby=function( id ) { return document.getElementById( id ); };
+const mapping_objekt={'aromaselect1':'geschmack1', 'aromaselect2':'geschmack2', 'aromaselect3':'geschmack3', 'aromaselect4':'geschmack4', 'aromaselect5':'geschmack5'};
 function collapse(block) {
 	klapp=dgby(block);
 	//console.log(klapp);
@@ -33,7 +31,6 @@ function col100(val1,val2,val3,col) {
 	dgby(val2).style.background = col;
 	dgby(val3).style.background = col;
 }
-
 // GRUNDMISCHUNG
 // check fuer grundstoffe
 function chkgrund() {
@@ -109,11 +106,6 @@ function calc_grund() {
 		dgby('alkz').value=alkpct;
 	}
 }
-// WERTE VON GRUNDMISCHUNG ZU NIKMISCHUNG UEBERNEHMEN
-//function slidestate(slider) {
-//	return dgby(slider.id).value
-//}
-
 function hilite(felder) {
 	//	console.log(felder);
 	for (var i in felder.basis) {
@@ -149,9 +141,6 @@ var labeltexte={
 		felder:{oben:['arpct_5','ml_5'],unten:['aromagesamt','einzelmenge'],exe:'ubertrag3'}
 	}
 }
-
-
-
 function slideopt(slider) {
 	state=dgby(slider.id).value;
 	sliderID=slider.id;
@@ -457,6 +446,7 @@ function chkvalid2() {
 			dgby('go2').disabled=true;
 		}
 	}
+	chk100_2();
 }
 
 function calculate_liq2() {
@@ -573,7 +563,6 @@ function calculate_liq2() {
 }
 
 function chk100_2() {
-	console.log('chk100_2');
 	var overall=Number(dgby('einzelmenge').value).toFixed(2);
 	var ar_ml=Number(dgby('aromagesamt').value).toFixed(2);
 	var overall_ml=Number(overall*(ar_ml/100)).toFixed(2);
@@ -640,11 +629,21 @@ function chk100_2() {
 		}
 	}
 
-	var pc = pct_chk();
-	var vol = volumencheck();
-	var str = strng_check(catstr);
-	var neg = test_neg(einzelwerte_pztfelder);
-	if( pc && vol && str && neg ) {
+	function nic_pg_check() {
+		if(!dgby('nic_5').value || !dgby('pg_5').value || !dgby('vg_5').value){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+
+	let pc = pct_chk();
+	let vol = volumencheck();
+	let nic_pg = nic_pg_check();
+	let str = strng_check(catstr);
+	let neg = test_neg(einzelwerte_pztfelder);
+	if( pc && vol && str && neg && nic_pg ) {
 		dgby('shooter').disabled=false;
 	} else {
 		dgby('shooter').disabled=true;
