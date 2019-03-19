@@ -207,9 +207,9 @@ table {
 	border-radius: 20px;
 }
 .hiliterow {
-	border: dotted 2px #c4fa9d4d;
+	border: dashed 2px #00346f;
 	border-collapse: collapse;
-	background-color: #f9efd8;
+	background-color: #002b5d;
 	font-weight: bold;
 	border-radius: 50px;
 	/*! border-color: blue; */
