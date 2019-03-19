@@ -14,7 +14,7 @@
 				<script src='new_liq.js' defer></script>
 				<script src='db_for_main_page.js' defer></script>
 				<script src='etiketten.js' defer></script>
-				<link rel="stylesheet" href="heller_style_neu.css">
+				<link rel="stylesheet" href="dunkler_style.css">
 	</head>
 	<body>
 		<div id="outercontainer">
