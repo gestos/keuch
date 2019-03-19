@@ -118,7 +118,7 @@ function hilite(felder) {
 		dgby(felder.neutral[i]).className='';
 	}
 }
-var labeltexte={
+let labeltexte={
 	slider1:{
 		label:'slider1_label',
 		vonoben:'<span class="von">&#8595</span>',
@@ -211,7 +211,6 @@ function chkvalid() {
 		dgby('go').disabled=true;
 	}
 }
-
 function chknic(nicbb,nicliq,mlliq) {
 	let nic_bb = Number(dgby(nicbb).value).toFixed(2);
 	let nic_liq = Number(dgby(nicliq).value).toFixed(2);
@@ -248,7 +247,6 @@ function calculate_nic(liq_menge,liq_nic,bb_nic) {
 	let ml_menge_nb = (liqmenge-ml_menge_bb).toFixed(2);
 	return [ml_menge_nb,ml_menge_bb];
 }
-
 function get_pct(nullerbase,bunkerbase,ml_nb,ml_bb) {
 	let liqmenge				=	Number(dgby('mlliq').value).toFixed(2);
 	let pct_nb = Number(dgby(nullerbase).value).toFixed(2);
@@ -274,11 +272,8 @@ function calculate_liq () {
 	}
 }
 function calc2pct(pct_pg_bb,pct_vg_bb,pct_alk_bb,mg_bb,mg_lq,menge_lq,pct_pg_lq,pct_vg_lq,pct_alk_lq) {
-	//console.log('calc2pct');
 	for (i=0; i<arguments.length;i++) {
-		// console.log(arguments[i]);
 		arguments[i]=dgby(arguments[i]).value;
-		// console.log(arguments[i]);
 	}
 	// diese Werte sind fix, weil durch die Zusammensetzung der BB vorgegeben
 	let ml_bb=((mg_lq*menge_lq)/mg_bb).toFixed(2);
@@ -286,29 +281,18 @@ function calc2pct(pct_pg_bb,pct_vg_bb,pct_alk_bb,mg_bb,mg_lq,menge_lq,pct_pg_lq,
 	let ml_pg_bb=(ml_bb*(pct_pg_bb/100)).toFixed(2);
 	let ml_vg_bb=(ml_bb*(pct_vg_bb/100)).toFixed(2);
 	let ml_alk_bb=(ml_bb*(pct_alk_bb/100)).toFixed(2);
-
-	//console.log('BB ml_PG:',ml_pg_bb,' ml_VG:',ml_vg_bb,' ml_Alk:',ml_alk_bb);
-
 	// diese Werte in ml soll das Ziel-Liquid haben:
 	let ml_pg_liq=(menge_lq*(pct_pg_lq/100)).toFixed(2);
 	let ml_vg_liq=(menge_lq*(pct_vg_lq/100)).toFixed(2);
 	let ml_alk_liq=(menge_lq*(pct_alk_lq/100)).toFixed(2);
-
-	//console.log('Liq ml_PG:',ml_pg_liq,' ml_VG:',ml_vg_liq,' ml_Alk:',ml_alk_liq);
-
 	// diese Werte in ml werden von der NB benoetigt, um auf die Zielwerte zu kommen
 	let ml_pg_nb=(ml_pg_liq-ml_pg_bb).toFixed(2);
 	let ml_vg_nb=(ml_vg_liq-ml_vg_bb).toFixed(2);
 	let ml_alk_nb=(ml_alk_liq-ml_alk_bb).toFixed(2);
-
-	//console.log('NB ml_PG:',ml_pg_nb,' ml_VG:',ml_vg_nb,' ml_Alk:',ml_alk_nb);
-
 	// diese in Prozent von der berechneten NB-Menge
 	let pct_pg_nb=((ml_pg_nb/ml_nb)*100).toFixed(2);
 	let pct_vg_nb=((ml_vg_nb/ml_nb)*100).toFixed(2);
 	let pct_alk_nb=((ml_alk_nb/ml_nb)*100).toFixed(2);
-
-
 	// check, ob die Werte ueberhaupt legal sind
 	if ((ml_pg_liq-ml_pg_bb < 0) || (ml_vg_liq-ml_vg_bb <0) || (ml_alk_liq-ml_alk_bb <0)) {
 		window.alert('nicht moeglich');
@@ -319,7 +303,6 @@ function calc2pct(pct_pg_bb,pct_vg_bb,pct_alk_bb,mg_bb,mg_lq,menge_lq,pct_pg_lq,
 	dgby('vgb1').value=pct_vg_nb;
 	dgby('alk1').value=pct_alk_nb;
 }
-
 // richtung aendern2
 function switch2() {
 	var Fo=['pgb1','vgb1','alk1','ml1'],Fu=['pgbz','vgbz','alkz1'],nc='nicz',Fa=Fo.concat(Fu);
@@ -344,7 +327,6 @@ function switch2() {
 		dgby('misch_nuller').className="";
 	}
 }
-
 function switch3() {
 	var Fo=['pg_3','vg_3','alk3','nic3'],Fu=['pg_5','vg_5','alk_5','nic_5'],Fm=['ml3','ml4'],Fa=Fo.concat(Fu).concat(Fm);
 	for (var i=0;i<Fa.length;i++) {
@@ -371,7 +353,6 @@ function switch3() {
 		dgby('Ergebnis3').className="hiliterow"
 	}
 }
-
 function chkvalid2() {
 	// erstmal bestimmen, in welche richtung gerechnet wird
 	if (flick('switcher3') == false) {
@@ -379,11 +360,10 @@ function chkvalid2() {
 	} else {
 		var richtung='rev';
 	}
-
 	// paar Variablen
-	var nicsrc=dgby('nic3').value;
-	var nicdst=dgby('nic_5').value;
-	var arpct=dgby('arpct_5').value;
+	let nicsrc=dgby('nic3').value;
+	let nicdst=dgby('nic_5').value;
+	let arpct=dgby('arpct_5').value;
 
 	if (richtung == 'norm') {
 		//console.log(richtung);
@@ -447,7 +427,6 @@ function chkvalid2() {
 		}
 	}
 }
-
 function calculate_liq2() {
 	if (flick('switcher3') == false) {
 
@@ -495,7 +474,8 @@ function calculate_liq2() {
 		// mg/ml im Zielliquid
 		let nic_dst=((dml_olq*nic_src)/dlq_ml).toFixed(2);
 		dgby('nic_5').value=nic_dst;
-	} else if (flick('switcher3') == true) {
+	} 
+	else if (flick('switcher3') == true) {
 
 		// HIER IN DIE ANDERE RICHTUNG RECHNEN!
 
@@ -560,23 +540,22 @@ function calculate_liq2() {
 		}
 	}
 }
-
 function chk100_2() {
 	console.log('chk100_2');
-	var overall=Number(dgby('einzelmenge').value).toFixed(2);
-	var ar_ml=Number(dgby('aromagesamt').value).toFixed(2);
-	var overall_ml=Number(overall*(ar_ml/100)).toFixed(2);
+	let overall=Number(dgby('einzelmenge').value).toFixed(2);
+	let ar_ml=Number(dgby('aromagesamt').value).toFixed(2);
+	let overall_ml=Number(overall*(ar_ml/100)).toFixed(2);
 
 	dgby('aromagesamtml').value=overall_ml;
 
-	var ins=document.getElementsByClassName('arpct');
-	var outs=document.getElementsByClassName('arml');
-	var suma=0;
+	let ins=document.getElementsByClassName('arpct');
+	let outs=document.getElementsByClassName('arml');
+	let suma=0;
 
-	var einzelwerte_pztfelder = [];
+	let einzelwerte_pztfelder = [];
 	for (var i=0; i < ins.length; i++) {
-		var curpct=ins[i];
-		var curml=outs[i];
+		let curpct=ins[i];
+		let curml=outs[i];
 		suma += Number(curpct.value) || 0;
 		curml.value=(curpct.value*(overall_ml/100)).toFixed(2);
 		einzelwerte_pztfelder.push(curpct.value);
@@ -592,9 +571,8 @@ function chk100_2() {
 			return true;
 		}
 	}
-
 	// test if at least one flavour is set
-	var catstr='';
+	let catstr='';
 	for (feld of Object.keys(mapping_objekt)) {
 		feldstring=dgby(feld).value;
 		catstr += feldstring;
@@ -607,7 +585,6 @@ function chk100_2() {
 			return true;
 		}
 	}
-
 	// test for negative perceantages
 	function test_neg(pztarray) {
 		for (let num of pztarray) {
@@ -617,7 +594,6 @@ function chk100_2() {
 		}
 		return true;
 	}
-
 	function volumencheck() {
 		menge=dgby('einzelmenge').value;
 		aromaanteil=dgby('aromagesamt').value;
@@ -628,11 +604,10 @@ function chk100_2() {
 			return false;
 		}
 	}
-
-	var pc = pct_chk();
-	var vol = volumencheck();
-	var str = strng_check(catstr);
-	var neg = test_neg(einzelwerte_pztfelder);
+	let pc = pct_chk();
+	let vol = volumencheck();
+	let str = strng_check(catstr);
+	let neg = test_neg(einzelwerte_pztfelder);
 	if( pc && vol && str && neg ) {
 		dgby('shooter').disabled=false;
 	} else {
@@ -640,7 +615,6 @@ function chk100_2() {
 	}
 }
 chk100_2();
-
 function ausblenden(tabelle,ausblender) {
 	if (dgby(tabelle).style.display !== 'none') {
 		dgby(tabelle).style.display='none';
@@ -650,4 +624,37 @@ function ausblenden(tabelle,ausblender) {
 		dgby(ausblender).style.display='';
 
 	}
+}
+function styleswitch(button) {
+	let style_array=[
+		{no:0,name:"bright",url:"heller_style.css"},
+		{no:1,name:"dark",url:"dunkler_style2.css"},
+		{no:2,name:"blue",url:"dunkler_style.css"}	
+	];
+	let stylelink=dgby('style');
+	
+	let currentStyleName=button.value;
+	let currentStyleObject = style_array.filter(function(objekt) {return objekt["name"] === currentStyleName})[0];
+	let currentIndex=style_array.indexOf(currentStyleObject);
+
+	console.log(currentIndex);
+
+	function ix_reset() {
+	if (currentIndex+1 >= style_array.length) {
+		return 0;
+	}
+	else {
+		return currentIndex+1;
+	}
+	}
+	let nextIndex=ix_reset();
+	console.log(nextIndex);
+
+	let nextStyleObject = style_array[nextIndex];
+	let nextStyleName = nextStyleObject['name'];
+	let nextStyle = nextStyleObject['url'];
+
+	stylelink.setAttribute('href',nextStyle);
+	button.value = nextStyleName;
+
 }

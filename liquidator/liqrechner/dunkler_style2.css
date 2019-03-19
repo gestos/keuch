@@ -84,13 +84,13 @@ table {
 }
 .grund select {
 	text-align: center;
-	background-color: #CC822266;
-	border: solid 1px #43666c;
+	background-color: #84BDFF;
+	border: solid 1px #004698;
 	margin: 2px 2px;
 	padding: 3px 3px;
 	color: #000;
 	inline-size: 115px;
-	box-shadow: -2px -2px 0px 0px #81502F;
+	box-shadow: -2px -2px 0px 0px #00249F;
 }
 .kopf {
 	color: darkslateblue;
@@ -301,7 +301,7 @@ input.failfeld {
 	color: #00c9ff;
 	margin-bottom: 5px;
 	margin-top: 5px;
-	border: solid black 1px;
+	border: solid #008b8b 1px;
 	background-color: #000;
 }
 .labeltable td {
