@@ -2,7 +2,7 @@ const manlist_by_freq=aromen_bycount(aromen);
 var herstellerfelder=Object.keys(mapping_objekt);
 // create an array of available manufacturers, sorted by frequency
 function aromen_bycount(aroma_array) {
-	if(!aromen){console.log("no db [aromen]"); return false;}
+	if(!aromen){console.log("no db"); return false;}
 	var counter = {};
 	for (i=0;i<aromen.length;i++) {
 		counter[aromen[i].hersteller] = 0;

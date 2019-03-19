@@ -306,6 +306,7 @@
 					<form method="post" name="db_save" action="vars.php" target="php_messages">
 						<div id="jsondiv" style="display:none">
 							<input class="json_input" id="jsonvalues" name="jsonified" size="150" type="text" />
+							<input class="json_input" id="jsonvalues_ml" name="jsonified_ml" size="150" type="text" />
 						</div>
 						<input class="pushbuttonr markirbox" type="submit" name="save_to_db" onclick="return validate_form()" value="markierte Liquids in DB speichern" />
 					</form>
@@ -318,6 +319,7 @@
 			</div>
 
 			<div class="footer">
+todo: bei etikett löschen haken entfernen und aus der db_liste streichen
 			</div>
 	</body> 
 </html>

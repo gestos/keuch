@@ -28,7 +28,7 @@
 						<!-- onSubmit="manual_reload()" -->  
 						<table id="herstellertabelle" class="smalltable borderlein">
 							<tr>
-								<th>Kürzel</th>
+								<th>Tag</th>
 								<th>Hersteller</th>
 								<th></th>
 						</table>
@@ -40,8 +40,9 @@
 					<table id="aromenliste" class="smalltable borderlein">
 						<tr></tr>
 						<tr>
-							<th>Hersteller</th>
-							<th>Geschmack</th>
+							<th>Marke</th>
+							<th>Aroma</th>
+							<th>ml</th>
 							<th></th>
 							<th></th>
 						</tr>
@@ -51,6 +52,7 @@
 				<iframe id="phpm" name="phpm">
 				</iframe>
 			</div>
+		</div>
 
 			<div id="liquids" class="large_table_div">
 				<h2 class="headline">Liquids</h2>
@@ -62,6 +64,5 @@
 			<div id="zumCalc" class="db_link">
 				<a href="index.php">zum Rechner</a>
 			</div>
-		</div>
 	</body>
 </html>

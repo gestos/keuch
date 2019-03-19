@@ -15,7 +15,7 @@
 		font-size: 10px;
 	}
 	.etiketten_input::placeholder {
-		color: white;
+		color:transparent;
 	}
 	.trenner {
 		width: 5px;
@@ -35,6 +35,9 @@
 		margin: 0;
 		padding: 0;
 		position: absolute 0 0;
+	}
+	::placeholder {
+		color:transparent;
 	}
 }
 @media screen {

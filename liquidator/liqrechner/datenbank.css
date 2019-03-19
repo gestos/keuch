@@ -30,30 +30,38 @@ body input[readonly] {
 }
 .smalltable th {
 	text-align: left;
+	font-weight: normal;
+	color: #0b7701;
+	padding: 0 10px;
+	/*! text-shadow: #6c6b6b 0px 1px; */
+	font-size: 1.1em;
+	background-color: #defedb;
 }
 .smalltable td {
 	text-align: left;
-	padding: 0 5px;
+	padding: 0 10px;
 	border-left: 1px #d8a7ff dashed;
 }
-.smalltable input,select {
+.smalltable input[type=button] {
+	cursor: pointer;
 	font-size: 12px;
-	/*! border: none; */
 	border-radius: 5px;
-	background-color: #defedb;
+}
+.smalltable input[type=submit] {
+	cursor: pointer;
+	font-size: 12px;
+	border-radius: 5px;
+}
+.smalltable input[type=submit]:disabled {
+	cursor: not-allowed;
+	background-color: #fff;
+}
+.smalltable input[type=button]:disabled {
+	cursor: not-allowed;
+	background-color: #fff;
 }
 .smalltable input[readonly] {
 	background-color: blanchedalmond;
-}
-.smalltable input[type=submit] {
-	border: none;
-	border-radius: 5px;
-	background-color: #d1ebff;
-}
-.smalltable input[type=submit][disabled] {
-	border: none;
-	border-radius: 5px;
-	background-color: #ffffff;
 }
 .hidden {
 	display:none;
@@ -86,4 +94,28 @@ form {
 	width: 55%;
 	min-height: 320px;
 	display: inline-block;
+}
+#liquids {
+	width: 95%;
+	margin: 0 auto;
+}
+.flavor_header td {
+	cursor: pointer;
+	text-align: center;
+	color: #005393;
+	background-color: #d1ebff;
+	border-radius: 5px;
+	text-shadow: 0px 1px white;
+}
+.tooltip {
+	background-color: #fffafa;
+	color: violet;
+	text-align: left;
+	/*display: block;*/
+}
+.delbutton {
+	background-color: #ffd6d6;
+}
+.updatebutton {
+	background-color: #edf5ff;
 }

@@ -130,12 +130,14 @@ table {
 .von {
 	color: #00aa4a;
 	font-weight: bold;
-	font-size: 13px;
+	font-size: 50px;
+	text-shadow: 2px 2px #c4fa9d;
 }
 .nach {
 	color: #d5ad00;
 	font-weight: bold;
-	font-size: 13px;
+	font-size: 50px;
+	text-shadow: 2px 2px #ffe161;
 }
 .pushbutton {
 	color: #186d1c;
@@ -286,6 +288,7 @@ a#klapper:hover {
 }
 input.okfeld {
 	background-color: #8afe5780;
+	box-shadow: -2px -2px 0 0 #667495;
 }
 input.failfeld {
 	background-color: #ff000080;
