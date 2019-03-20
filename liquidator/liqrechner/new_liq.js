@@ -629,7 +629,8 @@ function styleswitch(button) {
 	let style_array=[
 		{no:0,name:"bright",url:"heller_style.css"},
 		{no:1,name:"dark",url:"dunkler_style2.css"},
-		{no:2,name:"blue",url:"dunkler_style.css"}	
+		{no:2,name:"blue",url:"dunkler_style.css"},
+		{no:3,name:"scheme3",url:"scheme3.css"}	
 	];
 	let stylelink=dgby('style');
 	
