@@ -1,23 +1,21 @@
 body input {
-	background-color: #defedb;
+	background-color: transparent;
+	color: #b1b1b1;
+	border: 1px solid #828789;
 }
 body input[readonly] {
-	background-color: blanchedalmond;
 }
 .small_table_div {
-	color: #894f2b;
 	width: 50%;
 	text-align: center;
 }
 .large_table_div {
-	color: #894f2b;
+	/*! color: #894f2b; */
 	width: 100%;
 	text-align: center;
 }
 .small_table_div h1,h2,h3,h4,h5,h6 {
-	color: #894f2b;
 	width: 50%;
-	text-align: center;
 }
 .smalltable {
 	font-size: 12px;
@@ -31,16 +29,13 @@ body input[readonly] {
 .smalltable th {
 	text-align: left;
 	font-weight: normal;
-	color: #0b7701;
 	padding: 0 10px;
-	/*! text-shadow: #6c6b6b 0px 1px; */
 	font-size: 1.1em;
-	background-color: #defedb;
 }
 .smalltable td {
 	text-align: left;
-	padding: 0 10px;
-	border-left: 1px #d8a7ff dashed;
+	padding: 1px 10px;
+	border-left: 1px #828789 dashed;
 }
 .smalltable input[type=button] {
 	cursor: pointer;
@@ -54,14 +49,15 @@ body input[readonly] {
 }
 .smalltable input[type=submit]:disabled {
 	cursor: not-allowed;
-	background-color: #fff;
+	background-color: #272f33;
+	color: black;
+	border: black;
 }
 .smalltable input[type=button]:disabled {
 	cursor: not-allowed;
 	background-color: #fff;
 }
 .smalltable input[readonly] {
-	background-color: blanchedalmond;
 }
 .hidden {
 	display:none;
@@ -76,14 +72,10 @@ form {
 	display: block;
 	overflow-y: auto;
 	border: none;
-	background-color: #edf5ff;
 	padding: 0;
 	max-height: 4em;
 }
 .headline {
-	border: solid 1px #bed8ff;
-	border-bottom: none;
-	box-shadow: #ffd9a1 -2px -2px;
 }
 #hersteller_div {
 	width: 45%;
@@ -102,20 +94,26 @@ form {
 .flavor_header td {
 	cursor: pointer;
 	text-align: center;
-	color: #005393;
-	background-color: #d1ebff;
+	color: #20b1f9;
 	border-radius: 5px;
-	text-shadow: 0px 1px white;
 }
 .tooltip {
 	background-color: #fffafa;
 	color: violet;
 	text-align: left;
-	/*display: block;*/
 }
 .delbutton {
-	background-color: #ffd6d6;
+	color: #ff3030;
 }
 .updatebutton {
-	background-color: #edf5ff;
+	color: #1b80ff;
+}
+.styleswtch {
+	font-size: 12px;
+	display: block;
+	line-height: 2em;
+	color: thistle;
+}
+.commentEdit {
+	background-color: #72a5bf;
 }

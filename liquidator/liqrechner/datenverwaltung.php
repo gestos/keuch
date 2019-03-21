@@ -63,6 +63,7 @@
 
 			<div id="zumCalc" class="db_link">
 				<a href="index.php">zum Rechner</a>
+					<p>change style <input type="button" class="pushbuttonr" value="bright" onclick="styleswitch(this)" /> </p>
 			</div>
 	</body>
 </html>

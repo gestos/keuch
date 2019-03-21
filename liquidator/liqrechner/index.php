@@ -11,6 +11,7 @@
 					var aromen = <?php echo json_encode($ds_aromen); ?>;
 					var liquids = <?php echo json_encode($ds_liquids); ?>;
 				</script>
+				<script src='general.js' defer></script>
 				<script src='new_liq.js' defer></script>
 				<script src='db_for_main_page.js' defer></script>
 				<script src='etiketten.js' defer></script>

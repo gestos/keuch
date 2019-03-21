@@ -1,4 +1,3 @@
-const dgby=function( id ) { return document.getElementById( id ); };
 const manuf_tab = dgby('herstellertabelle');
 const liste_kpl = dgby('aromenliste');
 const hersteller_objekt=get_herstellernamen();
@@ -123,7 +122,7 @@ function create_manufacturer_list(table) {
 	add_manu_td.colSpan="3";
 	var togglebutton=add_manu_td.appendChild(document.createElement('input'));
 	togglebutton.type='button';
-	togglebutton.style.width='200px';
+	togglebutton.style.width='175px';
 	togglebutton.value="add another manufacturer";
 	togglebutton.id="toggle_addform";
 	togglebutton.onclick=toggle;
@@ -158,7 +157,7 @@ function create_manufacturer_list(table) {
 	add_flav_td.colSpan="3";
 	var togglebutton2=add_flav_td.appendChild(document.createElement('input'));
 	togglebutton2.type='button';
-	togglebutton2.style.width='200px';
+	togglebutton2.style.width='175px';
 	togglebutton2.value="add another flavor";
 	togglebutton2.id="toggle_addflav";
 	togglebutton2.onclick=toggle;
@@ -442,6 +441,8 @@ function make_edit() {
 	if(in_left1.readOnly) {
 		in_left1.readOnly = false;
 		in_left2.readOnly = false;
+		in_left1.className="commentEdit";
+		in_left2.className="commentEdit";
 		subbutt.disabled=true;
 	}
 	else {
@@ -449,6 +450,8 @@ function make_edit() {
 		in_left2.readOnly = true;
 		rate_to_submit.value=in_left1.value;
 		comment_to_submit.value=in_left2.value;
+		in_left1.className="";
+		in_left2.className="";
 		subbutt.disabled=false;
 	}
 }
