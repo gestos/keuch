@@ -26,9 +26,5 @@ synclient TapButton1=1
 echo "$HOME/.profile"
 env > /home/keuch/env_profile
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+source /home/keuch/gits/keuch/code_box/pyt/spreadsheetparsing/entwuerfe/ve/bin/activate
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-# load the .Xresources (wrong file?)
-xrdb load $HOME/.Xresources
