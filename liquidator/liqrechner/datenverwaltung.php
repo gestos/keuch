@@ -9,8 +9,9 @@
 			var aromen = <?php echo json_encode($ds_aromen); ?>;
 			var liquids = <?php echo json_encode($ds_liquids); ?>;
 		</script>
+		<script src='general.js' defer></script>
 		<script src='liqdb.js' defer></script>
-		<link rel="stylesheet" href="heller_style_neu.css">
+		<link id="style" rel="stylesheet" href="heller_style.css">
 		<link rel="stylesheet" href="datenbank.css">
 	</head>
 	<body>
@@ -49,7 +50,7 @@
 
 					</table>
 				</div>
-				<iframe id="phpm" name="phpm">
+				<iframe id="phpm" name="phpm" class="errorlog">
 				</iframe>
 			</div>
 		</div>
@@ -63,7 +64,8 @@
 
 			<div id="zumCalc" class="db_link">
 				<a href="index.php">zum Rechner</a>
-					<p>change style <input type="button" class="pushbuttonr" value="bright" onclick="styleswitch(this)" /> </p>
+					<span class="styleswtch">style: <input type="button" class="pushbuttonr" style="width:50px" value="bright" onclick="styleswitch(this)" />
+					</span>
 			</div>
 	</body>
 </html>

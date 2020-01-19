@@ -321,6 +321,7 @@
 			</div>
 
 			<div class="footer">
+todo: "clear"-button bei kompositionsteil
 todo: bei etikett löschen haken entfernen und aus der db_liste streichen
 			</div>
 	</body> 
