@@ -1,0 +1,2 @@
+#!/bin/bash
+convert $1 -compress jpeg -resize 1240x1753 -units PixelsPerInch -density 150x150 A4_${1%.*}.pdf

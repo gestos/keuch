@@ -1,0 +1,2 @@
+#!/bin/bash
+pdfjam --outfile A4_$1 --paper a4paper $1
