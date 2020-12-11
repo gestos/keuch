@@ -9,6 +9,7 @@ set tabstop=2		" while in edit mode, tab is 2 chars wide
 set shiftwidth=2		" same is true for identation of lines and blocks
 set mouse=a			" mousescrolling and copying without linenumbers
 set nowrap			" no linewrapping as starting default mode
+set nofixendofline
 
 au BufNewFile,BufRead * if &ft == '' | set ft=sh | endif  " unknown filetypes will be recognized and highlighted as "sh" files
 let mapleader=" "

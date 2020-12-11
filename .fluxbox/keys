@@ -23,8 +23,8 @@ OnWindow Mod1 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing BottomRight}
 OnDesktop Mouse1 :HideMenus
 OnDesktop Mouse2 :WorkspaceMenu
 OnDesktop Mouse3 :RootMenu
-OnDesktop Mouse4 :NextWorkspace
-OnDesktop Mouse5 :PrevWorkspace
+#OnDesktop Mouse4 :NextWorkspace
+#OnDesktop Mouse5 :PrevWorkspace
 
 OnDesktop Mouse2 :WorkspaceMenu
 OnDesktop Mouse3 :RootMenu
@@ -32,8 +32,8 @@ OnDesktop Mouse3 :RootMenu
 Mod1 y :RootMenu
 
 # scroll on the desktop to change workspaces
-OnToolbar Mouse5 :PrevWorkspace
-OnToolbar Mouse4 :NextWorkspace
+#OnToolbar Mouse5 :PrevWorkspace
+#OnToolbar Mouse4 :NextWorkspace
 
 # scroll on the toolbar to change current window
 OnDesktop Mouse4 :PrevWindow {static groups} (workspace=[current])  (iconhidden=no) !! FBCV13 !!
@@ -157,16 +157,16 @@ Control F4 :Workspace 4
 
 ######### eigene section ##############
 
-F1 :ExecCommand urxvt -tr -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -tint white -sh 182 -e screen
-F2 :ExecCommand firefox &
-F3 :ExecCommand urxvt -tr -tint lightgreen -sh 35 -fg lightblue -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -e screen -c /home/keuch/.screenrc_moc mocp -T ~/.moc/themes/transparent_fordarkbg
-F4 :ExecCommand bluefish
-F5 :ExecCommand xfe
-F7 :ExecCommand xo2 
-F8 :ExecCommand pidgin &
-F9 :ExecCommand /usr/local/bin/pausa
-F10 :ExecCommand xterm /usr/bin/alsamixer
-F11 :ExecCommand zeitling
+Mod5 F1 :ExecCommand urxvt -tr -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -tint white -sh 182 -e screen -c /home/keuch/.screenrc
+Mod5 F2 :ExecCommand firefox &
+Mod5 F3 :ExecCommand urxvt -tr -tint lightgreen -sh 35 -fg lightblue -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -e screen -c /home/keuch/.screenrc_moc mocp -T ~/.moc/themes/transparent_fordarkbg
+Mod5 F4 :ExecCommand bluefish
+Mod5 F5 :ExecCommand xfe
+Mod5 F7 :ExecCommand xo2 
+Mod5 F8 :ExecCommand pidgin &
+Mod5 F9 :ExecCommand /usr/local/bin/pausa
+Mod5 F10 :ExecCommand xterm /usr/bin/alsamixer
+Mod5 F11 :ExecCommand zeitling
 
 Mod1 F1 	:ExecCommand gvim
 Mod1 F3		:ExecCommand urxvt -tr -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -tint white -sh 180 -e ssh -t kueche mocp
@@ -183,13 +183,9 @@ Mod4 F12 :ExecCommand xmessage -bg lightblue -fg blue -timeout 3 -buttons , GOIN
 Mod5 114 :ExecCommand mocp -f
 Mod5 113 :ExecCommand mocp -r
 Mod5 116 :ExecCommand mocp -t shuffle
-Mod5 F11 :ExecCommand amixer set PCM 5%-
-Mod5 F12 :ExecCommand amixer set PCM 5%+
-Mod5 k :ExecCommand /usr/local/bin/kick "$(mocp -Q %file)"
+Mod5 k :ExecCommand /usr/local/bin/get_song /home/keuch/gits/keuch/songlist.json
 Mod5 l :ExecCommand /usr/local/bin/songzeiger
 Mod5 w 	:ExecCommand feh --bg-scale $(find ~/.wall/ -type f | shuf -n1)
-Mod5 F3	:ExecCommand /usr/local/bin/remucke 300
-Mod5 F2 :ExecCommand /usr/bin/chromium
 
 Shift F1 :ExecCommand urxvt -fg lightblue -tr -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -tint white -sh 25 -e screen
 Shift F2 :ExecCommand /usr/bin/sylpheed
