@@ -1,0 +1,7 @@
+#!/bin/bash
+
+title=$(mocp -Q %title)
+song=$(mocp -Q %song)
+artist=$(mocp -Q %artist)
+current="${title:-notset}, ${song:-notset}, ${artist:-notset}"
+echo $current >> $1
