@@ -7,8 +7,8 @@ song=$(mocp -Q %song)
 datum=$(date '+%d-%m-%y %H:%M')
 songhash=$(echo -e "$file_url$title$artist$song" | md5sum | awk '{print $1}')
 
-printf ',\n%s={\n"filename":"%s",\n"title":"%s",\n"artist":"%s",\n"songname":"%s"\n}' "${songhash:-null}" "${file_url:-null}" "${title:-null}" "${artist:-null}" "${song:-null}" >> $1
+printf ',\n"%s":\n{\n"filename":"%s",\n"title":"%s",\n"artist":"%s",\n"songname":"%s"\n}' "${songhash:-null}" "${file_url:-null}" "${title:-null}" "${artist:-null}" "${song:-null}" >> $1
 
 #echo -e $json_obj >> $1 
-xmessage -center -buttons "" -timeout 1 -fg blue -bg yellow "$(mocp -Q %title) added" 2>/dev/null
+xmessage -center -buttons "" -timeout 1 -fg blue -bg yellow "$(mocp -Q %title) added to $1" 2>/dev/null
 #echo -e $json_obj 
